@@ -1,0 +1,7 @@
+node_modules
+dist
+.DS_Store
+*.local
+.claude
+상단 롤링배너
+이사진-사진원본
