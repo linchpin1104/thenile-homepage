@@ -356,15 +356,14 @@ const HomePage=({go})=>(<>
   {/* 우리가 바라보는 현실 — 미션/비전 연결형 서사 */}
   <Sec bg={C.w}>
     <Box>
-      <FI><Tag>우리가 바라보는 현실</Tag></FI>
-      <FI delay={.1}><H2>부모됨이 주는 기쁨이 가려지고<br/>두려움이 가득해진 사회</H2></FI>
-      <FI delay={.2}><Desc>오늘의 부모들은 넘쳐나는 정보와 높아진 기준 앞에서 오히려 더 불안하고, 더 외롭습니다. 양육의 어려움은 개인만의 문제가 아닙니다. 복합적인 원인을 가지고 있기에 다각적인 변화가 필요합니다.</Desc></FI>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:20}}>
+      <FI><Tag>부모됨의 두려움</Tag></FI>
+      <FI delay={.1}><H2>부모됨의 두려움은 우리가 꼭 해결해야 할{"\n"}사회적 현상입니다</H2></FI>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:20,marginTop:32}}>
         {[
-          {t:"양육자의 심리돌봄 지원 부재",d:"부모의 마음을 돌봐주는 전문적 지원이 극히 부족합니다."},
-          {t:"사회적 지지망 부족",d:"도움을 요청하기 어려운 환경 속에서 부모는 고립됩니다."},
-          {t:"양육친화적이지 못한 문화",d:"가족을 향한 냉소적인 시선이 사회 전반에 퍼져 있습니다."},
-          {t:"불안정한 환경 구조",d:"부모를 위한 정책과 인프라가 현장의 필요를 따라가지 못합니다."},
+          {t:"양육에 대한 냉소적 시선",d:"가족을 향한 냉소적인 시선이 사회 전반에 퍼져 있습니다."},
+          {t:"양육으로 인한 고립감",d:"도움을 요청하기 어려운 환경 속에서 부모는 고립됩니다."},
+          {t:"지식과 정서돌봄의 부족",d:"부모의 마음을 돌봐주는 전문적 지원이 극히 부족합니다."},
+          {t:"정책과 인프라의 부족",d:"부모를 위한 정책과 인프라가 현장의 필요를 따라가지 못합니다."},
         ].map((x,i)=>(
           <FI key={i} delay={i*.1}><div style={{padding:24,background:C.warm,borderRadius:16,border:`1px solid ${C.g2}`}}>
             <h3 style={{fontSize:16,fontWeight:700,color:C.navy,marginBottom:8}}>{x.t}</h3>
