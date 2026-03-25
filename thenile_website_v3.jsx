@@ -38,7 +38,7 @@ const Dot=()=><div style={{width:4,height:4,borderRadius:2,background:C.gold,fle
 
 const PAGES=[
   {id:"home",label:"Home"},{id:"about",label:"더나일 소개"},{id:"programs",label:"사업소개"},
-  {id:"parentscan",label:"양육불안검사"},{id:"contact",label:"협력문의"},
+  {id:"parentscan",label:"양육불안검사"},{id:"pacer",label:"후원하기"},{id:"contact",label:"협력문의"},
 ];
 
 const Nav=({page,go})=>{
@@ -51,14 +51,14 @@ const Nav=({page,go})=>{
         <div onClick={()=>go("home")}><Logo light={home&&!sc} s={.8}/></div>
         <div style={{display:"flex",alignItems:"center",gap:24}}>
           {PAGES.map(n=><div key={n.id} onClick={()=>go(n.id)} className="nl" style={{fontSize:14,color:page===n.id?C.gold:txt,cursor:"pointer",fontWeight:page===n.id?600:400,transition:"color .2s"}}>{n.label}</div>)}
-          <BG onClick={()=>window.open("https://link.donationbox.co.kr/donationBoxJoin.jsp?campaignuid=1FuNiwn6W6","_blank")} className="nl" style={{padding:"10px 24px",fontSize:13}}>후원하기</BG>
+          <BG onClick={()=>go("pacer")} className="nl" style={{padding:"10px 24px",fontSize:13}}>후원하기</BG>
           <div onClick={()=>setOp(!op)} className="bg" style={{display:"none",flexDirection:"column",gap:5,cursor:"pointer",padding:8}}>{[0,1,2].map(i=><div key={i} style={{width:22,height:2,background:txt,borderRadius:1}}/>)}</div>
         </div>
       </Box>
     </nav>
     {op&&<div style={{position:"fixed",inset:0,zIndex:99,background:"rgba(27,42,74,.97)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:24}} onClick={()=>setOp(false)}>
       {PAGES.map(n=><div key={n.id} onClick={()=>go(n.id)} style={{fontSize:22,color:"#fff",cursor:"pointer",fontWeight:page===n.id?700:400}}>{n.label}</div>)}
-      <BG onClick={()=>window.open("https://link.donationbox.co.kr/donationBoxJoin.jsp?campaignuid=1FuNiwn6W6","_blank")} style={{marginTop:16}}>후원하기</BG>
+      <BG onClick={()=>go("pacer")} style={{marginTop:16}}>후원하기</BG>
     </div>}
     <style>{`@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Noto+Serif+KR:wght@400;700&display=swap');*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Pretendard',sans-serif;color:${C.g8};background:${C.warm};overflow-x:hidden;word-break:keep-all}h1,h2,h3,h4,p{word-break:keep-all}.nl{display:block}.bg{display:none!important}@media(max-width:960px){.nl{display:none!important}.bg{display:flex!important}}`}</style>
   </>);
@@ -594,20 +594,20 @@ const ProgramsPage=()=>{
   const tabs=["전체","지방보조금 사업","기타사업 (수탁 등)","2026 계획"];
 
   const govProjects=[
-    {name:"양성평등 돌봄문화 확산을 위한 부모학교 – 아빠와 함께하는 원팀육아",period:"2025.04 ~ 2025.09",target:"영유아 부모",budget:"8,000천원",content:["예비부모 온라인 교육(BBH 프로그램)","영아기 부모 온라인 교육(Happy Parents)"],org:"영등포구",cat:"성장추구"},
-    {name:"ESG 공모사업 <리커넥트> 장애아동 가족 지원",period:"2025.05 ~ 2025.12",target:"장애아동 가족",budget:"13,206천원",content:["장애아동 가족 심리/정서 지원 (심리상담 138회)","힐링캠프 운영 (만족도 4.9점)"],org:"성동구청",cat:"성장추구 · 양육문화"},
+    {name:"양성평등 돌봄문화 확산을 위한 부모학교 – 아빠와 함께하는 원팀육아",period:"2025.04 ~ 2025.09",target:"영유아 부모",content:["예비부모 온라인 교육(BBH 프로그램)","영아기 부모 온라인 교육(Happy Parents)"],org:"영등포구",cat:"성장추구",imgDir:"01-원팀육아"},
+    {name:"ESG 공모사업 <리커넥트> 장애아동 가족 지원",period:"2025.05 ~ 2025.12",target:"장애아동 가족",content:["장애아동 가족 심리/정서 지원 (심리상담 138회)","힐링캠프 운영 (만족도 4.9점)"],org:"성동구청",cat:"성장추구 · 양육문화",imgDir:"02-리커넥트"},
   ];
 
   const otherProjects=[
-    {name:'CSR <우리동네 아이케어>',period:"2025년",target:"영유아 부모",budget:"민간위탁",content:["전국 문화센터(동탄, 천안 등) 12주 완성 부모교육","육아스트레스(PSI) 및 기질(TCI) 검사 및 석박사급 상담","겨울학기까지 진행 완료"],org:"㈜이마트",cat:"성장추구 · 양육문화"},
-    {name:"육아휴직자 아버지 대상 부모교육",period:"2025년",target:"육아휴직자 아버지",budget:"육아종합 지원센터",content:["육아휴직중인 아빠를 대상으로한 부모교육 2회 진행"],org:"부천육아종합지원센터",cat:"양육문화"},
-    {name:"정책간담회 및 토크콘서트",period:"2025년",target:"양육 당사자",budget:"자체예산",content:["국회 저출생·축소사회 대응포럼 정책간담회 참여","양육 당사자 160여 명 참여, 실질적 정책 아젠다 제언","일시: 2025년 12월 22일, 국회의원회관 대회의실"],org:"국회 저출생·축소사회 대응포럼",cat:"환경구조 · 양육문화"},
-    {name:"서울 여성과 가족이 함께하는 토크콘서트",period:"2025년",target:"서울시민",budget:"민간위탁",content:["양성평등한 오늘, 자라는 내일 토크콘서트 개최","일시: 2025년 11월 8일(토), 서울시 가족플라자","약 80명 참석"],org:"서울여성가족재단",cat:"양육문화"},
-    {name:"위기가정 긴급 양육상담",period:"2025년",target:"위기가정",budget:"자부담/재능기부",content:["사별 한부모(아빠 3명, 5회), 이혼/투병 위기 가정 6가구","총 18회기 심층 상담 지원 (공익성/남성 육아 지원 강화)","해외 제3세계 국가 양육 긴급상담 포함 (2명, 4회)"],org:"자체사업",cat:"성장추구"},
-    {name:"LG 유플러스 아이드림챌린지",period:"2025년",target:"초등학생 부모",budget:"자체예산",content:["초등 우리아이, 디지털 잘 사용하고 잘 멈추기 교육","온라인 ZOOM 진행 (8월 8일, 22일, 29일)","약 100명 참여"],org:"LG 유플러스",cat:"양육문화"},
-    {name:"세브란스병원노동조합 진로캠프",period:"2025년",target:"세브란스병원 직원 가족",budget:"민간위탁",content:["사춘기 자녀와의 관계 & 대화법","일시: 2025년 7월 30일, 분당 잡월드","약 200명 참여"],org:"세브란스병원노동조합",cat:"양육문화"},
-    {name:"자체 교육 프로그램 (페이서 교육)",period:"2025년",target:"영유아 부모",budget:"자부담",content:["온라인 교육: 방학동안 놀이의 비밀, 육아비법, 감정수업 등 5회","오프라인 교육: 어린이 사회성 교육 1회"],org:"자체사업",cat:"양육문화"},
-    {name:"미디어 활동 및 부모역량강화",period:"2025년",target:"일반 시민",budget:"자부담",content:["YTN, CBS, 극동방송 라디오 출연","저출생 대책 및 양육 환경 개선 주제 확산"],org:"자체사업",cat:"환경구조"},
+    {name:'CSR <우리동네 아이케어>',period:"2025년",target:"영유아 부모",content:["전국 문화센터(동탄, 천안 등) 12주 완성 부모교육","육아스트레스(PSI) 및 기질(TCI) 검사 및 석박사급 상담","겨울학기까지 진행 완료"],org:"㈜이마트",cat:"성장추구 · 양육문화",imgDir:"03-우리동네아이케어"},
+    {name:"육아휴직자 아버지 대상 부모교육",period:"2025년",target:"육아휴직자 아버지",content:["육아휴직중인 아빠를 대상으로한 부모교육 2회 진행"],org:"부천육아종합지원센터",cat:"양육문화",imgDir:"04-육아휴직자부모교육"},
+    {name:"정책간담회 및 토크콘서트",period:"2025년",target:"양육 당사자",content:["국회 저출생·축소사회 대응포럼 정책간담회 참여","양육 당사자 160여 명 참여, 실질적 정책 아젠다 제언","일시: 2025년 12월 22일, 국회의원회관 대회의실"],org:"국회 저출생·축소사회 대응포럼",cat:"환경구조 · 양육문화",imgDir:"05-정책간담회"},
+    {name:"서울 여성과 가족이 함께하는 토크콘서트",period:"2025년",target:"서울시민",content:["양성평등한 오늘, 자라는 내일 토크콘서트 개최","일시: 2025년 11월 8일(토), 서울시 가족플라자","약 80명 참석"],org:"서울여성가족재단",cat:"양육문화",imgDir:"06-토크콘서트"},
+    {name:"위기가정 긴급 양육상담",period:"2025년",target:"위기가정",content:["사별 한부모(아빠 3명, 5회), 이혼/투병 위기 가정 6가구","총 18회기 심층 상담 지원 (공익성/남성 육아 지원 강화)","해외 제3세계 국가 양육 긴급상담 포함 (2명, 4회)"],org:"자체사업",cat:"성장추구",imgDir:"07-위기가정긴급상담"},
+    {name:"LG 유플러스 아이드림챌린지",period:"2025년",target:"초등학생 부모",content:["초등 우리아이, 디지털 잘 사용하고 잘 멈추기 교육","온라인 ZOOM 진행 (8월 8일, 22일, 29일)","약 100명 참여"],org:"LG 유플러스",cat:"양육문화",imgDir:"08-아이드림챌린지"},
+    {name:"세브란스병원노동조합 진로캠프",period:"2025년",target:"세브란스병원 직원 가족",content:["사춘기 자녀와의 관계 & 대화법","일시: 2025년 7월 30일, 분당 잡월드","약 200명 참여"],org:"세브란스병원노동조합",cat:"양육문화",imgDir:"09-세브란스진로캠프"},
+    {name:"자체 교육 프로그램 (페이서 교육)",period:"2025년",target:"영유아 부모",content:["온라인 교육: 방학동안 놀이의 비밀, 육아비법, 감정수업 등 5회","오프라인 교육: 어린이 사회성 교육 1회"],org:"자체사업",cat:"양육문화",imgDir:"10-페이서교육"},
+    {name:"미디어 활동 및 부모역량강화",period:"2025년",target:"일반 시민",content:["YTN, CBS, 극동방송 라디오 출연","저출생 대책 및 양육 환경 개선 주제 확산"],org:"자체사업",cat:"환경구조",imgDir:"11-미디어활동"},
   ];
 
   const plan2026=[
@@ -626,15 +626,42 @@ const ProgramsPage=()=>{
     ]},
   ];
 
+  const ProjectImgSlider=({imgDir})=>{
+    const imgs=[1,2,3,4,5].map(n=>`/images/projects/${imgDir}/${n}.jpg`);
+    const[si,setSi]=useState(0);const[loaded,setLoaded]=useState([]);
+    useEffect(()=>{
+      const check=[];
+      imgs.forEach((src,idx)=>{const img=new Image();img.onload=()=>{check[idx]=true;setLoaded([...check])};img.onerror=()=>{check[idx]=false;setLoaded([...check])};img.src=src});
+    },[imgDir]);
+    const validImgs=imgs.filter((_,idx)=>loaded[idx]===true);
+    if(validImgs.length===0) return(
+      <div style={{width:"100%",height:220,background:`linear-gradient(135deg,${C.g1},${C.g2})`,display:"flex",alignItems:"center",justifyContent:"center",gap:8,color:C.g4,fontSize:13}}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        사업 이미지 영역
+      </div>
+    );
+    const idx=si%validImgs.length;
+    return(
+      <div style={{position:"relative",width:"100%",height:220,overflow:"hidden",background:C.g1}}>
+        <img src={validImgs[idx]} alt="" style={{width:"100%",height:"100%",objectFit:"cover",transition:"opacity .4s"}}/>
+        {validImgs.length>1&&<>
+          <button onClick={e=>{e.stopPropagation();setSi(i=>i===0?validImgs.length-1:i-1)}} style={{position:"absolute",left:8,top:"50%",transform:"translateY(-50%)",width:32,height:32,borderRadius:"50%",border:"none",background:"rgba(0,0,0,.4)",color:"#fff",cursor:"pointer",fontSize:14,display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
+          <button onClick={e=>{e.stopPropagation();setSi(i=>(i+1)%validImgs.length)}} style={{position:"absolute",right:8,top:"50%",transform:"translateY(-50%)",width:32,height:32,borderRadius:"50%",border:"none",background:"rgba(0,0,0,.4)",color:"#fff",cursor:"pointer",fontSize:14,display:"flex",alignItems:"center",justifyContent:"center"}}>→</button>
+          <div style={{position:"absolute",bottom:8,left:"50%",transform:"translateX(-50%)",display:"flex",gap:6}}>
+            {validImgs.map((_,di)=><div key={di} onClick={e=>{e.stopPropagation();setSi(di)}} style={{width:idx===di?16:6,height:6,borderRadius:3,background:idx===di?"#fff":"rgba(255,255,255,.5)",cursor:"pointer",transition:"all .3s"}}/>)}
+          </div>
+        </>}
+      </div>
+    );
+  };
+
   const ProjectCard=({p,i})=>(
     <FI delay={i*.06}>
       <div style={{background:C.w,borderRadius:16,border:`1px solid ${C.g2}`,marginBottom:16,transition:"all .3s",overflow:"hidden"}}
         onMouseEnter={e=>e.currentTarget.style.borderColor=C.gold} onMouseLeave={e=>e.currentTarget.style.borderColor=C.g2}>
-        {/* 사업 이미지 영역 */}
-        {p.img ? (
-          <img src={p.img} alt={p.name} style={{width:"100%",height:200,objectFit:"cover"}}/>
-        ) : (
-          <div style={{width:"100%",height:180,background:`linear-gradient(135deg,${C.g1},${C.g2})`,display:"flex",alignItems:"center",justifyContent:"center",gap:8,color:C.g4,fontSize:13}}>
+        {/* 사업 이미지 슬라이더 */}
+        {p.imgDir ? <ProjectImgSlider imgDir={p.imgDir}/> : (
+          <div style={{width:"100%",height:220,background:`linear-gradient(135deg,${C.g1},${C.g2})`,display:"flex",alignItems:"center",justifyContent:"center",gap:8,color:C.g4,fontSize:13}}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
             사업 이미지 영역
           </div>
@@ -719,74 +746,173 @@ const ParentscanPage=()=>(<>
 
 
 /* ═══ PACER — 후원 안내 ═══ */
+const DONATE_URL="https://link.donationbox.co.kr/donationBoxJoin.jsp?campaignuid=1FuNiwn6W6";
 const PacerPage=()=>(<>
+  {/* 히어로 */}
   <section style={{paddingTop:120,paddingBottom:80,background:`linear-gradient(135deg,${C.navy} 0%,${C.navyL} 100%)`}}><Box style={{textAlign:"center"}}>
     <FI><Tag color={C.gold}>PACER · 함께 걷는 사람들</Tag></FI>
-    <FI delay={.1}><H2 light style={{fontSize:"clamp(28px,5vw,40px)"}}>부모됨의 여정을{"\n"}함께 걸어주세요</H2></FI>
-    <FI delay={.2}><p style={{fontSize:16,color:"rgba(255,255,255,.7)",lineHeight:1.9,maxWidth:560,margin:"0 auto",wordBreak:"keep-all"}}>페이서(PACER)는 '함께 걷는 사람들'이라는 뜻을 가지고 있습니다. 더 나은 사회를 위해 가족의 가치가 회복되어야 한다는 것에 동의하며 함께 힘을 모으는 사람들입니다.</p></FI>
+    <FI delay={.1}><H2 light style={{fontSize:"clamp(28px,5vw,40px)"}}>오늘의 가족을 변화시키는 일에{"\n"}함께해주세요</H2></FI>
+    <FI delay={.2}><p style={{fontSize:16,color:"rgba(255,255,255,.7)",lineHeight:1.9,maxWidth:560,margin:"0 auto",wordBreak:"keep-all"}}>페이서(PACER)란 더 나은 사회를 위해 가족의 가치가 회복되어야 한다는 것에 동의하며 더나일과 함께 걷는 사람들입니다.</p></FI>
     <FI delay={.3}><div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap",marginTop:32}}>
-      <BG onClick={()=>window.open("https://link.donationbox.co.kr/donationBoxJoin.jsp?campaignuid=1FuNiwn6W6","_blank")} style={{fontSize:17,padding:"18px 48px"}}>후원하기</BG>
+      <BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{fontSize:17,padding:"18px 48px"}}>후원하기</BG>
     </div></FI>
     <FI delay={.35}><p style={{fontSize:13,color:"rgba(255,255,255,.4)",marginTop:24}}>더나일은 기획재정부 지정 지정기부금단체로 기부금영수증 발급이 가능합니다 (법인/개인)</p></FI>
   </Box></section>
 
-  {/* 후원금 사용처 */}
+  {/* 더나일은 약속합니다 */}
   <Sec bg={C.w}><Box>
     <FI><div style={{textAlign:"center",marginBottom:48}}>
-      <Tag>후원금은 이렇게 사용됩니다</Tag>
-      <H2>여러분의 후원이 만드는 변화</H2>
+      <Tag>OUR PROMISE</Tag>
+      <H2>더나일은 약속합니다</H2>
     </div></FI>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:24}}>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:24}}>
       {[
-        {icon:"🤲",t:"위기가정 긴급상담",d:"사별, 이혼, 학대 등 위기 상황의 부모와 아동에게 무료 심리상담을 제공합니다"},
-        {icon:"📚",t:"부모교육 프로그램",d:"양육불안을 줄이고 건강한 부모됨을 지원하는 교육 프로그램을 운영합니다"},
-        {icon:"🔬",t:"양육불안 연구",d:"양육불안척도 개발과 데이터 분석을 통해 근거 기반의 정책을 제안합니다"},
-        {icon:"🤝",t:"양육문화 캠페인",d:"양육친화적 사회를 만들기 위한 포럼, 토크콘서트 등을 개최합니다"},
+        {icon:"📋",t:"신뢰로운 전문가의 연대를 통한\n건강한 양육 정보의 제공",d:"가족의 생애주기에 따라 적합한 정보를 제공하고 신뢰로운 전문가들의 POOL을 확대해 나갑니다"},
+        {icon:"🤝",t:"건강한 양육관 형성을 위한\n캠페인 및 커뮤니티 형성",d:"더나일을 지지하는 건강한 양육관을 가진 페이서들과 함께 양육의 문화와 가치를 지켜나갑니다"},
+        {icon:"🌍",t:"차별과 소외 없이\n모두에게 닿도록",d:"기술을 기반으로 하여 창의적이고 새로운 시도를 통해 임팩트를 확장합니다"},
       ].map((x,i)=>(
-        <FI key={i} delay={i*.1}><div style={{padding:28,background:C.warm,borderRadius:16,border:`1px solid ${C.g2}`,height:"100%",transition:"all .3s"}}
+        <FI key={i} delay={i*.12}><div style={{padding:32,background:C.warm,borderRadius:16,border:`1px solid ${C.g2}`,height:"100%",textAlign:"center",transition:"all .3s"}}
           onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-4px)";e.currentTarget.style.boxShadow="0 8px 24px rgba(27,42,74,.08)"}}
           onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow="none"}}>
-          <div style={{fontSize:32,marginBottom:12}}>{x.icon}</div>
-          <h3 style={{fontSize:17,fontWeight:700,color:C.navy,marginBottom:8}}>{x.t}</h3>
+          <div style={{fontSize:36,marginBottom:16}}>{x.icon}</div>
+          <h3 style={{fontSize:17,fontWeight:700,color:C.navy,marginBottom:12,lineHeight:1.5,whiteSpace:"pre-line"}}>{x.t}</h3>
           <p style={{fontSize:14,color:C.g6,lineHeight:1.7,wordBreak:"keep-all"}}>{x.d}</p>
         </div></FI>
       ))}
     </div>
   </Box></Sec>
 
-  {/* 페이서 유형 */}
+  {/* 주요 사업영역 */}
   <Sec bg={C.warm}><Box>
     <FI><div style={{textAlign:"center",marginBottom:48}}>
-      <Tag>페이서 유형</Tag>
-      <H2>당신에게 맞는 방식으로{"\n"}함께 걸어주세요</H2>
+      <Tag>BUSINESS AREA</Tag>
+      <H2>더나일의 주요 사업영역</H2>
     </div></FI>
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:24}}>
       {[
-        {type:"개인 페이서",color:C.goldP,intro:"건강한 가족이 되어 또 다른 가족의 회복을 지원합니다",items:["웰컴굿즈 제공","정기 뉴스레터","정기 부모포럼 초대","우리가족 양육상담"]},
-        {type:"전문가 페이서",color:C.goldL,intro:"전문성을 통해 위기가족지원에 함께 합니다",items:["전문가 네트워킹","자문 및 사업 참여","컨퍼런스 및 포럼 초대"]},
-        {type:"기업 페이서",color:C.gold,intro:"건강한 양육문화를 지지하는 기업과 함께 성장합니다",items:["사회공헌 사업 연계","사내 복지 프로그램 제공","포럼 후원사 참여"]},
-      ].map((p,i)=>(
-        <FI key={i} delay={i*.12}><div style={{borderRadius:16,overflow:"hidden",border:`1px solid ${C.g2}`,background:C.w,height:"100%",display:"flex",flexDirection:"column"}}>
-          <div style={{background:p.color,padding:32,textAlign:"center"}}>
-            <h3 style={{fontSize:22,fontWeight:700,color:C.navy}}>{p.type}</h3>
-            <div style={{fontSize:14,color:C.navyL,marginTop:8,lineHeight:1.6,wordBreak:"keep-all"}}>{p.intro}</div>
+        {t:"양육문화 바로 세우기",color:"#E8D5B7",items:["건강한 양육 문화의 확산을 위한 포럼 개최","교육/심리 영역의 전문가 네트워킹 구축","관련 법률 및 조례 개정 지원/정책홍보"]},
+        {t:"생애주기별 가족교육",color:"#D5E0D5",items:["36개월 초보가정 양육 상담","가족의 변화에 따른 맞춤 서비스","콘텐츠 연구 및 개발"]},
+        {t:"위기가족 심리지원",color:"#D5DAE8",items:["사회경제적 취약계층 양육 상담","미혼/청소년부모 양육 상담","재혼/이혼 등 가족 변화 상담"]},
+      ].map((x,i)=>(
+        <FI key={i} delay={i*.12}><div style={{borderRadius:16,overflow:"hidden",border:`1px solid ${C.g2}`,background:C.w,height:"100%"}}>
+          <div style={{background:x.color,padding:"28px 24px",textAlign:"center"}}>
+            <h3 style={{fontSize:20,fontWeight:700,color:C.navy}}>{x.t}</h3>
           </div>
-          <div style={{padding:28,flex:1,display:"flex",flexDirection:"column"}}>
-            <div style={{fontSize:12,color:C.gold,fontWeight:600,marginBottom:12}}>제공 혜택</div>
-            {p.items.map((b,j)=><div key={j} style={{fontSize:14,color:C.g6,padding:"10px 0",borderBottom:j<p.items.length-1?`1px solid ${C.g1}`:"none",display:"flex",alignItems:"center",gap:10}}><div style={{width:6,height:6,borderRadius:3,background:C.gold}}/>{b}</div>)}
-            <div style={{fontSize:12,color:C.g4,marginTop:16,padding:"12px 16px",background:C.g1,borderRadius:8,textAlign:"center"}}>기부금 영수증 발급 가능</div>
-            <BG onClick={()=>window.open("https://link.donationbox.co.kr/donationBoxJoin.jsp?campaignuid=1FuNiwn6W6","_blank")} style={{width:"100%",marginTop:20,textAlign:"center"}}>후원하기</BG>
+          <div style={{padding:24}}>
+            {x.items.map((item,j)=><div key={j} style={{fontSize:14,color:C.g6,padding:"8px 0",display:"flex",alignItems:"flex-start",gap:10,lineHeight:1.6}}><Dot/><span>{item}</span></div>)}
           </div>
         </div></FI>
       ))}
     </div>
   </Box></Sec>
 
+  {/* 페이서란 */}
+  <Sec bg={C.navy}><Box style={{textAlign:"center"}}>
+    <FI><H2 light style={{fontSize:"clamp(24px,4vw,32px)",maxWidth:600,margin:"0 auto 24px"}}>오늘의 가족을 변화시키는 일에{"\n"}함께해주세요</H2></FI>
+    <FI delay={.1}><p style={{fontSize:15,color:"rgba(255,255,255,.65)",lineHeight:1.9,maxWidth:540,margin:"0 auto",wordBreak:"keep-all"}}>가족의 가치를 회복하는 여정에 건강한 가족 문화를 형성해 나가는 더나일 커뮤니티의 일원으로서 함께합니다.</p></FI>
+    <FI delay={.15}><p style={{fontSize:15,color:"rgba(255,255,255,.65)",lineHeight:1.9,maxWidth:540,margin:"16px auto 0",wordBreak:"keep-all"}}>가족의 행복한 성장을 함께 공유할 수 있도록 페이서에게도 가족을 위한 다양한 프로그램 참여 기회를 드립니다.</p></FI>
+  </Box></Sec>
+
+  {/* 페이서 유형 */}
+  <Sec bg={C.w}><Box>
+    <FI><div style={{textAlign:"center",marginBottom:48}}>
+      <Tag>페이서 유형</Tag>
+      <H2>당신에게 맞는 방식으로{"\n"}함께 걸어주세요</H2>
+    </div></FI>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:24}}>
+      {[
+        {type:"개인 페이서",sub:"(연간 후원 페이서 기준)",color:C.goldP,intro:"건강한 가족이 되어 또 다른 가족의 회복을 지원합니다.",items:["교육 및 심리지원","컨퍼런스 및 포럼 참여"]},
+        {type:"전문가 페이서",sub:"(연간 후원 페이서 기준)",color:C.goldL,intro:"나의 전문성으로 건강한 가족과 사회에 기여합니다.",items:["전문가 네트워킹","사업자문 및 직접참여","컨퍼런스 및 포럼 참여"]},
+        {type:"기업 페이서",sub:"(연간 후원 페이서 기준)",color:C.gold,intro:"건강한 사회 뒤에는 건강한 기업이 있습니다.",items:["가족을 위한 사회공헌 사업","사내 가족 지원","컨퍼런스 및 포럼 참여"]},
+      ].map((p,i)=>(
+        <FI key={i} delay={i*.12}><div style={{borderRadius:16,overflow:"hidden",border:`1px solid ${C.g2}`,background:C.w,height:"100%",display:"flex",flexDirection:"column"}}>
+          <div style={{background:p.color,padding:32,textAlign:"center"}}>
+            <h3 style={{fontSize:22,fontWeight:700,color:C.navy}}>{p.type}</h3>
+            <div style={{fontSize:12,color:C.g6,marginTop:4}}>{p.sub}</div>
+          </div>
+          <div style={{padding:28,flex:1,display:"flex",flexDirection:"column"}}>
+            {p.items.map((b,j)=><div key={j} style={{fontSize:14,color:C.g6,padding:"10px 0",borderBottom:j<p.items.length-1?`1px solid ${C.g1}`:"none",display:"flex",alignItems:"center",gap:10}}><span style={{color:C.gold}}>✔</span>{b}</div>)}
+            <p style={{fontSize:13,color:C.navy,fontWeight:500,marginTop:16,lineHeight:1.6,wordBreak:"keep-all"}}>{p.intro}</p>
+            <BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{width:"100%",marginTop:"auto",paddingTop:16,textAlign:"center"}}>후원하기</BG>
+          </div>
+        </div></FI>
+      ))}
+    </div>
+  </Box></Sec>
+
+  {/* 페이서 혜택 */}
+  <Sec bg={C.warm}><Box>
+    <FI><div style={{textAlign:"center",marginBottom:48}}>
+      <Tag>PACER BENEFITS</Tag>
+      <H2>페이서들과 함께 걸어갈 수 있도록{"\n"}후원자의 가족까지 함께 성장할 수 있습니다</H2>
+    </div></FI>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:20}}>
+      {[
+        {emoji:"🎁",t:"우리가족 행복달력",d:"아동심리전문가가 만드는 가족을 위한 Weekly 캘린더"},
+        {emoji:"✉️",t:"뉴스레터",d:"더나일과 페이서의 활동내역, 프로그램 등의 프리미엄 정보를 매월 전달드립니다"},
+        {emoji:"🎟️",t:"커뮤니티 전용 프로그램",d:"가족의 문제를 해결하기 위해 새롭고 창의적인 시선으로 접근합니다"},
+        {emoji:"💬",t:"온라인 상담 및 검사",d:"전문가와 이야기 나눌 수 있는 상담, 다양한 양육자 지원 프로그램 지원"},
+        {emoji:"👪",t:"정기 부모 포럼",d:"한 달에 1회 이상 온라인 커뮤니티 세션 (부모교육), 전문가와 함께하는 Q&A 세션 등 우선 참여 가능"},
+      ].map((x,i)=>(
+        <FI key={i} delay={i*.08}><div style={{padding:24,background:C.w,borderRadius:16,border:`1px solid ${C.g2}`,height:"100%"}}>
+          <div style={{fontSize:28,marginBottom:10}}>{x.emoji}</div>
+          <h4 style={{fontSize:16,fontWeight:700,color:C.navy,marginBottom:8}}>{x.t}</h4>
+          <p style={{fontSize:13,color:C.g6,lineHeight:1.7,wordBreak:"keep-all"}}>{x.d}</p>
+        </div></FI>
+      ))}
+    </div>
+  </Box></Sec>
+
+  {/* 월정기 후원 */}
+  <Sec bg={C.w}><Box>
+    <FI><div style={{textAlign:"center",marginBottom:12}}>
+      <Tag>MONTHLY DONATION</Tag>
+      <H2>월정기 후원 페이서 제공 내역</H2>
+    </div></FI>
+    <FI delay={.1}><p style={{textAlign:"center",fontSize:13,color:C.g4,marginBottom:48}}>기부금 영수증 발급 / 법인 정기후원 가능(별도문의)</p></FI>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:16}}>
+      {[
+        {amt:"월 1만원",items:["우리가족 행복달력","정기 뉴스레터","정기 부모포럼 초대"],extra:[]},
+        {amt:"월 2만원",items:["우리가족 행복달력","정기 뉴스레터","정기 부모포럼 초대"],extra:["온·오프라인 아동/가족 프로그램 (최대 연 1회 우선 참여)"]},
+        {amt:"월 3만원",items:["우리가족 행복달력","정기 뉴스레터","정기 부모포럼 초대"],extra:["온·오프라인 아동/가족 프로그램 (최대 연 2회 우선 참여)","온라인 양육상담 (최대 연 2회)"]},
+        {amt:"월 5만원",items:["우리가족 행복달력","정기 뉴스레터","정기 부모포럼 초대"],extra:["온·오프라인 아동/가족 프로그램 (최대 연 3회 우선 참여)","온라인 양육상담 (최대 연 3회)"]},
+      ].map((tier,i)=>(
+        <FI key={i} delay={i*.08}><div style={{padding:24,background:C.warm,borderRadius:16,border:i===3?`2px solid ${C.gold}`:`1px solid ${C.g2}`,height:"100%",position:"relative"}}>
+          {i===3&&<div style={{position:"absolute",top:-12,left:"50%",transform:"translateX(-50%)",background:C.gold,color:C.navy,fontSize:11,fontWeight:700,padding:"4px 16px",borderRadius:20}}>추천</div>}
+          <div style={{fontSize:13,color:C.gold,fontWeight:700,marginBottom:4}}>🎁 정기 후원</div>
+          <div style={{fontSize:22,fontWeight:700,color:C.navy,marginBottom:16}}>{tier.amt}</div>
+          {tier.items.map((item,j)=><div key={j} style={{fontSize:13,color:C.g6,padding:"4px 0",display:"flex",alignItems:"center",gap:6}}>👉 {item}</div>)}
+          {tier.extra.length>0&&<div style={{borderTop:`1px solid ${C.g2}`,marginTop:12,paddingTop:12}}>
+            {tier.extra.map((item,j)=><div key={j} style={{fontSize:13,color:C.navy,fontWeight:500,padding:"4px 0",lineHeight:1.5,wordBreak:"keep-all"}}>😍 {item}</div>)}
+          </div>}
+          <BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{width:"100%",marginTop:16,textAlign:"center",fontSize:13,padding:"10px 20px"}}>후원하기</BG>
+        </div></FI>
+      ))}
+    </div>
+  </Box></Sec>
+
+  {/* 이사장 메시지 */}
+  <Sec bg={C.warm}><Box>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:48,alignItems:"center"}}>
+      <FI><div style={{textAlign:"center"}}>
+        <img src="/images/이다랑.jpg" alt="이다랑 이사장" style={{width:"100%",maxWidth:280,borderRadius:20,margin:"0 auto",objectFit:"cover",display:"block",boxShadow:"0 8px 32px rgba(27,42,74,.12)"}}/>
+      </div></FI>
+      <FI delay={.15}><div>
+        <Tag>FROM THE CHAIRMAN</Tag>
+        <H2 style={{fontSize:"clamp(20px,3.5vw,26px)"}}>안녕하세요,{"\n"}이사장 이다랑입니다.</H2>
+        <p style={{fontSize:14,color:C.g6,lineHeight:1.9,marginBottom:16,wordBreak:"keep-all"}}>가족은 한 개인을 가장 안정적으로 성장시킬 수 있는 지지기반이자, 사회의 중요한 구성요소입니다. 심리적으로 안정적인 가족에서 성장한 개인은 좋은 사회구성원이 될 수 있으며, 개개인이 모인 사회 또한 건강해 집니다.</p>
+        <p style={{fontSize:14,color:C.g6,lineHeight:1.9,marginBottom:16,wordBreak:"keep-all"}}>하지만 가족이 갖는 가치와 중요성에도 불구하고, 가족을 만들고 유지하는 과정은 많은 사람들에게 부담스럽고 어려운 일이 되고 있습니다. 특히 무분별하게 확산되는 비전문적이고 잘못된 정보들은 양육에 대한 불안을 더욱 강하게 만들고, 불안한 부모의 심리적 상태는 자녀를 양육하는 태도에도 부정적인 영향을 줍니다.</p>
+        <p style={{fontSize:14,color:C.g6,lineHeight:1.9,wordBreak:"keep-all"}}>우리는 아이들이 살아갈 미래가 더욱 건강하길 바라는 마음으로 '오늘의 가족'을 바꾸는 일들을 하고자 합니다. 특히 양육취약계층에게 더 많은 지원이 닿을 수 있도록 하여 누구나 소외되지 않고 건강한 가족을 만들 수 있는 기회를 갖도록 하고 싶습니다.</p>
+      </div></FI>
+    </div>
+  </Box></Sec>
+
   {/* 하단 CTA */}
   <Sec bg={C.navy}><Box style={{textAlign:"center"}}>
-    <FI><H2 light style={{maxWidth:500,margin:"0 auto 16px"}}>우리 가족이 성장하며{"\n"}다른 가족도 성장시키는 일</H2></FI>
-    <FI delay={.1}><p style={{fontSize:16,color:"rgba(255,255,255,.6)",lineHeight:1.8,maxWidth:480,margin:"0 auto 32px",wordBreak:"keep-all"}}>페이서 후원을 통해 시작하세요. 여러분의 작은 관심이 한 가정의 큰 변화가 됩니다.</p></FI>
-    <FI delay={.2}><BG onClick={()=>window.open("https://link.donationbox.co.kr/donationBoxJoin.jsp?campaignuid=1FuNiwn6W6","_blank")} style={{fontSize:17,padding:"18px 48px"}}>지금 후원하기</BG></FI>
+    <FI><H2 light style={{fontSize:"clamp(22px,4vw,30px)",maxWidth:560,margin:"0 auto 24px"}}>함께 걸을 날을 기다리고 있습니다</H2></FI>
+    <FI delay={.1}><p style={{fontSize:16,color:"rgba(255,255,255,.65)",lineHeight:1.9,maxWidth:520,margin:"0 auto 16px",wordBreak:"keep-all"}}>가족의 행복은 사회 전체의 행복으로 이어진다는 사실을 우리 모두는 알고 있습니다.</p></FI>
+    <FI delay={.15}><p style={{fontSize:16,color:"rgba(255,255,255,.65)",lineHeight:1.9,maxWidth:520,margin:"0 auto 40px",wordBreak:"keep-all"}}>가족을 회복시키고 더 나은 세상을 만들어가는 여정. 더나일과 함께 걸어가는 페이서가 되어주세요.</p></FI>
+    <FI delay={.2}><BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{fontSize:17,padding:"18px 48px"}}>지금 후원하기</BG></FI>
   </Box></Sec>
 </>);
 
