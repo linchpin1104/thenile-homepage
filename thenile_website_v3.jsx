@@ -641,6 +641,7 @@ const ProgramsPage=()=>{
     return(
       <div style={{position:"relative",width:"100%",height:220,overflow:"hidden",background:C.g1}}>
         <img src={validImgs[idx]} alt="" style={{width:"100%",height:"100%",objectFit:"cover",transition:"opacity .4s"}}/>
+        <div style={{position:"absolute",inset:0,background:"rgba(27,42,74,.15)",pointerEvents:"none"}}/>
         {validImgs.length>1&&<>
           <button onClick={e=>{e.stopPropagation();setSi(i=>i===0?validImgs.length-1:i-1)}} style={{position:"absolute",left:8,top:"50%",transform:"translateY(-50%)",width:32,height:32,borderRadius:"50%",border:"none",background:"rgba(0,0,0,.4)",color:"#fff",cursor:"pointer",fontSize:14,display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
           <button onClick={e=>{e.stopPropagation();setSi(i=>(i+1)%validImgs.length)}} style={{position:"absolute",right:8,top:"50%",transform:"translateY(-50%)",width:32,height:32,borderRadius:"50%",border:"none",background:"rgba(0,0,0,.4)",color:"#fff",cursor:"pointer",fontSize:14,display:"flex",alignItems:"center",justifyContent:"center"}}>→</button>
