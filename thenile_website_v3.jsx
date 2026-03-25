@@ -916,19 +916,33 @@ const PacerPage=()=>(<>
 /* ═══ CONTACT — p.23 원문 ═══ */
 const ContactPage=()=>{
   const[form,setForm]=useState({type:"",org:"",name:"",email:"",phone:"",msg:""});
-  const[sent,setSent]=useState(false);
-  const handleSubmit=()=>{
+  const[sent,setSent]=useState(false);const[sending,setSending]=useState(false);
+  const handleSubmit=async()=>{
     if(!form.name||!form.email||!form.msg){alert("담당자명, 이메일, 문의 내용은 필수 항목입니다.");return;}
-    const subject=encodeURIComponent(`[더나일 협력문의] ${form.type||"기타"} - ${form.org||"개인"}`);
-    const body=encodeURIComponent(`문의 유형: ${form.type||"기타"}\n기관/회사명: ${form.org||"-"}\n담당자명: ${form.name}\n이메일: ${form.email}\n연락처: ${form.phone||"-"}\n\n문의 내용:\n${form.msg}`);
-    window.open(`mailto:cross@thenile.kr?subject=${subject}&body=${body}`);
-    setSent(true);
+    setSending(true);
+    try{
+      const res=await fetch("https://formspree.io/f/xojpaoaz",{
+        method:"POST",
+        headers:{"Content-Type":"application/json","Accept":"application/json"},
+        body:JSON.stringify({
+          _subject:`[더나일 협력문의] ${form.type||"기타"} - ${form.org||"개인"}`,
+          "문의 유형":form.type||"기타",
+          "기관/회사명":form.org||"-",
+          "담당자명":form.name,
+          email:form.email,
+          "연락처":form.phone||"-",
+          "문의 내용":form.msg,
+        })
+      });
+      if(res.ok){setSent(true)}else{alert("전송에 실패했습니다. 다시 시도해주세요.")}
+    }catch(e){alert("네트워크 오류가 발생했습니다.")}
+    setSending(false);
   };
   if(sent) return(<>
     <section style={{paddingTop:120,paddingBottom:80,background:C.warm,minHeight:"60vh",display:"flex",alignItems:"center"}}><Box style={{textAlign:"center"}}>
       <div style={{fontSize:48,marginBottom:24}}>✉️</div>
       <H2>문의가 전송되었습니다</H2>
-      <p style={{fontSize:16,color:C.g6,lineHeight:1.8,marginTop:16}}>이메일 앱에서 전송을 완료해주세요.<br/>빠른 시일 내에 답변 드리겠습니다.</p>
+      <p style={{fontSize:16,color:C.g6,lineHeight:1.8,marginTop:16}}>빠른 시일 내에 답변 드리겠습니다.<br/>감사합니다.</p>
       <div style={{marginTop:32}}><Btn onClick={()=>{setSent(false);setForm({type:"",org:"",name:"",email:"",phone:"",msg:""});}}>새 문의 작성</Btn></div>
     </Box></section>
   </>);
@@ -979,7 +993,7 @@ const ContactPage=()=>{
               style={{width:"100%",padding:"12px 16px",borderRadius:10,border:`1px solid ${C.g2}`,fontSize:14,outline:"none",background:C.w,resize:"vertical",fontFamily:"inherit"}}
               onFocus={e=>e.target.style.borderColor=C.gold} onBlur={e=>e.target.style.borderColor=C.g2}/>
           </div>
-          <BG onClick={handleSubmit} style={{width:"100%",padding:"16px",fontSize:16,textAlign:"center"}}>문의 보내기</BG>
+          <BG onClick={handleSubmit} style={{width:"100%",padding:"16px",fontSize:16,textAlign:"center",opacity:sending?.6:1,pointerEvents:sending?"none":"auto"}}>{sending?"전송 중...":"문의 보내기"}</BG>
           <div style={{marginTop:24,padding:"16px 20px",background:C.w,borderRadius:12,border:`1px solid ${C.g2}`}}>
             <div style={{fontSize:12,color:C.gold,fontWeight:600,marginBottom:8}}>직접 연락</div>
             <div style={{fontSize:13,color:C.g6,lineHeight:1.8}}>E-mail: cross@thenile.kr<br/>전화: 010-8257-1104</div>
