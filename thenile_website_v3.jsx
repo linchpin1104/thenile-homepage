@@ -60,7 +60,7 @@ const Nav=({page,go})=>{
       {PAGES.map(n=><div key={n.id} onClick={()=>go(n.id)} style={{fontSize:22,color:"#fff",cursor:"pointer",fontWeight:page===n.id?700:400}}>{n.label}</div>)}
       <BG onClick={()=>go("pacer")} style={{marginTop:16}}>후원하기</BG>
     </div>}
-    <style>{`@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Noto+Serif+KR:wght@400;700&display=swap');*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Pretendard',sans-serif;color:${C.g8};background:${C.warm};overflow-x:hidden;word-break:keep-all}h1,h2,h3,h4,p{word-break:keep-all}.nl{display:block}.bg{display:none!important}@media(max-width:960px){.nl{display:none!important}.bg{display:flex!important}}`}</style>
+    <style>{`*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Pretendard',sans-serif;color:${C.g8};background:${C.warm};overflow-x:hidden;word-break:keep-all}h1,h2,h3,h4,p{word-break:keep-all}.nl{display:block}.bg{display:none!important}@media(max-width:960px){.nl{display:none!important}.bg{display:flex!important}}`}</style>
   </>);
 };
 
