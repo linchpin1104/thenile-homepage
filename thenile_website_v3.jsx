@@ -549,7 +549,7 @@ const AboutPage=({go})=>(<>
     <FI><Tag>이다랑 이사장</Tag></FI>
     <FI delay={.1}><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:48,alignItems:"start",marginTop:16}}>
       <div style={{textAlign:"center",position:"sticky",top:100}}>
-        <div style={{width:200,height:200,borderRadius:20,margin:"0 auto 20px",background:`linear-gradient(135deg,${C.goldP},${C.g1})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:72,fontWeight:700,color:C.navy,border:`3px solid ${C.goldL}`}}>이</div>
+        <img src="/images/이다랑.jpg" alt="이다랑 이사장" style={{width:"100%",maxWidth:280,borderRadius:20,margin:"0 auto 20px",objectFit:"cover",display:"block",boxShadow:"0 8px 32px rgba(27,42,74,.12)"}}/>
         <div style={{fontSize:24,fontWeight:700,color:C.navy}}>이다랑</div>
         <div style={{fontSize:14,color:C.g6,marginTop:4}}>아동학 학사 / 발달심리학 석사 / 아동심리박사과정<br/>(주)그로잉맘 창업자 / 아동심리전문가</div>
       </div>
@@ -715,17 +715,6 @@ const ParentscanPage=()=>(<>
     <FI delay={.25}><p style={{fontSize:15,color:"rgba(255,255,255,.6)",lineHeight:1.8,maxWidth:600,margin:"0 auto 40px"}}>양육불안 척도는 양육자가 느끼는 심리/정서적 불안 수준과 양육자로서의 효능감을 측정할 수 있는 척도입니다. 더나일은 타당도가 확인된 자체 분석도구를 활용하여 누구나 쉽게 온라인으로 검사할 수 있는 시스템을 구축하고 임팩트 지표를 지속적으로 측정하고 관리합니다.</p></FI>
     <FI delay={.3}><BG onClick={()=>window.open("https://www.thenile.kr/parentscan","_blank")} style={{fontSize:17,padding:"18px 48px"}}>검사 시작하기</BG></FI>
   </Box></section>
-  <Sec bg={C.w}><Box>
-    <FI><H2 style={{textAlign:"center",marginBottom:16}}>양육불안척도 (Parenting anxiety Inventory)</H2></FI>
-    <FI delay={.1}><p style={{textAlign:"center",fontSize:15,color:C.g6,marginBottom:48}}>주요 측정 항목 : 정서불안 / 능력불안 / 관계불안</p></FI>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:24}}>
-      {[{t:"정서불안",c:"#F87171"},{t:"능력불안",c:"#5EEAD4"},{t:"관계불안",c:"#60A5FA"}].map((a,i)=>(
-        <FI key={i} delay={i*.15}><div style={{padding:32,background:C.warm,borderRadius:16,height:"100%",borderTop:`4px solid ${a.c}`,textAlign:"center"}}>
-          <h3 style={{fontSize:22,fontWeight:700,color:C.navy}}>{a.t}</h3>
-        </div></FI>
-      ))}
-    </div>
-  </Box></Sec>
 </>);
 
 
