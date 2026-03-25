@@ -119,12 +119,6 @@ const ACTIVITIES = [
   { cat:"#성장추구", t:"긴급지원상담",
     d:"사별, 이혼 소송 중, 저소득층, 아동 학대 의심 가정 등 심리적 위기 상황에 처한 부모 및 아동 대상 후원금을 활용한 1:1 긴급 심리 상담 지원, 전문 상담사 연계, 위기 상황별 맞춤형 코칭 제공",
     stats:[], period:"상시 진행" },
-  { cat:"#성장추구", t:"장애아동부모상담",
-    d:"장애 아동의 부모를 대상으로 한 전문 심리상담 및 정서 지원 프로그램",
-    stats:[], period:"2025년" },
-  { cat:"#양육문화", t:"까르띠에 여성창업",
-    d:"까르띠에 여성창업 프로그램과 연계한 양육문화 사업",
-    stats:[], period:"2025년" },
 ];
 
 const ActivitySlider = () => {
@@ -414,11 +408,11 @@ const HomePage=({go})=>(<>
       <FI><div style={{textAlign:"center",marginBottom:48}}><Tag>이사진</Tag><H2>주요 이사진</H2></div></FI>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(150px,1fr))",gap:20}}>
         {[
-          {name:"이혜린 이사",img:"/images/이혜린.jpg",lines:["(현) 쉬벤처스 부대표","(전) 그로잉맘 부대표","부모교육전문가,","청소년상담사,","비즈니스 빌더"]},
+          {name:"이혜린 이사",img:"/images/이혜린.jpg",lines:["(현) 쉬벤처스 부대표","(전) 그로잉맘 부대표","교육학 석사, 창업학 박사과정중","부모교육전문가,","청소년상담사,","비즈니스 빌더"]},
           {name:"정우열 이사",img:"/images/정우열.jpg",lines:["정신과 전문의","생각과 느낌 원장","2016년 여성가족부장관표창","2017년 국무총리표창"]},
           {name:"김혜민 이사",img:"/images/김혜민.jpg",lines:["(전) YTN 라디오PD","극동방송 아나운서","한국자살예방협회","홍보 및 대외협력위원","국무총리표창"]},
           {name:"박장원 이사",img:"/images/변장원.jpg",lines:["정책학 박사","(전공: 필란트로피)","(전) 국가균형발전","위원회 정책홍보팀장"]},
-          {name:"김혜진 이사",img:"/images/김혜진.jpg",lines:["(전) 실리콘밸리 글로벌 IT 기업 근무","(Roblox, Myriad Genetics, Counsyl 등)","저서 「실리콘밸리를 그리다」(공저)","커리어 코치 및 글로벌 조직문화 강연자"]},
+          {name:"김혜진 이사",img:"/images/김혜진.jpg",lines:["(현) 옥소폴리틱스 운영총괄","(전) 실리콘밸리 글로벌 기업 근무","(Roblox, Myriad Genetics, Counsyl 등)","저서 「실리콘밸리를 그리다」","커리어 코치 및 글로벌 조직문화 강연자"]},
         ].map((m,i)=>(
           <FI key={i} delay={i*.08}>
             <div style={{textAlign:"center",padding:20,background:C.w,borderRadius:16,border:`1px solid ${C.g2}`,height:"100%"}}>
@@ -480,7 +474,7 @@ const HomePage=({go})=>(<>
     <Box style={{textAlign:"center"}}>
       <FI><Tag color={C.gold}>페이서 PACER</Tag></FI>
       <FI delay={.1}><H2 light style={{maxWidth:500,margin:"0 auto 16px"}}>부모됨의 여정을<br/>함께 걸어주세요</H2></FI>
-      <FI delay={.2}><p style={{fontSize:16,color:"rgba(255,255,255,.6)",lineHeight:1.8,maxWidth:520,margin:"0 auto 40px"}}>우리는 후원자를 페이서라고 부릅니다. 페이서는 [함께 걷는 사람들] 이라는 뜻을 가지고 있지요. [페이서] 는 더 나은 사회를 위해 가족의 가치가 회복되어야 한다는 것에 동의하며 함께 힘을 모으는 사람들입니다.</p></FI>
+      <FI delay={.2}><p style={{fontSize:16,color:"rgba(255,255,255,.6)",lineHeight:1.8,maxWidth:520,margin:"0 auto 40px",wordBreak:"keep-all"}}>우리는 후원자를 페이서라고 부릅니다.<br/>페이서는 [함께 걷는 사람들] 이라는 뜻을 가지고 있지요.<br/><br/>[페이서] 는 더 나은 사회를 위해 가족의 가치가 회복되어야 한다는 것에 동의하며 함께 힘을 모으는 사람들입니다.</p></FI>
       <FI delay={.3}><div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap"}}><BG onClick={()=>window.open("https://link.donationbox.co.kr/donationBoxJoin.jsp?campaignuid=1FuNiwn6W6","_blank")}>페이서 되기</BG><Btn primary={false} onClick={()=>go("contact")} style={{borderColor:"rgba(255,255,255,.3)",color:"#fff"}}>사업 및 협력 문의</Btn></div></FI>
     </Box>
   </Sec>
@@ -500,7 +494,7 @@ const AboutPage=({go})=>(<>
   <Sec bg={C.w}><Box>
     <FI><Tag>MISSION</Tag></FI>
     <FI delay={.1}><H2>부모됨의 두려움이 기쁨으로 전환되는 여정을 함께 합니다</H2></FI>
-    <FI delay={.15}><p style={{fontSize:16,color:C.g6,marginBottom:24}}>Parenthood : From dread to delight</p></FI>
+    <FI delay={.15}><H2 style={{color:C.g6,marginBottom:24}}>Parenthood : From dread to delight</H2></FI>
     <FI delay={.2}><div style={{marginBottom:40}}>
       <Tag>VISION</Tag>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:24}}>
@@ -571,11 +565,11 @@ const AboutPage=({go})=>(<>
     <FI><Tag>이사진</Tag></FI>
     <FI delay={.1}><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(155px,1fr))",gap:20,marginTop:16}}>
       {[
-        {name:"이혜린 이사",img:"/images/이혜린.jpg",lines:["(현) 쉬벤처스 부대표","(전) 그로잉맘 부대표","부모교육전문가,","청소년상담사,","비즈니스 빌더"]},
+        {name:"이혜린 이사",img:"/images/이혜린.jpg",lines:["(현) 쉬벤처스 부대표","(전) 그로잉맘 부대표","교육학 석사, 창업학 박사과정중","부모교육전문가,","청소년상담사,","비즈니스 빌더"]},
         {name:"정우열 이사",img:"/images/정우열.jpg",lines:["정신과 전문의","생각과 느낌 원장","2016년 여성가족부장관표창","2017년 국무총리표창"]},
         {name:"김혜민 이사",img:"/images/김혜민.jpg",lines:["(전) YTN 라디오PD","극동방송 아나운서","한국자살예방협회","홍보 및 대외협력위원","국무총리표창"]},
         {name:"박장원 이사",img:"/images/변장원.jpg",lines:["정책학 박사","(전공: 필란트로피)","(전) 국가균형발전","위원회 정책홍보팀장"]},
-        {name:"김혜진 이사",img:"/images/김혜진.jpg",lines:["(전) 실리콘밸리 글로벌 IT 기업 근무","(Roblox, Myriad Genetics, Counsyl 등)","저서 「실리콘밸리를 그리다」(공저)","커리어 코치 및 글로벌 조직문화 강연자"]},
+        {name:"김혜진 이사",img:"/images/김혜진.jpg",lines:["(현) 옥소폴리틱스 운영총괄","(전) 실리콘밸리 글로벌 기업 근무","(Roblox, Myriad Genetics, Counsyl 등)","저서 「실리콘밸리를 그리다」","커리어 코치 및 글로벌 조직문화 강연자"]},
       ].map((m,i)=>(
         <FI key={i} delay={i*.08}><div style={{textAlign:"center",padding:20,background:C.w,borderRadius:16,border:`1px solid ${C.g2}`,height:"100%"}}>
           {m.img ? <img src={m.img} alt={m.name} style={{width:110,height:110,borderRadius:"50%",margin:"0 auto 16px",objectFit:"cover",display:"block",border:`3px solid ${C.goldL}`}}/> : <div style={{width:110,height:110,borderRadius:"50%",margin:"0 auto 16px",background:`linear-gradient(135deg,${C.goldP},${C.g1})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:36,color:C.navy}}>{m.name[0]}</div>}
@@ -623,14 +617,18 @@ const ProgramsPage=()=>{
   ];
 
   const ProjectImgSlider=({imgDir})=>{
-    const imgs=[1,2,3,4,5].map(n=>`/images/projects/${imgDir}/${n}.jpg`);
-    const[si,setSi]=useState(0);const[loaded,setLoaded]=useState([]);const[ratios,setRatios]=useState({});
+    const[si,setSi]=useState(0);const[validImgs,setValidImgs]=useState([]);const[imgRatios,setImgRatios]=useState([]);
     useEffect(()=>{
-      const check=[];const r={};
-      imgs.forEach((src,idx)=>{const img=new Image();img.onload=()=>{check[idx]=true;r[idx]=img.width/img.height;setLoaded([...check]);setRatios({...r})};img.onerror=()=>{check[idx]=false;setLoaded([...check])};img.src=src});
+      const srcs=[1,2,3,4,5].map(n=>`/images/projects/${encodeURIComponent(imgDir)}/${n}.jpg`);
+      const results=[];const rats=[];let done=0;
+      srcs.forEach((src,idx)=>{
+        const img=new Image();
+        img.onload=()=>{results[idx]=src;rats[idx]=img.width/img.height;done++;if(done===5){setValidImgs(results.filter(Boolean));setImgRatios(rats.filter((_,i)=>results[i]))}};
+        img.onerror=()=>{results[idx]=null;done++;if(done===5){setValidImgs(results.filter(Boolean));setImgRatios(rats.filter((_,i)=>results[i]))}};
+        img.src=src;
+      });
     },[imgDir]);
-    const validImgs=imgs.filter((_,idx)=>loaded[idx]===true);
-    const validRatios=imgs.map((_,idx)=>ratios[idx]||1).filter((_,idx)=>loaded[idx]===true);
+    const validRatios=imgRatios;
     if(validImgs.length===0) return(
       <div style={{width:"100%",height:260,background:`linear-gradient(135deg,${C.g1},${C.g2})`,display:"flex",alignItems:"center",justifyContent:"center",gap:8,color:C.g4,fontSize:13}}>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
