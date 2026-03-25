@@ -60,7 +60,7 @@ const Nav=({page,go})=>{
       {PAGES.map(n=><div key={n.id} onClick={()=>go(n.id)} style={{fontSize:22,color:"#fff",cursor:"pointer",fontWeight:page===n.id?700:400}}>{n.label}</div>)}
       <BG onClick={()=>go("pacer")} style={{marginTop:16}}>후원하기</BG>
     </div>}
-    <style>{`*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Pretendard',sans-serif;color:${C.g8};background:${C.warm};overflow-x:hidden;word-break:keep-all}h1,h2,h3,h4,p{word-break:keep-all}.nl{display:block}.bg{display:none!important}@media(max-width:960px){.nl{display:none!important}.bg{display:flex!important}}`}</style>
+    <style>{`*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Pretendard',sans-serif;color:${C.g8};background:${C.warm};overflow-x:hidden;word-break:keep-all}h1,h2,h3,h4,p{word-break:keep-all}.nl{display:block}.bg{display:none!important}@media(min-width:961px){.about-photo{position:sticky;top:100px}}@media(max-width:960px){.nl{display:none!important}.bg{display:flex!important}}`}</style>
   </>);
 };
 
@@ -541,7 +541,7 @@ const AboutPage=({go})=>(<>
   <Sec bg={C.w}><Box>
     <FI><Tag>이다랑 이사장</Tag></FI>
     <FI delay={.1}><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:48,alignItems:"start",marginTop:16}}>
-      <div style={{textAlign:"center",position:"sticky",top:100}}>
+      <div className="about-photo" style={{textAlign:"center"}}>
         <img src="/images/이다랑.jpg" alt="이다랑 이사장" style={{width:"100%",maxWidth:280,borderRadius:20,margin:"0 auto 20px",objectFit:"cover",display:"block",boxShadow:"0 8px 32px rgba(27,42,74,.12)"}}/>
         <div style={{fontSize:24,fontWeight:700,color:C.navy}}>이다랑</div>
         <div style={{fontSize:14,color:C.g6,marginTop:4}}>아동학 학사 / 발달심리학 석사 / 아동심리박사과정<br/>(주)그로잉맘 창업자 / 아동심리전문가</div>
