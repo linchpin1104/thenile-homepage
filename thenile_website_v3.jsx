@@ -486,7 +486,7 @@ const HomePage=({go})=>(<>
   </Sec>
 
   {/* 인스타그램 */}
-  <InstagramSection />
+  {/* <InstagramSection /> */}
 </>);
 
 /* ═══ ABOUT ═══ */
