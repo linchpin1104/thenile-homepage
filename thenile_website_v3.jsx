@@ -992,10 +992,45 @@ const ContactPage=()=>{
   </>);
 };
 
+/* ═══ SEO META ═══ */
+const PAGE_META={
+  home:{title:"사단법인 더나일 | 부모됨의 두려움이 기쁨으로 전환되는 여정",desc:"사단법인 더나일은 건강한 양육문화 확산과 부모의 심리적 안정을 위해 활동하는 서울특별시 산하 비영리법인입니다."},
+  about:{title:"더나일 소개 | 사단법인 더나일",desc:"더나일의 미션, 비전, 설립목적, 주된사업, 연혁, 이사진을 소개합니다."},
+  programs:{title:"사업소개 | 사단법인 더나일",desc:"더나일이 수행한 양육문화 확산, 부모교육, 위기가족 지원 등 주요 사업을 소개합니다."},
+  parentscan:{title:"양육불안검사 | 사단법인 더나일",desc:"양육자가 느끼는 심리/정서적 불안 수준과 양육 효능감을 측정하는 양육불안척도 검사입니다."},
+  pacer:{title:"후원하기 - 페이서(PACER) | 사단법인 더나일",desc:"더나일과 함께 걷는 페이서가 되어주세요. 가족의 가치를 회복하는 여정에 함께합니다."},
+  contact:{title:"협력문의 | 사단법인 더나일",desc:"기업 CSR, 강연, 기관 협업, 연구 협력, 후원 협약 등 더나일과의 협력을 문의하세요."},
+};
+
+const PATH_MAP={"/":"home","/about":"about","/programs":"programs","/parentscan":"parentscan","/pacer":"pacer","/contact":"contact"};
+const ID_TO_PATH={home:"/",about:"/about",programs:"/programs",parentscan:"/parentscan",pacer:"/pacer",contact:"/contact"};
+
 /* ═══ APP ═══ */
 export default function App(){
-  const[page,setPage]=useState("home");
-  const go=id=>{setPage(id);window.scrollTo({top:0,behavior:"smooth"})};
+  const getPageFromPath=()=>{const p=window.location.pathname.replace(/\/$/,"");return PATH_MAP[p||"/"]||"home"};
+  const[page,setPage]=useState(getPageFromPath);
+
+  useEffect(()=>{
+    const onPop=()=>setPage(getPageFromPath());
+    window.addEventListener("popstate",onPop);
+    return()=>window.removeEventListener("popstate",onPop);
+  },[]);
+
+  useEffect(()=>{
+    const meta=PAGE_META[page]||PAGE_META.home;
+    document.title=meta.title;
+    let desc=document.querySelector('meta[name="description"]');
+    if(!desc){desc=document.createElement("meta");desc.name="description";document.head.appendChild(desc)}
+    desc.content=meta.desc;
+  },[page]);
+
+  const go=id=>{
+    setPage(id);
+    const path=ID_TO_PATH[id]||"/";
+    window.history.pushState({},"",path);
+    window.scrollTo({top:0,behavior:"smooth"});
+  };
+
   const P={home:<HomePage go={go}/>,about:<AboutPage go={go}/>,programs:<ProgramsPage/>,parentscan:<ParentscanPage/>,pacer:<PacerPage/>,contact:<ContactPage/>};
   return(<div><Nav page={page} go={go}/><main>{P[page]||<HomePage go={go}/>}</main><Footer go={go}/></div>);
 }

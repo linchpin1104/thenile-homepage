@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    { "source": "/join_pacer", "destination": "/pacer", "permanent": true },
+    { "source": "/business", "destination": "/programs", "permanent": true },
+    { "source": "/thenile-blog", "destination": "/", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
