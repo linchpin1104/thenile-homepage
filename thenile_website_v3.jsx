@@ -624,23 +624,25 @@ const ProgramsPage=()=>{
 
   const ProjectImgSlider=({imgDir})=>{
     const imgs=[1,2,3,4,5].map(n=>`/images/projects/${imgDir}/${n}.jpg`);
-    const[si,setSi]=useState(0);const[loaded,setLoaded]=useState([]);
+    const[si,setSi]=useState(0);const[loaded,setLoaded]=useState([]);const[ratios,setRatios]=useState({});
     useEffect(()=>{
-      const check=[];
-      imgs.forEach((src,idx)=>{const img=new Image();img.onload=()=>{check[idx]=true;setLoaded([...check])};img.onerror=()=>{check[idx]=false;setLoaded([...check])};img.src=src});
+      const check=[];const r={};
+      imgs.forEach((src,idx)=>{const img=new Image();img.onload=()=>{check[idx]=true;r[idx]=img.width/img.height;setLoaded([...check]);setRatios({...r})};img.onerror=()=>{check[idx]=false;setLoaded([...check])};img.src=src});
     },[imgDir]);
     const validImgs=imgs.filter((_,idx)=>loaded[idx]===true);
+    const validRatios=imgs.map((_,idx)=>ratios[idx]||1).filter((_,idx)=>loaded[idx]===true);
     if(validImgs.length===0) return(
-      <div style={{width:"100%",height:220,background:`linear-gradient(135deg,${C.g1},${C.g2})`,display:"flex",alignItems:"center",justifyContent:"center",gap:8,color:C.g4,fontSize:13}}>
+      <div style={{width:"100%",height:260,background:`linear-gradient(135deg,${C.g1},${C.g2})`,display:"flex",alignItems:"center",justifyContent:"center",gap:8,color:C.g4,fontSize:13}}>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
         사업 이미지 영역
       </div>
     );
     const idx=si%validImgs.length;
+    const isPortrait=validRatios[idx]<1;
     return(
-      <div style={{position:"relative",width:"100%",height:220,overflow:"hidden",background:C.g1}}>
-        <img src={validImgs[idx]} alt="" style={{width:"100%",height:"100%",objectFit:"cover",transition:"opacity .4s"}}/>
-        <div style={{position:"absolute",inset:0,background:"rgba(27,42,74,.15)",pointerEvents:"none"}}/>
+      <div style={{position:"relative",width:"100%",height:isPortrait?320:240,overflow:"hidden",background:C.g1,transition:"height .3s"}}>
+        <img src={validImgs[idx]} alt="" style={{width:"100%",height:"100%",objectFit:isPortrait?"contain":"cover",transition:"opacity .4s"}}/>
+        <div style={{position:"absolute",inset:0,background:"rgba(27,42,74,.1)",pointerEvents:"none"}}/>
         {validImgs.length>1&&<>
           <button onClick={e=>{e.stopPropagation();setSi(i=>i===0?validImgs.length-1:i-1)}} style={{position:"absolute",left:8,top:"50%",transform:"translateY(-50%)",width:32,height:32,borderRadius:"50%",border:"none",background:"rgba(0,0,0,.4)",color:"#fff",cursor:"pointer",fontSize:14,display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
           <button onClick={e=>{e.stopPropagation();setSi(i=>(i+1)%validImgs.length)}} style={{position:"absolute",right:8,top:"50%",transform:"translateY(-50%)",width:32,height:32,borderRadius:"50%",border:"none",background:"rgba(0,0,0,.4)",color:"#fff",cursor:"pointer",fontSize:14,display:"flex",alignItems:"center",justifyContent:"center"}}>→</button>
