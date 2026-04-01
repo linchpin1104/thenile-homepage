@@ -38,7 +38,7 @@ const Dot=()=><div style={{width:4,height:4,borderRadius:2,background:C.gold,fle
 
 const PAGES=[
   {id:"home",label:"Home"},{id:"about",label:"더나일 소개"},{id:"programs",label:"사업소개"},
-  {id:"parentscan",label:"양육불안검사"},{id:"pacer",label:"후원하기"},{id:"contact",label:"협력문의"},
+  {id:"parentscan",label:"양육불안검사"},{id:"pacer",label:"후원하기"},{id:"shop",label:"상품"},{id:"counsel",label:"페이서 상담"},{id:"contact",label:"협력문의"},
 ];
 
 const Nav=({page,go})=>{
@@ -410,7 +410,7 @@ const HomePage=({go})=>(<>
         {[
           {name:"이혜린 이사",img:"/images/이혜린.jpg",lines:["(현) 쉬벤처스 부대표","(전) 그로잉맘 부대표","교육학 석사, 창업학 박사과정중","부모교육전문가,","청소년상담사,","비즈니스 빌더"]},
           {name:"정우열 이사",img:"/images/정우열.jpg",lines:["정신과 전문의","생각과 느낌 원장","2016년 여성가족부장관표창","2017년 국무총리표창"]},
-          {name:"김혜민 이사",img:"/images/김혜민.jpg",lines:["(전) YTN 라디오PD","극동방송 아나운서","한국자살예방협회","홍보 및 대외협력위원","국무총리표창"]},
+          {name:"김혜민 이사",img:"/images/김혜민.jpg",lines:["(전) YTN 라디오PD","극동방송 아나운서","한국자살예방협회 홍보위원장","국무총리표창"]},
           {name:"박장원 이사",img:"/images/변장원.jpg",lines:["정책학 박사","(전공: 필란트로피)","(전) 국가균형발전","위원회 정책홍보팀장"]},
           {name:"김혜진 이사",img:"/images/김혜진.jpg",lines:["(현) 옥소폴리틱스 운영총괄","(전) 실리콘밸리 글로벌 기업 근무","(Roblox, Myriad Genetics, Counsyl 등)","저서 「실리콘밸리를 그리다」","커리어 코치 및 글로벌 조직문화 강연자"]},
         ].map((m,i)=>(
@@ -567,7 +567,7 @@ const AboutPage=({go})=>(<>
       {[
         {name:"이혜린 이사",img:"/images/이혜린.jpg",lines:["(현) 쉬벤처스 부대표","(전) 그로잉맘 부대표","교육학 석사, 창업학 박사과정중","부모교육전문가,","청소년상담사,","비즈니스 빌더"]},
         {name:"정우열 이사",img:"/images/정우열.jpg",lines:["정신과 전문의","생각과 느낌 원장","2016년 여성가족부장관표창","2017년 국무총리표창"]},
-        {name:"김혜민 이사",img:"/images/김혜민.jpg",lines:["(전) YTN 라디오PD","극동방송 아나운서","한국자살예방협회","홍보 및 대외협력위원","국무총리표창"]},
+        {name:"김혜민 이사",img:"/images/김혜민.jpg",lines:["(전) YTN 라디오PD","극동방송 아나운서","한국자살예방협회 홍보위원장","국무총리표창"]},
         {name:"박장원 이사",img:"/images/변장원.jpg",lines:["정책학 박사","(전공: 필란트로피)","(전) 국가균형발전","위원회 정책홍보팀장"]},
         {name:"김혜진 이사",img:"/images/김혜진.jpg",lines:["(현) 옥소폴리틱스 운영총괄","(전) 실리콘밸리 글로벌 기업 근무","(Roblox, Myriad Genetics, Counsyl 등)","저서 「실리콘밸리를 그리다」","커리어 코치 및 글로벌 조직문화 강연자"]},
       ].map((m,i)=>(
@@ -737,7 +737,7 @@ const ParentscanPage=()=>(<>
     <FI delay={.1}><H2 light>양육불안검사</H2></FI>
     <FI delay={.2}><p style={{fontSize:16,color:"rgba(255,255,255,.7)",lineHeight:1.8,maxWidth:600,margin:"0 auto 16px"}}>자체보유하고 있는 양육불안 척도를 활용하여 임팩트 지표를 지속적으로 측정합니다.</p></FI>
     <FI delay={.25}><p style={{fontSize:15,color:"rgba(255,255,255,.6)",lineHeight:1.8,maxWidth:600,margin:"0 auto 40px"}}>양육불안 척도는 양육자가 느끼는 심리/정서적 불안 수준과 양육자로서의 효능감을 측정할 수 있는 척도입니다. 더나일은 타당도가 확인된 자체 분석도구를 활용하여 누구나 쉽게 온라인으로 검사할 수 있는 시스템을 구축하고 임팩트 지표를 지속적으로 측정하고 관리합니다.</p></FI>
-    <FI delay={.3}><BG onClick={()=>window.open("https://www.thenile.kr/parentscan","_blank")} style={{fontSize:17,padding:"18px 48px"}}>검사 시작하기</BG></FI>
+    <FI delay={.3}><BG onClick={()=>window.open("https://www.parentscan.app/register","_blank")} style={{fontSize:17,padding:"18px 48px"}}>검사 시작하기</BG></FI>
   </Box></section>
 </>);
 
@@ -1004,6 +1004,208 @@ const ContactPage=()=>{
   </>);
 };
 
+/* ═══ SHOP ═══ */
+const ShopPage=()=>{
+  const product={name:"더나일 상담(테스트)",price:100000,desc:"사단법인 더나일의 전문 상담 서비스입니다. 양육 관련 고민이나 가족 내 어려움에 대해 전문가와 함께 이야기를 나눌 수 있습니다.",features:["1:1 전문 상담","양육·가족 관련 주제","상담 후 맞춤 솔루션 제공"]};
+  return(<>
+    <section style={{paddingTop:120,paddingBottom:60,background:C.warm}}><Box>
+      <FI><Tag>SHOP</Tag></FI>
+      <FI delay={.1}><H2>상품</H2></FI>
+      <FI delay={.2}><Desc>더나일의 전문 서비스를 만나보세요.</Desc></FI>
+    </Box></section>
+    <Sec bg={C.w}><Box>
+      <FI><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:48,alignItems:"start"}}>
+        {/* 상품 이미지 영역 */}
+        <div style={{background:C.warm,borderRadius:20,padding:48,display:"flex",alignItems:"center",justifyContent:"center",minHeight:320,border:`1px solid ${C.g2}`}}>
+          <div style={{textAlign:"center"}}>
+            <div style={{width:80,height:80,borderRadius:"50%",background:C.navy,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 20px"}}>
+              <span style={{fontSize:36,color:"#fff"}}>💬</span>
+            </div>
+            <p style={{fontSize:14,color:C.g6}}>Professional Counseling</p>
+          </div>
+        </div>
+        {/* 상품 정보 */}
+        <div>
+          <h3 style={{fontSize:24,fontWeight:700,color:C.navy,marginBottom:12,fontFamily:"'Noto Serif KR',serif"}}>{product.name}</h3>
+          <div style={{fontSize:28,fontWeight:700,color:C.gold,marginBottom:24}}>{product.price.toLocaleString()}원</div>
+          <p style={{fontSize:15,color:C.g6,lineHeight:1.8,marginBottom:32,wordBreak:"keep-all"}}>{product.desc}</p>
+          <div style={{marginBottom:32}}>
+            {product.features.map((f,i)=><div key={i} style={{display:"flex",alignItems:"center",gap:12,padding:"10px 0",borderBottom:`1px solid ${C.g1}`}}>
+              <div style={{width:6,height:6,borderRadius:3,background:C.gold,flexShrink:0}}/>
+              <span style={{fontSize:14,color:C.navy,fontWeight:500}}>{f}</span>
+            </div>)}
+          </div>
+          <Btn onClick={()=>alert("상담 신청이 접수되었습니다. 담당자가 곧 연락드리겠습니다.")} style={{width:"100%",textAlign:"center",fontSize:16,padding:"16px 32px"}}>구매하기</Btn>
+          <p style={{fontSize:12,color:C.g6,marginTop:12,textAlign:"center"}}>구매 후 담당자가 상담 일정을 안내드립니다.</p>
+        </div>
+      </div></FI>
+    </Box></Sec>
+  </>);
+};
+
+/* ═══ COUNSEL — 페이서 전용상담 ═══ */
+const CONCERN_OPTIONS=["훈육/행동지도","정서/심리 발달","학습/교육","형제자매 관계","부모-자녀 의사소통","또래 관계","기타"];
+const TIME_SLOTS=[];
+for(let h=9;h<18;h++){TIME_SLOTS.push(`${String(h).padStart(2,"0")}:00`);TIME_SLOTS.push(`${String(h).padStart(2,"0")}:30`)}
+TIME_SLOTS.push("18:00");
+
+const CounselPage=()=>{
+  const[step,setStep]=useState("ask"); // ask | notPacer | form | done
+  const[form,setForm]=useState({name:"",phone:"",childAge:"",childGender:"",concerns:[],date:"",time:"",detail:""});
+  const[sending,setSending]=useState(false);
+
+  const toggleConcern=c=>{
+    setForm(f=>({...f,concerns:f.concerns.includes(c)?f.concerns.filter(x=>x!==c):[...f.concerns,c]}));
+  };
+
+  const handleSubmit=async()=>{
+    if(!form.name||!form.phone||!form.childAge||!form.childGender||form.concerns.length===0||!form.date||!form.time){
+      alert("필수 항목을 모두 입력해주세요.");return;
+    }
+    setSending(true);
+    try{
+      const res=await fetch("https://formspree.io/f/xojpaoaz",{
+        method:"POST",
+        headers:{"Content-Type":"application/json","Accept":"application/json"},
+        body:JSON.stringify({
+          _subject:`[페이서 상담 신청] ${form.name}`,
+          "신청자명":form.name,
+          "연락처":form.phone,
+          "아이 연령":form.childAge,
+          "아이 성별":form.childGender,
+          "고민 유형":form.concerns.join(", "),
+          "희망 날짜":form.date,
+          "희망 시간":form.time,
+          "기타 내용":form.detail||"-",
+        })
+      });
+      if(res.ok){setStep("done")}else{alert("전송에 실패했습니다. 다시 시도해주세요.")}
+    }catch(e){alert("네트워크 오류가 발생했습니다.")}
+    setSending(false);
+  };
+
+  const inputStyle={width:"100%",padding:"12px 16px",borderRadius:10,border:`1px solid ${C.g2}`,fontSize:14,outline:"none",background:C.w,fontFamily:"inherit",transition:"border .2s"};
+  const labelStyle={fontSize:13,fontWeight:500,color:C.g6,display:"block",marginBottom:6};
+
+  // 첫 화면: 페이서 여부 확인
+  if(step==="ask") return(<>
+    <section style={{paddingTop:120,paddingBottom:80,background:C.warm,minHeight:"60vh",display:"flex",alignItems:"center"}}><Box style={{textAlign:"center"}}>
+      <FI><div style={{width:80,height:80,borderRadius:"50%",background:C.navy,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 24px"}}><span style={{fontSize:36,color:"#fff"}}>🤝</span></div></FI>
+      <FI delay={.1}><H2>페이서 전용 상담 신청</H2></FI>
+      <FI delay={.2}><p style={{fontSize:16,color:C.g6,lineHeight:1.8,maxWidth:480,margin:"0 auto 40px",wordBreak:"keep-all"}}>더나일의 페이서(PACER) 후원자를 위한 전문 양육 상담 서비스입니다.</p></FI>
+      <FI delay={.3}><p style={{fontSize:18,fontWeight:600,color:C.navy,marginBottom:24}}>페이서이신가요?</p></FI>
+      <FI delay={.35}><div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap"}}>
+        <Btn onClick={()=>setStep("form")} style={{minWidth:140,fontSize:16,padding:"16px 40px"}}>네, 페이서입니다</Btn>
+        <Btn primary={false} onClick={()=>setStep("notPacer")} style={{minWidth:140,fontSize:16,padding:"16px 40px"}}>아니요</Btn>
+      </div></FI>
+    </Box></section>
+  </>);
+
+  // 페이서가 아닌 경우: 후원 안내
+  if(step==="notPacer") return(<>
+    <section style={{paddingTop:120,paddingBottom:80,background:C.warm,minHeight:"60vh",display:"flex",alignItems:"center"}}><Box style={{textAlign:"center"}}>
+      <FI><div style={{fontSize:48,marginBottom:24}}>💛</div></FI>
+      <FI delay={.1}><H2>페이서가 되시면 상담을 받으실 수 있습니다</H2></FI>
+      <FI delay={.2}><p style={{fontSize:16,color:C.g6,lineHeight:1.8,maxWidth:520,margin:"0 auto 16px",wordBreak:"keep-all"}}>페이서(PACER)는 더나일과 함께 걷는 후원자입니다. 월 정기후원을 통해 페이서가 되시면 전문 양육 상담 서비스를 이용하실 수 있습니다.</p></FI>
+      <FI delay={.25}><p style={{fontSize:15,color:C.g6,lineHeight:1.8,maxWidth:520,margin:"0 auto 40px",wordBreak:"keep-all"}}>가족의 가치를 회복하는 여정에 함께해 주세요.</p></FI>
+      <FI delay={.3}><div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap"}}>
+        <BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{fontSize:16,padding:"16px 40px"}}>후원하고 페이서 되기</BG>
+        <Btn primary={false} onClick={()=>setStep("ask")} style={{fontSize:14,padding:"12px 24px"}}>돌아가기</Btn>
+      </div></FI>
+    </Box></section>
+  </>);
+
+  // 상담 완료
+  if(step==="done") return(<>
+    <section style={{paddingTop:120,paddingBottom:80,background:C.warm,minHeight:"60vh",display:"flex",alignItems:"center"}}><Box style={{textAlign:"center"}}>
+      <FI><div style={{fontSize:48,marginBottom:24}}>✅</div></FI>
+      <FI delay={.1}><H2>상담 신청이 완료되었습니다</H2></FI>
+      <FI delay={.2}><p style={{fontSize:16,color:C.g6,lineHeight:1.8,marginTop:16,wordBreak:"keep-all"}}>담당자가 확인 후 연락드리겠습니다.<br/>감사합니다.</p></FI>
+      <FI delay={.3}><div style={{marginTop:32}}><Btn onClick={()=>{setStep("ask");setForm({name:"",phone:"",childAge:"",childGender:"",concerns:[],date:"",time:"",detail:""});}}>새 상담 신청</Btn></div></FI>
+    </Box></section>
+  </>);
+
+  // 상담 신청 폼
+  return(<>
+    <section style={{paddingTop:120,paddingBottom:60,background:C.warm}}><Box>
+      <FI><Tag>PACER COUNSELING</Tag></FI>
+      <FI delay={.1}><H2>페이서 상담 신청</H2></FI>
+      <FI delay={.2}><Desc>양육 관련 고민을 전문가와 함께 나눠보세요.</Desc></FI>
+    </Box></section>
+    <Sec bg={C.w}><Box style={{maxWidth:640}}>
+      <FI><div style={{background:C.warm,borderRadius:20,padding:32,border:`1px solid ${C.g2}`}}>
+
+        {/* 이름 */}
+        <div style={{marginBottom:20}}>
+          <label style={labelStyle}>이름 *</label>
+          <input value={form.name} onChange={e=>setForm({...form,name:e.target.value})} placeholder="신청자 성함" style={inputStyle}
+            onFocus={e=>e.target.style.borderColor=C.gold} onBlur={e=>e.target.style.borderColor=C.g2}/>
+        </div>
+
+        {/* 연락처 */}
+        <div style={{marginBottom:20}}>
+          <label style={labelStyle}>연락처 *</label>
+          <input value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} placeholder="010-0000-0000" style={inputStyle}
+            onFocus={e=>e.target.style.borderColor=C.gold} onBlur={e=>e.target.style.borderColor=C.g2}/>
+        </div>
+
+        {/* 아이 연령 */}
+        <div style={{marginBottom:20}}>
+          <label style={labelStyle}>아이 연령 *</label>
+          <select value={form.childAge} onChange={e=>setForm({...form,childAge:e.target.value})} style={{...inputStyle,cursor:"pointer",appearance:"auto"}}>
+            <option value="">선택해주세요</option>
+            {Array.from({length:19},(_, i)=><option key={i} value={`${i}세`}>{i}세</option>)}
+          </select>
+        </div>
+
+        {/* 아이 성별 */}
+        <div style={{marginBottom:20}}>
+          <label style={labelStyle}>아이 성별 *</label>
+          <div style={{display:"flex",gap:12}}>
+            {["남","여"].map(g=><div key={g} onClick={()=>setForm({...form,childGender:g})} style={{flex:1,padding:"12px 16px",borderRadius:10,textAlign:"center",cursor:"pointer",fontSize:14,fontWeight:500,border:`1px solid ${form.childGender===g?C.navy:C.g2}`,background:form.childGender===g?C.navy:"transparent",color:form.childGender===g?"#fff":C.g6,transition:"all .2s"}}>{g}</div>)}
+          </div>
+        </div>
+
+        {/* 고민 유형 (체크박스) */}
+        <div style={{marginBottom:20}}>
+          <label style={labelStyle}>고민 유형 * (중복 선택 가능)</label>
+          <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+            {CONCERN_OPTIONS.map(c=><div key={c} onClick={()=>toggleConcern(c)} style={{padding:"8px 16px",borderRadius:20,fontSize:13,cursor:"pointer",background:form.concerns.includes(c)?C.navy:C.w,color:form.concerns.includes(c)?"#fff":C.g6,border:`1px solid ${form.concerns.includes(c)?C.navy:C.g2}`,transition:"all .2s"}}>{form.concerns.includes(c)?"✓ ":""}{c}</div>)}
+          </div>
+        </div>
+
+        {/* 희망 날짜 */}
+        <div style={{marginBottom:20}}>
+          <label style={labelStyle}>상담 희망 날짜 *</label>
+          <input type="date" value={form.date} onChange={e=>setForm({...form,date:e.target.value})} style={{...inputStyle,cursor:"pointer"}}
+            min={new Date().toISOString().split("T")[0]}
+            onFocus={e=>e.target.style.borderColor=C.gold} onBlur={e=>e.target.style.borderColor=C.g2}/>
+        </div>
+
+        {/* 희망 시간 */}
+        <div style={{marginBottom:20}}>
+          <label style={labelStyle}>상담 희망 시간 *</label>
+          <select value={form.time} onChange={e=>setForm({...form,time:e.target.value})} style={{...inputStyle,cursor:"pointer",appearance:"auto"}}>
+            <option value="">선택해주세요</option>
+            {TIME_SLOTS.map(t=><option key={t} value={t}>{t}</option>)}
+          </select>
+        </div>
+
+        {/* 기타 내용 */}
+        <div style={{marginBottom:28}}>
+          <label style={labelStyle}>기타 고민 내용</label>
+          <textarea value={form.detail} onChange={e=>setForm({...form,detail:e.target.value})} placeholder="상담받고 싶은 내용을 자유롭게 작성해주세요." rows={4}
+            style={{...inputStyle,resize:"vertical"}}
+            onFocus={e=>e.target.style.borderColor=C.gold} onBlur={e=>e.target.style.borderColor=C.g2}/>
+        </div>
+
+        <BG onClick={handleSubmit} style={{width:"100%",padding:"16px",fontSize:16,textAlign:"center",opacity:sending?.6:1,pointerEvents:sending?"none":"auto"}}>{sending?"전송 중...":"상담 신청하기"}</BG>
+        <div style={{marginTop:16,textAlign:"center"}}><span onClick={()=>setStep("ask")} style={{fontSize:13,color:C.g6,cursor:"pointer",textDecoration:"underline"}}>돌아가기</span></div>
+      </div></FI>
+    </Box></Sec>
+  </>);
+};
+
 /* ═══ SEO META ═══ */
 const PAGE_META={
   home:{title:"사단법인 더나일 | 부모됨의 두려움이 기쁨으로 전환되는 여정",desc:"사단법인 더나일은 건강한 양육문화 확산과 부모의 심리적 안정을 위해 활동하는 서울특별시 산하 비영리법인입니다."},
@@ -1011,11 +1213,13 @@ const PAGE_META={
   programs:{title:"사업소개 | 사단법인 더나일",desc:"더나일이 수행한 양육문화 확산, 부모교육, 위기가족 지원 등 주요 사업을 소개합니다."},
   parentscan:{title:"양육불안검사 | 사단법인 더나일",desc:"양육자가 느끼는 심리/정서적 불안 수준과 양육 효능감을 측정하는 양육불안척도 검사입니다."},
   pacer:{title:"후원하기 - 페이서(PACER) | 사단법인 더나일",desc:"더나일과 함께 걷는 페이서가 되어주세요. 가족의 가치를 회복하는 여정에 함께합니다."},
+  shop:{title:"상품 | 사단법인 더나일",desc:"더나일의 전문 상담 서비스를 만나보세요."},
+  counsel:{title:"페이서 상담 | 사단법인 더나일",desc:"페이서 후원자를 위한 전문 양육 상담 신청 페이지입니다."},
   contact:{title:"협력문의 | 사단법인 더나일",desc:"기업 CSR, 강연, 기관 협업, 연구 협력, 후원 협약 등 더나일과의 협력을 문의하세요."},
 };
 
-const PATH_MAP={"/":"home","/about":"about","/programs":"programs","/parentscan":"parentscan","/pacer":"pacer","/contact":"contact"};
-const ID_TO_PATH={home:"/",about:"/about",programs:"/programs",parentscan:"/parentscan",pacer:"/pacer",contact:"/contact"};
+const PATH_MAP={"/":"home","/about":"about","/programs":"programs","/parentscan":"parentscan","/pacer":"pacer","/shop":"shop","/counsel":"counsel","/contact":"contact"};
+const ID_TO_PATH={home:"/",about:"/about",programs:"/programs",parentscan:"/parentscan",pacer:"/pacer",shop:"/shop",counsel:"/counsel",contact:"/contact"};
 
 /* ═══ APP ═══ */
 export default function App(){
@@ -1043,6 +1247,6 @@ export default function App(){
     window.scrollTo({top:0,behavior:"smooth"});
   };
 
-  const P={home:<HomePage go={go}/>,about:<AboutPage go={go}/>,programs:<ProgramsPage/>,parentscan:<ParentscanPage/>,pacer:<PacerPage/>,contact:<ContactPage/>};
+  const P={home:<HomePage go={go}/>,about:<AboutPage go={go}/>,programs:<ProgramsPage/>,parentscan:<ParentscanPage/>,pacer:<PacerPage/>,shop:<ShopPage/>,counsel:<CounselPage/>,contact:<ContactPage/>};
   return(<div><Nav page={page} go={go}/><main>{P[page]||<HomePage go={go}/>}</main><Footer go={go}/></div>);
 }
