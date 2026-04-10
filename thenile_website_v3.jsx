@@ -787,9 +787,9 @@ const PacerPage=()=>(<>
     </div></FI>
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:24}}>
       {[
-        {t:"양육문화 바로 세우기",color:"#E8D5B7",items:["건강한 양육 문화의 확산을 위한 포럼 개최","교육/심리 영역의 전문가 네트워킹 구축","관련 법률 및 조례 개정 지원/정책홍보"]},
-        {t:"생애주기별 가족교육",color:"#D5E0D5",items:["36개월 초보가정 양육 상담","가족의 변화에 따른 맞춤 서비스","콘텐츠 연구 및 개발"]},
-        {t:"위기가족 심리지원",color:"#D5DAE8",items:["사회경제적 취약계층 양육 상담","미혼/청소년부모 양육 상담","재혼/이혼 등 가족 변화 상담"]},
+        {t:"부모의 일상이 성장이 되게 합니다",color:"#E8D5B7",items:["부모를 위한 리더십 과정 진행","소외 계층 긴급 상담 / 심리치료 지원"]},
+        {t:"양육에 대한 냉소를 다정함으로 바꿉니다",color:"#D5E0D5",items:["언어변화 프로젝트 – 말빛 프로젝트 진행","가족과 함께하는 정기후원행사"]},
+        {t:"양육의 즐거움을 사회와 공유합니다",color:"#D5DAE8",items:["가족을 위한 더나일 포럼 개최","변화를 꿈꾸는 100인의 가족 커뮤니티 운영"]},
       ].map((x,i)=>(
         <FI key={i} delay={i*.12}><div style={{borderRadius:16,overflow:"hidden",border:`1px solid ${C.g2}`,background:C.w,height:"100%"}}>
           <div style={{background:x.color,padding:"28px 24px",textAlign:"center"}}>
@@ -845,11 +845,10 @@ const PacerPage=()=>(<>
     </div></FI>
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:20}}>
       {[
-        {emoji:"🎁",t:"우리가족 행복달력",d:"아동심리전문가가 만드는 가족을 위한 Weekly 캘린더"},
-        {emoji:"✉️",t:"뉴스레터",d:"더나일과 페이서의 활동내역, 프로그램 등의 프리미엄 정보를 매월 전달드립니다"},
-        {emoji:"🎟️",t:"커뮤니티 전용 프로그램",d:"가족의 문제를 해결하기 위해 새롭고 창의적인 시선으로 접근합니다"},
-        {emoji:"💬",t:"온라인 상담 및 검사",d:"전문가와 이야기 나눌 수 있는 상담, 다양한 양육자 지원 프로그램 지원"},
-        {emoji:"👪",t:"정기 부모 포럼",d:"한 달에 1회 이상 온라인 커뮤니티 세션 (부모교육), 전문가와 함께하는 Q&A 세션 등 우선 참여 가능"},
+        {emoji:"✉️",t:"뉴스레터",d:"매 월, 더나일과 페이서 활동 계획 및 내용과 함께 페이서의 참여가 가능한 프로그램 정보를 받아 볼 수 있습니다."},
+        {emoji:"🎟️",t:"커뮤니티 참여",d:"페이서 교육 및 프로그램 참여를 위한 커뮤니티를 운영합니다."},
+        {emoji:"💬",t:"온라인 상담 및 검사",d:"페이서의 가족을 위한 전문가 상담 및 검사 등을 지원합니다."},
+        {emoji:"👪",t:"분기별 페이서 밋업",d:"분기별로 페이서와 임원진의 밋업을 진행하여 더나일의 소식을 전달하며 함께 계획을 세우고 프로젝트를 만들어 나갑니다."},
       ].map((x,i)=>(
         <FI key={i} delay={i*.08}><div style={{padding:24,background:C.w,borderRadius:16,border:`1px solid ${C.g2}`,height:"100%"}}>
           <div style={{fontSize:28,marginBottom:10}}>{x.emoji}</div>
@@ -867,25 +866,18 @@ const PacerPage=()=>(<>
       <H2>월정기 후원 페이서 제공 내역</H2>
     </div></FI>
     <FI delay={.1}><p style={{textAlign:"center",fontSize:13,color:C.g4,marginBottom:48}}>기부금 영수증 발급 / 법인 정기후원 가능(별도문의)</p></FI>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(240px,1fr))",gap:16}}>
+    <FI delay={.15}><div style={{maxWidth:480,margin:"0 auto",padding:40,background:C.warm,borderRadius:20,border:`2px solid ${C.gold}`,textAlign:"center"}}>
+      <div style={{fontSize:15,color:C.gold,fontWeight:700,marginBottom:24}}>🎁 정기 후원</div>
       {[
-        {amt:"월 1만원",items:["우리가족 행복달력","정기 뉴스레터","정기 부모포럼 초대"],extra:[]},
-        {amt:"월 2만원",items:["우리가족 행복달력","정기 뉴스레터","정기 부모포럼 초대"],extra:["온·오프라인 아동/가족 프로그램 (최대 연 1회 우선 참여)"]},
-        {amt:"월 3만원",items:["우리가족 행복달력","정기 뉴스레터","정기 부모포럼 초대"],extra:["온·오프라인 아동/가족 프로그램 (최대 연 2회 우선 참여)","온라인 양육상담 (최대 연 2회)"]},
-        {amt:"월 5만원",items:["우리가족 행복달력","정기 뉴스레터","정기 부모포럼 초대"],extra:["온·오프라인 아동/가족 프로그램 (최대 연 3회 우선 참여)","온라인 양육상담 (최대 연 3회)"]},
-      ].map((tier,i)=>(
-        <FI key={i} delay={i*.08}><div style={{padding:24,background:C.warm,borderRadius:16,border:i===3?`2px solid ${C.gold}`:`1px solid ${C.g2}`,height:"100%",position:"relative"}}>
-          {i===3&&<div style={{position:"absolute",top:-12,left:"50%",transform:"translateX(-50%)",background:C.gold,color:C.navy,fontSize:11,fontWeight:700,padding:"4px 16px",borderRadius:20}}>추천</div>}
-          <div style={{fontSize:13,color:C.gold,fontWeight:700,marginBottom:4}}>🎁 정기 후원</div>
-          <div style={{fontSize:22,fontWeight:700,color:C.navy,marginBottom:16}}>{tier.amt}</div>
-          {tier.items.map((item,j)=><div key={j} style={{fontSize:13,color:C.g6,padding:"4px 0",display:"flex",alignItems:"center",gap:6}}>👉 {item}</div>)}
-          {tier.extra.length>0&&<div style={{borderTop:`1px solid ${C.g2}`,marginTop:12,paddingTop:12}}>
-            {tier.extra.map((item,j)=><div key={j} style={{fontSize:13,color:C.navy,fontWeight:500,padding:"4px 0",lineHeight:1.5,wordBreak:"keep-all"}}>😍 {item}</div>)}
-          </div>}
-          <BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{width:"100%",marginTop:16,textAlign:"center",fontSize:13,padding:"10px 20px"}}>후원하기</BG>
-        </div></FI>
+        {emoji:"😍",text:"온·오프라인 아동/가족 프로그램 (우선참여 3회 / 1년)"},
+        {emoji:"😍",text:"온라인 양육상담 (3회 / 1년)"},
+      ].map((item,i)=>(
+        <div key={i} style={{fontSize:15,color:C.navy,fontWeight:500,padding:"10px 0",borderTop:i===0?`1px solid ${C.g2}`:"none",borderBottom:`1px solid ${C.g2}`,lineHeight:1.6,wordBreak:"keep-all"}}>
+          {item.emoji} {item.text}
+        </div>
       ))}
-    </div>
+      <BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{marginTop:32,fontSize:16,padding:"16px 48px"}}>후원하기</BG>
+    </div></FI>
   </Box></Sec>
 
   {/* 이사장 메시지 */}
@@ -897,9 +889,9 @@ const PacerPage=()=>(<>
       <FI delay={.15}><div>
         <Tag>FROM THE CHAIRMAN</Tag>
         <H2 style={{fontSize:"clamp(20px,3.5vw,26px)"}}>안녕하세요,{"\n"}이사장 이다랑입니다.</H2>
-        <p style={{fontSize:14,color:C.g6,lineHeight:1.9,marginBottom:16,wordBreak:"keep-all"}}>가족은 한 개인을 가장 안정적으로 성장시킬 수 있는 지지기반이자, 사회의 중요한 구성요소입니다. 심리적으로 안정적인 가족에서 성장한 개인은 좋은 사회구성원이 될 수 있으며, 개개인이 모인 사회 또한 건강해 집니다.</p>
-        <p style={{fontSize:14,color:C.g6,lineHeight:1.9,marginBottom:16,wordBreak:"keep-all"}}>하지만 가족이 갖는 가치와 중요성에도 불구하고, 가족을 만들고 유지하는 과정은 많은 사람들에게 부담스럽고 어려운 일이 되고 있습니다. 특히 무분별하게 확산되는 비전문적이고 잘못된 정보들은 양육에 대한 불안을 더욱 강하게 만들고, 불안한 부모의 심리적 상태는 자녀를 양육하는 태도에도 부정적인 영향을 줍니다.</p>
-        <p style={{fontSize:14,color:C.g6,lineHeight:1.9,wordBreak:"keep-all"}}>우리는 아이들이 살아갈 미래가 더욱 건강하길 바라는 마음으로 '오늘의 가족'을 바꾸는 일들을 하고자 합니다. 특히 양육취약계층에게 더 많은 지원이 닿을 수 있도록 하여 누구나 소외되지 않고 건강한 가족을 만들 수 있는 기회를 갖도록 하고 싶습니다.</p>
+        <p style={{fontSize:14,color:C.g6,lineHeight:1.9,marginBottom:16,wordBreak:"keep-all"}}>오늘의 부모들은 넘쳐나는 정보와 높아진 기준 앞에서 오히려 더 불안하고, 더 외롭습니다. 가족을 향한 냉소적인 시선은 사회 전반에 퍼져 있고, 양육 불안은 부모가 자신의 가능성을 보지 못하게 합니다. 그 결과, 부모됨이 주는 기쁨은 가려지고 두려움이 가득해졌습니다.</p>
+        <p style={{fontSize:14,color:C.g6,lineHeight:1.9,marginBottom:16,wordBreak:"keep-all"}}>더나일은 이 문제를 정면으로 바라봅니다. 그리고 이 시대에 필요한 건강하고 균형 잡힌 부모상을 사회의 새로운 기준으로 만들어 가고자 합니다.</p>
+        <p style={{fontSize:14,color:C.g6,lineHeight:1.9,wordBreak:"keep-all"}}>가족을 바라보는 냉소적인 시선을 신뢰와 환대로 바꾸고, 부모 개개인이 자신 안에 이미 가진 자원을 발견하여 양육의 효능감을 회복하며, 그렇게 변화된 부모들이 모여 사회적 문화를 함께 바꾸어 나가기를 기대합니다. 부모됨이 가진 기쁨을 회복하는 것— 그것이 더 나은 다음 세대를 만드는 가장 근본적인 힘입니다.</p>
       </div></FI>
     </div>
   </Box></Sec>
