@@ -1053,13 +1053,14 @@ const DelightPage=()=>(<>
       <div style={{display:"inline-block",padding:"6px 16px",background:`${C.gold}22`,border:`1px solid ${C.gold}55`,borderRadius:30,fontSize:12,color:C.gold,fontWeight:600,letterSpacing:".08em",marginBottom:24}}>
         딜라이트 프로젝트 · 1기 모집
       </div>
-      <h2 style={{fontFamily:"'Noto Serif KR',serif",fontSize:"clamp(28px,5.5vw,46px)",fontWeight:700,color:"#fff",lineHeight:1.4,marginBottom:28,wordBreak:"keep-all"}}>
-        방법은 충분히 배웠는데,<br/>왜 어제와 똑같을까요.
+      <h2 style={{fontFamily:"'Noto Serif KR',serif",fontSize:"clamp(26px,6vw,46px)",fontWeight:700,color:"#fff",lineHeight:1.45,marginBottom:28,wordBreak:"keep-all"}}>
+        <span style={{display:"inline-block"}}>방법은 충분히 배웠는데,</span>{" "}
+        <span style={{display:"inline-block"}}>왜 어제와 똑같을까요.</span>
       </h2>
-      <p style={{fontSize:"clamp(15px,2vw,17px)",color:"rgba(255,255,255,.75)",lineHeight:1.95,wordBreak:"keep-all",marginBottom:48,maxWidth:560,marginLeft:"auto",marginRight:"auto"}}>
-        내 양육 장면을 다시 보는 6주.<br/>
-        정답을 외우는 시간이 아니라,<br/>
-        사례를 보는 눈을 훈련하는 시간.
+      <p style={{fontSize:"clamp(15px,2vw,17px)",color:"rgba(255,255,255,.75)",lineHeight:1.95,wordBreak:"keep-all",marginBottom:48,maxWidth:560,marginLeft:"auto",marginRight:"auto",padding:"0 8px"}}>
+        <span style={{display:"inline-block"}}>내 양육 장면을 다시 보는 6주.</span>{" "}
+        <span style={{display:"inline-block"}}>정답을 외우는 시간이 아니라,</span>{" "}
+        <span style={{display:"inline-block"}}>사례를 보는 눈을 훈련하는 시간.</span>
       </p>
     </div></FI>
     <FI delay={.15}><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:12,maxWidth:680,margin:"0 auto 48px",position:"relative"}}>
@@ -1085,13 +1086,14 @@ const DelightPage=()=>(<>
   <Sec bg={C.w}><Box>
     <FI><div style={{textAlign:"center",marginBottom:48}}>
       <Tag>왜 "딜라이트"인가</Tag>
-      <H2 style={{whiteSpace:"pre-line"}}>{"부모됨의 두려움이,\n기쁨에 가까워지도록."}</H2>
+      <H2><span style={{display:"inline-block"}}>부모됨의 두려움이,</span>{" "}<span style={{display:"inline-block"}}>기쁨에 가까워지도록.</span></H2>
     </div></FI>
     <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:16,color:C.g6,lineHeight:2,wordBreak:"keep-all"}}>
       <p style={{marginBottom:20}}>부모됨에는 두려움과 기쁨이 함께 있습니다. 두려움이 크면 자꾸 피하게 되고, 기쁨이 자라면 책임은 자연스럽게 따라옵니다.</p>
       <p style={{marginBottom:24}}>더나일이 그리는 부모의 모습은 이렇습니다.</p>
-      <blockquote style={{borderLeft:`3px solid ${C.gold}`,paddingLeft:20,fontSize:18,color:C.navy,fontStyle:"italic",margin:"24px 0",lineHeight:1.7}}>
-        "동네에 한 명 있으면,<br/>백 명의 상담사보다 도움 되는 부모."
+      <blockquote style={{borderLeft:`3px solid ${C.gold}`,paddingLeft:20,fontSize:"clamp(16px,2.2vw,18px)",color:C.navy,fontStyle:"italic",margin:"24px 0",lineHeight:1.7,wordBreak:"keep-all"}}>
+        <span style={{display:"inline-block"}}>"동네에 한 명 있으면,</span>{" "}
+        <span style={{display:"inline-block"}}>백 명의 상담사보다 도움 되는 부모."</span>
       </blockquote>
       <p style={{marginBottom:20}}>내 아이의 장면을 조금 더 선명하게 보고, 다른 집 아이의 장면에도 다정하게 개입할 수 있는 사람.</p>
       <p>양육이 두려움보다 기쁨에 가까워지는 자리. 그래서 우리는 이 프로젝트를 <em style={{color:C.gold,fontStyle:"normal",fontWeight:600}}>딜라이트</em>라고 부릅니다.</p>
@@ -1102,12 +1104,15 @@ const DelightPage=()=>(<>
   <Sec bg={C.warm}><Box>
     <FI><div style={{textAlign:"center",marginBottom:40}}>
       <Tag>우리의 입장</Tag>
-      <H2 style={{whiteSpace:"pre-line"}}>{"우리는 정답을 외우지 않습니다.\n대신, 사례를 보는 눈을 훈련합니다."}</H2>
+      <H2><span style={{display:"inline-block"}}>우리는 정답을 외우지 않습니다.</span>{" "}<span style={{display:"inline-block"}}>대신, 사례를 보는 눈을 훈련합니다.</span></H2>
     </div></FI>
     <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:16,color:C.g6,lineHeight:2,wordBreak:"keep-all"}}>
       <p style={{marginBottom:20}}>부모교육은 이미 차고 넘칩니다. 영상은 끝없고, 책은 빼곡하고, 전문가의 조언은 매일 도착합니다.</p>
       <p style={{marginBottom:20}}>그런데 왜 우리는 여전히, 어제와 같은 방식으로 아이에게 반응할까요.</p>
-      <p style={{fontSize:17,color:C.navy,fontWeight:500}}>"방법"은 더 이상 부족한 것이 아닙니다.<br/>부족한 것은, 내 양육을 들여다보는 시선입니다.</p>
+      <p style={{fontSize:"clamp(15px,2.2vw,17px)",color:C.navy,fontWeight:500,lineHeight:1.8}}>
+        <span style={{display:"inline-block"}}>"방법"은 더 이상 부족한 것이 아닙니다.</span>{" "}
+        <span style={{display:"inline-block"}}>부족한 것은, 내 양육을 들여다보는 시선입니다.</span>
+      </p>
     </div></FI>
   </Box></Sec>
 
@@ -1115,7 +1120,7 @@ const DelightPage=()=>(<>
   <Sec bg={C.w}><Box>
     <FI><div style={{textAlign:"center",marginBottom:40}}>
       <Tag>6주 후, 되어가는 부모</Tag>
-      <H2 style={{whiteSpace:"pre-line"}}>{"자기 양육을 살피고,\n자기 삶을 들여다볼 줄 아는 부모."}</H2>
+      <H2><span style={{display:"inline-block"}}>자기 양육을 살피고,</span>{" "}<span style={{display:"inline-block"}}>자기 삶을 들여다볼 줄 아는 부모.</span></H2>
     </div></FI>
     <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:16,color:C.g6,lineHeight:2,wordBreak:"keep-all"}}>
       <p style={{marginBottom:24}}>별로인 나, 반복해서 무너지는 나, 아이 앞에서 작아지는 나를 왜곡 없이 바라볼 수 있는 부모. 그래서 내 아이의 장면도 조금 더 선명하게 보이는 부모.</p>
@@ -1129,7 +1134,7 @@ const DelightPage=()=>(<>
   <Sec bg={C.warm}><Box>
     <FI><div style={{textAlign:"center",marginBottom:40}}>
       <Tag>양육프레임워크</Tag>
-      <H2 style={{whiteSpace:"pre-line"}}>{"내 양육의 구조를,\n내가 만든다."}</H2>
+      <H2><span style={{display:"inline-block"}}>내 양육의 구조를,</span>{" "}<span style={{display:"inline-block"}}>내가 만든다.</span></H2>
     </div></FI>
     <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:15,color:C.g6,lineHeight:1.9,wordBreak:"keep-all",marginBottom:32}}>
       <p>양육프레임워크란, 나의 감정·생각·행동이 어떻게 연결되어 있는지를 스스로 들여다보는 시선입니다. 남의 방법을 따라 하는 것이 아니라, 나 자신과 우리 아이에게 맞는 나만의 양육 구조를 찾는 일입니다.</p>
@@ -1168,7 +1173,7 @@ const DelightPage=()=>(<>
   <Sec bg={C.w}><Box>
     <FI><div style={{textAlign:"center",marginBottom:24}}>
       <Tag>6주 커리큘럼</Tag>
-      <H2 style={{whiteSpace:"pre-line"}}>{"6주, 한 회씩,\n내 양육의 구조가 보이기 시작합니다."}</H2>
+      <H2><span style={{display:"inline-block"}}>6주, 한 회씩,</span>{" "}<span style={{display:"inline-block"}}>내 양육의 구조가 보이기 시작합니다.</span></H2>
     </div></FI>
     <FI delay={.1}><p style={{textAlign:"center",fontSize:14,color:C.g4,marginBottom:32,wordBreak:"keep-all"}}>매 회차 사전 과제(독서 + 분석쓰기)가 있고, 세션은 강의 + 자기분석 + 나눔으로 구성됩니다.</p></FI>
     <FI delay={.15}><div style={{maxWidth:820,margin:"0 auto",display:"grid",gap:12}}>
@@ -1180,16 +1185,14 @@ const DelightPage=()=>(<>
         {n:"05",d:"7/3 (금)",t:"나의 양육프레임워크 작성하기",c:"10회 분량의 피드백 및 검사결과 반영"},
         {n:"06",d:"7/10 (금)",t:"나의 양육프레임워크 공유하기",c:"상호 피드백"},
       ].map((x,i)=>(
-        <div key={i} style={{display:"grid",gridTemplateColumns:"60px 90px 1fr",gap:16,padding:20,background:C.warm,borderRadius:12,alignItems:"start"}}>
-          <div style={{fontSize:13,color:C.gold,fontWeight:700,letterSpacing:".05em"}}>{x.n}</div>
-          <div style={{fontSize:13,color:C.g6,fontWeight:600}}>{x.d}</div>
-          <div>
-            <div style={{fontSize:15,fontWeight:700,color:C.navy,marginBottom:6}}>
-              {x.t}
-              {x.online&&<span style={{marginLeft:8,fontSize:11,padding:"2px 8px",background:C.gold,color:C.navy,borderRadius:20,fontWeight:600}}>온라인</span>}
-            </div>
-            <div style={{fontSize:13,color:C.g6,lineHeight:1.7,wordBreak:"keep-all"}}>{x.c}</div>
+        <div key={i} style={{padding:"18px 20px",background:C.warm,borderRadius:12}}>
+          <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:10,flexWrap:"wrap"}}>
+            <span style={{fontSize:12,color:C.gold,fontWeight:700,letterSpacing:".08em",background:C.w,padding:"3px 10px",borderRadius:20,border:`1px solid ${C.gold}66`}}>{x.n}</span>
+            <span style={{fontSize:13,color:C.g6,fontWeight:600}}>{x.d}</span>
+            {x.online&&<span style={{fontSize:11,padding:"3px 10px",background:C.gold,color:C.navy,borderRadius:20,fontWeight:700,letterSpacing:".05em"}}>온라인</span>}
           </div>
+          <div style={{fontSize:"clamp(14px,2vw,15px)",fontWeight:700,color:C.navy,marginBottom:6,wordBreak:"keep-all",lineHeight:1.5}}>{x.t}</div>
+          <div style={{fontSize:13,color:C.g6,lineHeight:1.7,wordBreak:"keep-all"}}>{x.c}</div>
         </div>
       ))}
     </div></FI>
@@ -1253,9 +1256,9 @@ const DelightPage=()=>(<>
         {k:"결과 통보",v:"2026.05.29 (금)"},
         {k:"1주차 시작",v:"2026.06.05 (금)"},
       ].map((x,i,a)=>(
-        <div key={i} style={{display:"grid",gridTemplateColumns:"130px 1fr",gap:16,padding:"16px 24px",borderBottom:i<a.length-1?`1px solid ${C.g2}`:"none",background:x.bold?C.warm:C.w}}>
-          <div style={{fontSize:13,color:C.g4,fontWeight:500}}>{x.k}</div>
-          <div style={{fontSize:14,color:x.bold?C.navy:C.g6,fontWeight:x.bold?700:400,wordBreak:"keep-all"}}>{x.v}</div>
+        <div key={i} className="info-row" style={{padding:"14px 20px",borderBottom:i<a.length-1?`1px solid ${C.g2}`:"none",background:x.bold?C.warm:C.w}}>
+          <div style={{fontSize:12,color:C.g4,fontWeight:500,marginBottom:4,letterSpacing:".03em"}}>{x.k}</div>
+          <div style={{fontSize:"clamp(13px,2vw,14px)",color:x.bold?C.navy:C.g6,fontWeight:x.bold?700:500,wordBreak:"keep-all",lineHeight:1.6}}>{x.v}</div>
         </div>
       ))}
     </div></FI>
@@ -1263,7 +1266,7 @@ const DelightPage=()=>(<>
 
   {/* CTA */}
   <Sec bg={C.navy}><Box style={{textAlign:"center"}}>
-    <FI><H2 light style={{fontSize:"clamp(22px,4vw,30px)",maxWidth:620,margin:"0 auto 24px",whiteSpace:"pre-line"}}>{"내 양육 장면을,\n다시 보고 싶은 분의 자리입니다."}</H2></FI>
+    <FI><H2 light style={{fontSize:"clamp(22px,4vw,30px)",maxWidth:620,margin:"0 auto 24px"}}><span style={{display:"inline-block"}}>내 양육 장면을,</span>{" "}<span style={{display:"inline-block"}}>다시 보고 싶은 분의 자리입니다.</span></H2></FI>
     <FI delay={.1}><p style={{fontSize:15,color:"rgba(255,255,255,.7)",lineHeight:1.9,maxWidth:560,margin:"0 auto 40px",wordBreak:"keep-all"}}>지원서는 정답을 묻지 않습니다. 자기 양육을 어떻게 보고 있는지, 그 시선만 봅니다. 솔직하게 적어주세요.</p></FI>
     <FI delay={.15}><div style={{maxWidth:520,margin:"0 auto 40px",padding:24,background:"rgba(255,255,255,.05)",borderRadius:14,border:"1px solid rgba(255,255,255,.1)",textAlign:"left"}}>
       <h4 style={{fontSize:14,color:C.gold,fontWeight:700,marginBottom:14,textAlign:"center"}}>시작하기 전에, 이 세 가지가 가능한가요?</h4>
