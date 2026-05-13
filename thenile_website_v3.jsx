@@ -1043,7 +1043,7 @@ for(let h=9;h<18;h++){TIME_SLOTS.push(`${String(h).padStart(2,"0")}:00`);TIME_SL
 TIME_SLOTS.push("18:00");
 
 /* ═══ 딜라이트 프로젝트 페이지 ═══ */
-const DELIGHT_APPLY_URL="https://docs.google.com/forms/d/1NBaoFqOLmFp7D3_3efaVOsr1uPk-_inkXGcRdofj4KY/viewform";
+const DELIGHT_APPLY_URL="https://forms.gle/4AkLnb2QuxxWQx266";
 const DelightPage=()=>(<>
   {/* HERO */}
   <Sec style={{paddingTop:140,background:`linear-gradient(180deg,${C.warm} 0%,${C.w} 100%)`}}><Box>
