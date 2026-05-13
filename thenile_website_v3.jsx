@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Fragment } from "react";
 
 const C = {
   navy: "#1B2A4A", navyL: "#243B6A", navyM: "#2D4A7A",
@@ -1128,10 +1128,10 @@ const DelightPage=()=>(<>
     </div></FI>
     <FI delay={.15}><div style={{display:"flex",justifyContent:"center",alignItems:"center",gap:"clamp(12px,3vw,32px)",margin:"32px 0 48px",flexWrap:"wrap"}}>
       {["감정","생각","행동"].map((w,i)=>(
-        <React.Fragment key={i}>
+        <Fragment key={i}>
           <div style={{padding:"18px 28px",background:C.w,border:`2px solid ${C.gold}`,borderRadius:50,fontSize:16,fontWeight:700,color:C.navy}}>{w}</div>
           {i<2&&<div style={{fontSize:20,color:C.gold}}>↔</div>}
-        </React.Fragment>
+        </Fragment>
       ))}
     </div></FI>
     <FI delay={.2}><div style={{maxWidth:760,margin:"0 auto"}}>
