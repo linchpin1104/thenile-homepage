@@ -38,6 +38,7 @@ const Dot=()=><div style={{width:4,height:4,borderRadius:2,background:C.gold,fle
 
 const PAGES=[
   {id:"home",label:"Home"},{id:"about",label:"더나일 소개"},{id:"programs",label:"사업소개"},
+  {id:"delight",label:"딜라이트 프로젝트"},
   {id:"parentscan",label:"양육불안검사"},{id:"pacer",label:"후원하기"},{id:"shop",label:"상품"},{id:"counsel",label:"페이서 상담"},{id:"contact",label:"협력문의"},
 ];
 
@@ -1041,6 +1042,240 @@ const TIME_SLOTS=[];
 for(let h=9;h<18;h++){TIME_SLOTS.push(`${String(h).padStart(2,"0")}:00`);TIME_SLOTS.push(`${String(h).padStart(2,"0")}:30`)}
 TIME_SLOTS.push("18:00");
 
+/* ═══ 딜라이트 프로젝트 페이지 ═══ */
+const DELIGHT_APPLY_URL="https://forms.gle/";  // TODO: 실제 신청 폼 URL로 교체
+const DelightPage=()=>(<>
+  {/* HERO */}
+  <Sec style={{paddingTop:140,background:`linear-gradient(180deg,${C.warm} 0%,${C.w} 100%)`}}><Box>
+    <FI><div style={{textAlign:"center",maxWidth:760,margin:"0 auto"}}>
+      <Tag>딜라이트 프로젝트 · 1기 모집</Tag>
+      <H2 style={{fontSize:"clamp(28px,5vw,44px)",lineHeight:1.35,marginBottom:24}}>방법은 충분히 배웠는데,{"\n"}왜 어제와 똑같을까요.</H2>
+      <p style={{fontSize:"clamp(15px,2vw,17px)",color:C.g6,lineHeight:1.9,wordBreak:"keep-all",marginBottom:40}}>
+        내 양육 장면을 다시 보는 6주.<br/>정답을 외우는 시간이 아니라, 사례를 보는 눈을 훈련하는 시간.
+      </p>
+    </div></FI>
+    <FI delay={.15}><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:12,maxWidth:680,margin:"0 auto 40px"}}>
+      {[
+        {k:"정원",v:"12명"},
+        {k:"기간",v:"6주"},
+        {k:"시작",v:"2026.06.05"},
+        {k:"참가비",v:"35만원"},
+      ].map((x,i)=>(
+        <div key={i} style={{padding:"20px 16px",background:C.w,borderRadius:14,border:`1px solid ${C.g2}`,textAlign:"center"}}>
+          <div style={{fontSize:12,color:C.g4,marginBottom:6,letterSpacing:".05em"}}>{x.k}</div>
+          <div style={{fontSize:18,fontWeight:700,color:C.navy}}>{x.v}</div>
+        </div>
+      ))}
+    </div></FI>
+    <FI delay={.25}><div style={{textAlign:"center"}}>
+      <BG onClick={()=>window.open(DELIGHT_APPLY_URL,"_blank")} style={{fontSize:16,padding:"16px 48px"}}>지원서 작성하기 →</BG>
+      <p style={{fontSize:13,color:C.g4,marginTop:16}}>모집 마감 · 2026.05.26 (화)</p>
+    </div></FI>
+  </Box></Sec>
+
+  {/* 왜 딜라이트인가 */}
+  <Sec bg={C.w}><Box>
+    <FI><div style={{textAlign:"center",marginBottom:48}}>
+      <Tag>왜 "딜라이트"인가</Tag>
+      <H2>부모됨의 두려움이,{"\n"}기쁨에 가까워지도록.</H2>
+    </div></FI>
+    <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:16,color:C.g6,lineHeight:2,wordBreak:"keep-all"}}>
+      <p style={{marginBottom:20}}>부모됨에는 두려움과 기쁨이 함께 있습니다. 두려움이 크면 자꾸 피하게 되고, 기쁨이 자라면 책임은 자연스럽게 따라옵니다.</p>
+      <p style={{marginBottom:24}}>더나일이 그리는 부모의 모습은 이렇습니다.</p>
+      <blockquote style={{borderLeft:`3px solid ${C.gold}`,paddingLeft:20,fontSize:18,color:C.navy,fontStyle:"italic",margin:"24px 0",lineHeight:1.7}}>
+        "동네에 한 명 있으면,<br/>백 명의 상담사보다 도움 되는 부모."
+      </blockquote>
+      <p style={{marginBottom:20}}>내 아이의 장면을 조금 더 선명하게 보고, 다른 집 아이의 장면에도 다정하게 개입할 수 있는 사람.</p>
+      <p>양육이 두려움보다 기쁨에 가까워지는 자리. 그래서 우리는 이 프로젝트를 <em style={{color:C.gold,fontStyle:"normal",fontWeight:600}}>딜라이트</em>라고 부릅니다.</p>
+    </div></FI>
+  </Box></Sec>
+
+  {/* 우리의 입장 */}
+  <Sec bg={C.warm}><Box>
+    <FI><div style={{textAlign:"center",marginBottom:40}}>
+      <Tag>우리의 입장</Tag>
+      <H2>우리는 정답을 외우지 않습니다.{"\n"}대신, 사례를 보는 눈을 훈련합니다.</H2>
+    </div></FI>
+    <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:16,color:C.g6,lineHeight:2,wordBreak:"keep-all"}}>
+      <p style={{marginBottom:20}}>부모교육은 이미 차고 넘칩니다. 영상은 끝없고, 책은 빼곡하고, 전문가의 조언은 매일 도착합니다.</p>
+      <p style={{marginBottom:20}}>그런데 왜 우리는 여전히, 어제와 같은 방식으로 아이에게 반응할까요.</p>
+      <p style={{fontSize:17,color:C.navy,fontWeight:500}}>"방법"은 더 이상 부족한 것이 아닙니다.<br/>부족한 것은, 내 양육을 들여다보는 시선입니다.</p>
+    </div></FI>
+  </Box></Sec>
+
+  {/* 6주 후, 되어가는 부모 */}
+  <Sec bg={C.w}><Box>
+    <FI><div style={{textAlign:"center",marginBottom:40}}>
+      <Tag>6주 후, 되어가는 부모</Tag>
+      <H2>자기 양육을 살피고,{"\n"}자기 삶을 들여다볼 줄 아는 부모.</H2>
+    </div></FI>
+    <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:16,color:C.g6,lineHeight:2,wordBreak:"keep-all"}}>
+      <p style={{marginBottom:24}}>별로인 나, 반복해서 무너지는 나, 아이 앞에서 작아지는 나를 왜곡 없이 바라볼 수 있는 부모. 그래서 내 아이의 장면도 조금 더 선명하게 보이는 부모.</p>
+      <blockquote style={{borderLeft:`3px solid ${C.gold}`,paddingLeft:20,fontSize:17,color:C.navy,fontStyle:"italic",lineHeight:1.7}}>
+        "동네에 한 명 있으면 백 명의 상담사보다 도움 되는 부모."
+      </blockquote>
+    </div></FI>
+  </Box></Sec>
+
+  {/* 양육프레임워크 */}
+  <Sec bg={C.warm}><Box>
+    <FI><div style={{textAlign:"center",marginBottom:40}}>
+      <Tag>양육프레임워크</Tag>
+      <H2>내 양육의 구조를,{"\n"}내가 만든다.</H2>
+    </div></FI>
+    <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:15,color:C.g6,lineHeight:1.9,wordBreak:"keep-all",marginBottom:32}}>
+      <p>양육프레임워크란, 나의 감정·생각·행동이 어떻게 연결되어 있는지를 스스로 들여다보는 시선입니다. 남의 방법을 따라 하는 것이 아니라, 나 자신과 우리 아이에게 맞는 나만의 양육 구조를 찾는 일입니다.</p>
+    </div></FI>
+    <FI delay={.15}><div style={{display:"flex",justifyContent:"center",alignItems:"center",gap:"clamp(12px,3vw,32px)",margin:"32px 0 48px",flexWrap:"wrap"}}>
+      {["감정","생각","행동"].map((w,i)=>(
+        <React.Fragment key={i}>
+          <div style={{padding:"18px 28px",background:C.w,border:`2px solid ${C.gold}`,borderRadius:50,fontSize:16,fontWeight:700,color:C.navy}}>{w}</div>
+          {i<2&&<div style={{fontSize:20,color:C.gold}}>↔</div>}
+        </React.Fragment>
+      ))}
+    </div></FI>
+    <FI delay={.2}><div style={{maxWidth:760,margin:"0 auto"}}>
+      <h3 style={{textAlign:"center",fontSize:20,fontWeight:700,color:C.navy,marginBottom:24}}>이 6주가 길러내는 것</h3>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:16}}>
+        {[
+          {n:"01",t:"내 반응을 알아차리는 눈",d:'"내가 지금 왜 이렇게 반응하고 있지?"를 그 한가운데서 알아챕니다.'},
+          {n:"02",t:"책임의 경계를 보는 눈",d:"내가 져야 할 책임, 아이에게 넘기지 말아야 할 책임, 아이에게 가르쳐야 할 책임을 구분합니다. 양육의 불안은 이 경계가 흐려질 때 커집니다."},
+          {n:"03",t:"다른 양육 장면도 다정하게 보는 눈",d:"내 아이뿐 아니라, 동네 다른 집 아이의 장면에도 한 마디 건넬 수 있는 사람."},
+        ].map((x,i)=>(
+          <div key={i} style={{padding:24,background:C.w,borderRadius:16,border:`1px solid ${C.g2}`}}>
+            <div style={{fontSize:12,color:C.gold,fontWeight:700,marginBottom:8,letterSpacing:".1em"}}>{x.n}</div>
+            <h4 style={{fontSize:16,fontWeight:700,color:C.navy,marginBottom:10,lineHeight:1.5}}>{x.t}</h4>
+            <p style={{fontSize:13,color:C.g6,lineHeight:1.8,wordBreak:"keep-all"}}>{x.d}</p>
+          </div>
+        ))}
+      </div>
+      <blockquote style={{maxWidth:560,margin:"40px auto 0",borderLeft:`3px solid ${C.gold}`,paddingLeft:20,fontSize:15,color:C.navy,fontStyle:"italic",lineHeight:1.7,textAlign:"left"}}>
+        "누구의 답도 아닌, 내 답으로 양육하는 부모."<br/>
+        <span style={{fontSize:13,color:C.g4,fontStyle:"normal"}}>— 이 프로그램이 길러내는 사람</span>
+      </blockquote>
+    </div></FI>
+  </Box></Sec>
+
+  {/* 6주 커리큘럼 */}
+  <Sec bg={C.w}><Box>
+    <FI><div style={{textAlign:"center",marginBottom:24}}>
+      <Tag>6주 커리큘럼</Tag>
+      <H2>6주, 한 회씩,{"\n"}내 양육의 구조가 보이기 시작합니다.</H2>
+    </div></FI>
+    <FI delay={.1}><p style={{textAlign:"center",fontSize:14,color:C.g4,marginBottom:32,wordBreak:"keep-all"}}>매 회차 사전 과제(독서 + 분석쓰기)가 있고, 세션은 강의 + 자기분석 + 나눔으로 구성됩니다.</p></FI>
+    <FI delay={.15}><div style={{maxWidth:820,margin:"0 auto",display:"grid",gap:12}}>
+      {[
+        {n:"01",d:"6/5 (금)",t:"프로젝트 세우기",c:"소개와 나눔, 목적과 방향성, 핵심 문제 나누기, 도서 및 과제 안내"},
+        {n:"02",d:"6/12 (금)",t:"양육프레임워크, 왜 필요한가",c:"어떻게 세우는가 (강의 + 실습)"},
+        {n:"03",d:"6/19 (금)",t:"나의 심리도식 이해하기",c:"검사 해석 및 양육분석지도 수정"},
+        {n:"04",d:"6/26 (금)",t:"사랑과 책임감",c:"사랑을 어떻게 받고 어떻게 주는가, 나의 관계에서 책임감은 어떻게 나타나는가",online:true},
+        {n:"05",d:"7/3 (금)",t:"나의 양육프레임워크 작성하기",c:"10회 분량의 피드백 및 검사결과 반영"},
+        {n:"06",d:"7/10 (금)",t:"나의 양육프레임워크 공유하기",c:"상호 피드백"},
+      ].map((x,i)=>(
+        <div key={i} style={{display:"grid",gridTemplateColumns:"60px 90px 1fr",gap:16,padding:20,background:C.warm,borderRadius:12,alignItems:"start"}}>
+          <div style={{fontSize:13,color:C.gold,fontWeight:700,letterSpacing:".05em"}}>{x.n}</div>
+          <div style={{fontSize:13,color:C.g6,fontWeight:600}}>{x.d}</div>
+          <div>
+            <div style={{fontSize:15,fontWeight:700,color:C.navy,marginBottom:6}}>
+              {x.t}
+              {x.online&&<span style={{marginLeft:8,fontSize:11,padding:"2px 8px",background:C.gold,color:C.navy,borderRadius:20,fontWeight:600}}>온라인</span>}
+            </div>
+            <div style={{fontSize:13,color:C.g6,lineHeight:1.7,wordBreak:"keep-all"}}>{x.c}</div>
+          </div>
+        </div>
+      ))}
+    </div></FI>
+    <FI delay={.2}><p style={{textAlign:"center",fontSize:12,color:C.g4,marginTop:24,fontStyle:"italic"}}>* 모든 회기 사이에 '생각-감정-행동'에 대한 분석쓰기 과제 피드백이 진행됩니다.</p></FI>
+  </Box></Sec>
+
+  {/* 함께할 12명 */}
+  <Sec bg={C.warm}><Box>
+    <FI><div style={{textAlign:"center",marginBottom:24}}>
+      <Tag>함께할 12명을 찾습니다</Tag>
+      <H2>함께할 12명을 찾습니다.</H2>
+    </div></FI>
+    <FI delay={.1}><p style={{textAlign:"center",fontSize:15,color:C.g6,maxWidth:560,margin:"0 auto 48px",lineHeight:1.9,wordBreak:"keep-all"}}>선발은 "정답"을 보지 않습니다. 자기 양육을 어떻게 보고 있는지, 그 시선만 살핍니다.</p></FI>
+    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:20,maxWidth:880,margin:"0 auto"}}>
+      <FI delay={.15}><div style={{padding:28,background:C.w,borderRadius:16,border:`2px solid ${C.gold}`,height:"100%"}}>
+        <h3 style={{fontSize:17,fontWeight:700,color:C.navy,marginBottom:20}}>이런 분과 함께하고 싶습니다</h3>
+        {[
+          "처방보다 시선을 갖고 싶은 부모",
+          "별로인 나, 무너지는 나를 회피하지 않고 보겠다고 결심한 부모",
+          "매주 3시간과 사전 과제 시간을 낼 수 있는 부모",
+          "그룹 안에서 실수와 부끄러움을 솔직히 나눌 수 있는 부모",
+          "이 변화를 가까운 사람들과 나누고 싶은 부모",
+        ].map((t,i)=>(
+          <div key={i} style={{fontSize:14,color:C.g6,padding:"8px 0",display:"flex",alignItems:"flex-start",gap:10,lineHeight:1.7,wordBreak:"keep-all"}}>
+            <span style={{color:C.gold,flexShrink:0}}>✓</span><span>{t}</span>
+          </div>
+        ))}
+      </div></FI>
+      <FI delay={.2}><div style={{padding:28,background:C.w,borderRadius:16,border:`1px solid ${C.g2}`,height:"100%"}}>
+        <h3 style={{fontSize:17,fontWeight:700,color:C.g6,marginBottom:20}}>다음 기회를 기다리시는 게 좋은 분</h3>
+        {[
+          '"이렇게 하면 됩니다"라는 답을 듣고 싶은 분',
+          "자기 양육을 들여다보는 일이 아직 많이 불편한 분",
+          "매주 3시간과 사전 과제 수행이 어려운 분",
+          "그룹 안에서 자기 이야기를 나누는 것이 부담스러운 분",
+        ].map((t,i)=>(
+          <div key={i} style={{fontSize:14,color:C.g4,padding:"8px 0",display:"flex",alignItems:"flex-start",gap:10,lineHeight:1.7,wordBreak:"keep-all"}}>
+            <span style={{color:C.g4,flexShrink:0}}>·</span><span>{t}</span>
+          </div>
+        ))}
+      </div></FI>
+    </div>
+  </Box></Sec>
+
+  {/* 실제 정보 */}
+  <Sec bg={C.w}><Box>
+    <FI><div style={{textAlign:"center",marginBottom:32}}>
+      <Tag>실제 정보</Tag>
+      <H2>모집·일정·장소</H2>
+    </div></FI>
+    <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",borderRadius:16,border:`1px solid ${C.g2}`,overflow:"hidden"}}>
+      {[
+        {k:"기간",v:"2026.06.05 ~ 07.10 (총 6주)"},
+        {k:"시간",v:"매주 금요일 오전 10:00 ~ 오후 1:00 (3시간)"},
+        {k:"형식",v:"오프라인 5회 + 온라인 1회 (4주차 / 6.26)"},
+        {k:"사전 과제",v:"매주 독서 1권·챕터 + 분석일지 주 3회 이상"},
+        {k:"장소",v:"헤이그라운드 성수시작점"},
+        {k:"정원",v:"12명 (지원서 검토 후 선발)"},
+        {k:"참가비",v:"35만원"},
+        {k:"모집 마감",v:"2026.05.26 (화)",bold:true},
+        {k:"결과 통보",v:"2026.05.29 (금)"},
+        {k:"1주차 시작",v:"2026.06.05 (금)"},
+      ].map((x,i,a)=>(
+        <div key={i} style={{display:"grid",gridTemplateColumns:"130px 1fr",gap:16,padding:"16px 24px",borderBottom:i<a.length-1?`1px solid ${C.g2}`:"none",background:x.bold?C.warm:C.w}}>
+          <div style={{fontSize:13,color:C.g4,fontWeight:500}}>{x.k}</div>
+          <div style={{fontSize:14,color:x.bold?C.navy:C.g6,fontWeight:x.bold?700:400,wordBreak:"keep-all"}}>{x.v}</div>
+        </div>
+      ))}
+    </div></FI>
+  </Box></Sec>
+
+  {/* CTA */}
+  <Sec bg={C.navy}><Box style={{textAlign:"center"}}>
+    <FI><H2 light style={{fontSize:"clamp(22px,4vw,30px)",maxWidth:620,margin:"0 auto 24px"}}>내 양육 장면을,{"\n"}다시 보고 싶은 분의 자리입니다.</H2></FI>
+    <FI delay={.1}><p style={{fontSize:15,color:"rgba(255,255,255,.7)",lineHeight:1.9,maxWidth:560,margin:"0 auto 40px",wordBreak:"keep-all"}}>지원서는 정답을 묻지 않습니다. 자기 양육을 어떻게 보고 있는지, 그 시선만 봅니다. 솔직하게 적어주세요.</p></FI>
+    <FI delay={.15}><div style={{maxWidth:520,margin:"0 auto 40px",padding:24,background:"rgba(255,255,255,.05)",borderRadius:14,border:"1px solid rgba(255,255,255,.1)",textAlign:"left"}}>
+      <h4 style={{fontSize:14,color:C.gold,fontWeight:700,marginBottom:14,textAlign:"center"}}>시작하기 전에, 이 세 가지가 가능한가요?</h4>
+      {[
+        "매주 금요일 3시간 (10:00–13:00) 정기 참석",
+        "매주 사전 과제, 독서와 분석일지 (주 3회 이상)",
+        "그룹 안에서 자기 이야기를 솔직히 나누기",
+      ].map((t,i)=>(
+        <div key={i} style={{fontSize:14,color:"rgba(255,255,255,.85)",padding:"6px 0",display:"flex",gap:10,alignItems:"flex-start",wordBreak:"keep-all"}}>
+          <span style={{color:C.gold,flexShrink:0}}>○</span><span>{t}</span>
+        </div>
+      ))}
+    </div></FI>
+    <FI delay={.2}>
+      <BG onClick={()=>window.open(DELIGHT_APPLY_URL,"_blank")} style={{fontSize:16,padding:"16px 48px"}}>지원서 작성하기 →</BG>
+      <p style={{fontSize:13,color:"rgba(255,255,255,.5)",marginTop:16}}>모집 마감 · 2026.05.26 (화)</p>
+    </FI>
+  </Box></Sec>
+</>);
+
 const CounselPage=()=>{
   const[step,setStep]=useState("ask"); // ask | notPacer | form | done
   const[form,setForm]=useState({name:"",phone:"",childAge:"",childGender:"",concerns:[],date:"",time:"",detail:""});
@@ -1203,6 +1438,7 @@ const PAGE_META={
   home:{title:"사단법인 더나일 | 부모됨의 두려움이 기쁨으로 전환되는 여정",desc:"사단법인 더나일은 건강한 양육문화 확산과 부모의 심리적 안정을 위해 활동하는 서울특별시 산하 비영리법인입니다."},
   about:{title:"더나일 소개 | 사단법인 더나일",desc:"더나일의 미션, 비전, 설립목적, 주된사업, 연혁, 이사진을 소개합니다."},
   programs:{title:"사업소개 | 사단법인 더나일",desc:"더나일이 수행한 양육문화 확산, 부모교육, 위기가족 지원 등 주요 사업을 소개합니다."},
+  delight:{title:"딜라이트 프로젝트 1기 모집 | 사단법인 더나일",desc:"방법은 충분히 배웠는데, 왜 어제와 똑같을까요. 내 양육 장면을 다시 보는 6주, 12명을 모집합니다."},
   parentscan:{title:"양육불안검사 | 사단법인 더나일",desc:"양육자가 느끼는 심리/정서적 불안 수준과 양육 효능감을 측정하는 양육불안척도 검사입니다."},
   pacer:{title:"후원하기 - 페이서(PACER) | 사단법인 더나일",desc:"더나일과 함께 걷는 페이서가 되어주세요. 가족의 가치를 회복하는 여정에 함께합니다."},
   shop:{title:"상품 | 사단법인 더나일",desc:"더나일의 전문 상담 서비스를 만나보세요."},
@@ -1210,8 +1446,8 @@ const PAGE_META={
   contact:{title:"협력문의 | 사단법인 더나일",desc:"기업 CSR, 강연, 기관 협업, 연구 협력, 후원 협약 등 더나일과의 협력을 문의하세요."},
 };
 
-const PATH_MAP={"/":"home","/about":"about","/programs":"programs","/parentscan":"parentscan","/pacer":"pacer","/shop":"shop","/counsel":"counsel","/contact":"contact"};
-const ID_TO_PATH={home:"/",about:"/about",programs:"/programs",parentscan:"/parentscan",pacer:"/pacer",shop:"/shop",counsel:"/counsel",contact:"/contact"};
+const PATH_MAP={"/":"home","/about":"about","/programs":"programs","/delight":"delight","/parentscan":"parentscan","/pacer":"pacer","/shop":"shop","/counsel":"counsel","/contact":"contact"};
+const ID_TO_PATH={home:"/",about:"/about",programs:"/programs",delight:"/delight",parentscan:"/parentscan",pacer:"/pacer",shop:"/shop",counsel:"/counsel",contact:"/contact"};
 
 /* ═══ APP ═══ */
 export default function App(){
@@ -1239,6 +1475,6 @@ export default function App(){
     window.scrollTo({top:0,behavior:"smooth"});
   };
 
-  const P={home:<HomePage go={go}/>,about:<AboutPage go={go}/>,programs:<ProgramsPage/>,parentscan:<ParentscanPage/>,pacer:<PacerPage/>,shop:<ShopPage/>,counsel:<CounselPage/>,contact:<ContactPage/>};
+  const P={home:<HomePage go={go}/>,about:<AboutPage go={go}/>,programs:<ProgramsPage/>,delight:<DelightPage/>,parentscan:<ParentscanPage/>,pacer:<PacerPage/>,shop:<ShopPage/>,counsel:<CounselPage/>,contact:<ContactPage/>};
   return(<div><Nav page={page} go={go}/><main>{P[page]||<HomePage go={go}/>}</main><Footer go={go}/></div>);
 }
