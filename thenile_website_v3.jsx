@@ -1053,14 +1053,13 @@ const DelightPage=()=>(<>
       <div style={{display:"inline-block",padding:"6px 16px",background:`${C.gold}22`,border:`1px solid ${C.gold}55`,borderRadius:30,fontSize:12,color:C.gold,fontWeight:600,letterSpacing:".08em",marginBottom:24}}>
         딜라이트 프로젝트 · 1기 모집
       </div>
-      <h2 style={{fontFamily:"'Noto Serif KR',serif",fontSize:"clamp(26px,6vw,46px)",fontWeight:700,color:"#fff",lineHeight:1.45,marginBottom:28,wordBreak:"keep-all"}}>
-        <span style={{display:"inline-block"}}>방법은 충분히 배웠는데,</span>{" "}
-        <span style={{display:"inline-block"}}>왜 어제와 똑같을까요.</span>
+      <h2 style={{fontFamily:"'Noto Serif KR',serif",fontSize:"clamp(26px,6vw,46px)",fontWeight:700,color:"#fff",lineHeight:1.45,marginBottom:32,wordBreak:"keep-all"}}>
+        <span style={{display:"inline-block"}}>"오늘도 비슷한 장면에서</span>{" "}
+        <span style={{display:"inline-block"}}>비슷하게 무너졌다면."</span>
       </h2>
-      <p style={{fontSize:"clamp(15px,2vw,17px)",color:"rgba(255,255,255,.75)",lineHeight:1.95,wordBreak:"keep-all",marginBottom:48,maxWidth:560,marginLeft:"auto",marginRight:"auto",padding:"0 8px"}}>
-        <span style={{display:"inline-block"}}>내 양육 장면을 다시 보는 6주.</span>{" "}
-        <span style={{display:"inline-block"}}>정답을 외우는 시간이 아니라,</span>{" "}
-        <span style={{display:"inline-block"}}>사례를 보는 눈을 훈련하는 시간.</span>
+      <p style={{fontSize:"clamp(16px,2.4vw,19px)",color:"rgba(255,255,255,.88)",lineHeight:1.9,wordBreak:"keep-all",marginBottom:48,maxWidth:560,marginLeft:"auto",marginRight:"auto",padding:"0 8px",fontWeight:500}}>
+        <span style={{display:"inline-block"}}>아이를 바꾸기 전에,</span>{" "}
+        <span style={{display:"inline-block"}}>내가 보는 방식을 다시 봅니다.</span>
       </p>
     </div></FI>
     <FI delay={.15}><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:12,maxWidth:680,margin:"0 auto 48px",position:"relative"}}>
@@ -1114,13 +1113,28 @@ const DelightPage=()=>(<>
         <span style={{display:"inline-block"}}>부족한 것은, 내 양육을 들여다보는 시선입니다.</span>
       </p>
     </div></FI>
+    <FI delay={.2}><div style={{maxWidth:760,margin:"56px auto 0",padding:"32px 28px",background:C.w,borderRadius:16,border:`1px solid ${C.g2}`}}>
+      <div style={{fontSize:13,color:C.gold,fontWeight:700,letterSpacing:".1em",textAlign:"center",marginBottom:24}}>우리가 바라는 것</div>
+      <div style={{display:"grid",gap:18}}>
+        {[
+          "우리는 부모가 자기 양육을 객관화할 수 있는 힘을 갖기를 바랍니다.",
+          "자기 사례뿐 아니라, 타인의 사례도 다정하게 볼 수 있는 눈을 갖기를 바랍니다.",
+          "불안한 부모를 비난하지 않고, 그 불안이 어디에서 왔는지 함께 해석할 수 있는 사람이 되기를 바랍니다.",
+        ].map((t,i)=>(
+          <div key={i} style={{display:"flex",gap:14,alignItems:"flex-start"}}>
+            <div style={{flexShrink:0,width:24,height:24,borderRadius:"50%",background:`${C.gold}33`,color:C.navy,fontSize:12,fontWeight:700,display:"flex",alignItems:"center",justifyContent:"center"}}>{i+1}</div>
+            <p style={{fontSize:"clamp(14px,2vw,15px)",color:C.g6,lineHeight:1.85,wordBreak:"keep-all",margin:0}}>{t}</p>
+          </div>
+        ))}
+      </div>
+    </div></FI>
   </Box></Sec>
 
   {/* 6주 후, 되어가는 부모 */}
   <Sec bg={C.w}><Box>
     <FI><div style={{textAlign:"center",marginBottom:40}}>
       <Tag>6주 후, 되어가는 부모</Tag>
-      <H2><span style={{display:"inline-block"}}>자기 양육을 살피고,</span>{" "}<span style={{display:"inline-block"}}>자기 삶을 들여다볼 줄 아는 부모.</span></H2>
+      <H2><span style={{display:"inline-block"}}>완벽한 부모가 아니라,</span>{" "}<span style={{display:"inline-block"}}>양육을 해석할 줄 아는 부모로.</span></H2>
     </div></FI>
     <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:16,color:C.g6,lineHeight:2,wordBreak:"keep-all"}}>
       <p style={{marginBottom:24}}>별로인 나, 반복해서 무너지는 나, 아이 앞에서 작아지는 나를 왜곡 없이 바라볼 수 있는 부모. 그래서 내 아이의 장면도 조금 더 선명하게 보이는 부모.</p>
@@ -1205,7 +1219,13 @@ const DelightPage=()=>(<>
       <Tag>함께할 12명을 찾습니다</Tag>
       <H2>함께할 12명을 찾습니다.</H2>
     </div></FI>
-    <FI delay={.1}><p style={{textAlign:"center",fontSize:15,color:C.g6,maxWidth:560,margin:"0 auto 48px",lineHeight:1.9,wordBreak:"keep-all"}}>선발은 "정답"을 보지 않습니다. 자기 양육을 어떻게 보고 있는지, 그 시선만 살핍니다.</p></FI>
+    <FI delay={.08}><p style={{textAlign:"center",fontSize:"clamp(14px,2vw,15px)",color:C.g6,maxWidth:560,margin:"0 auto 20px",lineHeight:1.9,wordBreak:"keep-all"}}>선발은 "정답"을 보지 않습니다. 자기 양육을 어떻게 보고 있는지, 그 시선만 살핍니다.</p></FI>
+    <FI delay={.12}><p style={{textAlign:"center",fontSize:"clamp(14px,2vw,15px)",color:C.g6,maxWidth:680,margin:"0 auto 48px",lineHeight:1.95,wordBreak:"keep-all",padding:"0 12px"}}>
+      <span style={{display:"inline-block"}}>다만 자신의 양육을 진지하게 들여다보고 싶은 사람,</span>{" "}
+      <span style={{display:"inline-block"}}>반복되는 고리를 끊고 싶은 사람,</span>{" "}
+      <span style={{display:"inline-block"}}>아이를 더 잘 통제하고 싶은 것이 아니라</span>{" "}
+      <span style={{display:"inline-block"}}>아이와 나를 더 정확하고 다정하게 이해하고 싶은 사람을 기다립니다.</span>
+    </p></FI>
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:20,maxWidth:880,margin:"0 auto"}}>
       <FI delay={.15}><div style={{padding:28,background:C.w,borderRadius:16,border:`2px solid ${C.gold}`,height:"100%"}}>
         <h3 style={{fontSize:17,fontWeight:700,color:C.navy,marginBottom:20}}>이런 분과 함께하고 싶습니다</h3>
