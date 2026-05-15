@@ -1062,19 +1062,25 @@ const DelightPage=()=>(<>
         <span style={{display:"inline-block"}}>내가 보는 방식을 다시 봅니다.</span>
       </p>
     </div></FI>
-    <FI delay={.15}><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:12,maxWidth:680,margin:"0 auto 48px",position:"relative"}}>
+    <FI delay={.15}><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:12,maxWidth:680,margin:"0 auto 24px",position:"relative"}}>
       {[
         {k:"정원",v:"12명"},
         {k:"기간",v:"6주"},
         {k:"시작",v:"2026.06.05"},
-        {k:"참가비",v:"35만원"},
+        {k:"참가비",v:"35만원",strike:"50만원",badge:"1기 특별가"},
       ].map((x,i)=>(
-        <div key={i} style={{padding:"22px 16px",background:"rgba(255,255,255,.06)",backdropFilter:"blur(10px)",borderRadius:14,border:"1px solid rgba(247,215,107,.25)",textAlign:"center"}}>
+        <div key={i} style={{padding:"22px 16px",background:"rgba(255,255,255,.06)",backdropFilter:"blur(10px)",borderRadius:14,border:x.badge?`1px solid ${C.gold}`:"1px solid rgba(247,215,107,.25)",textAlign:"center",position:"relative"}}>
+          {x.badge&&<div style={{position:"absolute",top:-10,left:"50%",transform:"translateX(-50%)",background:C.gold,color:C.navy,fontSize:10,fontWeight:700,padding:"3px 10px",borderRadius:20,whiteSpace:"nowrap",letterSpacing:".03em"}}>{x.badge}</div>}
           <div style={{fontSize:12,color:"rgba(255,255,255,.6)",marginBottom:8,letterSpacing:".08em"}}>{x.k}</div>
+          {x.strike&&<div style={{fontSize:13,color:"rgba(255,255,255,.4)",textDecoration:"line-through",marginBottom:2}}>{x.strike}</div>}
           <div style={{fontSize:19,fontWeight:700,color:C.gold}}>{x.v}</div>
         </div>
       ))}
     </div></FI>
+    <FI delay={.2}><p style={{textAlign:"center",fontSize:13,color:"rgba(255,255,255,.65)",marginBottom:32,wordBreak:"keep-all",padding:"0 16px"}}>
+      <span style={{display:"inline-block"}}>정가 50만원 → 1기 모집 특별가 35만원</span>{" "}
+      <span style={{display:"inline-block",color:C.gold,fontWeight:600}}>(30% 할인)</span>
+    </p></FI>
     <FI delay={.25}><div style={{textAlign:"center",position:"relative"}}>
       <BG onClick={()=>window.open(DELIGHT_APPLY_URL,"_blank")} style={{fontSize:16,padding:"16px 48px"}}>지원서 작성하기 →</BG>
       <p style={{fontSize:13,color:"rgba(255,255,255,.55)",marginTop:18}}>모집 마감 · 2026.05.26 (화)</p>
@@ -1271,7 +1277,7 @@ const DelightPage=()=>(<>
         {k:"사전 과제",v:"매주 독서 1권·챕터 + 분석일지 주 3회 이상"},
         {k:"장소",v:"헤이그라운드 성수시작점"},
         {k:"정원",v:"12명 (지원서 검토 후 선발)"},
-        {k:"참가비",v:"35만원"},
+        {k:"참가비",v:"35만원 (정가 50만원 · 1기 특별 30% 할인)"},
         {k:"모집 마감",v:"2026.05.26 (화)",bold:true},
         {k:"결과 통보",v:"2026.05.29 (금)"},
         {k:"1주차 시작",v:"2026.06.05 (금)"},
