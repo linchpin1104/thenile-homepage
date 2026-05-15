@@ -1097,10 +1097,10 @@ const DelightPage=()=>(<>
       <p style={{marginBottom:20}}>부모됨에는 두려움과 기쁨이 함께 있습니다. 두려움이 크면 자꾸 피하게 되고, 기쁨이 자라면 책임은 자연스럽게 따라옵니다.</p>
       <p style={{marginBottom:24}}>더나일이 그리는 부모의 모습은 이렇습니다.</p>
       <blockquote style={{borderLeft:`3px solid ${C.gold}`,paddingLeft:20,fontSize:"clamp(16px,2.2vw,18px)",color:C.navy,fontStyle:"italic",margin:"24px 0",lineHeight:1.7,wordBreak:"keep-all"}}>
-        <span style={{display:"inline-block"}}>"동네에 한 명 있으면,</span>{" "}
-        <span style={{display:"inline-block"}}>백 명의 상담사보다 도움 되는 부모."</span>
+        <span style={{display:"inline-block"}}>"모두의 육아를</span>{" "}
+        <span style={{display:"inline-block"}}>다정하게 해석하는 부모."</span>
       </blockquote>
-      <p style={{marginBottom:20}}>자기 사례를 객관화해 볼 수 있고, 타인의 사례도 다정하게 바라볼 수 있는 사람. 그렇게 부모와 부모가 서로의 불안을 비난 대신 해석으로 만나는 자리를 꿈꿉니다.</p>
+      <p style={{marginBottom:20}}>내 육아를 객관화해 볼 수 있고, 다른 육아에도 다정한 해석을 할 수 있는 부모. 그렇게 부모와 부모가 서로의 불안을 비난 대신 해석으로 만나는 자리를 꿈꿉니다.</p>
       <p>양육이 두려움보다 기쁨에 가까워지는 자리. 그래서 우리는 이 프로젝트를 <em style={{color:C.gold,fontStyle:"normal",fontWeight:600}}>딜라이트</em>라고 부릅니다.</p>
     </div></FI>
   </Box></Sec>
@@ -1124,7 +1124,7 @@ const DelightPage=()=>(<>
       <div style={{display:"grid",gap:18}}>
         {[
           "우리는 부모가 자기 양육을 객관화할 수 있는 힘을 갖기를 바랍니다.",
-          "자기 사례뿐 아니라, 타인의 사례도 다정하게 볼 수 있는 눈을 갖기를 바랍니다.",
+          "타인의 육아도 다정하게 볼 수 있는 눈을 갖기를 바랍니다.",
           "불안한 부모를 비난하지 않고, 그 불안이 어디에서 왔는지 함께 해석할 수 있는 사람이 되기를 바랍니다.",
         ].map((t,i)=>(
           <div key={i} style={{display:"flex",gap:14,alignItems:"flex-start"}}>
@@ -1145,7 +1145,7 @@ const DelightPage=()=>(<>
     <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:16,color:C.g6,lineHeight:2,wordBreak:"keep-all"}}>
       <p style={{marginBottom:24}}>별로인 나, 반복해서 무너지는 나, 아이 앞에서 작아지는 나를 왜곡 없이 바라볼 수 있는 부모. 그래서 내 아이의 장면도 조금 더 선명하게 보이는 부모.</p>
       <blockquote style={{borderLeft:`3px solid ${C.gold}`,paddingLeft:20,fontSize:17,color:C.navy,fontStyle:"italic",lineHeight:1.7}}>
-        "동네에 한 명 있으면 백 명의 상담사보다 도움 되는 부모."
+        "모두의 육아를 다정하게 해석하는 부모."
       </blockquote>
     </div></FI>
   </Box></Sec>
@@ -1173,7 +1173,7 @@ const DelightPage=()=>(<>
         {[
           {n:"01",t:"내 반응을 알아차리는 눈",d:'"내가 지금 왜 이렇게 반응하고 있지?"를 그 한가운데서 알아챕니다.'},
           {n:"02",t:"책임의 경계를 보는 눈",d:"내가 져야 할 책임, 아이에게 넘기지 말아야 할 책임, 아이에게 가르쳐야 할 책임을 구분합니다. 양육의 불안은 이 경계가 흐려질 때 커집니다."},
-          {n:"03",t:"다른 양육 장면도 다정하게 보는 눈",d:"내 아이뿐 아니라, 동네 다른 집 아이의 장면에도 한 마디 건넬 수 있는 사람."},
+          {n:"03",t:"다른 육아도 다정하게 보는 눈",d:"내 육아뿐 아니라, 다른 육아에도 다정한 해석을 할 수 있는 부모."},
         ].map((x,i)=>(
           <div key={i} style={{padding:24,background:C.w,borderRadius:16,border:`1px solid ${C.g2}`}}>
             <div style={{fontSize:12,color:C.gold,fontWeight:700,marginBottom:8,letterSpacing:".1em"}}>{x.n}</div>
