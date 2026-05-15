@@ -1171,7 +1171,7 @@ const DelightPage=()=>(<>
       ))}
     </div></FI>
     <FI delay={.2}><div style={{maxWidth:760,margin:"0 auto"}}>
-      <h3 style={{textAlign:"center",fontSize:20,fontWeight:700,color:C.navy,marginBottom:24}}>이 6주가 길러내는 것</h3>
+      <h3 style={{textAlign:"center",fontSize:20,fontWeight:700,color:C.navy,marginBottom:24}}>6주간 나에게 일어날 변화</h3>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:16}}>
         {[
           {n:"01",t:"내 반응을 알아차리는 눈",d:'"내가 지금 왜 이렇게 반응하고 있지?"를 그 한가운데서 알아챕니다.'},
