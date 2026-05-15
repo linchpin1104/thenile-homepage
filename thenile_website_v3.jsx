@@ -1108,8 +1108,8 @@ const DelightPage=()=>(<>
   {/* 우리의 입장 */}
   <Sec bg={C.warm}><Box>
     <FI><div style={{textAlign:"center",marginBottom:40}}>
-      <Tag>우리의 입장</Tag>
-      <H2><span style={{display:"inline-block"}}>우리는 정답을 외우지 않습니다.</span>{" "}<span style={{display:"inline-block"}}>대신, 사례를 보는 눈을 훈련합니다.</span></H2>
+      <Tag>왜 딜라이트 프로젝트를 시작했나요?</Tag>
+      <H2><span style={{display:"inline-block"}}>아이를 바꾸기 전에,</span>{" "}<span style={{display:"inline-block"}}>내가 보는 방식을 다시 봅니다.</span></H2>
     </div></FI>
     <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:16,color:C.g6,lineHeight:2,wordBreak:"keep-all"}}>
       <p style={{marginBottom:20}}>부모교육은 이미 차고 넘칩니다. 영상은 끝없고, 책은 빼곡하고, 전문가의 조언은 매일 도착합니다.</p>
@@ -1133,6 +1133,9 @@ const DelightPage=()=>(<>
           </div>
         ))}
       </div>
+      <p style={{marginTop:28,paddingTop:24,borderTop:`1px solid ${C.g2}`,textAlign:"center",fontSize:"clamp(14px,2.2vw,16px)",color:C.navy,fontWeight:600,lineHeight:1.7,wordBreak:"keep-all"}}>
+        그 동행을 함께 해주실 분을 기다리고 있어요.
+      </p>
     </div></FI>
   </Box></Sec>
 
@@ -1225,8 +1228,7 @@ const DelightPage=()=>(<>
       <Tag>함께할 12명을 찾습니다</Tag>
       <H2>함께할 12명을 찾습니다.</H2>
     </div></FI>
-    <FI delay={.08}><p style={{textAlign:"center",fontSize:"clamp(14px,2vw,15px)",color:C.g6,maxWidth:560,margin:"0 auto 20px",lineHeight:1.9,wordBreak:"keep-all"}}>선발은 "정답"을 보지 않습니다. 자기 양육을 어떻게 보고 있는지, 그 시선만 살핍니다.</p></FI>
-    <FI delay={.12}><p style={{textAlign:"center",fontSize:"clamp(14px,2vw,15px)",color:C.g6,maxWidth:680,margin:"0 auto 48px",lineHeight:1.95,wordBreak:"keep-all",padding:"0 12px"}}>
+    <FI delay={.1}><p style={{textAlign:"center",fontSize:"clamp(14px,2vw,15px)",color:C.g6,maxWidth:680,margin:"0 auto 48px",lineHeight:1.95,wordBreak:"keep-all",padding:"0 12px"}}>
       <span style={{display:"inline-block"}}>다만 자신의 양육을 진지하게 들여다보고 싶은 사람,</span>{" "}
       <span style={{display:"inline-block"}}>반복되는 고리를 끊고 싶은 사람,</span>{" "}
       <span style={{display:"inline-block"}}>아이를 더 잘 통제하고 싶은 것이 아니라</span>{" "}
