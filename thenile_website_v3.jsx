@@ -1100,7 +1100,7 @@ const DelightPage=()=>(<>
         <span style={{display:"inline-block"}}>"동네에 한 명 있으면,</span>{" "}
         <span style={{display:"inline-block"}}>백 명의 상담사보다 도움 되는 부모."</span>
       </blockquote>
-      <p style={{marginBottom:20}}>내 아이의 장면을 조금 더 선명하게 보고, 다른 집 아이의 장면에도 다정하게 개입할 수 있는 사람.</p>
+      <p style={{marginBottom:20}}>자기 사례를 객관화해 볼 수 있고, 타인의 사례도 다정하게 바라볼 수 있는 사람. 그렇게 부모와 부모가 서로의 불안을 비난 대신 해석으로 만나는 자리를 꿈꿉니다.</p>
       <p>양육이 두려움보다 기쁨에 가까워지는 자리. 그래서 우리는 이 프로젝트를 <em style={{color:C.gold,fontStyle:"normal",fontWeight:600}}>딜라이트</em>라고 부릅니다.</p>
     </div></FI>
   </Box></Sec>
@@ -1232,35 +1232,20 @@ const DelightPage=()=>(<>
       <span style={{display:"inline-block"}}>아이를 더 잘 통제하고 싶은 것이 아니라</span>{" "}
       <span style={{display:"inline-block"}}>아이와 나를 더 정확하고 다정하게 이해하고 싶은 사람을 기다립니다.</span>
     </p></FI>
-    <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:20,maxWidth:880,margin:"0 auto"}}>
-      <FI delay={.15}><div style={{padding:28,background:C.w,borderRadius:16,border:`2px solid ${C.gold}`,height:"100%"}}>
-        <h3 style={{fontSize:17,fontWeight:700,color:C.navy,marginBottom:20}}>이런 분과 함께하고 싶습니다</h3>
-        {[
-          "처방보다 시선을 갖고 싶은 부모",
-          "별로인 나, 무너지는 나를 회피하지 않고 보겠다고 결심한 부모",
-          "매주 3시간과 사전 과제 시간을 낼 수 있는 부모",
-          "그룹 안에서 실수와 부끄러움을 솔직히 나눌 수 있는 부모",
-          "이 변화를 가까운 사람들과 나누고 싶은 부모",
-        ].map((t,i)=>(
-          <div key={i} style={{fontSize:14,color:C.g6,padding:"8px 0",display:"flex",alignItems:"flex-start",gap:10,lineHeight:1.7,wordBreak:"keep-all"}}>
-            <span style={{color:C.gold,flexShrink:0}}>✓</span><span>{t}</span>
-          </div>
-        ))}
-      </div></FI>
-      <FI delay={.2}><div style={{padding:28,background:C.w,borderRadius:16,border:`1px solid ${C.g2}`,height:"100%"}}>
-        <h3 style={{fontSize:17,fontWeight:700,color:C.g6,marginBottom:20}}>다음 기회를 기다리시는 게 좋은 분</h3>
-        {[
-          '"이렇게 하면 됩니다"라는 답을 듣고 싶은 분',
-          "자기 양육을 들여다보는 일이 아직 많이 불편한 분",
-          "매주 3시간과 사전 과제 수행이 어려운 분",
-          "그룹 안에서 자기 이야기를 나누는 것이 부담스러운 분",
-        ].map((t,i)=>(
-          <div key={i} style={{fontSize:14,color:C.g4,padding:"8px 0",display:"flex",alignItems:"flex-start",gap:10,lineHeight:1.7,wordBreak:"keep-all"}}>
-            <span style={{color:C.g4,flexShrink:0}}>·</span><span>{t}</span>
-          </div>
-        ))}
-      </div></FI>
-    </div>
+    <FI delay={.15}><div style={{maxWidth:560,margin:"0 auto",padding:"32px 28px",background:C.w,borderRadius:16,border:`2px solid ${C.gold}`}}>
+      <h3 style={{fontSize:17,fontWeight:700,color:C.navy,marginBottom:20,textAlign:"center"}}>이런 분과 함께하고 싶습니다</h3>
+      {[
+        "처방보다 시선을 갖고 싶은 부모",
+        "별로인 나, 무너지는 나를 회피하지 않고 보겠다고 결심한 부모",
+        "매주 3시간과 사전 과제 시간을 낼 수 있는 부모",
+        "그룹 안에서 실수와 부끄러움을 솔직히 나눌 수 있는 부모",
+        "이 변화를 가까운 사람들과 나누고 싶은 부모",
+      ].map((t,i)=>(
+        <div key={i} style={{fontSize:"clamp(14px,2vw,15px)",color:C.g6,padding:"10px 0",display:"flex",alignItems:"flex-start",gap:12,lineHeight:1.7,wordBreak:"keep-all"}}>
+          <span style={{color:C.gold,flexShrink:0,fontWeight:700}}>✓</span><span>{t}</span>
+        </div>
+      ))}
+    </div></FI>
   </Box></Sec>
 
   {/* 실제 정보 */}
@@ -1293,7 +1278,10 @@ const DelightPage=()=>(<>
   {/* CTA */}
   <Sec bg={C.navy}><Box style={{textAlign:"center"}}>
     <FI><H2 light style={{fontSize:"clamp(22px,4vw,30px)",maxWidth:620,margin:"0 auto 24px"}}><span style={{display:"inline-block"}}>내 양육 장면을,</span>{" "}<span style={{display:"inline-block"}}>다시 보고 싶은 분의 자리입니다.</span></H2></FI>
-    <FI delay={.1}><p style={{fontSize:15,color:"rgba(255,255,255,.7)",lineHeight:1.9,maxWidth:560,margin:"0 auto 40px",wordBreak:"keep-all"}}>지원서는 정답을 묻지 않습니다. 자기 양육을 어떻게 보고 있는지, 그 시선만 봅니다. 솔직하게 적어주세요.</p></FI>
+    <FI delay={.1}><p style={{fontSize:"clamp(15px,2.2vw,16px)",color:"rgba(255,255,255,.78)",lineHeight:1.9,maxWidth:520,margin:"0 auto 40px",wordBreak:"keep-all",padding:"0 12px"}}>
+      <span style={{display:"inline-block"}}>지원서는 편안하고 솔직하게 적어주세요.</span>{" "}
+      <span style={{display:"inline-block"}}>정답을 묻는 자리가 아니니까요.</span>
+    </p></FI>
     <FI delay={.15}><div style={{maxWidth:520,margin:"0 auto 40px",padding:24,background:"rgba(255,255,255,.05)",borderRadius:14,border:"1px solid rgba(255,255,255,.1)",textAlign:"left"}}>
       <h4 style={{fontSize:14,color:C.gold,fontWeight:700,marginBottom:14,textAlign:"center"}}>시작하기 전에, 이 세 가지가 가능한가요?</h4>
       {[
