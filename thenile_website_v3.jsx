@@ -78,6 +78,7 @@ const Footer=({go})=>(
       <div style={{fontSize:13,color:"rgba(255,255,255,.5)",lineHeight:2,marginBottom:24}}>
         비영리법인 설립허가번호 : 제2024-194호<br/>
         사업자등록번호 : 438-82-00797<br/>
+        대표자 : 이다랑<br/>
         소재지 : 서울특별시 성동구 뚝섬로1나길 5, 7층 S721호(성수동1가, 헤이그라운드)
       </div>
       {/* 연락처 */}
@@ -88,6 +89,8 @@ const Footer=({go})=>(
       </div>
       {/* 링크 */}
       <div style={{display:"flex",flexWrap:"wrap",gap:8,alignItems:"center",fontSize:14,color:"rgba(255,255,255,.6)",marginBottom:32}}>
+        <span style={{cursor:"pointer"}} onClick={()=>go&&go("refund")}>환불 정책</span>
+        <span style={{color:"rgba(255,255,255,.3)"}}>|</span>
         <span style={{cursor:"pointer"}}>이용약관</span>
         <span style={{color:"rgba(255,255,255,.3)"}}>|</span>
         <span style={{cursor:"pointer"}}>개인정보처리방침</span>
@@ -1042,6 +1045,71 @@ const TIME_SLOTS=[];
 for(let h=9;h<18;h++){TIME_SLOTS.push(`${String(h).padStart(2,"0")}:00`);TIME_SLOTS.push(`${String(h).padStart(2,"0")}:30`)}
 TIME_SLOTS.push("18:00");
 
+/* ═══ 환불 정책 페이지 (카드사 심사용) ═══ */
+const RefundPage=()=>(<>
+  <section style={{paddingTop:120,paddingBottom:60,background:C.warm}}><Box>
+    <FI><Tag>REFUND POLICY</Tag></FI>
+    <FI delay={.1}><H2>환불 정책</H2></FI>
+    <FI delay={.2}><Desc>사단법인 더나일이 제공하는 상담 서비스의 환불 및 취소 규정입니다.</Desc></FI>
+  </Box></section>
+  <Sec bg={C.w}><Box>
+    <FI><div style={{maxWidth:820,margin:"0 auto",fontSize:15,color:C.g6,lineHeight:1.95,wordBreak:"keep-all"}}>
+
+      <div style={{padding:"24px 28px",background:C.warm,borderRadius:12,marginBottom:32,borderLeft:`4px solid ${C.gold}`}}>
+        <div style={{fontSize:13,color:C.gold,fontWeight:700,marginBottom:6,letterSpacing:".05em"}}>적용 대상</div>
+        <p style={{margin:0,color:C.navy,fontSize:14}}>본 환불 정책은 사단법인 더나일(www.thenile.kr)에서 제공하는 모든 상담·교육 서비스 및 디지털 콘텐츠에 적용됩니다.</p>
+      </div>
+
+      <h3 style={{fontSize:20,fontWeight:700,color:C.navy,marginTop:40,marginBottom:16}}>제1조 환불 신청 가능 기간</h3>
+      <p style={{marginBottom:12}}>① 결제일로부터 <strong style={{color:C.navy}}>7일 이내</strong>에 서비스 이용을 시작하지 않은 경우, 전액 환불이 가능합니다.</p>
+      <p style={{marginBottom:12}}>② 서비스 이용이 시작된 경우, 이용한 회차·기간에 따라 차감 후 환불됩니다(제3조 참조).</p>
+      <p style={{marginBottom:0}}>③ 환불 신청은 cross@thenile.kr 또는 010-8257-1104으로 접수해 주세요.</p>
+
+      <h3 style={{fontSize:20,fontWeight:700,color:C.navy,marginTop:40,marginBottom:16}}>제2조 환불이 가능한 경우</h3>
+      <p style={{marginBottom:12}}>① 본 법인의 귀책 사유로 서비스가 정상 제공되지 못한 경우, 전액 환불됩니다.</p>
+      <p style={{marginBottom:12}}>② 서비스 시작 전 결제 취소를 요청한 경우, 전액 환불됩니다.</p>
+      <p style={{marginBottom:0}}>③ 결제 수단의 오류·중복 결제 등 시스템적 오류가 발생한 경우, 확인 후 즉시 환불 처리됩니다.</p>
+
+      <h3 style={{fontSize:20,fontWeight:700,color:C.navy,marginTop:40,marginBottom:16}}>제3조 환불 금액 계산 방식</h3>
+      <p style={{marginBottom:12}}>① 단회성 상담의 경우, 상담 시작 전 취소 시 전액, 시작 후 취소 시 환불이 제한됩니다.</p>
+      <p style={{marginBottom:12}}>② 다회 프로그램(예: 6주 프로젝트)의 경우, 다음 기준으로 환불됩니다.</p>
+      <div style={{padding:"16px 20px",background:C.warm,borderRadius:8,marginBottom:12}}>
+        <p style={{marginBottom:8,fontSize:14}}>· 프로그램 시작 전 : 전액 환불</p>
+        <p style={{marginBottom:8,fontSize:14}}>· 전체 일정의 1/3 이내 진행 시 : 결제 금액의 2/3 환불</p>
+        <p style={{marginBottom:8,fontSize:14}}>· 전체 일정의 1/2 이내 진행 시 : 결제 금액의 1/2 환불</p>
+        <p style={{margin:0,fontSize:14}}>· 전체 일정의 1/2 초과 진행 시 : 환불 불가</p>
+      </div>
+      <p style={{marginBottom:0}}>③ 환불 금액은 카드 결제 취소 또는 계좌 이체로 환급되며, 카드 취소의 경우 카드사 정책에 따라 2~7영업일 소요됩니다.</p>
+
+      <h3 style={{fontSize:20,fontWeight:700,color:C.navy,marginTop:40,marginBottom:16}}>제4조 환불이 제한되는 경우</h3>
+      <p style={{marginBottom:12}}>① 회원의 단순 변심으로 인한 환불 요청이 서비스 시작 후 발생한 경우</p>
+      <p style={{marginBottom:12}}>② 서비스의 일부 또는 전부를 이용한 후 환불을 요청한 경우(제3조 비율 적용)</p>
+      <p style={{marginBottom:0}}>③ 다운로드 가능한 디지털 자료가 제공된 경우, 해당 자료에 한해 환불이 제한될 수 있습니다.</p>
+
+      <h3 style={{fontSize:20,fontWeight:700,color:C.navy,marginTop:40,marginBottom:16}}>제5조 환불 절차</h3>
+      <ol style={{paddingLeft:20,marginBottom:0}}>
+        <li style={{marginBottom:8}}>cross@thenile.kr 또는 010-8257-1104로 환불 요청 (이름·결제일·결제 수단 명시)</li>
+        <li style={{marginBottom:8}}>본 법인이 환불 사유와 회차를 확인하여 환불 가능 여부 및 금액을 안내</li>
+        <li style={{marginBottom:8}}>회원 동의 후 결제 수단 환급 또는 계좌 이체로 환불</li>
+        <li style={{marginBottom:0}}>환불 처리 완료 시 이메일로 결과 통보</li>
+      </ol>
+
+      <h3 style={{fontSize:20,fontWeight:700,color:C.navy,marginTop:40,marginBottom:16}}>제6조 문의</h3>
+      <p style={{marginBottom:8}}>환불 관련 문의는 아래로 연락 주세요.</p>
+      <div style={{padding:"20px 24px",background:C.warm,borderRadius:12,marginTop:12}}>
+        <p style={{marginBottom:6,fontSize:14}}><strong style={{color:C.navy}}>사단법인 더나일</strong></p>
+        <p style={{marginBottom:6,fontSize:14}}>대표자 : 이다랑</p>
+        <p style={{marginBottom:6,fontSize:14}}>사업자등록번호 : 438-82-00797</p>
+        <p style={{marginBottom:6,fontSize:14}}>주소 : 서울특별시 성동구 뚝섬로1나길 5, 7층 S721호(성수동1가, 헤이그라운드)</p>
+        <p style={{marginBottom:6,fontSize:14}}>전화 : 010-8257-1104</p>
+        <p style={{margin:0,fontSize:14}}>이메일 : cross@thenile.kr</p>
+      </div>
+
+      <p style={{marginTop:40,paddingTop:24,borderTop:`1px solid ${C.g2}`,fontSize:13,color:C.g4,textAlign:"right"}}>본 환불 정책은 2026년 5월 1일부터 시행됩니다.</p>
+    </div></FI>
+  </Box></Sec>
+</>);
+
 /* ═══ 딜라이트 프로젝트 페이지 ═══ */
 const DELIGHT_APPLY_URL="https://docs.google.com/forms/d/e/1FAIpQLSePoLfSazbmm0Cd4CyPaGISSWvkgvDInTtSuijbpvSjV8sdkw/viewform";
 const DelightPage=()=>(<>
@@ -1471,10 +1539,11 @@ const PAGE_META={
   shop:{title:"상품 | 사단법인 더나일",desc:"더나일의 전문 상담 서비스를 만나보세요."},
   counsel:{title:"페이서 상담 | 사단법인 더나일",desc:"페이서 후원자를 위한 전문 양육 상담 신청 페이지입니다."},
   contact:{title:"협력문의 | 사단법인 더나일",desc:"기업 CSR, 강연, 기관 협업, 연구 협력, 후원 협약 등 더나일과의 협력을 문의하세요."},
+  refund:{title:"환불 정책 | 사단법인 더나일",desc:"사단법인 더나일 상담·교육 서비스의 환불 및 취소 규정 안내."},
 };
 
-const PATH_MAP={"/":"home","/about":"about","/programs":"programs","/delight":"delight","/parentscan":"parentscan","/pacer":"pacer","/shop":"shop","/counsel":"counsel","/contact":"contact"};
-const ID_TO_PATH={home:"/",about:"/about",programs:"/programs",delight:"/delight",parentscan:"/parentscan",pacer:"/pacer",shop:"/shop",counsel:"/counsel",contact:"/contact"};
+const PATH_MAP={"/":"home","/about":"about","/programs":"programs","/delight":"delight","/parentscan":"parentscan","/pacer":"pacer","/shop":"shop","/counsel":"counsel","/contact":"contact","/refund":"refund"};
+const ID_TO_PATH={home:"/",about:"/about",programs:"/programs",delight:"/delight",parentscan:"/parentscan",pacer:"/pacer",shop:"/shop",counsel:"/counsel",contact:"/contact",refund:"/refund"};
 
 /* ═══ APP ═══ */
 export default function App(){
@@ -1502,6 +1571,6 @@ export default function App(){
     window.scrollTo({top:0,behavior:"smooth"});
   };
 
-  const P={home:<HomePage go={go}/>,about:<AboutPage go={go}/>,programs:<ProgramsPage/>,delight:<DelightPage/>,parentscan:<ParentscanPage/>,pacer:<PacerPage/>,shop:<ShopPage/>,counsel:<CounselPage/>,contact:<ContactPage/>};
+  const P={home:<HomePage go={go}/>,about:<AboutPage go={go}/>,programs:<ProgramsPage/>,delight:<DelightPage/>,parentscan:<ParentscanPage/>,pacer:<PacerPage/>,shop:<ShopPage/>,counsel:<CounselPage/>,contact:<ContactPage/>,refund:<RefundPage/>};
   return(<div><Nav page={page} go={go}/><main>{P[page]||<HomePage go={go}/>}</main><Footer go={go}/></div>);
 }
