@@ -1,4 +1,8 @@
 import { useState, useEffect, useRef, Fragment } from "react";
+import { loadTossPayments, ANONYMOUS } from "@tosspayments/tosspayments-sdk";
+
+/* 토스페이먼츠 테스트 클라이언트 키 (가맹점 심사 통과 후 라이브 키로 교체) */
+const TOSS_CLIENT_KEY = "test_ck_mBZ1gQ4YVXW4WBvkq5z13l2KPoqN";
 
 const C = {
   navy: "#1B2A4A", navyL: "#243B6A", navyM: "#2D4A7A",
@@ -1003,39 +1007,192 @@ const ContactPage=()=>{
 /* ═══ SHOP ═══ */
 const ShopPage=()=>{
   const product={name:"더나일 상담(테스트)",price:100000,desc:"사단법인 더나일의 전문 상담 서비스입니다. 양육 관련 고민이나 가족 내 어려움에 대해 전문가와 함께 이야기를 나눌 수 있습니다.",features:["1:1 전문 상담","양육·가족 관련 주제","상담 후 맞춤 솔루션 제공"]};
+  const [step,setStep]=useState("product"); // product | payment | success | fail
+  const [widgets,setWidgets]=useState(null);
+  const [widgetsReady,setWidgetsReady]=useState(false);
+  const [paying,setPaying]=useState(false);
+  const [resultInfo,setResultInfo]=useState(null);
+
+  // URL 쿼리로 결제 결과 감지
+  useEffect(()=>{
+    const params=new URLSearchParams(window.location.search);
+    const status=params.get("status");
+    if(status==="success"){
+      setStep("success");
+      setResultInfo({orderId:params.get("orderId"),paymentKey:params.get("paymentKey"),amount:params.get("amount")});
+    }else if(status==="fail"){
+      setStep("fail");
+      setResultInfo({code:params.get("code"),message:params.get("message")});
+    }
+  },[]);
+
+  // 결제 단계 진입 시 토스 위젯 로드
+  useEffect(()=>{
+    if(step!=="payment") return;
+    let cancelled=false;
+    (async()=>{
+      try{
+        const tossPayments=await loadTossPayments(TOSS_CLIENT_KEY);
+        if(cancelled) return;
+        const w=tossPayments.widgets({customerKey:ANONYMOUS});
+        await w.setAmount({currency:"KRW",value:product.price});
+        await Promise.all([
+          w.renderPaymentMethods({selector:"#payment-method",variantKey:"DEFAULT"}),
+          w.renderAgreement({selector:"#agreement",variantKey:"AGREEMENT"}),
+        ]);
+        if(cancelled) return;
+        setWidgets(w);
+        setWidgetsReady(true);
+      }catch(e){
+        console.error("[Toss widget load failed]",e);
+        alert("결제 화면을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.");
+      }
+    })();
+    return()=>{cancelled=true;};
+  },[step]);
+
+  const handlePayment=async()=>{
+    if(!widgets||paying) return;
+    setPaying(true);
+    try{
+      await widgets.requestPayment({
+        orderId:"thenile_"+Date.now()+"_"+Math.random().toString(36).slice(2,8),
+        orderName:product.name,
+        successUrl:window.location.origin+"/shop?status=success",
+        failUrl:window.location.origin+"/shop?status=fail",
+        customerEmail:"customer@thenile.kr",
+        customerName:"더나일 고객",
+      });
+    }catch(e){
+      console.error("[Toss requestPayment failed]",e);
+      setPaying(false);
+    }
+  };
+
   return(<>
-    <section style={{paddingTop:120,paddingBottom:60,background:C.warm}}><Box>
+    <section style={{paddingTop:120,paddingBottom:48,background:C.warm}}><Box>
       <FI><Tag>SHOP</Tag></FI>
       <FI delay={.1}><H2>상품</H2></FI>
       <FI delay={.2}><Desc>더나일의 전문 서비스를 만나보세요.</Desc></FI>
     </Box></section>
-    <Sec bg={C.w}><Box>
-      <FI><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:48,alignItems:"start"}}>
-        {/* 상품 이미지 영역 */}
-        <div style={{background:C.warm,borderRadius:20,padding:48,display:"flex",alignItems:"center",justifyContent:"center",minHeight:320,border:`1px solid ${C.g2}`}}>
-          <div style={{textAlign:"center"}}>
-            <div style={{width:80,height:80,borderRadius:"50%",background:C.navy,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 20px"}}>
-              <span style={{fontSize:36,color:"#fff"}}>💬</span>
+
+    {/* 단계 인디케이터 */}
+    {(step==="product"||step==="payment")&&(
+      <Sec bg={C.w} style={{paddingTop:32,paddingBottom:16}}><Box>
+        <div style={{display:"flex",justifyContent:"center",gap:12,fontSize:13,color:C.g4,fontWeight:500}}>
+          <span style={{color:step==="product"?C.navy:C.gold,fontWeight:step==="product"?700:600}}>① 상품 확인</span>
+          <span style={{color:C.g2}}>→</span>
+          <span style={{color:step==="payment"?C.navy:C.g4,fontWeight:step==="payment"?700:500}}>② 결제</span>
+          <span style={{color:C.g2}}>→</span>
+          <span>③ 완료</span>
+        </div>
+      </Box></Sec>
+    )}
+
+    {/* STEP: 상품 정보 */}
+    {step==="product"&&(
+      <Sec bg={C.w} style={{paddingTop:24}}><Box>
+        <FI><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:48,alignItems:"start"}}>
+          <div style={{background:C.warm,borderRadius:20,padding:48,display:"flex",alignItems:"center",justifyContent:"center",minHeight:320,border:`1px solid ${C.g2}`}}>
+            <div style={{textAlign:"center"}}>
+              <div style={{width:80,height:80,borderRadius:"50%",background:C.navy,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 20px"}}>
+                <span style={{fontSize:36,color:"#fff"}}>💬</span>
+              </div>
+              <p style={{fontSize:14,color:C.g6}}>Professional Counseling</p>
             </div>
-            <p style={{fontSize:14,color:C.g6}}>Professional Counseling</p>
           </div>
-        </div>
-        {/* 상품 정보 */}
-        <div>
-          <h3 style={{fontSize:24,fontWeight:700,color:C.navy,marginBottom:12,fontFamily:"'Noto Serif KR',serif"}}>{product.name}</h3>
-          <div style={{fontSize:28,fontWeight:700,color:C.gold,marginBottom:24}}>{product.price.toLocaleString()}원</div>
-          <p style={{fontSize:15,color:C.g6,lineHeight:1.8,marginBottom:32,wordBreak:"keep-all"}}>{product.desc}</p>
-          <div style={{marginBottom:32}}>
-            {product.features.map((f,i)=><div key={i} style={{display:"flex",alignItems:"center",gap:12,padding:"10px 0",borderBottom:`1px solid ${C.g1}`}}>
-              <div style={{width:6,height:6,borderRadius:3,background:C.gold,flexShrink:0}}/>
-              <span style={{fontSize:14,color:C.navy,fontWeight:500}}>{f}</span>
-            </div>)}
+          <div>
+            <h3 style={{fontSize:24,fontWeight:700,color:C.navy,marginBottom:12,fontFamily:"'Noto Serif KR',serif"}}>{product.name}</h3>
+            <div style={{fontSize:28,fontWeight:700,color:C.gold,marginBottom:24}}>{product.price.toLocaleString()}원</div>
+            <p style={{fontSize:15,color:C.g6,lineHeight:1.8,marginBottom:32,wordBreak:"keep-all"}}>{product.desc}</p>
+            <div style={{marginBottom:32}}>
+              {product.features.map((f,i)=><div key={i} style={{display:"flex",alignItems:"center",gap:12,padding:"10px 0",borderBottom:`1px solid ${C.g1}`}}>
+                <div style={{width:6,height:6,borderRadius:3,background:C.gold,flexShrink:0}}/>
+                <span style={{fontSize:14,color:C.navy,fontWeight:500}}>{f}</span>
+              </div>)}
+            </div>
+            <Btn onClick={()=>setStep("payment")} style={{width:"100%",textAlign:"center",fontSize:16,padding:"16px 32px"}}>구매하기</Btn>
+            <p style={{fontSize:12,color:C.g6,marginTop:12,textAlign:"center"}}>결제 진행 후 담당자가 상담 일정을 안내드립니다.</p>
           </div>
-          <Btn onClick={()=>alert("상담 신청이 접수되었습니다. 담당자가 곧 연락드리겠습니다.")} style={{width:"100%",textAlign:"center",fontSize:16,padding:"16px 32px"}}>구매하기</Btn>
-          <p style={{fontSize:12,color:C.g6,marginTop:12,textAlign:"center"}}>구매 후 담당자가 상담 일정을 안내드립니다.</p>
-        </div>
-      </div></FI>
-    </Box></Sec>
+        </div></FI>
+      </Box></Sec>
+    )}
+
+    {/* STEP: 결제 */}
+    {step==="payment"&&(
+      <Sec bg={C.w} style={{paddingTop:24}}><Box style={{maxWidth:760}}>
+        {/* 주문 요약 */}
+        <FI><div style={{background:C.warm,borderRadius:16,padding:"24px 28px",marginBottom:32,border:`1px solid ${C.g2}`}}>
+          <div style={{fontSize:12,color:C.g4,fontWeight:600,marginBottom:8,letterSpacing:".08em"}}>주문 상품</div>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",flexWrap:"wrap",gap:12}}>
+            <div style={{fontSize:17,fontWeight:700,color:C.navy}}>{product.name}</div>
+            <div style={{fontSize:22,fontWeight:700,color:C.gold}}>{product.price.toLocaleString()}원</div>
+          </div>
+        </div></FI>
+
+        {/* 토스 결제수단 위젯 */}
+        <FI delay={.1}><div style={{marginBottom:16}}>
+          <h4 style={{fontSize:15,fontWeight:700,color:C.navy,marginBottom:10}}>결제수단 선택</h4>
+          <div id="payment-method" style={{minHeight:200,background:C.w,borderRadius:12,border:`1px solid ${C.g2}`}}/>
+        </div></FI>
+
+        {/* 약관 동의 위젯 */}
+        <FI delay={.15}><div style={{marginBottom:24}}>
+          <h4 style={{fontSize:15,fontWeight:700,color:C.navy,marginBottom:10}}>약관 동의</h4>
+          <div id="agreement" style={{background:C.w,borderRadius:12,border:`1px solid ${C.g2}`}}/>
+        </div></FI>
+
+        {!widgetsReady&&(
+          <div style={{textAlign:"center",padding:"20px 0",fontSize:13,color:C.g4}}>결제 화면을 불러오는 중입니다…</div>
+        )}
+
+        {/* 결제하기 / 뒤로가기 */}
+        <FI delay={.2}><div style={{display:"flex",gap:12,flexWrap:"wrap",marginTop:24}}>
+          <button onClick={()=>setStep("product")} style={{flex:"0 0 auto",padding:"16px 24px",fontSize:14,background:C.w,color:C.g6,border:`1px solid ${C.g2}`,borderRadius:10,cursor:"pointer",fontWeight:500}}>← 이전</button>
+          <BG onClick={handlePayment} disabled={!widgetsReady||paying} style={{flex:1,textAlign:"center",fontSize:16,padding:"16px 32px",opacity:(!widgetsReady||paying)?.5:1,cursor:(!widgetsReady||paying)?"not-allowed":"pointer"}}>
+            {paying?"결제창 여는 중…":`${product.price.toLocaleString()}원 결제하기`}
+          </BG>
+        </div></FI>
+
+        <p style={{fontSize:12,color:C.g4,marginTop:16,textAlign:"center",lineHeight:1.6,wordBreak:"keep-all"}}>
+          본 결제는 토스페이먼츠 보안 결제창을 통해 안전하게 처리됩니다.<br/>
+          결제 후 7일 이내 미이용 시 전액 환불됩니다. (자세한 사항은 <span onClick={()=>{window.history.pushState({},"","/refund");window.dispatchEvent(new PopStateEvent("popstate"));}} style={{color:C.gold,cursor:"pointer",textDecoration:"underline"}}>환불 정책</span> 참조)
+        </p>
+      </Box></Sec>
+    )}
+
+    {/* STEP: 결제 성공 */}
+    {step==="success"&&(
+      <Sec bg={C.w}><Box style={{maxWidth:560,textAlign:"center"}}>
+        <FI>
+          <div style={{width:80,height:80,borderRadius:"50%",background:`${C.gold}33`,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 24px",fontSize:40}}>✓</div>
+          <h3 style={{fontSize:24,fontWeight:700,color:C.navy,marginBottom:16,fontFamily:"'Noto Serif KR',serif"}}>결제가 완료되었습니다</h3>
+          <p style={{fontSize:15,color:C.g6,lineHeight:1.8,marginBottom:32,wordBreak:"keep-all"}}>담당자가 곧 연락드려 상담 일정을 안내드립니다.</p>
+          {resultInfo&&(
+            <div style={{textAlign:"left",background:C.warm,padding:"20px 24px",borderRadius:12,marginBottom:32,fontSize:13,color:C.g6,lineHeight:1.9,wordBreak:"break-all"}}>
+              <div><strong style={{color:C.navy}}>주문번호</strong> : {resultInfo.orderId}</div>
+              <div><strong style={{color:C.navy}}>결제금액</strong> : {Number(resultInfo.amount).toLocaleString()}원</div>
+              <div><strong style={{color:C.navy}}>결제키</strong> : {resultInfo.paymentKey}</div>
+            </div>
+          )}
+          <Btn onClick={()=>{window.history.pushState({},"","/shop");setStep("product");setResultInfo(null);}} style={{fontSize:14,padding:"12px 32px"}}>상품 페이지로 돌아가기</Btn>
+        </FI>
+      </Box></Sec>
+    )}
+
+    {/* STEP: 결제 실패 */}
+    {step==="fail"&&(
+      <Sec bg={C.w}><Box style={{maxWidth:560,textAlign:"center"}}>
+        <FI>
+          <div style={{width:80,height:80,borderRadius:"50%",background:"#FEE2E2",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 24px",fontSize:40,color:"#DC2626"}}>✕</div>
+          <h3 style={{fontSize:24,fontWeight:700,color:C.navy,marginBottom:16,fontFamily:"'Noto Serif KR',serif"}}>결제가 완료되지 않았습니다</h3>
+          {resultInfo&&resultInfo.message&&(
+            <p style={{fontSize:14,color:C.g6,lineHeight:1.8,marginBottom:32,wordBreak:"keep-all"}}>{resultInfo.message}</p>
+          )}
+          <Btn onClick={()=>{window.history.pushState({},"","/shop");setStep("product");setResultInfo(null);}} style={{fontSize:14,padding:"12px 32px"}}>다시 시도하기</Btn>
+        </FI>
+      </Box></Sec>
+    )}
   </>);
 };
 
