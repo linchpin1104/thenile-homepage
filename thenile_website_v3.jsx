@@ -1308,7 +1308,7 @@ const DelightPage=()=>(<>
     </p></FI>
     <FI delay={.25}><div style={{textAlign:"center",position:"relative"}}>
       <BG onClick={()=>window.open(DELIGHT_APPLY_URL,"_blank")} style={{fontSize:16,padding:"16px 48px"}}>지원서 작성하기 →</BG>
-      <p style={{fontSize:13,color:"rgba(255,255,255,.55)",marginTop:18}}>모집 마감 · 2026.05.26 (화)</p>
+      <p style={{fontSize:13,color:"rgba(255,255,255,.55)",marginTop:18}}>모집 마감 · 2026.05.29 (금)</p>
     </div></FI>
   </Box></Sec>
 
@@ -1490,8 +1490,8 @@ const DelightPage=()=>(<>
         {k:"장소",v:"헤이그라운드 성수시작점"},
         {k:"정원",v:"12명 (지원서 검토 후 선발)"},
         {k:"참가비",v:"35만원 (정가 50만원 · 1기 특별 30% 할인)"},
-        {k:"모집 마감",v:"2026.05.26 (화)",bold:true},
-        {k:"결과 통보",v:"2026.05.29 (금)"},
+        {k:"모집 마감",v:"2026.05.29 (금)",bold:true},
+        {k:"결과 통보",v:"2026.06.01 (월)"},
         {k:"1주차 시작",v:"2026.06.05 (금)"},
       ].map((x,i,a)=>(
         <div key={i} className="info-row" style={{padding:"14px 20px",borderBottom:i<a.length-1?`1px solid ${C.g2}`:"none",background:x.bold?C.warm:C.w}}>
@@ -1523,7 +1523,7 @@ const DelightPage=()=>(<>
     </div></FI>
     <FI delay={.2}>
       <BG onClick={()=>window.open(DELIGHT_APPLY_URL,"_blank")} style={{fontSize:16,padding:"16px 48px"}}>지원서 작성하기 →</BG>
-      <p style={{fontSize:13,color:"rgba(255,255,255,.5)",marginTop:16}}>모집 마감 · 2026.05.26 (화)</p>
+      <p style={{fontSize:13,color:"rgba(255,255,255,.5)",marginTop:16}}>모집 마감 · 2026.05.29 (금)</p>
     </FI>
   </Box></Sec>
 </>);
