@@ -1491,7 +1491,7 @@ const DelightPage=()=>(<>
         {k:"정원",v:"12명 (지원서 검토 후 선발)"},
         {k:"참가비",v:"35만원 (정가 50만원 · 1기 특별 30% 할인)"},
         {k:"모집 마감",v:"2026.05.29 (금)",bold:true},
-        {k:"결과 통보",v:"2026.06.01 (월)"},
+        {k:"결과 통보",v:"2026.05.29 (금)"},
         {k:"1주차 시작",v:"2026.06.05 (금)"},
       ].map((x,i,a)=>(
         <div key={i} className="info-row" style={{padding:"14px 20px",borderBottom:i<a.length-1?`1px solid ${C.g2}`:"none",background:x.bold?C.warm:C.w}}>
