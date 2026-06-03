@@ -1268,36 +1268,40 @@ const RefundPage=()=>(<>
 </>);
 
 /* ═══ 2026 양육불안 컨퍼런스 페이지 ═══ */
-/* 자체 폼 → Google Forms POST → 연결된 스프레드시트 자동 누적 흐름.
-   사용자가 구글 폼 생성 후 아래 두 ID + 각 필드의 entry.xxxx를 알려주면 교체. */
-const CONFERENCE_APPLY_FORM_ID="1FAIpQLSe_APPLY_FORM_ID_TBD";        // 참가 신청 폼
-const CONFERENCE_PARTNER_FORM_ID="1FAIpQLSe_PARTNER_FORM_ID_TBD";    // 기업 제휴 폼
-/* 각 필드의 entry ID는 구글폼 '미리 채워진 링크 받기'로 추출 후 아래 객체 교체 */
+/* 자체 모달 폼 → Google Forms POST → 시트 자동 누적 → Apps Script 트리거
+   → [참가] 솔라피 SMS / [제휴] lin@sheventures.kr 이메일 */
+/* 폼 ID는 응답 POST endpoint용 'hashed ID' (편집 URL ID와 다름) */
+const CONFERENCE_APPLY_FORM_ID="1FAIpQLSfIiuqQmHDgQcFz9DX-WYpYnXnxrSNStY0eSvcePR5RUghzCw";
+const CONFERENCE_PARTNER_FORM_ID="1FAIpQLSdxQHlM5yd2p6IgQjGib_Gtopbmh4YKcAKxXOtGz7bYfRyHRQ";
 const APPLY_ENTRIES={
-  name:"entry.1111111111",
-  phone:"entry.2222222222",
-  email:"entry.3333333333",
-  type:"entry.4444444444",
-  session:"entry.5555555555",
-  childAge:"entry.6666666666",
-  channel:"entry.7777777777",
-  message:"entry.8888888888",
+  name:"entry.436122736",
+  phone:"entry.1507192989",
+  email:"entry.317043642",
+  type:"entry.18879803",
+  session:"entry.223195370",
+  childAge:"entry.541220662",
+  channel:"entry.615908215",
+  message:"entry.565575001",
+  agree:"entry.771787031",
 };
 const PARTNER_ENTRIES={
-  company:"entry.1111111111",
-  contact:"entry.2222222222",
-  position:"entry.3333333333",
-  phone:"entry.4444444444",
-  email:"entry.5555555555",
-  type:"entry.6666666666",
-  message:"entry.7777777777",
+  company:"entry.68667907",
+  contact:"entry.1228948302",
+  position:"entry.1439583423",
+  phone:"entry.818901037",
+  email:"entry.500831618",
+  type:"entry.1539263350",
+  message:"entry.1024725422",
+  agree:"entry.165316621",
 };
 
 /* 구글 폼 POST 헬퍼 — no-cors 모드로 응답은 못 받지만 데이터는 정상 전송 */
 async function submitToGoogleForm(formId,entries,values){
   const fd=new FormData();
   Object.entries(values).forEach(([k,v])=>{
-    if(v===undefined||v===null||v==="") return;
+    /* boolean true → "동의합니다" (체크박스 필수 동의) / false → 미전송 */
+    if(v===true) v="동의합니다";
+    if(v===undefined||v===null||v===""||v===false) return;
     const eid=entries[k];if(!eid) return;
     if(Array.isArray(v)) v.forEach(x=>fd.append(eid,x));else fd.append(eid,v);
   });
