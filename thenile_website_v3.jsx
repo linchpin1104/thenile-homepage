@@ -1576,9 +1576,50 @@ const ConferencePage=()=>{
   ];
   const [showApply,setShowApply]=useState(false);
   const [showPartner,setShowPartner]=useState(false);
+  /* D-Day 카운트다운 (컨퍼런스: 2026-07-09 11:00 KST) */
+  const [dday,setDday]=useState(null);
+  const [stickyVisible,setStickyVisible]=useState(false);
+  useEffect(()=>{
+    const eventTs=new Date("2026-07-09T11:00:00+09:00").getTime();
+    const calc=()=>{
+      const diff=eventTs-Date.now();
+      if(diff<=0) return 0;
+      return Math.ceil(diff/(1000*60*60*24));
+    };
+    setDday(calc());
+    const id=setInterval(()=>setDday(calc()),60000);
+    return()=>clearInterval(id);
+  },[]);
+  /* 히어로 지나면 sticky bar 표시 */
+  useEffect(()=>{
+    const onScroll=()=>setStickyVisible(window.scrollY>520);
+    window.addEventListener("scroll",onScroll,{passive:true});
+    onScroll();
+    return()=>window.removeEventListener("scroll",onScroll);
+  },[]);
   return(<>
     <ApplyFormModal open={showApply} onClose={()=>setShowApply(false)}/>
     <PartnerFormModal open={showPartner} onClose={()=>setShowPartner(false)}/>
+
+    {/* D-Day 고정 신청 바 (히어로 지나면 등장) */}
+    <div style={{position:"fixed",top:72,left:0,right:0,zIndex:90,padding:"0 16px",pointerEvents:"none",transform:stickyVisible?"translateY(0)":"translateY(-200%)",opacity:stickyVisible?1:0,transition:"transform .35s cubic-bezier(.2,.7,.3,1),opacity .25s"}}>
+      <div style={{maxWidth:920,margin:"0 auto",pointerEvents:"auto",background:CC.ink,color:CC.cream,borderRadius:50,padding:"10px 12px 10px 22px",display:"flex",alignItems:"center",gap:12,boxShadow:"0 10px 30px rgba(42,31,26,.28)",justifyContent:"space-between",flexWrap:"nowrap"}}>
+        <div style={{display:"flex",alignItems:"center",gap:10,minWidth:0,flex:1}}>
+          {dday!==null&&dday>0&&(
+            <span style={{display:"inline-flex",alignItems:"baseline",gap:4,padding:"4px 12px",background:CC.coral,color:C.w,borderRadius:30,fontWeight:800,letterSpacing:".02em",flexShrink:0}}>
+              <span style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"clamp(15px,2.2vw,18px)"}}>D-{dday}</span>
+            </span>
+          )}
+          {dday===0&&(
+            <span style={{padding:"4px 12px",background:CC.coral,color:C.w,borderRadius:30,fontSize:12,fontWeight:800,letterSpacing:".05em",flexShrink:0}}>D-DAY</span>
+          )}
+          <span style={{fontSize:"clamp(12px,1.8vw,14px)",fontWeight:600,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>2026 양육불안 컨퍼런스</span>
+        </div>
+        <button onClick={()=>setShowApply(true)} style={{padding:"10px 20px",background:CC.coral,color:C.w,border:"none",borderRadius:30,fontSize:"clamp(12px,1.8vw,14px)",fontWeight:700,cursor:"pointer",letterSpacing:".02em",whiteSpace:"nowrap",flexShrink:0,transition:"background .2s"}} onMouseEnter={e=>e.currentTarget.style.background=CC.peach} onMouseLeave={e=>e.currentTarget.style.background=CC.coral}>
+          참가 신청 →
+        </button>
+      </div>
+    </div>
     {/* HERO */}
     <Sec style={{paddingTop:140,paddingBottom:100,background:CC.cream,position:"relative",overflow:"hidden"}}><Box>
       {/* Gradient Emotion 도형들 */}
@@ -1603,21 +1644,22 @@ const ConferencePage=()=>{
       </div></FI>
 
       <FI delay={.15}><div style={{position:"relative",maxWidth:920,margin:"40px auto 0"}}>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:12}}>
+        <div className="conf-info-grid" style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:12}}>
           {[
             {k:"일시",v:"2026.07.09 (목)",sub:"11:00 – 15:00",c:CC.coral},
             {k:"장소",v:"헤이그라운드",sub:"브릭스홀",c:CC.mango},
             {k:"인원",v:"100–120명",sub:"무료 / 사전신청",c:CC.mint},
             {k:"주최",v:"사단법인 더나일",sub:"협력 · 성동구청",c:CC.lilac},
           ].map((x,i)=>(
-            <div key={i} style={{padding:"22px 18px",background:C.w,borderRadius:16,textAlign:"left",border:`2px solid ${x.c}33`,position:"relative"}}>
-              <div style={{position:"absolute",top:-8,left:16,width:16,height:16,borderRadius:"50%",background:x.c}}/>
-              <div style={{fontSize:11,color:x.c,fontWeight:700,marginBottom:8,letterSpacing:".1em"}}>{x.k}</div>
-              <div style={{fontSize:"clamp(15px,2vw,17px)",fontWeight:700,color:CC.ink,marginBottom:4,wordBreak:"keep-all",lineHeight:1.3}}>{x.v}</div>
-              <div style={{fontSize:12,color:C.g4,wordBreak:"keep-all"}}>{x.sub}</div>
+            <div key={i} style={{padding:"18px 14px",background:C.w,borderRadius:16,textAlign:"left",border:`2px solid ${x.c}33`,position:"relative"}}>
+              <div style={{position:"absolute",top:-8,left:14,width:14,height:14,borderRadius:"50%",background:x.c}}/>
+              <div style={{fontSize:11,color:x.c,fontWeight:700,marginBottom:8,letterSpacing:".08em"}}>{x.k}</div>
+              <div style={{fontSize:"clamp(13px,1.8vw,17px)",fontWeight:700,color:CC.ink,marginBottom:4,wordBreak:"keep-all",lineHeight:1.3}}>{x.v}</div>
+              <div style={{fontSize:11,color:C.g4,wordBreak:"keep-all",lineHeight:1.4}}>{x.sub}</div>
             </div>
           ))}
         </div>
+        <style>{`@media (max-width:720px){.conf-info-grid{grid-template-columns:repeat(2,1fr)!important}}`}</style>
       </div></FI>
 
       <FI delay={.25}><div style={{textAlign:"center",marginTop:56,position:"relative"}}>
@@ -1749,7 +1791,7 @@ const ConferencePage=()=>{
         {speakers.map((s,i)=>(
           <div key={i} style={{textAlign:"center"}}>
             <div style={{width:"100%",aspectRatio:"1/1",borderRadius:"50%",overflow:"hidden",marginBottom:14,background:CC.cream,border:`2px solid ${s.color}33`,position:"relative",boxShadow:`0 4px 16px ${s.color}15`}}>
-              <img src={s.img} alt={s.n} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";const c1=s.color,c2=s.c2,sh=s.sh,id=`fb${i}-${Math.floor(Math.random()*9999)}`;wrap.insertAdjacentHTML("beforeend",`<svg viewBox="0 0 100 100" style="width:100%;height:100%;display:block"><defs><linearGradient id="${id}" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="${c1}22"/><text x="50" y="62" text-anchor="middle" font-size="32" font-weight="700" fill="${c1}" font-family="serif">${s.n[0]}</text></svg>`)}}}/>
+              <img src={s.img} alt={s.n} style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";const c1=s.color,c2=s.c2,sh=s.sh,id=`fb${i}-${Math.floor(Math.random()*9999)}`;wrap.insertAdjacentHTML("beforeend",`<svg viewBox="0 0 100 100" style="width:100%;height:100%;display:block"><defs><linearGradient id="${id}" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="${c1}22"/><text x="50" y="62" text-anchor="middle" font-size="32" font-weight="700" fill="${c1}" font-family="serif">${s.n[0]}</text></svg>`)}}}/>
             </div>
             <div style={{display:"inline-block",fontSize:10,color:s.color,fontWeight:700,letterSpacing:".1em",marginBottom:6,padding:"3px 10px",background:`${s.color}15`,borderRadius:12}}>{s.part}</div>
             <div style={{fontSize:16,fontWeight:700,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>{s.n}</div>
@@ -1774,7 +1816,7 @@ const ConferencePage=()=>{
           <FI key={i} delay={i*.1}><div style={{display:"grid",gridTemplateColumns:"minmax(180px,260px) 1fr",gap:0,background:CC.cream,borderRadius:28,overflow:"hidden",position:"relative"}} className="conf-keynote-card">
             {/* 좌측 큰 인물 사진 */}
             <div style={{position:"relative",aspectRatio:"4/5",background:`linear-gradient(135deg,${k.c}22 0%,${k.c2}22 100%)`,overflow:"hidden"}}>
-              <img src={k.img} alt={k.name} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;color:${k.c};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">${k.name[0]}</div>`)}}}/>
+              <img src={k.img} alt={k.name} style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;color:${k.c};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">${k.name[0]}</div>`)}}}/>
               <div style={{position:"absolute",bottom:14,left:14,padding:"5px 12px",background:"rgba(0,0,0,.55)",backdropFilter:"blur(8px)",borderRadius:20,fontSize:10,color:C.w,fontWeight:700,letterSpacing:".12em"}}>{k.n} · 20분</div>
             </div>
             {/* 우측 정보 */}
@@ -1815,7 +1857,7 @@ const ConferencePage=()=>{
           <FI key={i} delay={i*.08}><div style={{background:C.w,borderRadius:24,overflow:"hidden",position:"relative",border:`1px solid ${p.c}22`,height:"100%",display:"flex",flexDirection:"column"}}>
             {/* 상단 큰 이미지 */}
             <div style={{position:"relative",aspectRatio:"4/3",background:`linear-gradient(135deg,${p.c}22 0%,${p.c2}22 100%)`,overflow:"hidden"}}>
-              <img src={p.img} alt={p.name} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;color:${p.c};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">${p.name[0]}</div>`)}}}/>
+              <img src={p.img} alt={p.name} style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;color:${p.c};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">${p.name[0]}</div>`)}}}/>
               <div style={{position:"absolute",bottom:14,left:14,padding:"5px 12px",background:"rgba(0,0,0,.55)",backdropFilter:"blur(8px)",borderRadius:20,fontSize:10,color:C.w,fontWeight:700,letterSpacing:".12em"}}>{p.role}</div>
             </div>
             {/* 하단 정보 */}
@@ -1848,7 +1890,7 @@ const ConferencePage=()=>{
         {/* 강혁진 — 키노트와 동일한 큰 가로 카드 */}
         <FI><div className="conf-keynote-card" style={{display:"grid",gridTemplateColumns:"minmax(180px,260px) 1fr",gap:0,background:CC.cream,borderRadius:28,overflow:"hidden",position:"relative",marginBottom:32}}>
           <div style={{position:"relative",aspectRatio:"4/5",background:`linear-gradient(135deg,${CC.sage}22 0%,${CC.mint}22 100%)`,overflow:"hidden"}}>
-            <img src="/images/speakers/강혁진.png" alt="강혁진" style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;color:${CC.sage};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">강</div>`)}}}/>
+            <img src="/images/speakers/강혁진.png" alt="강혁진" style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;color:${CC.sage};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">강</div>`)}}}/>
             <div style={{position:"absolute",bottom:14,left:14,padding:"5px 12px",background:"rgba(0,0,0,.55)",backdropFilter:"blur(8px)",borderRadius:20,fontSize:10,color:C.w,fontWeight:700,letterSpacing:".12em"}}>FACILITATOR · 90분</div>
           </div>
           <div style={{padding:"32px 32px",position:"relative",overflow:"hidden"}}>
