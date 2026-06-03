@@ -1268,8 +1268,251 @@ const RefundPage=()=>(<>
 </>);
 
 /* ═══ 2026 양육불안 컨퍼런스 페이지 ═══ */
-const CONFERENCE_APPLY_URL="https://forms.gle/CONFERENCE_APPLY_TBD";  // TODO: 참가 신청 폼 URL 교체
-const CONFERENCE_PARTNERSHIP_URL="https://forms.gle/CONFERENCE_PARTNERSHIP_TBD";  // TODO: 기업 제휴 문의 폼 URL 교체
+/* 자체 폼 → Google Forms POST → 연결된 스프레드시트 자동 누적 흐름.
+   사용자가 구글 폼 생성 후 아래 두 ID + 각 필드의 entry.xxxx를 알려주면 교체. */
+const CONFERENCE_APPLY_FORM_ID="1FAIpQLSe_APPLY_FORM_ID_TBD";        // 참가 신청 폼
+const CONFERENCE_PARTNER_FORM_ID="1FAIpQLSe_PARTNER_FORM_ID_TBD";    // 기업 제휴 폼
+/* 각 필드의 entry ID는 구글폼 '미리 채워진 링크 받기'로 추출 후 아래 객체 교체 */
+const APPLY_ENTRIES={
+  name:"entry.1111111111",
+  phone:"entry.2222222222",
+  email:"entry.3333333333",
+  type:"entry.4444444444",
+  session:"entry.5555555555",
+  childAge:"entry.6666666666",
+  channel:"entry.7777777777",
+  message:"entry.8888888888",
+};
+const PARTNER_ENTRIES={
+  company:"entry.1111111111",
+  contact:"entry.2222222222",
+  position:"entry.3333333333",
+  phone:"entry.4444444444",
+  email:"entry.5555555555",
+  type:"entry.6666666666",
+  message:"entry.7777777777",
+};
+
+/* 구글 폼 POST 헬퍼 — no-cors 모드로 응답은 못 받지만 데이터는 정상 전송 */
+async function submitToGoogleForm(formId,entries,values){
+  const fd=new FormData();
+  Object.entries(values).forEach(([k,v])=>{
+    if(v===undefined||v===null||v==="") return;
+    const eid=entries[k];if(!eid) return;
+    if(Array.isArray(v)) v.forEach(x=>fd.append(eid,x));else fd.append(eid,v);
+  });
+  await fetch(`https://docs.google.com/forms/d/e/${formId}/formResponse`,{
+    method:"POST",body:fd,mode:"no-cors",
+  });
+}
+
+/* 폼 공통 스타일 */
+const FF_INPUT={width:"100%",padding:"11px 14px",fontSize:14,border:`1px solid ${C.g2}`,borderRadius:10,background:"#fff",color:"#2A1F1A",fontFamily:"inherit",boxSizing:"border-box",outline:"none",transition:"border-color .15s"};
+const FF_LABEL={display:"block",fontSize:13,fontWeight:600,color:"#2A1F1A",marginBottom:6};
+
+/* 필드 헬퍼 */
+const FormField=({label,required,children,help})=>(
+  <div style={{marginBottom:16}}>
+    <label style={FF_LABEL}>{label}{required&&<span style={{color:CC.coral,marginLeft:4}}>*</span>}</label>
+    {children}
+    {help&&<div style={{fontSize:11,color:"#9B9B93",marginTop:4,lineHeight:1.5}}>{help}</div>}
+  </div>
+);
+
+/* 라디오 그룹 */
+const RadioGroup=({name,options,value,onChange,accent=CC.coral})=>(
+  <div style={{display:"grid",gap:8}}>
+    {options.map(opt=>(
+      <label key={opt} style={{display:"flex",alignItems:"center",gap:10,padding:"10px 14px",borderRadius:10,border:`1px solid ${value===opt?accent:C.g2}`,background:value===opt?`${accent}10`:"#fff",cursor:"pointer",transition:"all .15s",fontSize:14,color:"#2A1F1A"}}>
+        <input type="radio" name={name} value={opt} checked={value===opt} onChange={()=>onChange(opt)} style={{accentColor:accent,margin:0}}/>
+        <span>{opt}</span>
+      </label>
+    ))}
+  </div>
+);
+
+/* 모달 컨테이너 */
+const ConfModal=({open,onClose,children,accent=CC.coral,title,subtitle})=>{
+  useEffect(()=>{
+    if(!open) return;
+    document.body.style.overflow="hidden";
+    const onEsc=e=>{if(e.key==="Escape") onClose()};
+    window.addEventListener("keydown",onEsc);
+    return()=>{document.body.style.overflow="";window.removeEventListener("keydown",onEsc)};
+  },[open,onClose]);
+  if(!open) return null;
+  return(
+    <div onClick={onClose} style={{position:"fixed",inset:0,background:"rgba(20,15,12,.6)",backdropFilter:"blur(4px)",zIndex:1000,display:"flex",alignItems:"flex-start",justifyContent:"center",padding:"40px 16px",overflowY:"auto"}}>
+      <div onClick={e=>e.stopPropagation()} style={{background:"#fff",borderRadius:24,maxWidth:560,width:"100%",position:"relative",boxShadow:"0 20px 60px rgba(0,0,0,.25)",overflow:"hidden"}}>
+        <div style={{padding:"28px 32px 20px",borderBottom:`1px solid ${C.g1}`,position:"sticky",top:0,background:"#fff",zIndex:2}}>
+          <button onClick={onClose} aria-label="닫기" style={{position:"absolute",top:20,right:20,width:36,height:36,borderRadius:"50%",background:"#FAFAF5",border:"none",cursor:"pointer",fontSize:18,color:"#5A5650",display:"flex",alignItems:"center",justifyContent:"center"}}>✕</button>
+          <div style={{fontSize:11,color:accent,fontWeight:700,letterSpacing:".15em",marginBottom:6}}>{subtitle}</div>
+          <h3 style={{fontFamily:"'Noto Serif KR',serif",fontSize:22,fontWeight:800,color:"#2A1F1A",margin:0,lineHeight:1.3}}>{title}</h3>
+        </div>
+        <div style={{padding:"24px 32px 32px"}}>{children}</div>
+      </div>
+    </div>
+  );
+};
+
+/* 참가 신청 모달 */
+const ApplyFormModal=({open,onClose})=>{
+  const [step,setStep]=useState("form");
+  const [v,setV]=useState({name:"",phone:"",email:"",type:"",session:"",childAge:"",channel:"",message:"",agree:false});
+  const upd=(k,val)=>setV(p=>({...p,[k]:val}));
+  const reset=()=>{setStep("form");setV({name:"",phone:"",email:"",type:"",session:"",childAge:"",channel:"",message:"",agree:false})};
+  const handleClose=()=>{onClose();setTimeout(reset,200)};
+  const handleSubmit=async e=>{
+    e.preventDefault();
+    if(!v.name||!v.phone||!v.email||!v.type||!v.session||!v.agree){alert("필수 항목을 모두 입력해 주세요.");return}
+    setStep("submitting");
+    try{
+      await submitToGoogleForm(CONFERENCE_APPLY_FORM_ID,APPLY_ENTRIES,v);
+      setStep("success");
+    }catch(err){console.error(err);setStep("error")}
+  };
+  return(
+    <ConfModal open={open} onClose={handleClose} accent={CC.coral} subtitle="2026 양육불안 컨퍼런스 · 참가 신청" title="신청서 작성">
+      {step==="form"&&(
+        <form onSubmit={handleSubmit}>
+          <FormField label="이름" required>
+            <input type="text" value={v.name} onChange={e=>upd("name",e.target.value)} style={FF_INPUT} placeholder="홍길동"/>
+          </FormField>
+          <FormField label="연락처" required help="문자 안내 발송에 사용됩니다">
+            <input type="tel" value={v.phone} onChange={e=>upd("phone",e.target.value)} style={FF_INPUT} placeholder="010-0000-0000"/>
+          </FormField>
+          <FormField label="이메일" required>
+            <input type="email" value={v.email} onChange={e=>upd("email",e.target.value)} style={FF_INPUT} placeholder="you@example.com"/>
+          </FormField>
+          <FormField label="참가자 유형" required>
+            <RadioGroup name="type" options={["부모","학계 · 정책 전문가","미디어","페이서","기타"]} value={v.type} onChange={x=>upd("type",x)}/>
+          </FormField>
+          <FormField label="참여 희망 세션 (SESSION 2)" required help="13:30–15:00에 병행 진행. 한 세션을 선택해 주세요.">
+            <RadioGroup name="session" options={["SESSION 2-1 · 인터뷰 (메인홀)","SESSION 2-2 · 워크숍 (소그룹룸)"]} value={v.session} onChange={x=>upd("session",x)} accent={v.session.includes("2-2")?CC.sage:CC.lilac}/>
+          </FormField>
+          <FormField label="양육 자녀 연령대 (선택)">
+            <select value={v.childAge} onChange={e=>upd("childAge",e.target.value)} style={FF_INPUT}>
+              <option value="">선택 안 함</option>
+              {["영유아 (0–3세)","미취학 (4–6세)","초등","중·고등","해당없음"].map(o=><option key={o} value={o}>{o}</option>)}
+            </select>
+          </FormField>
+          <FormField label="알게 된 경로 (선택)">
+            <input type="text" value={v.channel} onChange={e=>upd("channel",e.target.value)} style={FF_INPUT} placeholder="예: 인스타그램, 지인 추천, 더나일 뉴스레터 등"/>
+          </FormField>
+          <FormField label="가장 듣고 싶은 이야기 (선택)">
+            <textarea value={v.message} onChange={e=>upd("message",e.target.value)} style={{...FF_INPUT,minHeight:80,resize:"vertical",fontFamily:"inherit"}} placeholder="컨퍼런스에서 풀리길 바라는 양육불안에 대해 자유롭게 적어주세요."/>
+          </FormField>
+          <label style={{display:"flex",alignItems:"flex-start",gap:10,padding:"12px 14px",background:CC.cream,borderRadius:10,cursor:"pointer",marginTop:8}}>
+            <input type="checkbox" checked={v.agree} onChange={e=>upd("agree",e.target.checked)} style={{accentColor:CC.coral,marginTop:2,flexShrink:0}}/>
+            <span style={{fontSize:13,color:"#2A1F1A",lineHeight:1.6,wordBreak:"keep-all"}}>
+              <strong style={{color:CC.coral}}>(필수)</strong> 개인정보 수집·이용에 동의합니다. 수집 항목: 이름·연락처·이메일·참가자 유형 등. 이용 목적: 컨퍼런스 참가 안내 및 통계. 보관 기간: 행사 종료 후 6개월.
+            </span>
+          </label>
+          <button type="submit" style={{marginTop:24,width:"100%",padding:"16px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer",letterSpacing:".02em",transition:"all .2s"}} onMouseEnter={e=>e.currentTarget.style.background=CC.coral} onMouseLeave={e=>e.currentTarget.style.background=CC.ink}>신청서 제출하기</button>
+        </form>
+      )}
+      {step==="submitting"&&(
+        <div style={{padding:"40px 0",textAlign:"center"}}>
+          <div style={{width:48,height:48,border:`3px solid ${CC.coral}33`,borderTopColor:CC.coral,borderRadius:"50%",margin:"0 auto 16px",animation:"spin 1s linear infinite"}}/>
+          <div style={{fontSize:14,color:"#5A5650"}}>신청서를 제출하는 중입니다…</div>
+          <style>{`@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}`}</style>
+        </div>
+      )}
+      {step==="success"&&(
+        <div style={{padding:"32px 0 16px",textAlign:"center"}}>
+          <div style={{width:72,height:72,borderRadius:"50%",background:`${CC.coral}22`,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 20px",fontSize:36,color:CC.coral}}>✓</div>
+          <h4 style={{fontSize:20,fontWeight:800,color:"#2A1F1A",marginBottom:12,fontFamily:"'Noto Serif KR',serif"}}>신청이 접수되었습니다</h4>
+          <p style={{fontSize:14,color:"#5A5650",lineHeight:1.8,marginBottom:28,wordBreak:"keep-all"}}>제출하신 정보로 자리를 안내드리겠습니다.<br/>등록 결과는 모집 마감 후 안내됩니다.</p>
+          <button onClick={handleClose} style={{padding:"12px 32px",background:CC.coral,color:"#fff",border:"none",borderRadius:50,fontSize:14,fontWeight:700,cursor:"pointer"}}>확인</button>
+        </div>
+      )}
+      {step==="error"&&(
+        <div style={{padding:"32px 0 16px",textAlign:"center"}}>
+          <div style={{width:72,height:72,borderRadius:"50%",background:"#FEE2E2",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 20px",fontSize:36,color:"#DC2626"}}>!</div>
+          <h4 style={{fontSize:18,fontWeight:800,color:"#2A1F1A",marginBottom:12}}>제출 중 오류가 발생했습니다</h4>
+          <p style={{fontSize:14,color:"#5A5650",lineHeight:1.8,marginBottom:24,wordBreak:"keep-all"}}>잠시 후 다시 시도해 주세요. 계속 문제가 발생하면 cross@thenile.kr 로 연락 부탁드립니다.</p>
+          <button onClick={()=>setStep("form")} style={{padding:"12px 32px",background:CC.coral,color:"#fff",border:"none",borderRadius:50,fontSize:14,fontWeight:700,cursor:"pointer"}}>다시 시도</button>
+        </div>
+      )}
+    </ConfModal>
+  );
+};
+
+/* 기업 제휴 모달 */
+const PartnerFormModal=({open,onClose})=>{
+  const [step,setStep]=useState("form");
+  const [v,setV]=useState({company:"",contact:"",position:"",phone:"",email:"",type:"",message:"",agree:false});
+  const upd=(k,val)=>setV(p=>({...p,[k]:val}));
+  const reset=()=>{setStep("form");setV({company:"",contact:"",position:"",phone:"",email:"",type:"",message:"",agree:false})};
+  const handleClose=()=>{onClose();setTimeout(reset,200)};
+  const handleSubmit=async e=>{
+    e.preventDefault();
+    if(!v.company||!v.contact||!v.phone||!v.email||!v.agree){alert("필수 항목을 모두 입력해 주세요.");return}
+    setStep("submitting");
+    try{
+      await submitToGoogleForm(CONFERENCE_PARTNER_FORM_ID,PARTNER_ENTRIES,v);
+      setStep("success");
+    }catch(err){console.error(err);setStep("error")}
+  };
+  return(
+    <ConfModal open={open} onClose={handleClose} accent={CC.sage} subtitle="2026 양육불안 컨퍼런스 · 기업 제휴" title="함께 걸어요 · 제휴 문의">
+      {step==="form"&&(
+        <form onSubmit={handleSubmit}>
+          <FormField label="기업/기관명" required>
+            <input type="text" value={v.company} onChange={e=>upd("company",e.target.value)} style={FF_INPUT}/>
+          </FormField>
+          <FormField label="담당자명" required>
+            <input type="text" value={v.contact} onChange={e=>upd("contact",e.target.value)} style={FF_INPUT}/>
+          </FormField>
+          <FormField label="직책 (선택)">
+            <input type="text" value={v.position} onChange={e=>upd("position",e.target.value)} style={FF_INPUT}/>
+          </FormField>
+          <FormField label="연락처" required>
+            <input type="tel" value={v.phone} onChange={e=>upd("phone",e.target.value)} style={FF_INPUT} placeholder="010-0000-0000"/>
+          </FormField>
+          <FormField label="이메일" required>
+            <input type="email" value={v.email} onChange={e=>upd("email",e.target.value)} style={FF_INPUT} placeholder="you@company.com"/>
+          </FormField>
+          <FormField label="함께하고 싶은 방식 (선택)">
+            <RadioGroup name="ptype" options={["현금 후원","현물 · 서비스 협찬","콘텐츠 협력","기타 · 상담하며 결정"]} value={v.type} onChange={x=>upd("type",x)} accent={CC.sage}/>
+          </FormField>
+          <FormField label="메시지 (선택)" help="함께하고 싶은 이유, 구체적 제안 등 자유롭게 적어주세요.">
+            <textarea value={v.message} onChange={e=>upd("message",e.target.value)} style={{...FF_INPUT,minHeight:100,resize:"vertical",fontFamily:"inherit"}}/>
+          </FormField>
+          <label style={{display:"flex",alignItems:"flex-start",gap:10,padding:"12px 14px",background:CC.cream,borderRadius:10,cursor:"pointer",marginTop:8}}>
+            <input type="checkbox" checked={v.agree} onChange={e=>upd("agree",e.target.checked)} style={{accentColor:CC.sage,marginTop:2,flexShrink:0}}/>
+            <span style={{fontSize:13,color:"#2A1F1A",lineHeight:1.6,wordBreak:"keep-all"}}>
+              <strong style={{color:CC.sage}}>(필수)</strong> 개인정보 수집·이용에 동의합니다. 수집 항목: 담당자 정보 및 기업/기관명. 이용 목적: 제휴 검토 및 회신. 보관 기간: 회신 후 1년.
+            </span>
+          </label>
+          <button type="submit" style={{marginTop:24,width:"100%",padding:"16px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer",transition:"all .2s"}} onMouseEnter={e=>e.currentTarget.style.background=CC.sage} onMouseLeave={e=>e.currentTarget.style.background=CC.ink}>제휴 문의 보내기</button>
+        </form>
+      )}
+      {step==="submitting"&&(
+        <div style={{padding:"40px 0",textAlign:"center"}}>
+          <div style={{width:48,height:48,border:`3px solid ${CC.sage}33`,borderTopColor:CC.sage,borderRadius:"50%",margin:"0 auto 16px",animation:"spin 1s linear infinite"}}/>
+          <div style={{fontSize:14,color:"#5A5650"}}>전송 중입니다…</div>
+        </div>
+      )}
+      {step==="success"&&(
+        <div style={{padding:"32px 0 16px",textAlign:"center"}}>
+          <div style={{width:72,height:72,borderRadius:"50%",background:`${CC.sage}22`,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 20px",fontSize:36,color:CC.sage}}>✓</div>
+          <h4 style={{fontSize:20,fontWeight:800,color:"#2A1F1A",marginBottom:12,fontFamily:"'Noto Serif KR',serif"}}>문의가 전달되었습니다</h4>
+          <p style={{fontSize:14,color:"#5A5650",lineHeight:1.8,marginBottom:28,wordBreak:"keep-all"}}>담당자가 영업일 기준 3일 이내에 회신드리겠습니다.<br/>관심과 시간 내어 주셔서 감사합니다.</p>
+          <button onClick={handleClose} style={{padding:"12px 32px",background:CC.sage,color:"#fff",border:"none",borderRadius:50,fontSize:14,fontWeight:700,cursor:"pointer"}}>확인</button>
+        </div>
+      )}
+      {step==="error"&&(
+        <div style={{padding:"32px 0 16px",textAlign:"center"}}>
+          <div style={{width:72,height:72,borderRadius:"50%",background:"#FEE2E2",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 20px",fontSize:36,color:"#DC2626"}}>!</div>
+          <h4 style={{fontSize:18,fontWeight:800,color:"#2A1F1A",marginBottom:12}}>전송 중 오류가 발생했습니다</h4>
+          <p style={{fontSize:14,color:"#5A5650",lineHeight:1.8,marginBottom:24,wordBreak:"keep-all"}}>cross@thenile.kr 로 직접 문의 부탁드립니다.</p>
+          <button onClick={()=>setStep("form")} style={{padding:"12px 32px",background:CC.sage,color:"#fff",border:"none",borderRadius:50,fontSize:14,fontWeight:700,cursor:"pointer"}}>다시 시도</button>
+        </div>
+      )}
+    </ConfModal>
+  );
+};
 
 /* 컨퍼런스 전용 컬러 토큰 — Gradient Emotion 톤, 따뜻한 파스텔 위주 */
 const CC={
@@ -1331,7 +1574,11 @@ const ConferencePage=()=>{
     {n:"후추맘",r:"육아 크리에이터",img:"/images/speakers/후추맘.png",part:"SESSION 2-1",color:CC.lilac,c2:CC.mint,sh:"leaf"},
     {n:"강혁진",r:"워크숍 퍼실리테이터",img:"/images/speakers/강혁진.png",part:"SESSION 2-2",color:CC.sage,c2:CC.mint,sh:"flower"},
   ];
+  const [showApply,setShowApply]=useState(false);
+  const [showPartner,setShowPartner]=useState(false);
   return(<>
+    <ApplyFormModal open={showApply} onClose={()=>setShowApply(false)}/>
+    <PartnerFormModal open={showPartner} onClose={()=>setShowPartner(false)}/>
     {/* HERO */}
     <Sec style={{paddingTop:140,paddingBottom:100,background:CC.cream,position:"relative",overflow:"hidden"}}><Box>
       {/* Gradient Emotion 도형들 */}
@@ -1346,11 +1593,12 @@ const ConferencePage=()=>{
           사단법인 더나일 비영리 컨퍼런스
         </div>
         <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"clamp(72px,12vw,140px)",fontWeight:700,lineHeight:.95,marginBottom:8,letterSpacing:"-.02em",background:`linear-gradient(135deg,${CC.coral} 0%,${CC.mango} 50%,${CC.lilac} 100%)`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",backgroundClip:"text"}}>2026</div>
-        <h1 style={{fontFamily:"'Noto Serif KR',serif",fontSize:"clamp(36px,8vw,84px)",fontWeight:800,color:CC.ink,lineHeight:1.1,marginBottom:32,wordBreak:"keep-all",letterSpacing:"-.02em"}}>
-          양육불안 컨퍼런스
+        <h1 style={{fontFamily:"'Noto Serif KR',serif",fontSize:"clamp(34px,7.5vw,76px)",fontWeight:800,color:CC.ink,lineHeight:1.15,marginBottom:24,wordBreak:"keep-all",letterSpacing:"-.02em"}}>
+          <span style={{display:"inline-block"}}>불안을</span>{" "}
+          <span style={{display:"inline-block"}}>불안해하지 마세요</span>
         </h1>
-        <p style={{fontSize:"clamp(18px,2.6vw,24px)",color:CC.inkBrown,marginBottom:48,fontWeight:500,wordBreak:"keep-all"}}>
-          부모의 불안은 어디에서 오는가
+        <p style={{fontSize:"clamp(17px,2.4vw,22px)",color:CC.inkBrown,marginBottom:48,fontWeight:600,wordBreak:"keep-all",opacity:.85}}>
+          양육불안 컨퍼런스
         </p>
       </div></FI>
 
@@ -1373,7 +1621,7 @@ const ConferencePage=()=>{
       </div></FI>
 
       <FI delay={.25}><div style={{textAlign:"center",marginTop:56,position:"relative"}}>
-        <button onClick={()=>window.open(CONFERENCE_APPLY_URL,"_blank")} style={{padding:"18px 56px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer",letterSpacing:".02em",transition:"all .25s",boxShadow:`0 8px 24px ${CC.ink}33`}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.transform="translateY(-2px)"}} onMouseLeave={e=>{e.currentTarget.style.background=CC.ink;e.currentTarget.style.transform="translateY(0)"}}>
+        <button onClick={()=>setShowApply(true)} style={{padding:"18px 56px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer",letterSpacing:".02em",transition:"all .25s",boxShadow:`0 8px 24px ${CC.ink}33`}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.transform="translateY(-2px)"}} onMouseLeave={e=>{e.currentTarget.style.background=CC.ink;e.currentTarget.style.transform="translateY(0)"}}>
           참가 신청하기 →
         </button>
         <p style={{fontSize:13,color:CC.inkBrown,marginTop:16,opacity:.65}}>참가 무료 · 사전 신청 필수</p>
@@ -1697,7 +1945,7 @@ const ConferencePage=()=>{
       </div></FI>
 
       <FI delay={.25}><div style={{textAlign:"center",marginTop:56}}>
-        <button onClick={()=>window.open(CONFERENCE_PARTNERSHIP_URL,"_blank")} style={{padding:"18px 44px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:15,fontWeight:700,cursor:"pointer",transition:"all .25s",boxShadow:`0 8px 24px ${CC.ink}33`}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.transform="translateY(-2px)"}} onMouseLeave={e=>{e.currentTarget.style.background=CC.ink;e.currentTarget.style.transform="translateY(0)"}}>
+        <button onClick={()=>setShowPartner(true)} style={{padding:"18px 44px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:15,fontWeight:700,cursor:"pointer",transition:"all .25s",boxShadow:`0 8px 24px ${CC.ink}33`}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.transform="translateY(-2px)"}} onMouseLeave={e=>{e.currentTarget.style.background=CC.ink;e.currentTarget.style.transform="translateY(0)"}}>
           함께 걷고 싶어요 · 제휴 문의 →
         </button>
         <p style={{fontSize:12,color:CC.inkBrown,opacity:.5,marginTop:16,wordBreak:"keep-all"}}>회신 요청 · 2026.05.22 (목)까지</p>
@@ -1722,10 +1970,10 @@ const ConferencePage=()=>{
         </p>
       </div></FI>
       <FI delay={.15}><div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap",maxWidth:560,margin:"0 auto",position:"relative"}}>
-        <button onClick={()=>window.open(CONFERENCE_APPLY_URL,"_blank")} style={{padding:"18px 40px",background:CC.cream,color:CC.inkBrown,border:"none",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer",transition:"all .25s"}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.color=CC.cream}} onMouseLeave={e=>{e.currentTarget.style.background=CC.cream;e.currentTarget.style.color=CC.inkBrown}}>
+        <button onClick={()=>setShowApply(true)} style={{padding:"18px 40px",background:CC.cream,color:CC.inkBrown,border:"none",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer",transition:"all .25s"}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.color=CC.cream}} onMouseLeave={e=>{e.currentTarget.style.background=CC.cream;e.currentTarget.style.color=CC.inkBrown}}>
           참가 신청하기 →
         </button>
-        <button onClick={()=>window.open(CONFERENCE_PARTNERSHIP_URL,"_blank")} style={{padding:"18px 40px",background:"transparent",color:CC.cream,border:"1px solid rgba(255,248,236,.3)",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer",transition:"all .25s"}} onMouseEnter={e=>e.currentTarget.style.background="rgba(255,248,236,.08)"} onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
+        <button onClick={()=>setShowPartner(true)} style={{padding:"18px 40px",background:"transparent",color:CC.cream,border:"1px solid rgba(255,248,236,.3)",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer",transition:"all .25s"}} onMouseEnter={e=>e.currentTarget.style.background="rgba(255,248,236,.08)"} onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
           기업 제휴 문의
         </button>
       </div></FI>
