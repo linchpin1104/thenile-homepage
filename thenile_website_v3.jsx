@@ -1274,15 +1274,15 @@ const RefundPage=()=>(<>
 const CONFERENCE_APPLY_FORM_ID="1FAIpQLSfIiuqQmHDgQcFz9DX-WYpYnXnxrSNStY0eSvcePR5RUghzCw";
 const CONFERENCE_PARTNER_FORM_ID="1FAIpQLSdxQHlM5yd2p6IgQjGib_Gtopbmh4YKcAKxXOtGz7bYfRyHRQ";
 const APPLY_ENTRIES={
-  name:"entry.436122736",
-  phone:"entry.1507192989",
-  email:"entry.317043642",
-  type:"entry.18879803",
-  session:"entry.223195370",
-  childAge:"entry.541220662",
-  channel:"entry.615908215",
-  message:"entry.565575001",
-  agree:"entry.771787031",
+  name:"entry.1955864862",
+  phone:"entry.769543470",
+  email:"entry.910879252",
+  type:"entry.1151620531",
+  session:"entry.737504116",
+  childAge:"entry.203192727",
+  channel:"entry.1278543734",
+  message:"entry.133618965",
+  agree:"entry.761898604",
 };
 const PARTNER_ENTRIES={
   company:"entry.68667907",
