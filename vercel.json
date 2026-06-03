@@ -5,6 +5,7 @@
     { "source": "/thenile-blog", "destination": "/", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/conference", "destination": "/conference.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
