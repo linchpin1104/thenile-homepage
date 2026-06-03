@@ -1291,7 +1291,7 @@ const PARTNER_ENTRIES={
   phone:"entry.2141595619",
   email:"entry.1963085748",
   type:"entry.299743863",
-  message:"",  // TODO: prefilled URL 재추출로 entry ID 확보 필요
+  message:"entry.1814694000",
   agree:"entry.125344078",
 };
 
