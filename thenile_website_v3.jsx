@@ -35,9 +35,9 @@ const Sec=({bg="transparent",children,style={},id})=><section id={id} style={{pa
 const Box=({children,style={}})=><div style={{maxWidth:1100,margin:"0 auto",padding:"0 24px",...style}}>{children}</div>;
 const Tag=({children,color=C.gold})=><div style={{fontSize:12,fontWeight:600,letterSpacing:3,color,textTransform:"uppercase",marginBottom:8}}>{children}</div>;
 const H2=({children,light,style={}})=><h2 style={{fontFamily:"'Noto Serif KR',serif",fontSize:"clamp(24px,5vw,32px)",fontWeight:700,color:light?"#fff":C.navy,lineHeight:1.5,marginBottom:16,wordBreak:"keep-all",...style}}>{children}</h2>;
-const Desc=({children,light})=><p style={{fontSize:16,lineHeight:1.8,color:light?"rgba(255,255,255,.75)":C.g6,maxWidth:640,marginBottom:32,wordBreak:"keep-all"}}>{children}</p>;
-const Btn=({children,primary=true,onClick,style={}})=><button onClick={onClick} style={{padding:"14px 32px",borderRadius:50,border:primary?"none":`1.5px solid ${C.navy}`,background:primary?C.navy:"transparent",color:primary?"#fff":C.navy,fontSize:15,fontWeight:600,cursor:"pointer",transition:"all .3s",...style}}>{children}</button>;
-const BG=({children,onClick,style={}})=><button onClick={onClick} style={{padding:"14px 32px",borderRadius:50,border:"none",background:C.gold,color:C.navy,fontSize:15,fontWeight:600,cursor:"pointer",...style}}>{children}</button>;
+const Desc=({children,light})=><p style={{fontSize:18,lineHeight:1.8,color:light?"rgba(255,255,255,.75)":C.g6,maxWidth:640,marginBottom:32,wordBreak:"keep-all"}}>{children}</p>;
+const Btn=({children,primary=true,onClick,style={}})=><button onClick={onClick} style={{padding:"14px 32px",borderRadius:50,border:primary?"none":`1.5px solid ${C.navy}`,background:primary?C.navy:"transparent",color:primary?"#fff":C.navy,fontSize:17,fontWeight:600,cursor:"pointer",transition:"all .3s",...style}}>{children}</button>;
+const BG=({children,onClick,style={}})=><button onClick={onClick} style={{padding:"14px 32px",borderRadius:50,border:"none",background:C.gold,color:C.navy,fontSize:17,fontWeight:600,cursor:"pointer",...style}}>{children}</button>;
 const Dot=()=><div style={{width:4,height:4,borderRadius:2,background:C.gold,flexShrink:0}}/>;
 
 const PAGES=[
@@ -55,8 +55,8 @@ const Nav=({page,go})=>{
       <Box style={{display:"flex",alignItems:"center",justifyContent:"space-between",height:72}}>
         <div onClick={()=>go("home")}><Logo light={home&&!sc} s={.8}/></div>
         <div style={{display:"flex",alignItems:"center",gap:24}}>
-          {PAGES.map(n=><div key={n.id} onClick={()=>go(n.id)} className="nl" style={{fontSize:14,color:page===n.id?C.gold:txt,cursor:"pointer",fontWeight:page===n.id?600:400,transition:"color .2s"}}>{n.label}</div>)}
-          <BG onClick={()=>go("pacer")} className="nl" style={{padding:"10px 24px",fontSize:13}}>후원하기</BG>
+          {PAGES.map(n=><div key={n.id} onClick={()=>go(n.id)} className="nl" style={{fontSize:16,color:page===n.id?C.gold:txt,cursor:"pointer",fontWeight:page===n.id?600:400,transition:"color .2s"}}>{n.label}</div>)}
+          <BG onClick={()=>go("pacer")} className="nl" style={{padding:"10px 24px",fontSize:15}}>후원하기</BG>
           <div onClick={()=>setOp(!op)} className="bg" style={{display:"none",flexDirection:"column",gap:5,cursor:"pointer",padding:8}}>{[0,1,2].map(i=><div key={i} style={{width:22,height:2,background:txt,borderRadius:1}}/>)}</div>
         </div>
       </Box>
@@ -77,22 +77,22 @@ const Footer=({go})=>(
         <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"clamp(36px,5vw,48px)",fontWeight:700,color:"#fff",lineHeight:1.1}}>The <span style={{fontWeight:800}}>NILE.</span></div>
       </div>
       {/* 법인명 */}
-      <div style={{fontSize:16,fontWeight:700,color:"#fff",marginBottom:16}}>사단법인 더나일</div>
+      <div style={{fontSize:18,fontWeight:700,color:"#fff",marginBottom:16}}>사단법인 더나일</div>
       {/* 법인 정보 */}
-      <div style={{fontSize:13,color:"rgba(255,255,255,.5)",lineHeight:2,marginBottom:24}}>
+      <div style={{fontSize:15,color:"rgba(255,255,255,.5)",lineHeight:2,marginBottom:24}}>
         비영리법인 설립허가번호 : 제2024-194호<br/>
         사업자등록번호 : 438-82-00797<br/>
         대표자 : 이다랑<br/>
         소재지 : 서울특별시 성동구 뚝섬로1나길 5, 7층 S721호(성수동1가, 헤이그라운드)
       </div>
       {/* 연락처 */}
-      <div style={{fontSize:14,color:"rgba(255,255,255,.6)",marginBottom:32,display:"flex",flexWrap:"wrap",gap:8,alignItems:"center"}}>
+      <div style={{fontSize:16,color:"rgba(255,255,255,.6)",marginBottom:32,display:"flex",flexWrap:"wrap",gap:8,alignItems:"center"}}>
         <span>전화번호 : 010-8257-1104</span>
         <span style={{color:"rgba(255,255,255,.3)"}}>|</span>
         <span>이메일 : cross@thenile.kr</span>
       </div>
       {/* 링크 */}
-      <div style={{display:"flex",flexWrap:"wrap",gap:8,alignItems:"center",fontSize:14,color:"rgba(255,255,255,.6)",marginBottom:32}}>
+      <div style={{display:"flex",flexWrap:"wrap",gap:8,alignItems:"center",fontSize:16,color:"rgba(255,255,255,.6)",marginBottom:32}}>
         <span style={{cursor:"pointer"}} onClick={()=>go&&go("refund")}>환불 정책</span>
         <span style={{color:"rgba(255,255,255,.3)"}}>|</span>
         <span style={{cursor:"pointer"}}>이용약관</span>
@@ -102,7 +102,7 @@ const Footer=({go})=>(
         <span style={{cursor:"pointer"}}>공익위반신고 바로가기</span>
       </div>
       {/* 카피라이트 */}
-      <div style={{fontSize:13,color:"rgba(255,255,255,.45)"}}>Copyright © 2025 사단법인 더나일 All rights reserved.</div>
+      <div style={{fontSize:15,color:"rgba(255,255,255,.45)"}}>Copyright © 2025 사단법인 더나일 All rights reserved.</div>
     </Box>
   </footer>
 );
@@ -144,7 +144,7 @@ const ActivitySlider = () => {
             <H2>2025년의 더나일의 주요 활동</H2>
           </div>
           <div style={{ display:"flex", alignItems:"center", gap:12 }}>
-            <span style={{ fontSize:14, color:C.g4 }}>{idx + 1} / {total}</span>
+            <span style={{ fontSize:16, color:C.g4 }}>{idx + 1} / {total}</span>
             <button onClick={prev} style={{ width:40, height:40, borderRadius:"50%", border:`1px solid ${C.g2}`, background:C.w, cursor:"pointer", fontSize:18, display:"flex", alignItems:"center", justifyContent:"center", color:C.navy, transition:"all .2s" }}
               onMouseEnter={e=>e.currentTarget.style.background=C.g1} onMouseLeave={e=>e.currentTarget.style.background=C.w}>←</button>
             <button onClick={next} style={{ width:40, height:40, borderRadius:"50%", border:"none", background:C.navy, cursor:"pointer", fontSize:18, display:"flex", alignItems:"center", justifyContent:"center", color:"#fff", transition:"all .2s" }}
@@ -159,7 +159,7 @@ const ActivitySlider = () => {
               <span style={{ fontSize:12, padding:"4px 14px", borderRadius:20, background:C.g1, color:C.g6 }}>{a.period}</span>
             </div>
             <h3 style={{ fontSize:24, fontWeight:700, color:C.navy, marginBottom:16, lineHeight:1.4 }}>{a.t}</h3>
-            <p style={{ fontSize:15, color:C.g6, lineHeight:1.8, marginBottom:24, whiteSpace:"pre-line", maxWidth:700 }}>{a.d}</p>
+            <p style={{ fontSize:17, color:C.g6, lineHeight:1.8, marginBottom:24, whiteSpace:"pre-line", maxWidth:700 }}>{a.d}</p>
             {a.stats.length > 0 && (
               <div style={{ display:"flex", gap:24, flexWrap:"wrap" }}>
                 {a.stats.map(([k,v],j) => (
@@ -197,7 +197,7 @@ const InstagramSection = () => (
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={C.navy} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill={C.navy} stroke="none"/></svg>
           <span style={{fontSize:"clamp(24px,4vw,32px)",fontWeight:700,color:C.g8}}>@thenile_pacer</span>
         </div>
-        <p style={{fontSize:15,color:C.g6}}>인스타그램에서도 더나일의 소식을 만나보세요 :)</p>
+        <p style={{fontSize:17,color:C.g6}}>인스타그램에서도 더나일의 소식을 만나보세요 :)</p>
       </div></FI>
 
       {/* Elfsight 위젯 영역 — elfsight.com 에서 무료 위젯 생성 후 아래 주석을 교체하세요 */}
@@ -209,13 +209,13 @@ const InstagramSection = () => (
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg>
           </div>
           <div style={{textAlign:"left"}}>
-            <div style={{fontSize:16,fontWeight:700,color:C.navy}}>thenile_pacer</div>
+            <div style={{fontSize:18,fontWeight:700,color:C.navy}}>thenile_pacer</div>
             <div style={{fontSize:12,color:C.g4}}>사단법인 더나일</div>
           </div>
         </div>
-        <p style={{fontSize:14,color:C.g6,lineHeight:1.8,marginBottom:24}}>인스타그램 피드를 실시간으로 연동하려면<br/><a href="https://elfsight.com/instagram-feed-instashow/" target="_blank" rel="noopener noreferrer" style={{color:C.navy,fontWeight:600,textDecoration:"underline"}}>Elfsight 무료 위젯</a>을 생성 후 코드에 app-id를 추가하면 됩니다.</p>
+        <p style={{fontSize:16,color:C.g6,lineHeight:1.8,marginBottom:24}}>인스타그램 피드를 실시간으로 연동하려면<br/><a href="https://elfsight.com/instagram-feed-instashow/" target="_blank" rel="noopener noreferrer" style={{color:C.navy,fontWeight:600,textDecoration:"underline"}}>Elfsight 무료 위젯</a>을 생성 후 코드에 app-id를 추가하면 됩니다.</p>
         <a href="https://www.instagram.com/thenile_pacer/" target="_blank" rel="noopener noreferrer" style={{textDecoration:"none"}}>
-          <div style={{display:"inline-flex",alignItems:"center",gap:10,padding:"14px 32px",borderRadius:50,background:"linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)",color:"#fff",fontSize:15,fontWeight:600,cursor:"pointer"}}>
+          <div style={{display:"inline-flex",alignItems:"center",gap:10,padding:"14px 32px",borderRadius:50,background:"linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)",color:"#fff",fontSize:17,fontWeight:600,cursor:"pointer"}}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
             인스타그램에서 보기
           </div>
@@ -243,13 +243,13 @@ const VisionCards = () => {
               {/* 앞면 */}
               <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",padding:28,background:C.warm,borderRadius:16,border:`1px solid ${C.g2}`,textAlign:"center",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
                 <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:28,fontWeight:700,color:C.gold,marginBottom:12}}>Vision {v.n}</div>
-                <h3 style={{fontSize:17,fontWeight:700,color:C.navy,lineHeight:1.5}}>{v.t}</h3>
+                <h3 style={{fontSize:20,fontWeight:700,color:C.navy,lineHeight:1.5}}>{v.t}</h3>
                 <div style={{fontSize:11,color:C.g4,marginTop:12}}>클릭하여 자세히 보기</div>
               </div>
               {/* 뒷면 */}
               <div style={{position:"absolute",inset:0,backfaceVisibility:"hidden",transform:"rotateY(180deg)",padding:28,background:C.navy,borderRadius:16,textAlign:"center",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
                 <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:22,fontWeight:700,color:C.gold,marginBottom:12}}>Vision {v.n}</div>
-                <p style={{fontSize:14,color:"rgba(255,255,255,.85)",lineHeight:1.8}}>{v.d}</p>
+                <p style={{fontSize:16,color:"rgba(255,255,255,.85)",lineHeight:1.8}}>{v.d}</p>
               </div>
             </div>
           </div>
@@ -286,9 +286,9 @@ const HeroBanner = ({go}) => {
       <div style={{position:"absolute",bottom:0,left:0,right:0,height:120,background:"linear-gradient(to top, rgba(27,42,74,.9), transparent)",zIndex:1}}/>
       {/* 콘텐츠 */}
       <Box style={{position:"relative",zIndex:2}}>
-        <FI><div style={{fontSize:14,color:C.gold,letterSpacing:3,marginBottom:24,fontWeight:500}}>사단법인 더나일 · Nurtuning Into Light Everyday</div></FI>
+        <FI><div style={{fontSize:16,color:C.gold,letterSpacing:3,marginBottom:24,fontWeight:500}}>사단법인 더나일 · Nurtuning Into Light Everyday</div></FI>
         <FI delay={.2}><h1 style={{fontFamily:"'Noto Serif KR',serif",fontSize:"clamp(32px,5vw,52px)",fontWeight:700,color:"#fff",lineHeight:1.4,marginBottom:24,maxWidth:600,textShadow:"0 2px 20px rgba(0,0,0,.3)"}}>부모됨의 두려움이<br/><span style={{color:C.gold}}>기쁨</span>으로 전환되는<br/>여정을 함께 합니다</h1></FI>
-        <FI delay={.4}><p style={{fontSize:17,color:"rgba(255,255,255,.8)",lineHeight:1.8,maxWidth:480,marginBottom:40}}>Parenthood : From dread to delight</p></FI>
+        <FI delay={.4}><p style={{fontSize:20,color:"rgba(255,255,255,.8)",lineHeight:1.8,maxWidth:480,marginBottom:40}}>Parenthood : From dread to delight</p></FI>
         <FI delay={.6}><div style={{display:"flex",gap:16,flexWrap:"wrap"}}><BG onClick={()=>go("parentscan")}>양육불안검사 하기</BG><Btn primary={false} onClick={()=>go("about")} style={{borderColor:"rgba(255,255,255,.4)",color:"#fff"}}>더나일 알아보기</Btn></div></FI>
       </Box>
       {/* 인디케이터 */}
@@ -313,12 +313,12 @@ const HomePage=({go})=>(<>
       <div style={{textAlign:"center",maxWidth:800,margin:"0 auto"}}>
         <FI><Tag>MISSION</Tag></FI>
         <FI delay={.1}><h2 style={{fontFamily:"'Noto Serif KR',serif",fontSize:"clamp(24px,4vw,36px)",fontWeight:700,color:C.navy,lineHeight:1.5,marginBottom:16}}>부모됨의 두려움이 기쁨으로 전환되는<br/>여정을 함께 합니다</h2></FI>
-        <FI delay={.2}><p style={{fontSize:17,color:C.navyL,marginBottom:48,fontStyle:"italic"}}>Parenthood : From dread to delight</p></FI>
+        <FI delay={.2}><p style={{fontSize:20,color:C.navyL,marginBottom:48,fontStyle:"italic"}}>Parenthood : From dread to delight</p></FI>
         <FI delay={.3}><Tag>VISION</Tag></FI>
         <FI delay={.35}>
           <VisionCards />
         </FI>
-        <FI delay={.5}><p style={{fontSize:13,color:C.g4,marginTop:32}}>서울특별시 산하 비영리법인 / 기획재정부 지정 지정기부금 단체</p></FI>
+        <FI delay={.5}><p style={{fontSize:15,color:C.g4,marginTop:32}}>서울특별시 산하 비영리법인 / 기획재정부 지정 지정기부금 단체</p></FI>
       </div>
     </Box>
   </Sec>
@@ -327,8 +327,8 @@ const HomePage=({go})=>(<>
   <Sec bg={C.navy} style={{padding:"64px 0"}}>
     <Box style={{textAlign:"center"}}>
       <FI><H2 light style={{fontSize:"clamp(22px,3.5vw,32px)",maxWidth:700,margin:"0 auto 16px"}}>더나일은 믿고있습니다.</H2></FI>
-      <FI delay={.15}><p style={{fontSize:16,color:"rgba(255,255,255,.7)",lineHeight:1.9,maxWidth:600,margin:"0 auto"}}>건강한 양육의 방식으로 자라난 아이들이 많아져야<br/>미래세대의 아이들이 살아갈 세상도 건강해질 수 있습니다</p></FI>
-      <FI delay={.3}><p style={{fontSize:17,color:C.gold,lineHeight:1.8,maxWidth:600,margin:"24px auto 0",fontWeight:600}}>다음 세대가 살아갈 세상이 지금보다 더 나아지는 것에 대한 해답은<br/>바로 부모됨의 여정이 행복해지는 것입니다</p></FI>
+      <FI delay={.15}><p style={{fontSize:18,color:"rgba(255,255,255,.7)",lineHeight:1.9,maxWidth:600,margin:"0 auto"}}>건강한 양육의 방식으로 자라난 아이들이 많아져야<br/>미래세대의 아이들이 살아갈 세상도 건강해질 수 있습니다</p></FI>
+      <FI delay={.3}><p style={{fontSize:20,color:C.gold,lineHeight:1.8,maxWidth:600,margin:"24px auto 0",fontWeight:600}}>다음 세대가 살아갈 세상이 지금보다 더 나아지는 것에 대한 해답은<br/>바로 부모됨의 여정이 행복해지는 것입니다</p></FI>
     </Box>
   </Sec>
 
@@ -339,7 +339,7 @@ const HomePage=({go})=>(<>
         <FI><div style={{textAlign:"center"}}>
           <img src="/images/이다랑.jpg" alt="이다랑 이사장" style={{width:"100%",maxWidth:320,borderRadius:20,margin:"0 auto 20px",objectFit:"cover",display:"block",boxShadow:"0 8px 32px rgba(27,42,74,.12)"}}/>
           <div style={{fontSize:20,fontWeight:700,color:C.navy}}>이다랑 이사장</div>
-          <div style={{fontSize:13,color:C.gold,fontWeight:600,marginTop:4}}>아동심리전문가</div>
+          <div style={{fontSize:15,color:C.gold,fontWeight:600,marginTop:4}}>아동심리전문가</div>
           <div style={{fontSize:12,color:C.g4,marginTop:8,lineHeight:1.6}}>아동학 학사 / 발달심리학 석사<br/>아동심리박사과정 / (주)그로잉맘 창업자</div>
         </div></FI>
         <FI delay={.2}><div>
@@ -347,9 +347,9 @@ const HomePage=({go})=>(<>
           <div style={{fontFamily:"'Noto Serif KR',serif",fontSize:22,fontWeight:700,color:C.navy,lineHeight:1.7,marginBottom:24,borderLeft:`4px solid ${C.gold}`,paddingLeft:24}}>
             "더나일은 건강하고 기쁜 '부모됨'에 집중합니다."
           </div>
-          <p style={{fontSize:15,color:C.g6,lineHeight:1.9,marginBottom:16}}>오늘의 부모들은 넘쳐나는 정보와 높아진 기준 앞에서 오히려 더 불안하고, 더 외롭습니다. 가족을 향한 냉소적인 시선은 사회 전반에 퍼져 있고, 양육 불안은 부모가 자신의 가능성을 보지 못하게 합니다. 그 결과, 부모됨이 주는 기쁨은 가려지고 두려움이 가득해졌습니다.</p>
-          <p style={{fontSize:15,color:C.g6,lineHeight:1.9,marginBottom:16}}>더나일은 이 문제를 정면으로 바라봅니다. 그리고 이 시대에 필요한 건강하고 균형 잡힌 부모상을 사회의 새로운 기준으로 만들어 가고자 합니다. 가족을 바라보는 냉소적인 시선을 신뢰와 환대로 바꾸고, 부모 개개인이 자신 안에 이미 가진 자원을 발견하여 양육의 효능감을 회복하며, 그렇게 변화된 부모들이 모여 사회적 문화를 함께 바꾸어 나가기를 기대합니다.</p>
-          <p style={{fontSize:15,color:C.navy,lineHeight:1.9,fontWeight:600}}>부모됨이 가진 기쁨을 회복하는 것— 그것이 더 나은 다음 세대를 만드는 가장 근본적인 힘입니다.</p>
+          <p style={{fontSize:17,color:C.g6,lineHeight:1.9,marginBottom:16}}>오늘의 부모들은 넘쳐나는 정보와 높아진 기준 앞에서 오히려 더 불안하고, 더 외롭습니다. 가족을 향한 냉소적인 시선은 사회 전반에 퍼져 있고, 양육 불안은 부모가 자신의 가능성을 보지 못하게 합니다. 그 결과, 부모됨이 주는 기쁨은 가려지고 두려움이 가득해졌습니다.</p>
+          <p style={{fontSize:17,color:C.g6,lineHeight:1.9,marginBottom:16}}>더나일은 이 문제를 정면으로 바라봅니다. 그리고 이 시대에 필요한 건강하고 균형 잡힌 부모상을 사회의 새로운 기준으로 만들어 가고자 합니다. 가족을 바라보는 냉소적인 시선을 신뢰와 환대로 바꾸고, 부모 개개인이 자신 안에 이미 가진 자원을 발견하여 양육의 효능감을 회복하며, 그렇게 변화된 부모들이 모여 사회적 문화를 함께 바꾸어 나가기를 기대합니다.</p>
+          <p style={{fontSize:17,color:C.navy,lineHeight:1.9,fontWeight:600}}>부모됨이 가진 기쁨을 회복하는 것— 그것이 더 나은 다음 세대를 만드는 가장 근본적인 힘입니다.</p>
         </div></FI>
       </div>
     </Box>
@@ -368,8 +368,8 @@ const HomePage=({go})=>(<>
           {t:"정책과 인프라의 부족",d:"부모를 위한 정책과 인프라가 현장의 필요를 따라가지 못합니다."},
         ].map((x,i)=>(
           <FI key={i} delay={i*.1}><div style={{padding:24,background:C.warm,borderRadius:16,border:`1px solid ${C.g2}`}}>
-            <h3 style={{fontSize:16,fontWeight:700,color:C.navy,marginBottom:8}}>{x.t}</h3>
-            <p style={{fontSize:13,color:C.g6,lineHeight:1.6}}>{x.d}</p>
+            <h3 style={{fontSize:18,fontWeight:700,color:C.navy,marginBottom:8}}>{x.t}</h3>
+            <p style={{fontSize:15,color:C.g6,lineHeight:1.6}}>{x.d}</p>
           </div></FI>
         ))}
       </div>
@@ -382,7 +382,7 @@ const HomePage=({go})=>(<>
       <FI><div style={{textAlign:"center",marginBottom:16}}>
         <Tag>더나일의 접근</Tag>
         <H2>냉소를 다정함으로,<br/>두려움을 기쁨으로</H2>
-        <p style={{fontSize:15,color:C.g6,maxWidth:600,margin:"0 auto",lineHeight:1.8}}>더나일은 4개의 축으로 부모됨의 여정 전체를 지원합니다. 부모 개개인의 마음돌봄에서 시작해, 연결을 만들고, 문화를 바꾸고, 구조를 바꿉니다.</p>
+        <p style={{fontSize:17,color:C.g6,maxWidth:600,margin:"0 auto",lineHeight:1.8}}>더나일은 4개의 축으로 부모됨의 여정 전체를 지원합니다. 부모 개개인의 마음돌봄에서 시작해, 연결을 만들고, 문화를 바꾸고, 구조를 바꿉니다.</p>
       </div></FI>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:20,marginTop:32}}>
         {[
@@ -398,12 +398,12 @@ const HomePage=({go})=>(<>
               <div style={{fontSize:28,marginBottom:8}}>{x.icon}</div>
               <div style={{fontFamily:"'Cormorant Garamond',serif",fontSize:28,fontWeight:700,color:C.gold,marginBottom:4}}>{x.n}</div>
               <h3 style={{fontSize:18,fontWeight:700,color:C.navy,marginBottom:8}}>{x.t}</h3>
-              <p style={{fontSize:13,color:C.g6,lineHeight:1.6}}>{x.d}</p>
+              <p style={{fontSize:15,color:C.g6,lineHeight:1.6}}>{x.d}</p>
             </div>
           </FI>
         ))}
       </div>
-      <FI delay={.5}><p style={{textAlign:"center",marginTop:32,fontSize:14,color:C.g4}}>4개의 목표에 맞는 사업운영 및 임팩트 측정</p></FI>
+      <FI delay={.5}><p style={{textAlign:"center",marginTop:32,fontSize:16,color:C.g4}}>4개의 목표에 맞는 사업운영 및 임팩트 측정</p></FI>
     </Box>
   </Sec>
 
@@ -425,7 +425,7 @@ const HomePage=({go})=>(<>
           <FI key={i} delay={i*.08}>
             <div style={{textAlign:"center",padding:20,background:C.w,borderRadius:16,border:`1px solid ${C.g2}`,height:"100%"}}>
               {m.img ? <img src={m.img} alt={m.name} style={{width:110,height:110,borderRadius:"50%",margin:"0 auto 16px",objectFit:"cover",display:"block",border:`3px solid ${C.goldL}`}}/> : <div style={{width:110,height:110,borderRadius:"50%",margin:"0 auto 16px",background:`linear-gradient(135deg,${C.goldP},${C.g1})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:36,color:C.navy}}>{m.name[0]}</div>}
-              <div style={{fontSize:15,fontWeight:600,color:C.navy,marginBottom:8}}>{m.name}</div>
+              <div style={{fontSize:17,fontWeight:600,color:C.navy,marginBottom:8}}>{m.name}</div>
               {m.lines.map((l,j)=><div key={j} style={{fontSize:12,color:C.g4,lineHeight:1.5}}>{l}</div>)}
             </div>
           </FI>
@@ -469,8 +469,8 @@ const HomePage=({go})=>(<>
           {t:"#대상에 대한 치열한 고민",d:'문제를 "진짜" 해결하기 위해 대상을 향한 깊은 고민합니다.'},
         ].map((x,i)=>(
           <FI key={i} delay={i*.1}><div style={{padding:24,background:C.w,borderRadius:16,border:`1px solid ${C.g2}`,textAlign:"center",height:"100%"}}>
-            <div style={{fontSize:15,fontWeight:700,color:C.gold,marginBottom:8}}>{x.t}</div>
-            <p style={{fontSize:13,color:C.g6,lineHeight:1.6}}>{x.d}</p>
+            <div style={{fontSize:17,fontWeight:700,color:C.gold,marginBottom:8}}>{x.t}</div>
+            <p style={{fontSize:15,color:C.g6,lineHeight:1.6}}>{x.d}</p>
           </div></FI>
         ))}
       </div>
@@ -482,7 +482,7 @@ const HomePage=({go})=>(<>
     <Box style={{textAlign:"center"}}>
       <FI><Tag color={C.gold}>페이서 PACER</Tag></FI>
       <FI delay={.1}><H2 light style={{maxWidth:500,margin:"0 auto 16px"}}>부모됨의 여정을<br/>함께 걸어주세요</H2></FI>
-      <FI delay={.2}><p style={{fontSize:16,color:"rgba(255,255,255,.6)",lineHeight:1.8,maxWidth:520,margin:"0 auto 40px",wordBreak:"keep-all"}}>우리는 후원자를 페이서라고 부릅니다.<br/>페이서는 [함께 걷는 사람들] 이라는 뜻을 가지고 있지요.<br/><br/>[페이서] 는 더 나은 사회를 위해 가족의 가치가 회복되어야 한다는 것에 동의하며 함께 힘을 모으는 사람들입니다.</p></FI>
+      <FI delay={.2}><p style={{fontSize:18,color:"rgba(255,255,255,.6)",lineHeight:1.8,maxWidth:520,margin:"0 auto 40px",wordBreak:"keep-all"}}>우리는 후원자를 페이서라고 부릅니다.<br/>페이서는 [함께 걷는 사람들] 이라는 뜻을 가지고 있지요.<br/><br/>[페이서] 는 더 나은 사회를 위해 가족의 가치가 회복되어야 한다는 것에 동의하며 함께 힘을 모으는 사람들입니다.</p></FI>
       <FI delay={.3}><div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap"}}><BG onClick={()=>window.open("https://link.donationbox.co.kr/donationBoxJoin.jsp?campaignuid=1FuNiwn6W6","_blank")}>페이서 되기</BG><Btn primary={false} onClick={()=>go("contact")} style={{borderColor:"rgba(255,255,255,.3)",color:"#fff"}}>사업 및 협력 문의</Btn></div></FI>
     </Box>
   </Sec>
@@ -507,7 +507,7 @@ const AboutPage=({go})=>(<>
       <Tag>VISION</Tag>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:24}}>
         {["부모의 일상이 매일의 성장이 됩니다","양육에 대한 냉소를 다정함으로 바꿉니다","양육의 즐거움을 사회와 공유합니다"].map((v,i)=>(
-          <div key={i} style={{padding:24,background:C.warm,borderRadius:16}}><div style={{fontSize:11,color:C.gold,fontWeight:600,letterSpacing:2,marginBottom:8}}>Vision 0{i+1}</div><h3 style={{fontSize:17,fontWeight:700,color:C.navy}}>{v}</h3></div>
+          <div key={i} style={{padding:24,background:C.warm,borderRadius:16}}><div style={{fontSize:11,color:C.gold,fontWeight:600,letterSpacing:2,marginBottom:8}}>Vision 0{i+1}</div><h3 style={{fontSize:20,fontWeight:700,color:C.navy}}>{v}</h3></div>
         ))}
       </div>
     </div></FI>
@@ -515,12 +515,12 @@ const AboutPage=({go})=>(<>
 
   <Sec bg={C.warm}><Box>
     <FI><Tag>설립목적</Tag></FI>
-    <FI delay={.1}><p style={{fontSize:15,color:C.g6,lineHeight:1.9,maxWidth:800,marginBottom:40,wordBreak:"keep-all"}}>본 법인은 가족구성원의 정서적·사회적 가치의 회복이라는 가치 아래 다양한 가족 구성원들이 건강한 개인이자 가족의 일원으로 성장할 수 있도록 다양한 서비스와 기회를 제공한다. 이를 통하여 각각의 구성원의 심리·사회적 기능이 원활하게 수행되어 건강한 사회를 조성함을 목적으로 한다.</p></FI>
+    <FI delay={.1}><p style={{fontSize:17,color:C.g6,lineHeight:1.9,maxWidth:800,marginBottom:40,wordBreak:"keep-all"}}>본 법인은 가족구성원의 정서적·사회적 가치의 회복이라는 가치 아래 다양한 가족 구성원들이 건강한 개인이자 가족의 일원으로 성장할 수 있도록 다양한 서비스와 기회를 제공한다. 이를 통하여 각각의 구성원의 심리·사회적 기능이 원활하게 수행되어 건강한 사회를 조성함을 목적으로 한다.</p></FI>
 
     <FI delay={.2}><Tag>주된사업</Tag></FI>
     <FI delay={.25}><div style={{marginBottom:40}}>
       {["부모의 건강한 양육관 조성을 위한 전문가 자문 및 교육프로그램 운영","건강한 양육환경 조성을 위한 컨퍼런스 개최","부모교육 프로그램 개발 및 콘텐츠 개발","기타 법인의 목적을 수행하기 위한 사업"].map((item,i)=>(
-        <div key={i} style={{fontSize:14,color:C.g6,padding:"8px 0",display:"flex",alignItems:"flex-start",gap:10,lineHeight:1.6}}><Dot/><span>{item}</span></div>
+        <div key={i} style={{fontSize:16,color:C.g6,padding:"8px 0",display:"flex",alignItems:"flex-start",gap:10,lineHeight:1.6}}><Dot/><span>{item}</span></div>
       ))}
     </div></FI>
 
@@ -538,7 +538,7 @@ const AboutPage=({go})=>(<>
             <div style={{fontSize:18,fontWeight:700,color:C.navy,paddingLeft:4}}>{group.y}</div>
           </div>
           {group.items.map((item,i)=>(
-            <div key={i} style={{fontSize:14,color:C.g6,padding:"6px 0 6px 4px",lineHeight:1.6}}>{item}</div>
+            <div key={i} style={{fontSize:16,color:C.g6,padding:"6px 0 6px 4px",lineHeight:1.6}}>{item}</div>
           ))}
         </div>
       ))}
@@ -552,18 +552,18 @@ const AboutPage=({go})=>(<>
       <div className="about-photo" style={{textAlign:"center"}}>
         <img src="/images/이다랑.jpg" alt="이다랑 이사장" style={{width:"100%",maxWidth:280,borderRadius:20,margin:"0 auto 20px",objectFit:"cover",display:"block",boxShadow:"0 8px 32px rgba(27,42,74,.12)"}}/>
         <div style={{fontSize:24,fontWeight:700,color:C.navy}}>이다랑</div>
-        <div style={{fontSize:14,color:C.g6,marginTop:4}}>아동학 학사 / 발달심리학 석사 / 아동심리박사과정<br/>(주)그로잉맘 창업자 / 아동심리전문가</div>
+        <div style={{fontSize:16,color:C.g6,marginTop:4}}>아동학 학사 / 발달심리학 석사 / 아동심리박사과정<br/>(주)그로잉맘 창업자 / 아동심리전문가</div>
       </div>
       <div>
         <div style={{marginBottom:28}}>
           <div style={{fontSize:12,color:C.gold,fontWeight:600,letterSpacing:2,marginBottom:12}}>주요 저서</div>
-          {["아이 마음에 상처주지 않는 습관(길벗)","불안이 많은 아이 (한빛)","초등저학년, 아이의 사회성이 자라납니다(아울북)","내 아이를 위한 심플 육아(RHK)","육아 말고 뭐라도(세종)"].map((b,j)=><div key={j} style={{fontSize:14,color:C.g6,padding:"5px 0",display:"flex",alignItems:"center",gap:8}}><Dot/>{b}</div>)}
+          {["아이 마음에 상처주지 않는 습관(길벗)","불안이 많은 아이 (한빛)","초등저학년, 아이의 사회성이 자라납니다(아울북)","내 아이를 위한 심플 육아(RHK)","육아 말고 뭐라도(세종)"].map((b,j)=><div key={j} style={{fontSize:16,color:C.g6,padding:"5px 0",display:"flex",alignItems:"center",gap:8}}><Dot/>{b}</div>)}
         </div>
         <div style={{marginBottom:28}}>
           <div style={{fontSize:12,color:C.gold,fontWeight:600,letterSpacing:2,marginBottom:12}}>주요 활동</div>
-          {["NAVER 육아 공식 인플루언서","세바시 / SBS 스페셜 '스마트폰 전쟁' / KT 키즈랜드 등 출연","WEE매거진 / 맘앤앙팡 / 중앙:헬로페어런츠 / 여성신문 기고","포스코 / 구글코리아 / 스타벅스 / 삼천리 등 기업 출강","신세계 / 롯데 / 현대백화점 주요 문화센터 출강","NIA 디지털페어런팅 / 육아정책연구소 교육 프로그램 개발"].map((b,j)=><div key={j} style={{fontSize:14,color:C.g6,padding:"5px 0",display:"flex",alignItems:"flex-start",gap:8}}><Dot/>{b}</div>)}
+          {["NAVER 육아 공식 인플루언서","세바시 / SBS 스페셜 '스마트폰 전쟁' / KT 키즈랜드 등 출연","WEE매거진 / 맘앤앙팡 / 중앙:헬로페어런츠 / 여성신문 기고","포스코 / 구글코리아 / 스타벅스 / 삼천리 등 기업 출강","신세계 / 롯데 / 현대백화점 주요 문화센터 출강","NIA 디지털페어런팅 / 육아정책연구소 교육 프로그램 개발"].map((b,j)=><div key={j} style={{fontSize:16,color:C.g6,padding:"5px 0",display:"flex",alignItems:"flex-start",gap:8}}><Dot/>{b}</div>)}
         </div>
-        <div style={{fontSize:13,color:C.g4,lineHeight:1.6}}>전) 한국청소년상담복지개발원 상담사 | 전) 한국RT센터 전문 강사 및 치료사 | 전) 마음더하기상담센터, 구리시·서초구 상담센터 상담사</div>
+        <div style={{fontSize:15,color:C.g4,lineHeight:1.6}}>전) 한국청소년상담복지개발원 상담사 | 전) 한국RT센터 전문 강사 및 치료사 | 전) 마음더하기상담센터, 구리시·서초구 상담센터 상담사</div>
       </div>
     </div></FI>
   </Box></Sec>
@@ -581,7 +581,7 @@ const AboutPage=({go})=>(<>
       ].map((m,i)=>(
         <FI key={i} delay={i*.08}><div style={{textAlign:"center",padding:20,background:C.w,borderRadius:16,border:`1px solid ${C.g2}`,height:"100%"}}>
           {m.img ? <img src={m.img} alt={m.name} style={{width:110,height:110,borderRadius:"50%",margin:"0 auto 16px",objectFit:"cover",display:"block",border:`3px solid ${C.goldL}`}}/> : <div style={{width:110,height:110,borderRadius:"50%",margin:"0 auto 16px",background:`linear-gradient(135deg,${C.goldP},${C.g1})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:36,color:C.navy}}>{m.name[0]}</div>}
-          <div style={{fontSize:15,fontWeight:600,color:C.navy,marginBottom:8}}>{m.name}</div>
+          <div style={{fontSize:17,fontWeight:600,color:C.navy,marginBottom:8}}>{m.name}</div>
           {m.lines.map((l,j)=><div key={j} style={{fontSize:12,color:C.g4,lineHeight:1.5}}>{l}</div>)}
         </div></FI>
       ))}
@@ -638,7 +638,7 @@ const ProgramsPage=()=>{
     },[imgDir]);
     const validRatios=imgRatios;
     if(validImgs.length===0) return(
-      <div style={{width:"100%",height:260,background:`linear-gradient(135deg,${C.g1},${C.g2})`,display:"flex",alignItems:"center",justifyContent:"center",gap:8,color:C.g4,fontSize:13}}>
+      <div style={{width:"100%",height:260,background:`linear-gradient(135deg,${C.g1},${C.g2})`,display:"flex",alignItems:"center",justifyContent:"center",gap:8,color:C.g4,fontSize:15}}>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
         사업 이미지 영역
       </div>
@@ -650,8 +650,8 @@ const ProgramsPage=()=>{
         <img src={validImgs[idx]} alt="" style={{width:"100%",height:"100%",objectFit:isPortrait?"contain":"cover",transition:"opacity .4s"}}/>
         <div style={{position:"absolute",inset:0,background:"rgba(27,42,74,.1)",pointerEvents:"none"}}/>
         {validImgs.length>1&&<>
-          <button onClick={e=>{e.stopPropagation();setSi(i=>i===0?validImgs.length-1:i-1)}} style={{position:"absolute",left:8,top:"50%",transform:"translateY(-50%)",width:32,height:32,borderRadius:"50%",border:"none",background:"rgba(0,0,0,.4)",color:"#fff",cursor:"pointer",fontSize:14,display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
-          <button onClick={e=>{e.stopPropagation();setSi(i=>(i+1)%validImgs.length)}} style={{position:"absolute",right:8,top:"50%",transform:"translateY(-50%)",width:32,height:32,borderRadius:"50%",border:"none",background:"rgba(0,0,0,.4)",color:"#fff",cursor:"pointer",fontSize:14,display:"flex",alignItems:"center",justifyContent:"center"}}>→</button>
+          <button onClick={e=>{e.stopPropagation();setSi(i=>i===0?validImgs.length-1:i-1)}} style={{position:"absolute",left:8,top:"50%",transform:"translateY(-50%)",width:32,height:32,borderRadius:"50%",border:"none",background:"rgba(0,0,0,.4)",color:"#fff",cursor:"pointer",fontSize:16,display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
+          <button onClick={e=>{e.stopPropagation();setSi(i=>(i+1)%validImgs.length)}} style={{position:"absolute",right:8,top:"50%",transform:"translateY(-50%)",width:32,height:32,borderRadius:"50%",border:"none",background:"rgba(0,0,0,.4)",color:"#fff",cursor:"pointer",fontSize:16,display:"flex",alignItems:"center",justifyContent:"center"}}>→</button>
           <div style={{position:"absolute",bottom:8,left:"50%",transform:"translateX(-50%)",display:"flex",gap:6}}>
             {validImgs.map((_,di)=><div key={di} onClick={e=>{e.stopPropagation();setSi(di)}} style={{width:idx===di?16:6,height:6,borderRadius:3,background:idx===di?"#fff":"rgba(255,255,255,.5)",cursor:"pointer",transition:"all .3s"}}/>)}
           </div>
@@ -666,26 +666,26 @@ const ProgramsPage=()=>{
         onMouseEnter={e=>e.currentTarget.style.borderColor=C.gold} onMouseLeave={e=>e.currentTarget.style.borderColor=C.g2}>
         {/* 사업 이미지 슬라이더 */}
         {p.imgDir ? <ProjectImgSlider imgDir={p.imgDir}/> : (
-          <div style={{width:"100%",height:220,background:`linear-gradient(135deg,${C.g1},${C.g2})`,display:"flex",alignItems:"center",justifyContent:"center",gap:8,color:C.g4,fontSize:13}}>
+          <div style={{width:"100%",height:220,background:`linear-gradient(135deg,${C.g1},${C.g2})`,display:"flex",alignItems:"center",justifyContent:"center",gap:8,color:C.g4,fontSize:15}}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
             사업 이미지 영역
           </div>
         )}
         <div style={{padding:24}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",flexWrap:"wrap",gap:8,marginBottom:12}}>
-            <h4 style={{fontSize:17,fontWeight:700,color:C.navy,flex:1,minWidth:200}}>{p.name}</h4>
+            <h4 style={{fontSize:20,fontWeight:700,color:C.navy,flex:1,minWidth:200}}>{p.name}</h4>
             <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
               <span style={{fontSize:11,padding:"3px 10px",borderRadius:12,background:C.goldP,color:C.navy,fontWeight:600}}>{p.cat}</span>
               <span style={{fontSize:11,padding:"3px 10px",borderRadius:12,background:C.g1,color:C.g6}}>{p.period}</span>
             </div>
           </div>
           <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(140px,1fr))",gap:12,marginBottom:16}}>
-            <div style={{padding:"10px 14px",background:C.warm,borderRadius:8}}><div style={{fontSize:11,color:C.gold,fontWeight:600}}>대상</div><div style={{fontSize:13,color:C.navy,fontWeight:500,marginTop:2}}>{p.target}</div></div>
-            <div style={{padding:"10px 14px",background:C.warm,borderRadius:8}}><div style={{fontSize:11,color:C.gold,fontWeight:600}}>협력기관</div><div style={{fontSize:13,color:C.navy,fontWeight:500,marginTop:2}}>{p.org}</div></div>
+            <div style={{padding:"10px 14px",background:C.warm,borderRadius:8}}><div style={{fontSize:11,color:C.gold,fontWeight:600}}>대상</div><div style={{fontSize:15,color:C.navy,fontWeight:500,marginTop:2}}>{p.target}</div></div>
+            <div style={{padding:"10px 14px",background:C.warm,borderRadius:8}}><div style={{fontSize:11,color:C.gold,fontWeight:600}}>협력기관</div><div style={{fontSize:15,color:C.navy,fontWeight:500,marginTop:2}}>{p.org}</div></div>
           </div>
           <div style={{borderTop:`1px solid ${C.g1}`,paddingTop:12}}>
             <div style={{fontSize:11,color:C.gold,fontWeight:600,marginBottom:8}}>주요 내용</div>
-            {p.content.map((c,j)=><div key={j} style={{fontSize:13,color:C.g6,padding:"3px 0",display:"flex",alignItems:"flex-start",gap:8,lineHeight:1.5}}><Dot/><span>{c}</span></div>)}
+            {p.content.map((c,j)=><div key={j} style={{fontSize:15,color:C.g6,padding:"3px 0",display:"flex",alignItems:"flex-start",gap:8,lineHeight:1.5}}><Dot/><span>{c}</span></div>)}
           </div>
         </div>
       </div>
@@ -701,19 +701,19 @@ const ProgramsPage=()=>{
       <FI delay={.1}><H2>더나일이 해온 일들</H2></FI>
       <FI delay={.15}><Desc>더나일은 부모의 마음돌봄에서 시작해, 연결을 만들고, 문화를 바꾸고, 구조를 바꿉니다. 2025년 한 해 동안 아래의 사업들을 수행했습니다.</Desc></FI>
       <div style={{display:"flex",gap:10,flexWrap:"wrap",marginTop:8}}>
-        {tabs.map((t,i)=><div key={i} onClick={()=>setTab(i)} style={{padding:"10px 20px",borderRadius:50,background:tab===i?C.navy:C.w,color:tab===i?"#fff":C.navy,fontSize:13,fontWeight:600,cursor:"pointer",border:`1px solid ${tab===i?C.navy:C.g2}`,transition:"all .3s"}}>{t}</div>)}
+        {tabs.map((t,i)=><div key={i} onClick={()=>setTab(i)} style={{padding:"10px 20px",borderRadius:50,background:tab===i?C.navy:C.w,color:tab===i?"#fff":C.navy,fontSize:15,fontWeight:600,cursor:"pointer",border:`1px solid ${tab===i?C.navy:C.g2}`,transition:"all .3s"}}>{t}</div>)}
       </div>
     </Box></section>
 
     {tab < 3 ? (
       <Sec bg={C.w}><Box>
         {tab === 0 && <FI><div style={{padding:"16px 20px",background:C.goldP,borderRadius:12,marginBottom:24}}>
-          <span style={{fontSize:13,color:C.navy,fontWeight:500}}>전체 {allProjects.length}개 사업  |  지방보조금 {govProjects.length}건  |  기타사업(수탁 등) {otherProjects.length}건</span>
+          <span style={{fontSize:15,color:C.navy,fontWeight:500}}>전체 {allProjects.length}개 사업  |  지방보조금 {govProjects.length}건  |  기타사업(수탁 등) {otherProjects.length}건</span>
         </div></FI>}
 
-        {tab === 1 && <FI><h3 style={{fontSize:18,fontWeight:700,color:C.navy,marginBottom:8}}>최근 5년간 지방보조금 지원사항 (사업이력)</h3><p style={{fontSize:14,color:C.g6,marginBottom:24}}>지자체 보조금을 통해 수행한 공공사업입니다.</p></FI>}
+        {tab === 1 && <FI><h3 style={{fontSize:18,fontWeight:700,color:C.navy,marginBottom:8}}>최근 5년간 지방보조금 지원사항 (사업이력)</h3><p style={{fontSize:16,color:C.g6,marginBottom:24}}>지자체 보조금을 통해 수행한 공공사업입니다.</p></FI>}
 
-        {tab === 2 && <FI><h3 style={{fontSize:18,fontWeight:700,color:C.navy,marginBottom:8}}>최근 5년간 기타사업 추진실적 (수탁사업 등)</h3><p style={{fontSize:14,color:C.g6,marginBottom:24}}>민간위탁, CSR, 자체사업 등으로 수행한 사업입니다.</p></FI>}
+        {tab === 2 && <FI><h3 style={{fontSize:18,fontWeight:700,color:C.navy,marginBottom:8}}>최근 5년간 기타사업 추진실적 (수탁사업 등)</h3><p style={{fontSize:16,color:C.g6,marginBottom:24}}>민간위탁, CSR, 자체사업 등으로 수행한 사업입니다.</p></FI>}
 
         {displayProjects.map((p,i)=><ProjectCard key={`${tab}-${i}`} p={p} i={i}/>)}
       </Box></Sec>
@@ -722,12 +722,12 @@ const ProgramsPage=()=>{
         <FI><h3 style={{fontSize:18,fontWeight:700,color:C.navy,marginBottom:24}}>2026년 주요 사업 계획</h3></FI>
         {plan2026.map((sec,si)=>(
           <div key={si} style={{marginBottom:32}}>
-            <FI delay={si*.1}><div style={{fontSize:14,fontWeight:600,color:C.gold,letterSpacing:1,marginBottom:16,paddingBottom:8,borderBottom:`2px solid ${C.goldP}`}}>{sec.cat}</div></FI>
+            <FI delay={si*.1}><div style={{fontSize:16,fontWeight:600,color:C.gold,letterSpacing:1,marginBottom:16,paddingBottom:8,borderBottom:`2px solid ${C.goldP}`}}>{sec.cat}</div></FI>
             {sec.items.map((p,i)=>(
               <FI key={i} delay={(si*.1)+(i*.08)}>
                 <div style={{padding:24,background:C.warm,borderRadius:16,border:`1px solid ${C.g2}`,marginBottom:12}}>
-                  <h4 style={{fontSize:16,fontWeight:700,color:C.navy,marginBottom:8}}>{p.t}</h4>
-                  {p.d&&<p style={{fontSize:14,color:C.g6,lineHeight:1.7,whiteSpace:"pre-line"}}>{p.d}</p>}
+                  <h4 style={{fontSize:18,fontWeight:700,color:C.navy,marginBottom:8}}>{p.t}</h4>
+                  {p.d&&<p style={{fontSize:16,color:C.g6,lineHeight:1.7,whiteSpace:"pre-line"}}>{p.d}</p>}
                 </div>
               </FI>
             ))}
@@ -743,9 +743,9 @@ const ParentscanPage=()=>(<>
   <section style={{paddingTop:120,paddingBottom:80,background:`linear-gradient(180deg,${C.navy} 0%,${C.navyL} 100%)`}}><Box style={{textAlign:"center"}}>
     <FI><Tag color={C.gold}>임팩트 측정</Tag></FI>
     <FI delay={.1}><H2 light>양육불안검사</H2></FI>
-    <FI delay={.2}><p style={{fontSize:16,color:"rgba(255,255,255,.7)",lineHeight:1.8,maxWidth:600,margin:"0 auto 16px"}}>자체보유하고 있는 양육불안 척도를 활용하여 임팩트 지표를 지속적으로 측정합니다.</p></FI>
-    <FI delay={.25}><p style={{fontSize:15,color:"rgba(255,255,255,.6)",lineHeight:1.8,maxWidth:600,margin:"0 auto 40px"}}>양육불안 척도는 양육자가 느끼는 심리/정서적 불안 수준과 양육자로서의 효능감을 측정할 수 있는 척도입니다. 더나일은 타당도가 확인된 자체 분석도구를 활용하여 누구나 쉽게 온라인으로 검사할 수 있는 시스템을 구축하고 임팩트 지표를 지속적으로 측정하고 관리합니다.</p></FI>
-    <FI delay={.3}><BG onClick={()=>window.open("https://www.parentscan.app/register","_blank")} style={{fontSize:17,padding:"18px 48px"}}>검사 시작하기</BG></FI>
+    <FI delay={.2}><p style={{fontSize:18,color:"rgba(255,255,255,.7)",lineHeight:1.8,maxWidth:600,margin:"0 auto 16px"}}>자체보유하고 있는 양육불안 척도를 활용하여 임팩트 지표를 지속적으로 측정합니다.</p></FI>
+    <FI delay={.25}><p style={{fontSize:17,color:"rgba(255,255,255,.6)",lineHeight:1.8,maxWidth:600,margin:"0 auto 40px"}}>양육불안 척도는 양육자가 느끼는 심리/정서적 불안 수준과 양육자로서의 효능감을 측정할 수 있는 척도입니다. 더나일은 타당도가 확인된 자체 분석도구를 활용하여 누구나 쉽게 온라인으로 검사할 수 있는 시스템을 구축하고 임팩트 지표를 지속적으로 측정하고 관리합니다.</p></FI>
+    <FI delay={.3}><BG onClick={()=>window.open("https://www.parentscan.app/register","_blank")} style={{fontSize:20,padding:"18px 48px"}}>검사 시작하기</BG></FI>
   </Box></section>
 </>);
 
@@ -757,11 +757,11 @@ const PacerPage=()=>(<>
   <section style={{paddingTop:120,paddingBottom:80,background:`linear-gradient(135deg,${C.navy} 0%,${C.navyL} 100%)`}}><Box style={{textAlign:"center"}}>
     <FI><Tag color={C.gold}>PACER · 함께 걷는 사람들</Tag></FI>
     <FI delay={.1}><H2 light style={{fontSize:"clamp(28px,5vw,40px)"}}>오늘의 가족을 변화시키는 일에{"\n"}함께해주세요</H2></FI>
-    <FI delay={.2}><p style={{fontSize:16,color:"rgba(255,255,255,.7)",lineHeight:1.9,maxWidth:560,margin:"0 auto",wordBreak:"keep-all"}}>페이서(PACER)란 더 나은 사회를 위해 가족의 가치가 회복되어야 한다는 것에 동의하며 더나일과 함께 걷는 사람들입니다.</p></FI>
+    <FI delay={.2}><p style={{fontSize:18,color:"rgba(255,255,255,.7)",lineHeight:1.9,maxWidth:560,margin:"0 auto",wordBreak:"keep-all"}}>페이서(PACER)란 더 나은 사회를 위해 가족의 가치가 회복되어야 한다는 것에 동의하며 더나일과 함께 걷는 사람들입니다.</p></FI>
     <FI delay={.3}><div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap",marginTop:32}}>
-      <BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{fontSize:17,padding:"18px 48px"}}>후원하기</BG>
+      <BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{fontSize:20,padding:"18px 48px"}}>후원하기</BG>
     </div></FI>
-    <FI delay={.35}><p style={{fontSize:13,color:"rgba(255,255,255,.4)",marginTop:24}}>더나일은 기획재정부 지정 지정기부금단체로 기부금영수증 발급이 가능합니다 (법인/개인)</p></FI>
+    <FI delay={.35}><p style={{fontSize:15,color:"rgba(255,255,255,.4)",marginTop:24}}>더나일은 기획재정부 지정 지정기부금단체로 기부금영수증 발급이 가능합니다 (법인/개인)</p></FI>
   </Box></section>
 
   {/* 더나일은 약속합니다 */}
@@ -780,8 +780,8 @@ const PacerPage=()=>(<>
           onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-4px)";e.currentTarget.style.boxShadow="0 8px 24px rgba(27,42,74,.08)"}}
           onMouseLeave={e=>{e.currentTarget.style.transform="";e.currentTarget.style.boxShadow="none"}}>
           <div style={{fontSize:36,marginBottom:16}}>{x.icon}</div>
-          <h3 style={{fontSize:17,fontWeight:700,color:C.navy,marginBottom:12,lineHeight:1.5,whiteSpace:"pre-line"}}>{x.t}</h3>
-          <p style={{fontSize:14,color:C.g6,lineHeight:1.7,wordBreak:"keep-all"}}>{x.d}</p>
+          <h3 style={{fontSize:20,fontWeight:700,color:C.navy,marginBottom:12,lineHeight:1.5,whiteSpace:"pre-line"}}>{x.t}</h3>
+          <p style={{fontSize:16,color:C.g6,lineHeight:1.7,wordBreak:"keep-all"}}>{x.d}</p>
         </div></FI>
       ))}
     </div>
@@ -804,7 +804,7 @@ const PacerPage=()=>(<>
             <h3 style={{fontSize:20,fontWeight:700,color:C.navy}}>{x.t}</h3>
           </div>
           <div style={{padding:24}}>
-            {x.items.map((item,j)=><div key={j} style={{fontSize:14,color:C.g6,padding:"8px 0",display:"flex",alignItems:"flex-start",gap:10,lineHeight:1.6}}><Dot/><span>{item}</span></div>)}
+            {x.items.map((item,j)=><div key={j} style={{fontSize:16,color:C.g6,padding:"8px 0",display:"flex",alignItems:"flex-start",gap:10,lineHeight:1.6}}><Dot/><span>{item}</span></div>)}
           </div>
         </div></FI>
       ))}
@@ -814,8 +814,8 @@ const PacerPage=()=>(<>
   {/* 페이서란 */}
   <Sec bg={C.navy}><Box style={{textAlign:"center"}}>
     <FI><H2 light style={{fontSize:"clamp(24px,4vw,32px)",maxWidth:600,margin:"0 auto 24px"}}>오늘의 가족을 변화시키는 일에{"\n"}함께해주세요</H2></FI>
-    <FI delay={.1}><p style={{fontSize:15,color:"rgba(255,255,255,.65)",lineHeight:1.9,maxWidth:540,margin:"0 auto",wordBreak:"keep-all"}}>가족의 가치를 회복하는 여정에 건강한 가족 문화를 형성해 나가는 더나일 커뮤니티의 일원으로서 함께합니다.</p></FI>
-    <FI delay={.15}><p style={{fontSize:15,color:"rgba(255,255,255,.65)",lineHeight:1.9,maxWidth:540,margin:"16px auto 0",wordBreak:"keep-all"}}>가족의 행복한 성장을 함께 공유할 수 있도록 페이서에게도 가족을 위한 다양한 프로그램 참여 기회를 드립니다.</p></FI>
+    <FI delay={.1}><p style={{fontSize:17,color:"rgba(255,255,255,.65)",lineHeight:1.9,maxWidth:540,margin:"0 auto",wordBreak:"keep-all"}}>가족의 가치를 회복하는 여정에 건강한 가족 문화를 형성해 나가는 더나일 커뮤니티의 일원으로서 함께합니다.</p></FI>
+    <FI delay={.15}><p style={{fontSize:17,color:"rgba(255,255,255,.65)",lineHeight:1.9,maxWidth:540,margin:"16px auto 0",wordBreak:"keep-all"}}>가족의 행복한 성장을 함께 공유할 수 있도록 페이서에게도 가족을 위한 다양한 프로그램 참여 기회를 드립니다.</p></FI>
   </Box></Sec>
 
   {/* 페이서 유형 */}
@@ -836,8 +836,8 @@ const PacerPage=()=>(<>
             <div style={{fontSize:12,color:C.g6,marginTop:4}}>{p.sub}</div>
           </div>
           <div style={{padding:28,flex:1,display:"flex",flexDirection:"column"}}>
-            {p.items.map((b,j)=><div key={j} style={{fontSize:14,color:C.g6,padding:"10px 0",borderBottom:j<p.items.length-1?`1px solid ${C.g1}`:"none",display:"flex",alignItems:"center",gap:10}}><span style={{color:C.gold}}>✔</span>{b}</div>)}
-            <p style={{fontSize:13,color:C.navy,fontWeight:500,marginTop:16,lineHeight:1.6,wordBreak:"keep-all"}}>{p.intro}</p>
+            {p.items.map((b,j)=><div key={j} style={{fontSize:16,color:C.g6,padding:"10px 0",borderBottom:j<p.items.length-1?`1px solid ${C.g1}`:"none",display:"flex",alignItems:"center",gap:10}}><span style={{color:C.gold}}>✔</span>{b}</div>)}
+            <p style={{fontSize:15,color:C.navy,fontWeight:500,marginTop:16,lineHeight:1.6,wordBreak:"keep-all"}}>{p.intro}</p>
             <BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{width:"100%",marginTop:"auto",paddingTop:16,textAlign:"center"}}>후원하기</BG>
           </div>
         </div></FI>
@@ -860,8 +860,8 @@ const PacerPage=()=>(<>
       ].map((x,i)=>(
         <FI key={i} delay={i*.08}><div style={{padding:24,background:C.w,borderRadius:16,border:`1px solid ${C.g2}`,height:"100%"}}>
           <div style={{fontSize:28,marginBottom:10}}>{x.emoji}</div>
-          <h4 style={{fontSize:16,fontWeight:700,color:C.navy,marginBottom:8}}>{x.t}</h4>
-          <p style={{fontSize:13,color:C.g6,lineHeight:1.7,wordBreak:"keep-all"}}>{x.d}</p>
+          <h4 style={{fontSize:18,fontWeight:700,color:C.navy,marginBottom:8}}>{x.t}</h4>
+          <p style={{fontSize:15,color:C.g6,lineHeight:1.7,wordBreak:"keep-all"}}>{x.d}</p>
         </div></FI>
       ))}
     </div>
@@ -873,18 +873,18 @@ const PacerPage=()=>(<>
       <Tag>MONTHLY DONATION</Tag>
       <H2>월정기 후원 페이서 제공 내역</H2>
     </div></FI>
-    <FI delay={.1}><p style={{textAlign:"center",fontSize:13,color:C.g4,marginBottom:48}}>기부금 영수증 발급 / 법인 정기후원 가능(별도문의)</p></FI>
+    <FI delay={.1}><p style={{textAlign:"center",fontSize:15,color:C.g4,marginBottom:48}}>기부금 영수증 발급 / 법인 정기후원 가능(별도문의)</p></FI>
     <FI delay={.15}><div style={{maxWidth:480,margin:"0 auto",padding:40,background:C.warm,borderRadius:20,border:`2px solid ${C.gold}`,textAlign:"center"}}>
-      <div style={{fontSize:15,color:C.gold,fontWeight:700,marginBottom:24}}>🎁 정기 후원</div>
+      <div style={{fontSize:17,color:C.gold,fontWeight:700,marginBottom:24}}>🎁 정기 후원</div>
       {[
         {emoji:"😍",text:"온·오프라인 아동/가족 프로그램 (우선참여 3회 / 1년)"},
         {emoji:"😍",text:"온라인 양육상담 (3회 / 1년)"},
       ].map((item,i)=>(
-        <div key={i} style={{fontSize:15,color:C.navy,fontWeight:500,padding:"10px 0",borderTop:i===0?`1px solid ${C.g2}`:"none",borderBottom:`1px solid ${C.g2}`,lineHeight:1.6,wordBreak:"keep-all"}}>
+        <div key={i} style={{fontSize:17,color:C.navy,fontWeight:500,padding:"10px 0",borderTop:i===0?`1px solid ${C.g2}`:"none",borderBottom:`1px solid ${C.g2}`,lineHeight:1.6,wordBreak:"keep-all"}}>
           {item.emoji} {item.text}
         </div>
       ))}
-      <BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{marginTop:32,fontSize:16,padding:"16px 48px"}}>후원하기</BG>
+      <BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{marginTop:32,fontSize:18,padding:"16px 48px"}}>후원하기</BG>
     </div></FI>
   </Box></Sec>
 
@@ -897,9 +897,9 @@ const PacerPage=()=>(<>
       <FI delay={.15}><div>
         <Tag>FROM THE CHAIRMAN</Tag>
         <H2 style={{fontSize:"clamp(20px,3.5vw,26px)"}}>안녕하세요,{"\n"}이사장 이다랑입니다.</H2>
-        <p style={{fontSize:14,color:C.g6,lineHeight:1.9,marginBottom:16,wordBreak:"keep-all"}}>오늘의 부모들은 넘쳐나는 정보와 높아진 기준 앞에서 오히려 더 불안하고, 더 외롭습니다. 가족을 향한 냉소적인 시선은 사회 전반에 퍼져 있고, 양육 불안은 부모가 자신의 가능성을 보지 못하게 합니다. 그 결과, 부모됨이 주는 기쁨은 가려지고 두려움이 가득해졌습니다.</p>
-        <p style={{fontSize:14,color:C.g6,lineHeight:1.9,marginBottom:16,wordBreak:"keep-all"}}>더나일은 이 문제를 정면으로 바라봅니다. 그리고 이 시대에 필요한 건강하고 균형 잡힌 부모상을 사회의 새로운 기준으로 만들어 가고자 합니다.</p>
-        <p style={{fontSize:14,color:C.g6,lineHeight:1.9,wordBreak:"keep-all"}}>가족을 바라보는 냉소적인 시선을 신뢰와 환대로 바꾸고, 부모 개개인이 자신 안에 이미 가진 자원을 발견하여 양육의 효능감을 회복하며, 그렇게 변화된 부모들이 모여 사회적 문화를 함께 바꾸어 나가기를 기대합니다. 부모됨이 가진 기쁨을 회복하는 것— 그것이 더 나은 다음 세대를 만드는 가장 근본적인 힘입니다.</p>
+        <p style={{fontSize:16,color:C.g6,lineHeight:1.9,marginBottom:16,wordBreak:"keep-all"}}>오늘의 부모들은 넘쳐나는 정보와 높아진 기준 앞에서 오히려 더 불안하고, 더 외롭습니다. 가족을 향한 냉소적인 시선은 사회 전반에 퍼져 있고, 양육 불안은 부모가 자신의 가능성을 보지 못하게 합니다. 그 결과, 부모됨이 주는 기쁨은 가려지고 두려움이 가득해졌습니다.</p>
+        <p style={{fontSize:16,color:C.g6,lineHeight:1.9,marginBottom:16,wordBreak:"keep-all"}}>더나일은 이 문제를 정면으로 바라봅니다. 그리고 이 시대에 필요한 건강하고 균형 잡힌 부모상을 사회의 새로운 기준으로 만들어 가고자 합니다.</p>
+        <p style={{fontSize:16,color:C.g6,lineHeight:1.9,wordBreak:"keep-all"}}>가족을 바라보는 냉소적인 시선을 신뢰와 환대로 바꾸고, 부모 개개인이 자신 안에 이미 가진 자원을 발견하여 양육의 효능감을 회복하며, 그렇게 변화된 부모들이 모여 사회적 문화를 함께 바꾸어 나가기를 기대합니다. 부모됨이 가진 기쁨을 회복하는 것— 그것이 더 나은 다음 세대를 만드는 가장 근본적인 힘입니다.</p>
       </div></FI>
     </div>
   </Box></Sec>
@@ -907,9 +907,9 @@ const PacerPage=()=>(<>
   {/* 하단 CTA */}
   <Sec bg={C.navy}><Box style={{textAlign:"center"}}>
     <FI><H2 light style={{fontSize:"clamp(22px,4vw,30px)",maxWidth:560,margin:"0 auto 24px"}}>함께 걸을 날을 기다리고 있습니다</H2></FI>
-    <FI delay={.1}><p style={{fontSize:16,color:"rgba(255,255,255,.65)",lineHeight:1.9,maxWidth:520,margin:"0 auto 16px",wordBreak:"keep-all"}}>가족의 행복은 사회 전체의 행복으로 이어진다는 사실을 우리 모두는 알고 있습니다.</p></FI>
-    <FI delay={.15}><p style={{fontSize:16,color:"rgba(255,255,255,.65)",lineHeight:1.9,maxWidth:520,margin:"0 auto 40px",wordBreak:"keep-all"}}>가족을 회복시키고 더 나은 세상을 만들어가는 여정. 더나일과 함께 걸어가는 페이서가 되어주세요.</p></FI>
-    <FI delay={.2}><BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{fontSize:17,padding:"18px 48px"}}>지금 후원하기</BG></FI>
+    <FI delay={.1}><p style={{fontSize:18,color:"rgba(255,255,255,.65)",lineHeight:1.9,maxWidth:520,margin:"0 auto 16px",wordBreak:"keep-all"}}>가족의 행복은 사회 전체의 행복으로 이어진다는 사실을 우리 모두는 알고 있습니다.</p></FI>
+    <FI delay={.15}><p style={{fontSize:18,color:"rgba(255,255,255,.65)",lineHeight:1.9,maxWidth:520,margin:"0 auto 40px",wordBreak:"keep-all"}}>가족을 회복시키고 더 나은 세상을 만들어가는 여정. 더나일과 함께 걸어가는 페이서가 되어주세요.</p></FI>
+    <FI delay={.2}><BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{fontSize:20,padding:"18px 48px"}}>지금 후원하기</BG></FI>
   </Box></Sec>
 </>);
 
@@ -942,7 +942,7 @@ const ContactPage=()=>{
     <section style={{paddingTop:120,paddingBottom:80,background:C.warm,minHeight:"60vh",display:"flex",alignItems:"center"}}><Box style={{textAlign:"center"}}>
       <div style={{fontSize:48,marginBottom:24}}>✉️</div>
       <H2>문의가 전송되었습니다</H2>
-      <p style={{fontSize:16,color:C.g6,lineHeight:1.8,marginTop:16}}>빠른 시일 내에 답변 드리겠습니다.<br/>감사합니다.</p>
+      <p style={{fontSize:18,color:C.g6,lineHeight:1.8,marginTop:16}}>빠른 시일 내에 답변 드리겠습니다.<br/>감사합니다.</p>
       <div style={{marginTop:32}}><Btn onClick={()=>{setSent(false);setForm({type:"",org:"",name:"",email:"",phone:"",msg:""});}}>새 문의 작성</Btn></div>
     </Box></section>
   </>);
@@ -965,8 +965,8 @@ const ContactPage=()=>{
           ].map((x,i)=>(
             <div key={i} style={{display:"flex",gap:16,padding:"20px 0",borderBottom:`1px solid ${C.g1}`,alignItems:"flex-start"}}>
               <div style={{flex:1}}>
-                <h4 style={{fontSize:16,fontWeight:600,color:C.navy,marginBottom:4}}>{x.t}</h4>
-                <p style={{fontSize:13,color:C.g6,lineHeight:1.6}}>{x.d}</p>
+                <h4 style={{fontSize:18,fontWeight:600,color:C.navy,marginBottom:4}}>{x.t}</h4>
+                <p style={{fontSize:15,color:C.g6,lineHeight:1.6}}>{x.d}</p>
               </div>
             </div>
           ))}
@@ -974,29 +974,29 @@ const ContactPage=()=>{
         <FI delay={.2}><div style={{background:C.warm,borderRadius:20,padding:32,border:`1px solid ${C.g2}`,position:"sticky",top:100}}>
           <h3 style={{fontSize:20,fontWeight:700,color:C.navy,marginBottom:24}}>문의하기</h3>
           <div style={{marginBottom:16}}>
-            <label style={{fontSize:13,fontWeight:500,color:C.g6,display:"block",marginBottom:6}}>문의 유형</label>
+            <label style={{fontSize:15,fontWeight:500,color:C.g6,display:"block",marginBottom:6}}>문의 유형</label>
             <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
-              {["기업 CSR","강연/워크숍","기관 협업","연구 협력","후원 협약","기타"].map(t=><div key={t} onClick={()=>setForm({...form,type:t})} style={{padding:"8px 16px",borderRadius:20,fontSize:13,cursor:"pointer",background:form.type===t?C.navy:C.w,color:form.type===t?"#fff":C.g6,border:`1px solid ${form.type===t?C.navy:C.g2}`,transition:"all .2s"}}>{t}</div>)}
+              {["기업 CSR","강연/워크숍","기관 협업","연구 협력","후원 협약","기타"].map(t=><div key={t} onClick={()=>setForm({...form,type:t})} style={{padding:"8px 16px",borderRadius:20,fontSize:15,cursor:"pointer",background:form.type===t?C.navy:C.w,color:form.type===t?"#fff":C.g6,border:`1px solid ${form.type===t?C.navy:C.g2}`,transition:"all .2s"}}>{t}</div>)}
             </div>
           </div>
           {[{k:"org",l:"기관/회사명",p:"소속 기관 또는 회사명"},{k:"name",l:"담당자명 *",p:"성함"},{k:"email",l:"이메일 *",p:"example@company.com"},{k:"phone",l:"연락처",p:"010-0000-0000"}].map(f=>(
             <div key={f.k} style={{marginBottom:16}}>
-              <label style={{fontSize:13,fontWeight:500,color:C.g6,display:"block",marginBottom:6}}>{f.l}</label>
+              <label style={{fontSize:15,fontWeight:500,color:C.g6,display:"block",marginBottom:6}}>{f.l}</label>
               <input value={form[f.k]} onChange={e=>setForm({...form,[f.k]:e.target.value})} placeholder={f.p}
-                style={{width:"100%",padding:"12px 16px",borderRadius:10,border:`1px solid ${C.g2}`,fontSize:14,outline:"none",background:C.w,transition:"border .2s",fontFamily:"inherit"}}
+                style={{width:"100%",padding:"12px 16px",borderRadius:10,border:`1px solid ${C.g2}`,fontSize:16,outline:"none",background:C.w,transition:"border .2s",fontFamily:"inherit"}}
                 onFocus={e=>e.target.style.borderColor=C.gold} onBlur={e=>e.target.style.borderColor=C.g2}/>
             </div>
           ))}
           <div style={{marginBottom:24}}>
-            <label style={{fontSize:13,fontWeight:500,color:C.g6,display:"block",marginBottom:6}}>문의 내용 *</label>
+            <label style={{fontSize:15,fontWeight:500,color:C.g6,display:"block",marginBottom:6}}>문의 내용 *</label>
             <textarea value={form.msg} onChange={e=>setForm({...form,msg:e.target.value})} placeholder="협력하고 싶은 내용을 자유롭게 작성해주세요." rows={5}
-              style={{width:"100%",padding:"12px 16px",borderRadius:10,border:`1px solid ${C.g2}`,fontSize:14,outline:"none",background:C.w,resize:"vertical",fontFamily:"inherit"}}
+              style={{width:"100%",padding:"12px 16px",borderRadius:10,border:`1px solid ${C.g2}`,fontSize:16,outline:"none",background:C.w,resize:"vertical",fontFamily:"inherit"}}
               onFocus={e=>e.target.style.borderColor=C.gold} onBlur={e=>e.target.style.borderColor=C.g2}/>
           </div>
-          <BG onClick={handleSubmit} style={{width:"100%",padding:"16px",fontSize:16,textAlign:"center",opacity:sending?.6:1,pointerEvents:sending?"none":"auto"}}>{sending?"전송 중...":"문의 보내기"}</BG>
+          <BG onClick={handleSubmit} style={{width:"100%",padding:"16px",fontSize:18,textAlign:"center",opacity:sending?.6:1,pointerEvents:sending?"none":"auto"}}>{sending?"전송 중...":"문의 보내기"}</BG>
           <div style={{marginTop:24,padding:"16px 20px",background:C.w,borderRadius:12,border:`1px solid ${C.g2}`}}>
             <div style={{fontSize:12,color:C.gold,fontWeight:600,marginBottom:8}}>직접 연락</div>
-            <div style={{fontSize:13,color:C.g6,lineHeight:1.8}}>E-mail: cross@thenile.kr<br/>전화: 010-8257-1104</div>
+            <div style={{fontSize:15,color:C.g6,lineHeight:1.8}}>E-mail: cross@thenile.kr<br/>전화: 010-8257-1104</div>
           </div>
         </div></FI>
       </div>
@@ -1079,7 +1079,7 @@ const ShopPage=()=>{
     {/* 단계 인디케이터 */}
     {(step==="product"||step==="payment")&&(
       <Sec bg={C.w} style={{paddingTop:32,paddingBottom:16}}><Box>
-        <div style={{display:"flex",justifyContent:"center",gap:12,fontSize:13,color:C.g4,fontWeight:500}}>
+        <div style={{display:"flex",justifyContent:"center",gap:12,fontSize:15,color:C.g4,fontWeight:500}}>
           <span style={{color:step==="product"?C.navy:C.gold,fontWeight:step==="product"?700:600}}>① 상품 확인</span>
           <span style={{color:C.g2}}>→</span>
           <span style={{color:step==="payment"?C.navy:C.g4,fontWeight:step==="payment"?700:500}}>② 결제</span>
@@ -1098,20 +1098,20 @@ const ShopPage=()=>{
               <div style={{width:80,height:80,borderRadius:"50%",background:C.navy,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 20px"}}>
                 <span style={{fontSize:36,color:"#fff"}}>💬</span>
               </div>
-              <p style={{fontSize:14,color:C.g6}}>Professional Counseling</p>
+              <p style={{fontSize:16,color:C.g6}}>Professional Counseling</p>
             </div>
           </div>
           <div>
             <h3 style={{fontSize:24,fontWeight:700,color:C.navy,marginBottom:12,fontFamily:"'Noto Serif KR',serif"}}>{product.name}</h3>
             <div style={{fontSize:28,fontWeight:700,color:C.gold,marginBottom:24}}>{product.price.toLocaleString()}원</div>
-            <p style={{fontSize:15,color:C.g6,lineHeight:1.8,marginBottom:32,wordBreak:"keep-all"}}>{product.desc}</p>
+            <p style={{fontSize:17,color:C.g6,lineHeight:1.8,marginBottom:32,wordBreak:"keep-all"}}>{product.desc}</p>
             <div style={{marginBottom:32}}>
               {product.features.map((f,i)=><div key={i} style={{display:"flex",alignItems:"center",gap:12,padding:"10px 0",borderBottom:`1px solid ${C.g1}`}}>
                 <div style={{width:6,height:6,borderRadius:3,background:C.gold,flexShrink:0}}/>
-                <span style={{fontSize:14,color:C.navy,fontWeight:500}}>{f}</span>
+                <span style={{fontSize:16,color:C.navy,fontWeight:500}}>{f}</span>
               </div>)}
             </div>
-            <Btn onClick={()=>setStep("payment")} style={{width:"100%",textAlign:"center",fontSize:16,padding:"16px 32px"}}>구매하기</Btn>
+            <Btn onClick={()=>setStep("payment")} style={{width:"100%",textAlign:"center",fontSize:18,padding:"16px 32px"}}>구매하기</Btn>
             <p style={{fontSize:12,color:C.g6,marginTop:12,textAlign:"center"}}>결제 진행 후 담당자가 상담 일정을 안내드립니다.</p>
           </div>
         </div></FI>
@@ -1125,31 +1125,31 @@ const ShopPage=()=>{
         <FI><div style={{background:C.warm,borderRadius:16,padding:"24px 28px",marginBottom:32,border:`1px solid ${C.g2}`}}>
           <div style={{fontSize:12,color:C.g4,fontWeight:600,marginBottom:8,letterSpacing:".08em"}}>주문 상품</div>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",flexWrap:"wrap",gap:12}}>
-            <div style={{fontSize:17,fontWeight:700,color:C.navy}}>{product.name}</div>
+            <div style={{fontSize:20,fontWeight:700,color:C.navy}}>{product.name}</div>
             <div style={{fontSize:22,fontWeight:700,color:C.gold}}>{product.price.toLocaleString()}원</div>
           </div>
         </div></FI>
 
         {/* 토스 결제수단 위젯 */}
         <FI delay={.1}><div style={{marginBottom:16}}>
-          <h4 style={{fontSize:15,fontWeight:700,color:C.navy,marginBottom:10}}>결제수단 선택</h4>
+          <h4 style={{fontSize:17,fontWeight:700,color:C.navy,marginBottom:10}}>결제수단 선택</h4>
           <div id="payment-method" style={{minHeight:200,background:C.w,borderRadius:12,border:`1px solid ${C.g2}`}}/>
         </div></FI>
 
         {/* 약관 동의 위젯 */}
         <FI delay={.15}><div style={{marginBottom:24}}>
-          <h4 style={{fontSize:15,fontWeight:700,color:C.navy,marginBottom:10}}>약관 동의</h4>
+          <h4 style={{fontSize:17,fontWeight:700,color:C.navy,marginBottom:10}}>약관 동의</h4>
           <div id="agreement" style={{background:C.w,borderRadius:12,border:`1px solid ${C.g2}`}}/>
         </div></FI>
 
         {!widgetsReady&&(
-          <div style={{textAlign:"center",padding:"20px 0",fontSize:13,color:C.g4}}>결제 화면을 불러오는 중입니다…</div>
+          <div style={{textAlign:"center",padding:"20px 0",fontSize:15,color:C.g4}}>결제 화면을 불러오는 중입니다…</div>
         )}
 
         {/* 결제하기 / 뒤로가기 */}
         <FI delay={.2}><div style={{display:"flex",gap:12,flexWrap:"wrap",marginTop:24}}>
-          <button onClick={()=>setStep("product")} style={{flex:"0 0 auto",padding:"16px 24px",fontSize:14,background:C.w,color:C.g6,border:`1px solid ${C.g2}`,borderRadius:10,cursor:"pointer",fontWeight:500}}>← 이전</button>
-          <BG onClick={handlePayment} disabled={!widgetsReady||paying} style={{flex:1,textAlign:"center",fontSize:16,padding:"16px 32px",opacity:(!widgetsReady||paying)?.5:1,cursor:(!widgetsReady||paying)?"not-allowed":"pointer"}}>
+          <button onClick={()=>setStep("product")} style={{flex:"0 0 auto",padding:"16px 24px",fontSize:16,background:C.w,color:C.g6,border:`1px solid ${C.g2}`,borderRadius:10,cursor:"pointer",fontWeight:500}}>← 이전</button>
+          <BG onClick={handlePayment} disabled={!widgetsReady||paying} style={{flex:1,textAlign:"center",fontSize:18,padding:"16px 32px",opacity:(!widgetsReady||paying)?.5:1,cursor:(!widgetsReady||paying)?"not-allowed":"pointer"}}>
             {paying?"결제창 여는 중…":`${product.price.toLocaleString()}원 결제하기`}
           </BG>
         </div></FI>
@@ -1167,15 +1167,15 @@ const ShopPage=()=>{
         <FI>
           <div style={{width:80,height:80,borderRadius:"50%",background:`${C.gold}33`,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 24px",fontSize:40}}>✓</div>
           <h3 style={{fontSize:24,fontWeight:700,color:C.navy,marginBottom:16,fontFamily:"'Noto Serif KR',serif"}}>결제가 완료되었습니다</h3>
-          <p style={{fontSize:15,color:C.g6,lineHeight:1.8,marginBottom:32,wordBreak:"keep-all"}}>담당자가 곧 연락드려 상담 일정을 안내드립니다.</p>
+          <p style={{fontSize:17,color:C.g6,lineHeight:1.8,marginBottom:32,wordBreak:"keep-all"}}>담당자가 곧 연락드려 상담 일정을 안내드립니다.</p>
           {resultInfo&&(
-            <div style={{textAlign:"left",background:C.warm,padding:"20px 24px",borderRadius:12,marginBottom:32,fontSize:13,color:C.g6,lineHeight:1.9,wordBreak:"break-all"}}>
+            <div style={{textAlign:"left",background:C.warm,padding:"20px 24px",borderRadius:12,marginBottom:32,fontSize:15,color:C.g6,lineHeight:1.9,wordBreak:"break-all"}}>
               <div><strong style={{color:C.navy}}>주문번호</strong> : {resultInfo.orderId}</div>
               <div><strong style={{color:C.navy}}>결제금액</strong> : {Number(resultInfo.amount).toLocaleString()}원</div>
               <div><strong style={{color:C.navy}}>결제키</strong> : {resultInfo.paymentKey}</div>
             </div>
           )}
-          <Btn onClick={()=>{window.history.pushState({},"","/shop");setStep("product");setResultInfo(null);}} style={{fontSize:14,padding:"12px 32px"}}>상품 페이지로 돌아가기</Btn>
+          <Btn onClick={()=>{window.history.pushState({},"","/shop");setStep("product");setResultInfo(null);}} style={{fontSize:16,padding:"12px 32px"}}>상품 페이지로 돌아가기</Btn>
         </FI>
       </Box></Sec>
     )}
@@ -1187,9 +1187,9 @@ const ShopPage=()=>{
           <div style={{width:80,height:80,borderRadius:"50%",background:"#FEE2E2",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 24px",fontSize:40,color:"#DC2626"}}>✕</div>
           <h3 style={{fontSize:24,fontWeight:700,color:C.navy,marginBottom:16,fontFamily:"'Noto Serif KR',serif"}}>결제가 완료되지 않았습니다</h3>
           {resultInfo&&resultInfo.message&&(
-            <p style={{fontSize:14,color:C.g6,lineHeight:1.8,marginBottom:32,wordBreak:"keep-all"}}>{resultInfo.message}</p>
+            <p style={{fontSize:16,color:C.g6,lineHeight:1.8,marginBottom:32,wordBreak:"keep-all"}}>{resultInfo.message}</p>
           )}
-          <Btn onClick={()=>{window.history.pushState({},"","/shop");setStep("product");setResultInfo(null);}} style={{fontSize:14,padding:"12px 32px"}}>다시 시도하기</Btn>
+          <Btn onClick={()=>{window.history.pushState({},"","/shop");setStep("product");setResultInfo(null);}} style={{fontSize:16,padding:"12px 32px"}}>다시 시도하기</Btn>
         </FI>
       </Box></Sec>
     )}
@@ -1210,11 +1210,11 @@ const RefundPage=()=>(<>
     <FI delay={.2}><Desc>사단법인 더나일이 제공하는 상담 서비스의 환불 및 취소 규정입니다.</Desc></FI>
   </Box></section>
   <Sec bg={C.w}><Box>
-    <FI><div style={{maxWidth:820,margin:"0 auto",fontSize:15,color:C.g6,lineHeight:1.95,wordBreak:"keep-all"}}>
+    <FI><div style={{maxWidth:820,margin:"0 auto",fontSize:17,color:C.g6,lineHeight:1.95,wordBreak:"keep-all"}}>
 
       <div style={{padding:"24px 28px",background:C.warm,borderRadius:12,marginBottom:32,borderLeft:`4px solid ${C.gold}`}}>
-        <div style={{fontSize:13,color:C.gold,fontWeight:700,marginBottom:6,letterSpacing:".05em"}}>적용 대상</div>
-        <p style={{margin:0,color:C.navy,fontSize:14}}>본 환불 정책은 사단법인 더나일(www.thenile.kr)에서 제공하는 모든 상담·교육 서비스 및 디지털 콘텐츠에 적용됩니다.</p>
+        <div style={{fontSize:15,color:C.gold,fontWeight:700,marginBottom:6,letterSpacing:".05em"}}>적용 대상</div>
+        <p style={{margin:0,color:C.navy,fontSize:16}}>본 환불 정책은 사단법인 더나일(www.thenile.kr)에서 제공하는 모든 상담·교육 서비스 및 디지털 콘텐츠에 적용됩니다.</p>
       </div>
 
       <h3 style={{fontSize:20,fontWeight:700,color:C.navy,marginTop:40,marginBottom:16}}>제1조 환불 신청 가능 기간</h3>
@@ -1231,10 +1231,10 @@ const RefundPage=()=>(<>
       <p style={{marginBottom:12}}>① 단회성 상담의 경우, 상담 시작 전 취소 시 전액, 시작 후 취소 시 환불이 제한됩니다.</p>
       <p style={{marginBottom:12}}>② 다회 프로그램(예: 6주 프로젝트)의 경우, 다음 기준으로 환불됩니다.</p>
       <div style={{padding:"16px 20px",background:C.warm,borderRadius:8,marginBottom:12}}>
-        <p style={{marginBottom:8,fontSize:14}}>· 프로그램 시작 전 : 전액 환불</p>
-        <p style={{marginBottom:8,fontSize:14}}>· 전체 일정의 1/3 이내 진행 시 : 결제 금액의 2/3 환불</p>
-        <p style={{marginBottom:8,fontSize:14}}>· 전체 일정의 1/2 이내 진행 시 : 결제 금액의 1/2 환불</p>
-        <p style={{margin:0,fontSize:14}}>· 전체 일정의 1/2 초과 진행 시 : 환불 불가</p>
+        <p style={{marginBottom:8,fontSize:16}}>· 프로그램 시작 전 : 전액 환불</p>
+        <p style={{marginBottom:8,fontSize:16}}>· 전체 일정의 1/3 이내 진행 시 : 결제 금액의 2/3 환불</p>
+        <p style={{marginBottom:8,fontSize:16}}>· 전체 일정의 1/2 이내 진행 시 : 결제 금액의 1/2 환불</p>
+        <p style={{margin:0,fontSize:16}}>· 전체 일정의 1/2 초과 진행 시 : 환불 불가</p>
       </div>
       <p style={{marginBottom:0}}>③ 환불 금액은 카드 결제 취소 또는 계좌 이체로 환급되며, 카드 취소의 경우 카드사 정책에 따라 2~7영업일 소요됩니다.</p>
 
@@ -1254,15 +1254,15 @@ const RefundPage=()=>(<>
       <h3 style={{fontSize:20,fontWeight:700,color:C.navy,marginTop:40,marginBottom:16}}>제6조 문의</h3>
       <p style={{marginBottom:8}}>환불 관련 문의는 아래로 연락 주세요.</p>
       <div style={{padding:"20px 24px",background:C.warm,borderRadius:12,marginTop:12}}>
-        <p style={{marginBottom:6,fontSize:14}}><strong style={{color:C.navy}}>사단법인 더나일</strong></p>
-        <p style={{marginBottom:6,fontSize:14}}>대표자 : 이다랑</p>
-        <p style={{marginBottom:6,fontSize:14}}>사업자등록번호 : 438-82-00797</p>
-        <p style={{marginBottom:6,fontSize:14}}>주소 : 서울특별시 성동구 뚝섬로1나길 5, 7층 S721호(성수동1가, 헤이그라운드)</p>
-        <p style={{marginBottom:6,fontSize:14}}>전화 : 010-8257-1104</p>
-        <p style={{margin:0,fontSize:14}}>이메일 : cross@thenile.kr</p>
+        <p style={{marginBottom:6,fontSize:16}}><strong style={{color:C.navy}}>사단법인 더나일</strong></p>
+        <p style={{marginBottom:6,fontSize:16}}>대표자 : 이다랑</p>
+        <p style={{marginBottom:6,fontSize:16}}>사업자등록번호 : 438-82-00797</p>
+        <p style={{marginBottom:6,fontSize:16}}>주소 : 서울특별시 성동구 뚝섬로1나길 5, 7층 S721호(성수동1가, 헤이그라운드)</p>
+        <p style={{marginBottom:6,fontSize:16}}>전화 : 010-8257-1104</p>
+        <p style={{margin:0,fontSize:16}}>이메일 : cross@thenile.kr</p>
       </div>
 
-      <p style={{marginTop:40,paddingTop:24,borderTop:`1px solid ${C.g2}`,fontSize:13,color:C.g4,textAlign:"right"}}>본 환불 정책은 2026년 5월 1일부터 시행됩니다.</p>
+      <p style={{marginTop:40,paddingTop:24,borderTop:`1px solid ${C.g2}`,fontSize:15,color:C.g4,textAlign:"right"}}>본 환불 정책은 2026년 5월 1일부터 시행됩니다.</p>
     </div></FI>
   </Box></Sec>
 </>);
@@ -1338,8 +1338,8 @@ function submitToGoogleForm(formId,entries,values){
 }
 
 /* 폼 공통 스타일 */
-const FF_INPUT={width:"100%",padding:"11px 14px",fontSize:14,border:`1px solid ${C.g2}`,borderRadius:10,background:"#fff",color:"#2A1F1A",fontFamily:"inherit",boxSizing:"border-box",outline:"none",transition:"border-color .15s"};
-const FF_LABEL={display:"block",fontSize:13,fontWeight:600,color:"#2A1F1A",marginBottom:6};
+const FF_INPUT={width:"100%",padding:"11px 14px",fontSize:16,border:`1px solid ${C.g2}`,borderRadius:10,background:"#fff",color:"#2A1F1A",fontFamily:"inherit",boxSizing:"border-box",outline:"none",transition:"border-color .15s"};
+const FF_LABEL={display:"block",fontSize:15,fontWeight:600,color:"#2A1F1A",marginBottom:6};
 
 /* 필드 헬퍼 */
 const FormField=({label,required,children,help})=>(
@@ -1354,7 +1354,7 @@ const FormField=({label,required,children,help})=>(
 const RadioGroup=({name,options,value,onChange,accent=CC.coral})=>(
   <div style={{display:"grid",gap:8}}>
     {options.map(opt=>(
-      <label key={opt} style={{display:"flex",alignItems:"center",gap:10,padding:"10px 14px",borderRadius:10,border:`1px solid ${value===opt?accent:C.g2}`,background:value===opt?`${accent}10`:"#fff",cursor:"pointer",transition:"all .15s",fontSize:14,color:"#2A1F1A"}}>
+      <label key={opt} style={{display:"flex",alignItems:"center",gap:10,padding:"10px 14px",borderRadius:10,border:`1px solid ${value===opt?accent:C.g2}`,background:value===opt?`${accent}10`:"#fff",cursor:"pointer",transition:"all .15s",fontSize:16,color:"#2A1F1A"}}>
         <input type="radio" name={name} value={opt} checked={value===opt} onChange={()=>onChange(opt)} style={{accentColor:accent,margin:0}}/>
         <span>{opt}</span>
       </label>
@@ -1435,17 +1435,17 @@ const ApplyFormModal=({open,onClose})=>{
           </FormField>
           <label style={{display:"flex",alignItems:"flex-start",gap:10,padding:"12px 14px",background:CC.cream,borderRadius:10,cursor:"pointer",marginTop:8}}>
             <input type="checkbox" checked={v.agree} onChange={e=>upd("agree",e.target.checked)} style={{accentColor:CC.coral,marginTop:2,flexShrink:0}}/>
-            <span style={{fontSize:13,color:"#2A1F1A",lineHeight:1.6,wordBreak:"keep-all"}}>
+            <span style={{fontSize:15,color:"#2A1F1A",lineHeight:1.6,wordBreak:"keep-all"}}>
               <strong style={{color:CC.coral}}>(필수)</strong> 개인정보 수집·이용에 동의합니다. 수집 항목: 이름·연락처·이메일·참가자 유형 등. 이용 목적: 컨퍼런스 참가 안내 및 통계. 보관 기간: 행사 종료 후 6개월.
             </span>
           </label>
-          <button type="submit" style={{marginTop:24,width:"100%",padding:"16px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer",letterSpacing:".02em",transition:"all .2s"}} onMouseEnter={e=>e.currentTarget.style.background=CC.coral} onMouseLeave={e=>e.currentTarget.style.background=CC.ink}>신청서 제출하기</button>
+          <button type="submit" style={{marginTop:24,width:"100%",padding:"16px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:18,fontWeight:700,cursor:"pointer",letterSpacing:".02em",transition:"all .2s"}} onMouseEnter={e=>e.currentTarget.style.background=CC.coral} onMouseLeave={e=>e.currentTarget.style.background=CC.ink}>신청서 제출하기</button>
         </form>
       )}
       {step==="submitting"&&(
         <div style={{padding:"40px 0",textAlign:"center"}}>
           <div style={{width:48,height:48,border:`3px solid ${CC.coral}33`,borderTopColor:CC.coral,borderRadius:"50%",margin:"0 auto 16px",animation:"spin 1s linear infinite"}}/>
-          <div style={{fontSize:14,color:"#5A5650"}}>신청서를 제출하는 중입니다…</div>
+          <div style={{fontSize:16,color:"#5A5650"}}>신청서를 제출하는 중입니다…</div>
           <style>{`@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}`}</style>
         </div>
       )}
@@ -1453,16 +1453,16 @@ const ApplyFormModal=({open,onClose})=>{
         <div style={{padding:"32px 0 16px",textAlign:"center"}}>
           <div style={{width:72,height:72,borderRadius:"50%",background:`${CC.coral}22`,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 20px",fontSize:36,color:CC.coral}}>✓</div>
           <h4 style={{fontSize:20,fontWeight:800,color:"#2A1F1A",marginBottom:12,fontFamily:"'Noto Serif KR',serif"}}>신청이 접수되었습니다</h4>
-          <p style={{fontSize:14,color:"#5A5650",lineHeight:1.8,marginBottom:28,wordBreak:"keep-all"}}>제출하신 정보로 자리를 안내드리겠습니다.<br/>등록 결과는 모집 마감 후 안내됩니다.</p>
-          <button onClick={handleClose} style={{padding:"12px 32px",background:CC.coral,color:"#fff",border:"none",borderRadius:50,fontSize:14,fontWeight:700,cursor:"pointer"}}>확인</button>
+          <p style={{fontSize:16,color:"#5A5650",lineHeight:1.8,marginBottom:28,wordBreak:"keep-all"}}>제출하신 정보로 자리를 안내드리겠습니다.<br/>등록 결과는 모집 마감 후 안내됩니다.</p>
+          <button onClick={handleClose} style={{padding:"12px 32px",background:CC.coral,color:"#fff",border:"none",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer"}}>확인</button>
         </div>
       )}
       {step==="error"&&(
         <div style={{padding:"32px 0 16px",textAlign:"center"}}>
           <div style={{width:72,height:72,borderRadius:"50%",background:"#FEE2E2",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 20px",fontSize:36,color:"#DC2626"}}>!</div>
           <h4 style={{fontSize:18,fontWeight:800,color:"#2A1F1A",marginBottom:12}}>제출 중 오류가 발생했습니다</h4>
-          <p style={{fontSize:14,color:"#5A5650",lineHeight:1.8,marginBottom:24,wordBreak:"keep-all"}}>잠시 후 다시 시도해 주세요. 계속 문제가 발생하면 cross@thenile.kr 로 연락 부탁드립니다.</p>
-          <button onClick={()=>setStep("form")} style={{padding:"12px 32px",background:CC.coral,color:"#fff",border:"none",borderRadius:50,fontSize:14,fontWeight:700,cursor:"pointer"}}>다시 시도</button>
+          <p style={{fontSize:16,color:"#5A5650",lineHeight:1.8,marginBottom:24,wordBreak:"keep-all"}}>잠시 후 다시 시도해 주세요. 계속 문제가 발생하면 cross@thenile.kr 로 연락 부탁드립니다.</p>
+          <button onClick={()=>setStep("form")} style={{padding:"12px 32px",background:CC.coral,color:"#fff",border:"none",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer"}}>다시 시도</button>
         </div>
       )}
     </ConfModal>
@@ -1512,33 +1512,33 @@ const PartnerFormModal=({open,onClose})=>{
           </FormField>
           <label style={{display:"flex",alignItems:"flex-start",gap:10,padding:"12px 14px",background:CC.cream,borderRadius:10,cursor:"pointer",marginTop:8}}>
             <input type="checkbox" checked={v.agree} onChange={e=>upd("agree",e.target.checked)} style={{accentColor:CC.sage,marginTop:2,flexShrink:0}}/>
-            <span style={{fontSize:13,color:"#2A1F1A",lineHeight:1.6,wordBreak:"keep-all"}}>
+            <span style={{fontSize:15,color:"#2A1F1A",lineHeight:1.6,wordBreak:"keep-all"}}>
               <strong style={{color:CC.sage}}>(필수)</strong> 개인정보 수집·이용에 동의합니다. 수집 항목: 담당자 정보 및 기업/기관명. 이용 목적: 제휴 검토 및 회신. 보관 기간: 회신 후 1년.
             </span>
           </label>
-          <button type="submit" style={{marginTop:24,width:"100%",padding:"16px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer",transition:"all .2s"}} onMouseEnter={e=>e.currentTarget.style.background=CC.sage} onMouseLeave={e=>e.currentTarget.style.background=CC.ink}>제휴 문의 보내기</button>
+          <button type="submit" style={{marginTop:24,width:"100%",padding:"16px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:18,fontWeight:700,cursor:"pointer",transition:"all .2s"}} onMouseEnter={e=>e.currentTarget.style.background=CC.sage} onMouseLeave={e=>e.currentTarget.style.background=CC.ink}>제휴 문의 보내기</button>
         </form>
       )}
       {step==="submitting"&&(
         <div style={{padding:"40px 0",textAlign:"center"}}>
           <div style={{width:48,height:48,border:`3px solid ${CC.sage}33`,borderTopColor:CC.sage,borderRadius:"50%",margin:"0 auto 16px",animation:"spin 1s linear infinite"}}/>
-          <div style={{fontSize:14,color:"#5A5650"}}>전송 중입니다…</div>
+          <div style={{fontSize:16,color:"#5A5650"}}>전송 중입니다…</div>
         </div>
       )}
       {step==="success"&&(
         <div style={{padding:"32px 0 16px",textAlign:"center"}}>
           <div style={{width:72,height:72,borderRadius:"50%",background:`${CC.sage}22`,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 20px",fontSize:36,color:CC.sage}}>✓</div>
           <h4 style={{fontSize:20,fontWeight:800,color:"#2A1F1A",marginBottom:12,fontFamily:"'Noto Serif KR',serif"}}>문의가 전달되었습니다</h4>
-          <p style={{fontSize:14,color:"#5A5650",lineHeight:1.8,marginBottom:28,wordBreak:"keep-all"}}>담당자가 영업일 기준 3일 이내에 회신드리겠습니다.<br/>관심과 시간 내어 주셔서 감사합니다.</p>
-          <button onClick={handleClose} style={{padding:"12px 32px",background:CC.sage,color:"#fff",border:"none",borderRadius:50,fontSize:14,fontWeight:700,cursor:"pointer"}}>확인</button>
+          <p style={{fontSize:16,color:"#5A5650",lineHeight:1.8,marginBottom:28,wordBreak:"keep-all"}}>담당자가 영업일 기준 3일 이내에 회신드리겠습니다.<br/>관심과 시간 내어 주셔서 감사합니다.</p>
+          <button onClick={handleClose} style={{padding:"12px 32px",background:CC.sage,color:"#fff",border:"none",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer"}}>확인</button>
         </div>
       )}
       {step==="error"&&(
         <div style={{padding:"32px 0 16px",textAlign:"center"}}>
           <div style={{width:72,height:72,borderRadius:"50%",background:"#FEE2E2",display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 20px",fontSize:36,color:"#DC2626"}}>!</div>
           <h4 style={{fontSize:18,fontWeight:800,color:"#2A1F1A",marginBottom:12}}>전송 중 오류가 발생했습니다</h4>
-          <p style={{fontSize:14,color:"#5A5650",lineHeight:1.8,marginBottom:24,wordBreak:"keep-all"}}>cross@thenile.kr 로 직접 문의 부탁드립니다.</p>
-          <button onClick={()=>setStep("form")} style={{padding:"12px 32px",background:CC.sage,color:"#fff",border:"none",borderRadius:50,fontSize:14,fontWeight:700,cursor:"pointer"}}>다시 시도</button>
+          <p style={{fontSize:16,color:"#5A5650",lineHeight:1.8,marginBottom:24,wordBreak:"keep-all"}}>cross@thenile.kr 로 직접 문의 부탁드립니다.</p>
+          <button onClick={()=>setStep("form")} style={{padding:"12px 32px",background:CC.sage,color:"#fff",border:"none",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer"}}>다시 시도</button>
         </div>
       )}
     </ConfModal>
@@ -1637,17 +1637,17 @@ const ConferencePage=()=>{
       <div style={{maxWidth:960,margin:"0 auto",pointerEvents:"auto",background:CC.ink,color:CC.cream,borderRadius:50,padding:"8px 8px 8px 20px",display:"flex",alignItems:"center",gap:8,boxShadow:"0 10px 30px rgba(42,31,26,.28)"}}>
         <div className="conf-sticky-info" style={{display:"flex",alignItems:"center",gap:8,minWidth:0,flex:1}}>
           {dday!==null&&dday>0&&(
-            <span style={{padding:"4px 12px",background:CC.coral,color:C.w,borderRadius:30,fontWeight:800,letterSpacing:".02em",flexShrink:0,fontFamily:"'Cormorant Garamond',serif",fontSize:"clamp(15px,2.2vw,18px)"}}>D-{dday}</span>
+            <span style={{padding:"4px 12px",background:CC.coral,color:C.w,borderRadius:30,fontWeight:800,letterSpacing:".02em",flexShrink:0,fontFamily:"'Cormorant Garamond',serif",fontSize:"clamp(17px,2.2vw,18px)"}}>D-{dday}</span>
           )}
           {dday===0&&(
             <span style={{padding:"4px 12px",background:CC.coral,color:C.w,borderRadius:30,fontSize:12,fontWeight:800,letterSpacing:".05em",flexShrink:0}}>D-DAY</span>
           )}
-          <span className="conf-sticky-title" style={{fontSize:"clamp(12px,1.7vw,14px)",fontWeight:600,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>2026 양육불안 컨퍼런스</span>
+          <span className="conf-sticky-title" style={{fontSize:"clamp(12px,1.7vw,16px)",fontWeight:600,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>2026 양육불안 컨퍼런스</span>
         </div>
-        <button onClick={()=>setShowPartner(true)} className="conf-sticky-partner" style={{padding:"8px 14px",background:"transparent",color:CC.cream,border:"1px solid rgba(255,248,236,.35)",borderRadius:30,fontSize:"clamp(11px,1.5vw,13px)",fontWeight:600,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0,transition:"background .2s"}} onMouseEnter={e=>e.currentTarget.style.background="rgba(255,248,236,.1)"} onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
+        <button onClick={()=>setShowPartner(true)} className="conf-sticky-partner" style={{padding:"8px 14px",background:"transparent",color:CC.cream,border:"1px solid rgba(255,248,236,.35)",borderRadius:30,fontSize:"clamp(11px,1.5vw,15px)",fontWeight:600,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0,transition:"background .2s"}} onMouseEnter={e=>e.currentTarget.style.background="rgba(255,248,236,.1)"} onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
           제휴 문의
         </button>
-        <button onClick={()=>setShowApply(true)} style={{padding:"10px 18px",background:CC.coral,color:C.w,border:"none",borderRadius:30,fontSize:"clamp(12px,1.7vw,14px)",fontWeight:700,cursor:"pointer",letterSpacing:".02em",whiteSpace:"nowrap",flexShrink:0,transition:"background .2s"}} onMouseEnter={e=>e.currentTarget.style.background=CC.peach} onMouseLeave={e=>e.currentTarget.style.background=CC.coral}>
+        <button onClick={()=>setShowApply(true)} style={{padding:"10px 18px",background:CC.coral,color:C.w,border:"none",borderRadius:30,fontSize:"clamp(12px,1.7vw,16px)",fontWeight:700,cursor:"pointer",letterSpacing:".02em",whiteSpace:"nowrap",flexShrink:0,transition:"background .2s"}} onMouseEnter={e=>e.currentTarget.style.background=CC.peach} onMouseLeave={e=>e.currentTarget.style.background=CC.coral}>
           참가 신청 →
         </button>
       </div>
@@ -1687,7 +1687,7 @@ const ConferencePage=()=>{
             <div key={i} style={{padding:"18px 14px",background:C.w,borderRadius:16,textAlign:"left",border:`2px solid ${x.c}33`,position:"relative"}}>
               <div style={{position:"absolute",top:-8,left:14,width:14,height:14,borderRadius:"50%",background:x.c}}/>
               <div style={{fontSize:11,color:x.c,fontWeight:700,marginBottom:8,letterSpacing:".08em"}}>{x.k}</div>
-              <div style={{fontSize:"clamp(13px,1.8vw,17px)",fontWeight:700,color:CC.ink,marginBottom:4,wordBreak:"keep-all",lineHeight:1.3}}>{x.v}</div>
+              <div style={{fontSize:"clamp(15px,1.8vw,20px)",fontWeight:700,color:CC.ink,marginBottom:4,wordBreak:"keep-all",lineHeight:1.3}}>{x.v}</div>
               <div style={{fontSize:11,color:C.g4,wordBreak:"keep-all",lineHeight:1.4}}>{x.sub}</div>
             </div>
           ))}
@@ -1696,10 +1696,10 @@ const ConferencePage=()=>{
       </div></FI>
 
       <FI delay={.25}><div style={{textAlign:"center",marginTop:56,position:"relative"}}>
-        <button onClick={()=>setShowApply(true)} style={{padding:"18px 56px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer",letterSpacing:".02em",transition:"all .25s",boxShadow:`0 8px 24px ${CC.ink}33`}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.transform="translateY(-2px)"}} onMouseLeave={e=>{e.currentTarget.style.background=CC.ink;e.currentTarget.style.transform="translateY(0)"}}>
+        <button onClick={()=>setShowApply(true)} style={{padding:"18px 56px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:18,fontWeight:700,cursor:"pointer",letterSpacing:".02em",transition:"all .25s",boxShadow:`0 8px 24px ${CC.ink}33`}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.transform="translateY(-2px)"}} onMouseLeave={e=>{e.currentTarget.style.background=CC.ink;e.currentTarget.style.transform="translateY(0)"}}>
           참가 신청하기 →
         </button>
-        <p style={{fontSize:13,color:CC.inkBrown,marginTop:16,opacity:.65}}>참가 무료 · 사전 신청 필수</p>
+        <p style={{fontSize:15,color:CC.inkBrown,marginTop:16,opacity:.65}}>참가 무료 · 사전 신청 필수</p>
       </div></FI>
     </Box></Sec>
 
@@ -1708,7 +1708,7 @@ const ConferencePage=()=>{
       <div style={{position:"absolute",top:40,right:"4%",pointerEvents:"none",opacity:.85}}><EmoShape shape="burst" c1={CC.coral} c2={CC.peach} size={120} rotate={20}/></div>
       <div style={{position:"absolute",bottom:60,left:"3%",pointerEvents:"none",opacity:.85}}><EmoShape shape="flower" c1={CC.mint} c2={CC.sky} size={100} rotate={-15}/></div>
       <FI><div style={{textAlign:"center",maxWidth:840,margin:"0 auto",position:"relative"}}>
-        <div style={{fontSize:13,color:CC.peach,fontWeight:700,letterSpacing:".15em",marginBottom:24}}>WHY · 문제의식</div>
+        <div style={{fontSize:15,color:CC.peach,fontWeight:700,letterSpacing:".15em",marginBottom:24}}>WHY · 문제의식</div>
         <h2 style={{fontFamily:"'Noto Serif KR',serif",fontSize:"clamp(28px,5vw,44px)",fontWeight:700,color:CC.cream,lineHeight:1.4,marginBottom:48,wordBreak:"keep-all"}}>
           <span style={{display:"inline-block"}}>양육불안의 시대,</span>{" "}
           <span style={{display:"inline-block"}}>우리는 괜찮은 걸까요?</span>
@@ -1724,12 +1724,12 @@ const ConferencePage=()=>{
           <div key={i} style={{padding:"24px 20px",background:"rgba(255,255,255,.06)",backdropFilter:"blur(10px)",borderRadius:18,border:"1px solid rgba(255,255,255,.12)",textAlign:"center",position:"relative"}}>
             <div style={{display:"flex",justifyContent:"center",marginBottom:12}}><EmoShape shape={x.sh} c1={x.c} c2={CC.cream} size={48} eyes={false}/></div>
             <div style={{fontSize:11,color:x.c,fontWeight:700,marginBottom:6,letterSpacing:".1em"}}>0{i+1}</div>
-            <div style={{fontSize:"clamp(14px,2vw,15px)",color:CC.cream,fontWeight:600,lineHeight:1.5,wordBreak:"keep-all"}}>{x.t}</div>
+            <div style={{fontSize:"clamp(16px,2vw,17px)",color:CC.cream,fontWeight:600,lineHeight:1.5,wordBreak:"keep-all"}}>{x.t}</div>
           </div>
         ))}
       </div></FI>
       <FI delay={.2}><div style={{textAlign:"center",position:"relative"}}>
-        <p style={{fontSize:"clamp(15px,2vw,17px)",color:"rgba(255,248,236,.82)",lineHeight:1.85,maxWidth:680,marginLeft:"auto",marginRight:"auto",wordBreak:"keep-all"}}>
+        <p style={{fontSize:"clamp(17px,2vw,20px)",color:"rgba(255,248,236,.82)",lineHeight:1.85,maxWidth:680,marginLeft:"auto",marginRight:"auto",wordBreak:"keep-all"}}>
           <span style={{display:"inline-block"}}>그동안 양육불안은 "부모 개인이 다루어야 할 감정"으로만 다뤄져 왔습니다.</span>{" "}
           <span style={{display:"inline-block"}}>그러나 양육불안에 대한 솔루션은 다양한 사회문제의 게이트키퍼 역할을 할 수 있습니다.</span>
         </p>
@@ -1739,7 +1739,7 @@ const ConferencePage=()=>{
     {/* 3개 키 메시지 */}
     <Sec bg={C.w} style={{paddingTop:96,paddingBottom:48}}><Box>
       <FI><div style={{textAlign:"center",marginBottom:64}}>
-        <div style={{fontSize:13,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>KEY MESSAGES</div>
+        <div style={{fontSize:15,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>KEY MESSAGES</div>
         <H2><span style={{display:"inline-block"}}>세 가지 질문에 대해</span>{" "}<span style={{display:"inline-block"}}>함께 이야기 나눕니다.</span></H2>
       </div></FI>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:24,maxWidth:1080,margin:"0 auto"}}>
@@ -1753,7 +1753,7 @@ const ConferencePage=()=>{
             <div style={{position:"relative"}}>
               <div style={{fontSize:11,color:x.c,fontWeight:700,letterSpacing:".15em",marginBottom:8}}>PART {parseInt(x.n)}</div>
               <h3 style={{fontSize:"clamp(20px,2.6vw,24px)",fontWeight:800,color:CC.ink,marginBottom:16,lineHeight:1.35,wordBreak:"keep-all",fontFamily:"'Noto Serif KR',serif"}}>{x.t}</h3>
-              <p style={{fontSize:14,color:CC.inkBrown,opacity:.78,lineHeight:1.85,wordBreak:"keep-all"}}>{x.d}</p>
+              <p style={{fontSize:16,color:CC.inkBrown,opacity:.78,lineHeight:1.85,wordBreak:"keep-all"}}>{x.d}</p>
             </div>
           </div></FI>
         ))}
@@ -1764,7 +1764,7 @@ const ConferencePage=()=>{
     <Sec bg={CC.cream} style={{paddingTop:96,position:"relative",overflow:"hidden"}}><Box>
       <div style={{position:"absolute",top:60,right:"4%",pointerEvents:"none",opacity:.55}}><EmoShape shape="star" c1={CC.coral} c2={CC.peach} size={70} rotate={15} eyes={false}/></div>
       <FI><div style={{textAlign:"center",marginBottom:48,position:"relative"}}>
-        <div style={{fontSize:13,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>PROGRAM · 2026.07.09 (목)</div>
+        <div style={{fontSize:15,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>PROGRAM · 2026.07.09 (목)</div>
         <H2>시간표</H2>
       </div></FI>
       <FI delay={.1}><div style={{maxWidth:880,margin:"0 auto",borderRadius:24,overflow:"hidden",background:C.w,boxShadow:"0 4px 24px rgba(0,0,0,.05)"}}>
@@ -1774,38 +1774,38 @@ const ConferencePage=()=>{
           {t:"12:50 – 13:30",s:"점심 · 밍글링",d:"참가자 네트워킹",c:CC.inkBrown},
         ].map((x,i)=>(
           <div key={i} style={{display:"grid",gridTemplateColumns:"clamp(120px,22vw,150px) 1fr",gap:16,padding:"18px 24px",borderBottom:`1px solid ${C.g1}`,alignItems:"start"}}>
-            <div style={{fontSize:13,color:x.c,fontWeight:700,letterSpacing:".02em"}}>{x.t}</div>
+            <div style={{fontSize:15,color:x.c,fontWeight:700,letterSpacing:".02em"}}>{x.t}</div>
             <div>
               <div style={{display:"flex",alignItems:"baseline",gap:10,flexWrap:"wrap",marginBottom:6}}>
-                <span style={{fontSize:"clamp(14px,2vw,15px)",fontWeight:700,color:CC.ink,wordBreak:"keep-all",lineHeight:1.4}}>{x.s}</span>
+                <span style={{fontSize:"clamp(16px,2vw,17px)",fontWeight:700,color:CC.ink,wordBreak:"keep-all",lineHeight:1.4}}>{x.s}</span>
                 {x.sub&&<span style={{fontSize:11,color:x.c,fontWeight:700,padding:"2px 8px",background:`${x.c}15`,borderRadius:12,letterSpacing:".05em"}}>{x.sub}</span>}
               </div>
-              <div style={{fontSize:13,color:CC.inkBrown,opacity:.7,lineHeight:1.7,wordBreak:"keep-all"}}>{x.d}</div>
+              <div style={{fontSize:15,color:CC.inkBrown,opacity:.7,lineHeight:1.7,wordBreak:"keep-all"}}>{x.d}</div>
             </div>
           </div>
         ))}
         {/* SESSION 2 — 같은 시간대 좌우 병렬 */}
         <div style={{display:"grid",gridTemplateColumns:"clamp(120px,22vw,150px) 1fr",gap:16,padding:"18px 24px",borderBottom:`1px solid ${C.g1}`,alignItems:"start"}}>
-          <div style={{fontSize:13,color:CC.inkBrown,fontWeight:700,letterSpacing:".02em"}}>13:30 – 15:00</div>
+          <div style={{fontSize:15,color:CC.inkBrown,fontWeight:700,letterSpacing:".02em"}}>13:30 – 15:00</div>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
             <div style={{padding:"12px 14px",background:`${CC.lilac}12`,borderRadius:12,border:`1px solid ${CC.lilac}33`}}>
               <div style={{fontSize:10,color:CC.lilac,fontWeight:700,letterSpacing:".1em",marginBottom:4}}>SESSION 2-1 · 메인홀</div>
-              <div style={{fontSize:14,fontWeight:700,color:CC.ink,marginBottom:4,wordBreak:"keep-all"}}>인터뷰</div>
+              <div style={{fontSize:16,fontWeight:700,color:CC.ink,marginBottom:4,wordBreak:"keep-all"}}>인터뷰</div>
               <div style={{fontSize:12,color:CC.inkBrown,opacity:.7,lineHeight:1.6,wordBreak:"keep-all"}}>양육불안과 함께 살아간다는 것</div>
             </div>
             <div style={{padding:"12px 14px",background:`${CC.sage}15`,borderRadius:12,border:`1px solid ${CC.sage}44`}}>
               <div style={{fontSize:10,color:CC.sage,fontWeight:700,letterSpacing:".1em",marginBottom:4}}>SESSION 2-2 · 소그룹룸</div>
-              <div style={{fontSize:14,fontWeight:700,color:CC.ink,marginBottom:4,wordBreak:"keep-all"}}>워크숍</div>
+              <div style={{fontSize:16,fontWeight:700,color:CC.ink,marginBottom:4,wordBreak:"keep-all"}}>워크숍</div>
               <div style={{fontSize:12,color:CC.inkBrown,opacity:.7,lineHeight:1.6,wordBreak:"keep-all"}}>내 양육불안 다루기</div>
             </div>
           </div>
         </div>
         {/* 클로징 */}
         <div style={{display:"grid",gridTemplateColumns:"clamp(120px,22vw,150px) 1fr",gap:16,padding:"18px 24px",alignItems:"start"}}>
-          <div style={{fontSize:13,color:CC.inkBrown,fontWeight:700,letterSpacing:".02em"}}>15:00</div>
+          <div style={{fontSize:15,color:CC.inkBrown,fontWeight:700,letterSpacing:".02em"}}>15:00</div>
           <div>
-            <div style={{fontSize:"clamp(14px,2vw,15px)",fontWeight:700,color:CC.ink,marginBottom:4,wordBreak:"keep-all"}}>클로징</div>
-            <div style={{fontSize:13,color:CC.inkBrown,opacity:.7,lineHeight:1.7,wordBreak:"keep-all"}}>마무리 인사 및 후속 캠페인 안내</div>
+            <div style={{fontSize:"clamp(16px,2vw,17px)",fontWeight:700,color:CC.ink,marginBottom:4,wordBreak:"keep-all"}}>클로징</div>
+            <div style={{fontSize:15,color:CC.inkBrown,opacity:.7,lineHeight:1.7,wordBreak:"keep-all"}}>마무리 인사 및 후속 캠페인 안내</div>
           </div>
         </div>
       </div></FI>
@@ -1817,7 +1817,7 @@ const ConferencePage=()=>{
       <div style={{position:"absolute",top:40,left:"4%",pointerEvents:"none",opacity:.45}}><EmoShape shape="pebble" c1={CC.sage} c2={CC.mint} size={70} rotate={-10} eyes={false}/></div>
       <div style={{position:"absolute",bottom:60,right:"5%",pointerEvents:"none",opacity:.45}}><EmoShape shape="cloud" c1={CC.lilac} c2={CC.rose} size={75} rotate={10} eyes={false}/></div>
       <FI><div style={{textAlign:"center",marginBottom:48,position:"relative"}}>
-        <div style={{fontSize:13,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SPEAKERS · 함께 모시는 발표자</div>
+        <div style={{fontSize:15,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SPEAKERS · 함께 모시는 발표자</div>
         <H2>연사 라인업</H2>
       </div></FI>
       <FI delay={.1}><div style={{maxWidth:880,margin:"0 auto",position:"relative"}}>
@@ -1831,7 +1831,7 @@ const ConferencePage=()=>{
                     <img src={s.img} alt={s.n} style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";const c1=s.color,c2=s.c2,id=`fb${idx}-${Math.floor(Math.random()*9999)}`;wrap.insertAdjacentHTML("beforeend",`<svg viewBox="0 0 100 100" style="width:100%;height:100%;display:block"><defs><linearGradient id="${id}" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="${c1}22"/><text x="50" y="62" text-anchor="middle" font-size="32" font-weight="700" fill="${c1}" font-family="serif">${s.n[0]}</text></svg>`)}}}/>
                   </div>
                   <div style={{display:"inline-block",fontSize:10,color:s.color,fontWeight:700,letterSpacing:".1em",marginBottom:6,padding:"3px 10px",background:`${s.color}15`,borderRadius:12}}>{s.part}</div>
-                  <div style={{fontSize:16,fontWeight:700,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>{s.n}</div>
+                  <div style={{fontSize:18,fontWeight:700,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>{s.n}</div>
                   <div style={{fontSize:12,color:CC.inkBrown,opacity:.7,lineHeight:1.5,wordBreak:"keep-all"}}>{s.r}</div>
                 </div>
               );
@@ -1845,9 +1845,9 @@ const ConferencePage=()=>{
     {/* 키노트 상세 (SESSION 1) */}
     <Sec bg={C.w}><Box>
       <FI><div style={{textAlign:"center",marginBottom:48}}>
-        <div style={{fontSize:13,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 1 · 키노트 · 오전 90분</div>
+        <div style={{fontSize:15,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 1 · 키노트 · 오전 90분</div>
         <H2>양육불안은 어디에서 오는가</H2>
-        <p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.7,lineHeight:1.8,maxWidth:560,margin:"16px auto 0",wordBreak:"keep-all"}}>뇌과학과 발달심리학, 두 시선이 한 자리에서 만나 양육불안의 뿌리를 짚어드립니다.</p>
+        <p style={{fontSize:"clamp(16px,2vw,18px)",color:CC.inkBrown,opacity:.7,lineHeight:1.8,maxWidth:560,margin:"16px auto 0",wordBreak:"keep-all"}}>뇌과학과 발달심리학, 두 시선이 한 자리에서 만나 양육불안의 뿌리를 짚어드립니다.</p>
       </div></FI>
       <div style={{display:"grid",gap:24,maxWidth:960,margin:"0 auto"}}>
         {[
@@ -1865,9 +1865,9 @@ const ConferencePage=()=>{
               <div style={{position:"absolute",top:-30,right:-30,opacity:.25,pointerEvents:"none"}}><EmoShape shape={k.sh} c1={k.c} c2={k.c2} size={130} rotate={20} eyes={false}/></div>
               <div style={{position:"relative"}}>
                 <div style={{fontSize:28,fontWeight:800,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>{k.name}</div>
-                <div style={{fontSize:13,color:CC.inkBrown,opacity:.65,marginBottom:20,wordBreak:"keep-all"}}>{k.role}</div>
-                <h4 style={{fontSize:"clamp(16px,2.3vw,19px)",fontWeight:700,color:CC.ink,marginBottom:18,lineHeight:1.4,wordBreak:"keep-all",paddingBottom:16,borderBottom:`1px solid ${k.c}33`}}>{k.title}</h4>
-                <p style={{fontSize:14,color:CC.inkBrown,opacity:.82,lineHeight:1.85,wordBreak:"keep-all",margin:0}}>{k.desc}</p>
+                <div style={{fontSize:15,color:CC.inkBrown,opacity:.65,marginBottom:20,wordBreak:"keep-all"}}>{k.role}</div>
+                <h4 style={{fontSize:"clamp(18px,2.3vw,19px)",fontWeight:700,color:CC.ink,marginBottom:18,lineHeight:1.4,wordBreak:"keep-all",paddingBottom:16,borderBottom:`1px solid ${k.c}33`}}>{k.title}</h4>
+                <p style={{fontSize:16,color:CC.inkBrown,opacity:.82,lineHeight:1.85,wordBreak:"keep-all",margin:0}}>{k.desc}</p>
               </div>
             </div>
           </div></FI>
@@ -1879,13 +1879,13 @@ const ConferencePage=()=>{
     {/* SESSION 2-1 · 토크세션 (단독 섹션, 2x2 그리드) */}
     <Sec bg={CC.cream}><Box>
       <FI><div style={{textAlign:"center",marginBottom:16}}>
-        <div style={{fontSize:13,color:CC.lilac,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 2-1 · 메인홀 · 13:30 – 15:00</div>
+        <div style={{fontSize:15,color:CC.lilac,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 2-1 · 메인홀 · 13:30 – 15:00</div>
         <H2>양육불안과 함께 살아간다는 것</H2>
-        <div style={{display:"inline-block",marginTop:14,padding:"6px 16px",background:`${CC.lilac}15`,borderRadius:30,fontSize:13,color:CC.lilac,fontWeight:700,letterSpacing:".02em"}}>
+        <div style={{display:"inline-block",marginTop:14,padding:"6px 16px",background:`${CC.lilac}15`,borderRadius:30,fontSize:15,color:CC.lilac,fontWeight:700,letterSpacing:".02em"}}>
           토크세션 · 이혜린 / 신두란 / 정지우 / 후추맘
         </div>
       </div></FI>
-      <FI delay={.08}><p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.7,lineHeight:1.85,maxWidth:640,margin:"16px auto 48px",textAlign:"center",wordBreak:"keep-all"}}>다른 자리에서 양육과 만나온 네 분이 자신의 양육불안을 어떻게 통과해왔는지 나누는 대화</p></FI>
+      <FI delay={.08}><p style={{fontSize:"clamp(16px,2vw,18px)",color:CC.inkBrown,opacity:.7,lineHeight:1.85,maxWidth:640,margin:"16px auto 48px",textAlign:"center",wordBreak:"keep-all"}}>다른 자리에서 양육과 만나온 네 분이 자신의 양육불안을 어떻게 통과해왔는지 나누는 대화</p></FI>
 
       {/* 모더 + 패널 4명, 데스크탑 2x2 그리드 */}
       <div className="conf-panel-grid" style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:24,maxWidth:880,margin:"0 auto"}}>
@@ -1907,9 +1907,9 @@ const ConferencePage=()=>{
               <div style={{position:"absolute",top:-20,right:-20,opacity:.18,pointerEvents:"none"}}><EmoShape shape={p.sh} c1={p.c} c2={p.c2} size={110} rotate={20} eyes={false}/></div>
               <div style={{position:"relative",flex:1}}>
                 <div style={{fontSize:24,fontWeight:800,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>{p.name}</div>
-                <div style={{fontSize:13,color:CC.inkBrown,opacity:.65,marginBottom:14,wordBreak:"keep-all"}}>{p.pos}</div>
-                <div style={{fontSize:13,color:p.c,fontWeight:700,marginBottom:12,paddingBottom:12,borderBottom:`1px solid ${p.c}33`,wordBreak:"keep-all"}}>{p.label}</div>
-                <p style={{fontSize:14,color:CC.inkBrown,opacity:.82,lineHeight:1.85,wordBreak:"keep-all",margin:0}}>{p.desc}</p>
+                <div style={{fontSize:15,color:CC.inkBrown,opacity:.65,marginBottom:14,wordBreak:"keep-all"}}>{p.pos}</div>
+                <div style={{fontSize:15,color:p.c,fontWeight:700,marginBottom:12,paddingBottom:12,borderBottom:`1px solid ${p.c}33`,wordBreak:"keep-all"}}>{p.label}</div>
+                <p style={{fontSize:16,color:CC.inkBrown,opacity:.82,lineHeight:1.85,wordBreak:"keep-all",margin:0}}>{p.desc}</p>
               </div>
             </div>
           </div></FI>
@@ -1920,13 +1920,13 @@ const ConferencePage=()=>{
     {/* SESSION 2-2 · 워크숍 (단독 섹션) */}
     <Sec bg={C.w}><Box>
       <FI><div style={{textAlign:"center",marginBottom:16}}>
-        <div style={{fontSize:13,color:CC.sage,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 2-2 · 소그룹룸 · 13:30 – 15:00</div>
+        <div style={{fontSize:15,color:CC.sage,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 2-2 · 소그룹룸 · 13:30 – 15:00</div>
         <H2>내 양육불안 다루기</H2>
-        <div style={{display:"inline-block",marginTop:14,padding:"6px 16px",background:`${CC.sage}18`,borderRadius:30,fontSize:13,color:CC.sage,fontWeight:700,letterSpacing:".02em"}}>
+        <div style={{display:"inline-block",marginTop:14,padding:"6px 16px",background:`${CC.sage}18`,borderRadius:30,fontSize:15,color:CC.sage,fontWeight:700,letterSpacing:".02em"}}>
           워크숍 · 강혁진 / 더나일 크루
         </div>
       </div></FI>
-      <FI delay={.08}><p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.75,lineHeight:1.85,maxWidth:640,margin:"16px auto 48px",textAlign:"center",wordBreak:"keep-all"}}>내 안의 양육불안에 대해 함께 다루어보고, 개념화 작업을 통해 불안을 잘 다룰 수 있는 나만의 자원을 찾아봅니다.</p></FI>
+      <FI delay={.08}><p style={{fontSize:"clamp(16px,2vw,18px)",color:CC.inkBrown,opacity:.75,lineHeight:1.85,maxWidth:640,margin:"16px auto 48px",textAlign:"center",wordBreak:"keep-all"}}>내 안의 양육불안에 대해 함께 다루어보고, 개념화 작업을 통해 불안을 잘 다룰 수 있는 나만의 자원을 찾아봅니다.</p></FI>
 
       <div style={{maxWidth:960,margin:"0 auto"}}>
         {/* 강혁진 — 키노트와 동일한 큰 가로 카드 */}
@@ -1939,8 +1939,8 @@ const ConferencePage=()=>{
             <div style={{position:"absolute",top:-30,right:-30,opacity:.2,pointerEvents:"none"}}><EmoShape shape="flower" c1={CC.sage} c2={CC.mint} size={130} rotate={20} eyes={false}/></div>
             <div style={{position:"relative"}}>
               <div style={{fontSize:28,fontWeight:800,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>강혁진</div>
-              <div style={{fontSize:13,color:CC.inkBrown,opacity:.65,marginBottom:20}}>그룹 워크숍 디자인·진행 전문가</div>
-              <p style={{fontSize:14,color:CC.inkBrown,opacity:.82,lineHeight:1.85,wordBreak:"keep-all",margin:0}}>참가자가 자신의 양육 경험을 새로운 언어로 풀어볼 도구를 가지고 행사장을 떠나도록 설계합니다. 더나일 크루가 테이블 모더레이터로 참여하여 개념화 작업을 함께 가이드합니다.</p>
+              <div style={{fontSize:15,color:CC.inkBrown,opacity:.65,marginBottom:20}}>그룹 워크숍 디자인·진행 전문가</div>
+              <p style={{fontSize:16,color:CC.inkBrown,opacity:.82,lineHeight:1.85,wordBreak:"keep-all",margin:0}}>참가자가 자신의 양육 경험을 새로운 언어로 풀어볼 도구를 가지고 행사장을 떠나도록 설계합니다. 더나일 크루가 테이블 모더레이터로 참여하여 개념화 작업을 함께 가이드합니다.</p>
             </div>
           </div>
         </div></FI>
@@ -1959,8 +1959,8 @@ const ConferencePage=()=>{
                   <div style={{width:32,height:32,borderRadius:"50%",background:CC.sage,color:C.w,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:800}}>{s.n}</div>
                   <span style={{fontSize:11,color:CC.sage,fontWeight:700,padding:"2px 10px",background:`${CC.sage}15`,borderRadius:12,letterSpacing:".05em"}}>{s.dur}</span>
                 </div>
-                <div style={{fontSize:15,fontWeight:700,color:CC.ink,marginBottom:8,wordBreak:"keep-all",fontFamily:"'Noto Serif KR',serif"}}>{s.t}</div>
-                <div style={{fontSize:13,color:CC.inkBrown,opacity:.75,lineHeight:1.7,wordBreak:"keep-all"}}>{s.d}</div>
+                <div style={{fontSize:17,fontWeight:700,color:CC.ink,marginBottom:8,wordBreak:"keep-all",fontFamily:"'Noto Serif KR',serif"}}>{s.t}</div>
+                <div style={{fontSize:15,color:CC.inkBrown,opacity:.75,lineHeight:1.7,wordBreak:"keep-all"}}>{s.d}</div>
               </div>
             ))}
           </div>
@@ -1972,9 +1972,9 @@ const ConferencePage=()=>{
     {/* 장소 안내 — 헤이그라운드 사진 포함 */}
     <Sec bg={CC.cream}><Box>
       <FI><div style={{textAlign:"center",marginBottom:48}}>
-        <div style={{fontSize:13,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>VENUE · 장소 안내</div>
+        <div style={{fontSize:15,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>VENUE · 장소 안내</div>
         <H2>헤이그라운드 브릭스홀</H2>
-        <p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.7,lineHeight:1.8,maxWidth:560,margin:"16px auto 0",wordBreak:"keep-all"}}>성수동, 사회혁신 그룹들이 함께 모인 공간. 100~120명을 포근하게 담아낼 수 있는 메인홀입니다.</p>
+        <p style={{fontSize:"clamp(16px,2vw,18px)",color:CC.inkBrown,opacity:.7,lineHeight:1.8,maxWidth:560,margin:"16px auto 0",wordBreak:"keep-all"}}>성수동, 사회혁신 그룹들이 함께 모인 공간. 100~120명을 포근하게 담아낼 수 있는 메인홀입니다.</p>
       </div></FI>
       <FI delay={.1}><div style={{maxWidth:1000,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:16,marginBottom:24}}>
         {[
@@ -1991,11 +1991,11 @@ const ConferencePage=()=>{
         <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:24}}>
           <div>
             <div style={{fontSize:11,color:CC.mango,fontWeight:700,letterSpacing:".15em",marginBottom:8}}>주소</div>
-            <p style={{fontSize:14,lineHeight:1.7,wordBreak:"keep-all",margin:0}}>서울특별시 성동구 뚝섬로1나길 5,<br/>헤이그라운드 성수시작점 B1</p>
+            <p style={{fontSize:16,lineHeight:1.7,wordBreak:"keep-all",margin:0}}>서울특별시 성동구 뚝섬로1나길 5,<br/>헤이그라운드 성수시작점 B1</p>
           </div>
           <div>
             <div style={{fontSize:11,color:CC.mango,fontWeight:700,letterSpacing:".15em",marginBottom:8}}>오시는 길</div>
-            <p style={{fontSize:13,lineHeight:1.8,wordBreak:"keep-all",margin:0,color:"rgba(255,248,236,.85)"}}>
+            <p style={{fontSize:15,lineHeight:1.8,wordBreak:"keep-all",margin:0,color:"rgba(255,248,236,.85)"}}>
               · 2호선 뚝섬역 6번 출구 도보 5분<br/>
               · 수인분당선 서울숲역 1번 출구 도보 6분
             </p>
@@ -2009,14 +2009,14 @@ const ConferencePage=()=>{
       <div style={{position:"absolute",top:60,right:"4%",pointerEvents:"none",opacity:.45}}><EmoShape shape="heart" c1={CC.coral} c2={CC.rose} size={75} rotate={15} eyes={false}/></div>
       <div style={{position:"absolute",bottom:80,left:"4%",pointerEvents:"none",opacity:.4}}><EmoShape shape="star" c1={CC.sage} c2={CC.mint} size={60} rotate={-10} eyes={false}/></div>
       <FI><div style={{textAlign:"center",marginBottom:48,maxWidth:760,margin:"0 auto",position:"relative"}}>
-        <div style={{fontSize:13,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>PARTNERSHIP · 함께하는 분들</div>
+        <div style={{fontSize:15,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>PARTNERSHIP · 함께하는 분들</div>
         <H2><span style={{display:"inline-block"}}>혼자 풀 수 없는 문제,</span>{" "}<span style={{display:"inline-block"}}>함께 만들고 싶습니다.</span></H2>
-        <p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.75,lineHeight:1.9,marginTop:24,wordBreak:"keep-all"}}>
+        <p style={{fontSize:"clamp(16px,2vw,18px)",color:CC.inkBrown,opacity:.75,lineHeight:1.9,marginTop:24,wordBreak:"keep-all"}}>
           <span style={{display:"inline-block"}}>양육불안은 한 부모, 한 단체의 힘만으로는 풀리지 않는 문제입니다.</span>{" "}
           <span style={{display:"inline-block"}}>같은 문제 의식을 가진 기업과 기관이 함께 모일 때,</span>{" "}
           <span style={{display:"inline-block"}}>이 자리는 비로소 사회의 변화를 일으키는 출발점이 될 것이라 믿습니다.</span>
         </p>
-        <p style={{fontSize:"clamp(13px,1.8vw,14px)",color:CC.inkBrown,opacity:.6,lineHeight:1.8,marginTop:16,wordBreak:"keep-all"}}>
+        <p style={{fontSize:"clamp(15px,1.8vw,16px)",color:CC.inkBrown,opacity:.6,lineHeight:1.8,marginTop:16,wordBreak:"keep-all"}}>
           현금 후원, 현물·서비스 협찬, 콘텐츠 협력 등 함께할 수 있는 방식은 다양합니다. 더나일은 지정기부금단체로 기부금영수증 발급이 가능합니다.
         </p>
       </div></FI>
@@ -2039,7 +2039,7 @@ const ConferencePage=()=>{
       </div></FI>
 
       <FI delay={.25}><div style={{textAlign:"center",marginTop:56}}>
-        <button onClick={()=>setShowPartner(true)} style={{padding:"18px 44px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:15,fontWeight:700,cursor:"pointer",transition:"all .25s",boxShadow:`0 8px 24px ${CC.ink}33`}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.transform="translateY(-2px)"}} onMouseLeave={e=>{e.currentTarget.style.background=CC.ink;e.currentTarget.style.transform="translateY(0)"}}>
+        <button onClick={()=>setShowPartner(true)} style={{padding:"18px 44px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:17,fontWeight:700,cursor:"pointer",transition:"all .25s",boxShadow:`0 8px 24px ${CC.ink}33`}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.transform="translateY(-2px)"}} onMouseLeave={e=>{e.currentTarget.style.background=CC.ink;e.currentTarget.style.transform="translateY(0)"}}>
           함께 걷고 싶어요 · 제휴 문의 →
         </button>
         <p style={{fontSize:12,color:CC.inkBrown,opacity:.5,marginTop:16,wordBreak:"keep-all"}}>회신 요청 · 2026.05.22 (목)까지</p>
@@ -2053,25 +2053,25 @@ const ConferencePage=()=>{
       <div style={{position:"absolute",bottom:30,left:"8%",pointerEvents:"none",opacity:.5}}><EmoShape shape="leaf" c1={CC.mint} c2={CC.sage} size={80} rotate={15}/></div>
       <div style={{position:"absolute",bottom:60,right:"10%",pointerEvents:"none",opacity:.55}}><EmoShape shape="heart" c1={CC.rose} c2={CC.coral} size={70} rotate={-15} eyes={false}/></div>
       <FI><div style={{maxWidth:680,margin:"0 auto",position:"relative"}}>
-        <div style={{fontSize:13,color:CC.mango,fontWeight:700,letterSpacing:".15em",marginBottom:24}}>JOIN US · 신청</div>
+        <div style={{fontSize:15,color:CC.mango,fontWeight:700,letterSpacing:".15em",marginBottom:24}}>JOIN US · 신청</div>
         <h2 style={{fontFamily:"'Noto Serif KR',serif",fontSize:"clamp(28px,5vw,40px)",fontWeight:700,color:CC.cream,lineHeight:1.4,marginBottom:24,wordBreak:"keep-all"}}>
           <span style={{display:"inline-block"}}>양육의 두려움이 기쁨이 되도록</span>{" "}
           <span style={{display:"inline-block"}}>더나일과 함께해주세요</span>
         </h2>
-        <p style={{fontSize:"clamp(14px,2vw,16px)",color:"rgba(255,248,236,.7)",lineHeight:1.9,marginBottom:48,wordBreak:"keep-all"}}>
+        <p style={{fontSize:"clamp(16px,2vw,18px)",color:"rgba(255,248,236,.7)",lineHeight:1.9,marginBottom:48,wordBreak:"keep-all"}}>
           참가비는 없지만, 자리는 100–120명으로 한정되어 있습니다.<br/>
           사전 신청서를 작성해주시면 자리를 안내드립니다.
         </p>
       </div></FI>
       <FI delay={.15}><div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap",maxWidth:560,margin:"0 auto",position:"relative"}}>
-        <button onClick={()=>setShowApply(true)} style={{padding:"18px 40px",background:CC.cream,color:CC.inkBrown,border:"none",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer",transition:"all .25s"}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.color=CC.cream}} onMouseLeave={e=>{e.currentTarget.style.background=CC.cream;e.currentTarget.style.color=CC.inkBrown}}>
+        <button onClick={()=>setShowApply(true)} style={{padding:"18px 40px",background:CC.cream,color:CC.inkBrown,border:"none",borderRadius:50,fontSize:18,fontWeight:700,cursor:"pointer",transition:"all .25s"}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.color=CC.cream}} onMouseLeave={e=>{e.currentTarget.style.background=CC.cream;e.currentTarget.style.color=CC.inkBrown}}>
           참가 신청하기 →
         </button>
-        <button onClick={()=>setShowPartner(true)} style={{padding:"18px 40px",background:"transparent",color:CC.cream,border:"1px solid rgba(255,248,236,.3)",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer",transition:"all .25s"}} onMouseEnter={e=>e.currentTarget.style.background="rgba(255,248,236,.08)"} onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
+        <button onClick={()=>setShowPartner(true)} style={{padding:"18px 40px",background:"transparent",color:CC.cream,border:"1px solid rgba(255,248,236,.3)",borderRadius:50,fontSize:18,fontWeight:700,cursor:"pointer",transition:"all .25s"}} onMouseEnter={e=>e.currentTarget.style.background="rgba(255,248,236,.08)"} onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
           기업 제휴 문의
         </button>
       </div></FI>
-      <FI delay={.25}><div style={{marginTop:64,paddingTop:32,borderTop:"1px solid rgba(255,248,236,.1)",fontSize:13,color:"rgba(255,248,236,.5)",lineHeight:1.8,position:"relative"}}>
+      <FI delay={.25}><div style={{marginTop:64,paddingTop:32,borderTop:"1px solid rgba(255,248,236,.1)",fontSize:15,color:"rgba(255,248,236,.5)",lineHeight:1.8,position:"relative"}}>
         <p style={{margin:"0 0 8px"}}>사단법인 더나일 · 이사장 이다랑 / 이사 이혜린</p>
         <p style={{margin:0}}>lin@thenile.kr · cross@thenile.kr · https://thenile.kr</p>
       </div></FI>
@@ -2094,7 +2094,7 @@ const DelightPage=()=>(<>
         <span style={{display:"inline-block"}}>"오늘도 비슷한 장면에서</span>{" "}
         <span style={{display:"inline-block"}}>비슷하게 무너졌다면."</span>
       </h2>
-      <p style={{fontSize:"clamp(16px,2.4vw,19px)",color:"rgba(255,255,255,.88)",lineHeight:1.9,wordBreak:"keep-all",marginBottom:48,maxWidth:560,marginLeft:"auto",marginRight:"auto",padding:"0 8px",fontWeight:500}}>
+      <p style={{fontSize:"clamp(18px,2.4vw,19px)",color:"rgba(255,255,255,.88)",lineHeight:1.9,wordBreak:"keep-all",marginBottom:48,maxWidth:560,marginLeft:"auto",marginRight:"auto",padding:"0 8px",fontWeight:500}}>
         <span style={{display:"inline-block"}}>아이를 바꾸기 전에,</span>{" "}
         <span style={{display:"inline-block"}}>내가 보는 방식을 다시 봅니다.</span>
       </p>
@@ -2109,18 +2109,18 @@ const DelightPage=()=>(<>
         <div key={i} style={{padding:"22px 16px",background:"rgba(255,255,255,.06)",backdropFilter:"blur(10px)",borderRadius:14,border:x.badge?`1px solid ${C.gold}`:"1px solid rgba(247,215,107,.25)",textAlign:"center",position:"relative"}}>
           {x.badge&&<div style={{position:"absolute",top:-10,left:"50%",transform:"translateX(-50%)",background:C.gold,color:C.navy,fontSize:10,fontWeight:700,padding:"3px 10px",borderRadius:20,whiteSpace:"nowrap",letterSpacing:".03em"}}>{x.badge}</div>}
           <div style={{fontSize:12,color:"rgba(255,255,255,.6)",marginBottom:8,letterSpacing:".08em"}}>{x.k}</div>
-          {x.strike&&<div style={{fontSize:13,color:"rgba(255,255,255,.4)",textDecoration:"line-through",marginBottom:2}}>{x.strike}</div>}
+          {x.strike&&<div style={{fontSize:15,color:"rgba(255,255,255,.4)",textDecoration:"line-through",marginBottom:2}}>{x.strike}</div>}
           <div style={{fontSize:19,fontWeight:700,color:C.gold}}>{x.v}</div>
         </div>
       ))}
     </div></FI>
-    <FI delay={.2}><p style={{textAlign:"center",fontSize:13,color:"rgba(255,255,255,.65)",marginBottom:32,wordBreak:"keep-all",padding:"0 16px"}}>
+    <FI delay={.2}><p style={{textAlign:"center",fontSize:15,color:"rgba(255,255,255,.65)",marginBottom:32,wordBreak:"keep-all",padding:"0 16px"}}>
       <span style={{display:"inline-block"}}>정가 50만원 → 1기 모집 특별가 35만원</span>{" "}
       <span style={{display:"inline-block",color:C.gold,fontWeight:600}}>(30% 할인)</span>
     </p></FI>
     <FI delay={.25}><div style={{textAlign:"center",position:"relative"}}>
-      <BG onClick={()=>window.open(DELIGHT_APPLY_URL,"_blank")} style={{fontSize:16,padding:"16px 48px"}}>지원서 작성하기 →</BG>
-      <p style={{fontSize:13,color:"rgba(255,255,255,.55)",marginTop:18}}>모집 마감 · 2026.05.29 (금)</p>
+      <BG onClick={()=>window.open(DELIGHT_APPLY_URL,"_blank")} style={{fontSize:18,padding:"16px 48px"}}>지원서 작성하기 →</BG>
+      <p style={{fontSize:15,color:"rgba(255,255,255,.55)",marginTop:18}}>모집 마감 · 2026.05.29 (금)</p>
     </div></FI>
   </Box></Sec>
 
@@ -2130,10 +2130,10 @@ const DelightPage=()=>(<>
       <Tag>왜 "딜라이트"인가</Tag>
       <H2><span style={{display:"inline-block"}}>부모됨의 두려움이,</span>{" "}<span style={{display:"inline-block"}}>기쁨에 가까워지도록.</span></H2>
     </div></FI>
-    <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:16,color:C.g6,lineHeight:2,wordBreak:"keep-all"}}>
+    <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:18,color:C.g6,lineHeight:2,wordBreak:"keep-all"}}>
       <p style={{marginBottom:20}}>부모됨에는 두려움과 기쁨이 함께 있습니다. 두려움이 크면 자꾸 피하게 되고, 기쁨이 자라면 책임은 자연스럽게 따라옵니다.</p>
       <p style={{marginBottom:24}}>더나일이 그리는 부모의 모습은 이렇습니다.</p>
-      <blockquote style={{borderLeft:`3px solid ${C.gold}`,paddingLeft:20,fontSize:"clamp(16px,2.2vw,18px)",color:C.navy,fontStyle:"italic",margin:"24px 0",lineHeight:1.7,wordBreak:"keep-all"}}>
+      <blockquote style={{borderLeft:`3px solid ${C.gold}`,paddingLeft:20,fontSize:"clamp(18px,2.2vw,18px)",color:C.navy,fontStyle:"italic",margin:"24px 0",lineHeight:1.7,wordBreak:"keep-all"}}>
         <span style={{display:"inline-block"}}>"모두의 육아를</span>{" "}
         <span style={{display:"inline-block"}}>다정하게 해석하는 부모."</span>
       </blockquote>
@@ -2148,16 +2148,16 @@ const DelightPage=()=>(<>
       <Tag>왜 딜라이트 프로젝트를 시작했나요?</Tag>
       <H2><span style={{display:"inline-block"}}>아이를 바꾸기 전에,</span>{" "}<span style={{display:"inline-block"}}>내가 보는 방식을 다시 봅니다.</span></H2>
     </div></FI>
-    <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:16,color:C.g6,lineHeight:2,wordBreak:"keep-all"}}>
+    <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:18,color:C.g6,lineHeight:2,wordBreak:"keep-all"}}>
       <p style={{marginBottom:20}}>부모교육은 이미 차고 넘칩니다. 영상은 끝없고, 책은 빼곡하고, 전문가의 조언은 매일 도착합니다.</p>
       <p style={{marginBottom:20}}>그런데 왜 우리는 여전히, 어제와 같은 방식으로 아이에게 반응할까요.</p>
-      <p style={{fontSize:"clamp(15px,2.2vw,17px)",color:C.navy,fontWeight:500,lineHeight:1.8}}>
+      <p style={{fontSize:"clamp(17px,2.2vw,20px)",color:C.navy,fontWeight:500,lineHeight:1.8}}>
         <span style={{display:"inline-block"}}>"방법"은 더 이상 부족한 것이 아닙니다.</span>{" "}
         <span style={{display:"inline-block"}}>부족한 것은, 내 양육을 들여다보는 시선입니다.</span>
       </p>
     </div></FI>
     <FI delay={.2}><div style={{maxWidth:760,margin:"56px auto 0",padding:"32px 28px",background:C.w,borderRadius:16,border:`1px solid ${C.g2}`}}>
-      <div style={{fontSize:13,color:C.gold,fontWeight:700,letterSpacing:".1em",textAlign:"center",marginBottom:24}}>우리가 바라는 것</div>
+      <div style={{fontSize:15,color:C.gold,fontWeight:700,letterSpacing:".1em",textAlign:"center",marginBottom:24}}>우리가 바라는 것</div>
       <div style={{display:"grid",gap:18}}>
         {[
           "우리는 부모가 자기 양육을 객관화할 수 있는 힘을 갖기를 바랍니다.",
@@ -2166,11 +2166,11 @@ const DelightPage=()=>(<>
         ].map((t,i)=>(
           <div key={i} style={{display:"flex",gap:14,alignItems:"flex-start"}}>
             <div style={{flexShrink:0,width:24,height:24,borderRadius:"50%",background:`${C.gold}33`,color:C.navy,fontSize:12,fontWeight:700,display:"flex",alignItems:"center",justifyContent:"center"}}>{i+1}</div>
-            <p style={{fontSize:"clamp(14px,2vw,15px)",color:C.g6,lineHeight:1.85,wordBreak:"keep-all",margin:0}}>{t}</p>
+            <p style={{fontSize:"clamp(16px,2vw,17px)",color:C.g6,lineHeight:1.85,wordBreak:"keep-all",margin:0}}>{t}</p>
           </div>
         ))}
       </div>
-      <p style={{marginTop:28,paddingTop:24,borderTop:`1px solid ${C.g2}`,textAlign:"center",fontSize:"clamp(14px,2.2vw,16px)",color:C.navy,fontWeight:600,lineHeight:1.7,wordBreak:"keep-all"}}>
+      <p style={{marginTop:28,paddingTop:24,borderTop:`1px solid ${C.g2}`,textAlign:"center",fontSize:"clamp(16px,2.2vw,18px)",color:C.navy,fontWeight:600,lineHeight:1.7,wordBreak:"keep-all"}}>
         그 동행을 함께 해주실 분을 기다리고 있어요.
       </p>
     </div></FI>
@@ -2182,9 +2182,9 @@ const DelightPage=()=>(<>
       <Tag>6주 후, 되어가는 부모</Tag>
       <H2><span style={{display:"inline-block"}}>완벽한 부모가 아니라,</span>{" "}<span style={{display:"inline-block"}}>양육을 해석할 줄 아는 부모로.</span></H2>
     </div></FI>
-    <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:16,color:C.g6,lineHeight:2,wordBreak:"keep-all"}}>
+    <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:18,color:C.g6,lineHeight:2,wordBreak:"keep-all"}}>
       <p style={{marginBottom:24}}>별로인 나, 반복해서 무너지는 나, 아이 앞에서 작아지는 나를 왜곡 없이 바라볼 수 있는 부모. 그래서 내 아이의 장면도 조금 더 선명하게 보이는 부모.</p>
-      <blockquote style={{borderLeft:`3px solid ${C.gold}`,paddingLeft:20,fontSize:17,color:C.navy,fontStyle:"italic",lineHeight:1.7}}>
+      <blockquote style={{borderLeft:`3px solid ${C.gold}`,paddingLeft:20,fontSize:20,color:C.navy,fontStyle:"italic",lineHeight:1.7}}>
         "모두의 육아를 다정하게 해석하는 부모."
       </blockquote>
     </div></FI>
@@ -2196,13 +2196,13 @@ const DelightPage=()=>(<>
       <Tag>양육프레임워크</Tag>
       <H2><span style={{display:"inline-block"}}>내 양육의 구조를,</span>{" "}<span style={{display:"inline-block"}}>내가 만든다.</span></H2>
     </div></FI>
-    <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:15,color:C.g6,lineHeight:1.9,wordBreak:"keep-all",marginBottom:32}}>
+    <FI delay={.1}><div style={{maxWidth:680,margin:"0 auto",fontSize:17,color:C.g6,lineHeight:1.9,wordBreak:"keep-all",marginBottom:32}}>
       <p>양육프레임워크란, 나의 감정·생각·행동이 어떻게 연결되어 있는지를 스스로 들여다보는 시선입니다. 남의 방법을 따라 하는 것이 아니라, 나 자신과 우리 아이에게 맞는 나만의 양육 구조를 찾는 일입니다.</p>
     </div></FI>
     <FI delay={.15}><div style={{display:"flex",justifyContent:"center",alignItems:"center",gap:"clamp(12px,3vw,32px)",margin:"32px 0 48px",flexWrap:"wrap"}}>
       {["감정","생각","행동"].map((w,i)=>(
         <Fragment key={i}>
-          <div style={{padding:"18px 28px",background:C.w,border:`2px solid ${C.gold}`,borderRadius:50,fontSize:16,fontWeight:700,color:C.navy}}>{w}</div>
+          <div style={{padding:"18px 28px",background:C.w,border:`2px solid ${C.gold}`,borderRadius:50,fontSize:18,fontWeight:700,color:C.navy}}>{w}</div>
           {i<2&&<div style={{fontSize:20,color:C.gold}}>↔</div>}
         </Fragment>
       ))}
@@ -2217,14 +2217,14 @@ const DelightPage=()=>(<>
         ].map((x,i)=>(
           <div key={i} style={{padding:24,background:C.w,borderRadius:16,border:`1px solid ${C.g2}`}}>
             <div style={{fontSize:12,color:C.gold,fontWeight:700,marginBottom:8,letterSpacing:".1em"}}>{x.n}</div>
-            <h4 style={{fontSize:16,fontWeight:700,color:C.navy,marginBottom:10,lineHeight:1.5}}>{x.t}</h4>
-            <p style={{fontSize:13,color:C.g6,lineHeight:1.8,wordBreak:"keep-all"}}>{x.d}</p>
+            <h4 style={{fontSize:18,fontWeight:700,color:C.navy,marginBottom:10,lineHeight:1.5}}>{x.t}</h4>
+            <p style={{fontSize:15,color:C.g6,lineHeight:1.8,wordBreak:"keep-all"}}>{x.d}</p>
           </div>
         ))}
       </div>
-      <blockquote style={{maxWidth:560,margin:"40px auto 0",borderLeft:`3px solid ${C.gold}`,paddingLeft:20,fontSize:15,color:C.navy,fontStyle:"italic",lineHeight:1.7,textAlign:"left"}}>
+      <blockquote style={{maxWidth:560,margin:"40px auto 0",borderLeft:`3px solid ${C.gold}`,paddingLeft:20,fontSize:17,color:C.navy,fontStyle:"italic",lineHeight:1.7,textAlign:"left"}}>
         "누구의 답도 아닌, 내 답으로 양육하는 부모."<br/>
-        <span style={{fontSize:13,color:C.g4,fontStyle:"normal"}}>— 이 프로그램이 길러내는 사람</span>
+        <span style={{fontSize:15,color:C.g4,fontStyle:"normal"}}>— 이 프로그램이 길러내는 사람</span>
       </blockquote>
     </div></FI>
   </Box></Sec>
@@ -2235,7 +2235,7 @@ const DelightPage=()=>(<>
       <Tag>6주 커리큘럼</Tag>
       <H2><span style={{display:"inline-block"}}>6주, 한 회씩,</span>{" "}<span style={{display:"inline-block"}}>내 양육의 구조가 보이기 시작합니다.</span></H2>
     </div></FI>
-    <FI delay={.1}><p style={{textAlign:"center",fontSize:14,color:C.g4,marginBottom:32,wordBreak:"keep-all"}}>매 회차 사전 과제(독서 + 분석쓰기)가 있고, 세션은 강의 + 자기분석 + 나눔으로 구성됩니다.</p></FI>
+    <FI delay={.1}><p style={{textAlign:"center",fontSize:16,color:C.g4,marginBottom:32,wordBreak:"keep-all"}}>매 회차 사전 과제(독서 + 분석쓰기)가 있고, 세션은 강의 + 자기분석 + 나눔으로 구성됩니다.</p></FI>
     <FI delay={.15}><div style={{maxWidth:820,margin:"0 auto",display:"grid",gap:12}}>
       {[
         {n:"01",d:"6/5 (금)",t:"프로젝트 세우기",c:"소개와 나눔, 목적과 방향성, 핵심 문제 나누기, 도서 및 과제 안내"},
@@ -2248,11 +2248,11 @@ const DelightPage=()=>(<>
         <div key={i} style={{padding:"18px 20px",background:C.warm,borderRadius:12}}>
           <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:10,flexWrap:"wrap"}}>
             <span style={{fontSize:12,color:C.gold,fontWeight:700,letterSpacing:".08em",background:C.w,padding:"3px 10px",borderRadius:20,border:`1px solid ${C.gold}66`}}>{x.n}</span>
-            <span style={{fontSize:13,color:C.g6,fontWeight:600}}>{x.d}</span>
+            <span style={{fontSize:15,color:C.g6,fontWeight:600}}>{x.d}</span>
             {x.online&&<span style={{fontSize:11,padding:"3px 10px",background:C.gold,color:C.navy,borderRadius:20,fontWeight:700,letterSpacing:".05em"}}>온라인</span>}
           </div>
-          <div style={{fontSize:"clamp(14px,2vw,15px)",fontWeight:700,color:C.navy,marginBottom:6,wordBreak:"keep-all",lineHeight:1.5}}>{x.t}</div>
-          <div style={{fontSize:13,color:C.g6,lineHeight:1.7,wordBreak:"keep-all"}}>{x.c}</div>
+          <div style={{fontSize:"clamp(16px,2vw,17px)",fontWeight:700,color:C.navy,marginBottom:6,wordBreak:"keep-all",lineHeight:1.5}}>{x.t}</div>
+          <div style={{fontSize:15,color:C.g6,lineHeight:1.7,wordBreak:"keep-all"}}>{x.c}</div>
         </div>
       ))}
     </div></FI>
@@ -2265,14 +2265,14 @@ const DelightPage=()=>(<>
       <Tag>함께할 12명을 찾습니다</Tag>
       <H2>함께할 12명을 찾습니다.</H2>
     </div></FI>
-    <FI delay={.1}><p style={{textAlign:"center",fontSize:"clamp(14px,2vw,15px)",color:C.g6,maxWidth:680,margin:"0 auto 48px",lineHeight:1.95,wordBreak:"keep-all",padding:"0 12px"}}>
+    <FI delay={.1}><p style={{textAlign:"center",fontSize:"clamp(16px,2vw,17px)",color:C.g6,maxWidth:680,margin:"0 auto 48px",lineHeight:1.95,wordBreak:"keep-all",padding:"0 12px"}}>
       <span style={{display:"inline-block"}}>다만 자신의 양육을 진지하게 들여다보고 싶은 사람,</span>{" "}
       <span style={{display:"inline-block"}}>반복되는 고리를 끊고 싶은 사람,</span>{" "}
       <span style={{display:"inline-block"}}>아이를 더 잘 통제하고 싶은 것이 아니라</span>{" "}
       <span style={{display:"inline-block"}}>아이와 나를 더 정확하고 다정하게 이해하고 싶은 사람을 기다립니다.</span>
     </p></FI>
     <FI delay={.15}><div style={{maxWidth:560,margin:"0 auto",padding:"32px 28px",background:C.w,borderRadius:16,border:`2px solid ${C.gold}`}}>
-      <h3 style={{fontSize:17,fontWeight:700,color:C.navy,marginBottom:20,textAlign:"center"}}>이런 분과 함께하고 싶습니다</h3>
+      <h3 style={{fontSize:20,fontWeight:700,color:C.navy,marginBottom:20,textAlign:"center"}}>이런 분과 함께하고 싶습니다</h3>
       {[
         "처방보다 시선을 갖고 싶은 부모",
         "별로인 나, 무너지는 나를 회피하지 않고 보겠다고 결심한 부모",
@@ -2280,7 +2280,7 @@ const DelightPage=()=>(<>
         "그룹 안에서 실수와 부끄러움을 솔직히 나눌 수 있는 부모",
         "이 변화를 가까운 사람들과 나누고 싶은 부모",
       ].map((t,i)=>(
-        <div key={i} style={{fontSize:"clamp(14px,2vw,15px)",color:C.g6,padding:"10px 0",display:"flex",alignItems:"flex-start",gap:12,lineHeight:1.7,wordBreak:"keep-all"}}>
+        <div key={i} style={{fontSize:"clamp(16px,2vw,17px)",color:C.g6,padding:"10px 0",display:"flex",alignItems:"flex-start",gap:12,lineHeight:1.7,wordBreak:"keep-all"}}>
           <span style={{color:C.gold,flexShrink:0,fontWeight:700}}>✓</span><span>{t}</span>
         </div>
       ))}
@@ -2308,7 +2308,7 @@ const DelightPage=()=>(<>
       ].map((x,i,a)=>(
         <div key={i} className="info-row" style={{padding:"14px 20px",borderBottom:i<a.length-1?`1px solid ${C.g2}`:"none",background:x.bold?C.warm:C.w}}>
           <div style={{fontSize:12,color:C.g4,fontWeight:500,marginBottom:4,letterSpacing:".03em"}}>{x.k}</div>
-          <div style={{fontSize:"clamp(13px,2vw,14px)",color:x.bold?C.navy:C.g6,fontWeight:x.bold?700:500,wordBreak:"keep-all",lineHeight:1.6}}>{x.v}</div>
+          <div style={{fontSize:"clamp(15px,2vw,16px)",color:x.bold?C.navy:C.g6,fontWeight:x.bold?700:500,wordBreak:"keep-all",lineHeight:1.6}}>{x.v}</div>
         </div>
       ))}
     </div></FI>
@@ -2317,25 +2317,25 @@ const DelightPage=()=>(<>
   {/* CTA */}
   <Sec bg={C.navy}><Box style={{textAlign:"center"}}>
     <FI><H2 light style={{fontSize:"clamp(22px,4vw,30px)",maxWidth:620,margin:"0 auto 24px"}}><span style={{display:"inline-block"}}>내 양육 장면을,</span>{" "}<span style={{display:"inline-block"}}>다시 보고 싶은 분의 자리입니다.</span></H2></FI>
-    <FI delay={.1}><p style={{fontSize:"clamp(15px,2.2vw,16px)",color:"rgba(255,255,255,.78)",lineHeight:1.9,maxWidth:520,margin:"0 auto 40px",wordBreak:"keep-all",padding:"0 12px"}}>
+    <FI delay={.1}><p style={{fontSize:"clamp(17px,2.2vw,18px)",color:"rgba(255,255,255,.78)",lineHeight:1.9,maxWidth:520,margin:"0 auto 40px",wordBreak:"keep-all",padding:"0 12px"}}>
       <span style={{display:"inline-block"}}>지원서는 편안하고 솔직하게 적어주세요.</span>{" "}
       <span style={{display:"inline-block"}}>정답을 묻는 자리가 아니니까요.</span>
     </p></FI>
     <FI delay={.15}><div style={{maxWidth:520,margin:"0 auto 40px",padding:24,background:"rgba(255,255,255,.05)",borderRadius:14,border:"1px solid rgba(255,255,255,.1)",textAlign:"left"}}>
-      <h4 style={{fontSize:14,color:C.gold,fontWeight:700,marginBottom:14,textAlign:"center"}}>시작하기 전에, 이 세 가지가 가능한가요?</h4>
+      <h4 style={{fontSize:16,color:C.gold,fontWeight:700,marginBottom:14,textAlign:"center"}}>시작하기 전에, 이 세 가지가 가능한가요?</h4>
       {[
         "매주 금요일 3시간 (10:00–13:00) 정기 참석",
         "매주 사전 과제, 독서와 분석일지 (주 3회 이상)",
         "그룹 안에서 자기 이야기를 솔직히 나누기",
       ].map((t,i)=>(
-        <div key={i} style={{fontSize:14,color:"rgba(255,255,255,.85)",padding:"6px 0",display:"flex",gap:10,alignItems:"flex-start",wordBreak:"keep-all"}}>
+        <div key={i} style={{fontSize:16,color:"rgba(255,255,255,.85)",padding:"6px 0",display:"flex",gap:10,alignItems:"flex-start",wordBreak:"keep-all"}}>
           <span style={{color:C.gold,flexShrink:0}}>○</span><span>{t}</span>
         </div>
       ))}
     </div></FI>
     <FI delay={.2}>
-      <BG onClick={()=>window.open(DELIGHT_APPLY_URL,"_blank")} style={{fontSize:16,padding:"16px 48px"}}>지원서 작성하기 →</BG>
-      <p style={{fontSize:13,color:"rgba(255,255,255,.5)",marginTop:16}}>모집 마감 · 2026.05.29 (금)</p>
+      <BG onClick={()=>window.open(DELIGHT_APPLY_URL,"_blank")} style={{fontSize:18,padding:"16px 48px"}}>지원서 작성하기 →</BG>
+      <p style={{fontSize:15,color:"rgba(255,255,255,.5)",marginTop:16}}>모집 마감 · 2026.05.29 (금)</p>
     </FI>
   </Box></Sec>
 </>);
@@ -2375,19 +2375,19 @@ const CounselPage=()=>{
     setSending(false);
   };
 
-  const inputStyle={width:"100%",padding:"12px 16px",borderRadius:10,border:`1px solid ${C.g2}`,fontSize:14,outline:"none",background:C.w,fontFamily:"inherit",transition:"border .2s"};
-  const labelStyle={fontSize:13,fontWeight:500,color:C.g6,display:"block",marginBottom:6};
+  const inputStyle={width:"100%",padding:"12px 16px",borderRadius:10,border:`1px solid ${C.g2}`,fontSize:16,outline:"none",background:C.w,fontFamily:"inherit",transition:"border .2s"};
+  const labelStyle={fontSize:15,fontWeight:500,color:C.g6,display:"block",marginBottom:6};
 
   // 첫 화면: 페이서 여부 확인
   if(step==="ask") return(<>
     <section style={{paddingTop:120,paddingBottom:80,background:C.warm,minHeight:"60vh",display:"flex",alignItems:"center"}}><Box style={{textAlign:"center"}}>
       <FI><div style={{width:80,height:80,borderRadius:"50%",background:C.navy,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 24px"}}><span style={{fontSize:36,color:"#fff"}}>🤝</span></div></FI>
       <FI delay={.1}><H2>페이서 전용 상담 신청</H2></FI>
-      <FI delay={.2}><p style={{fontSize:16,color:C.g6,lineHeight:1.8,maxWidth:480,margin:"0 auto 40px",wordBreak:"keep-all"}}>더나일의 페이서(PACER) 후원자를 위한 전문 양육 상담 서비스입니다.</p></FI>
+      <FI delay={.2}><p style={{fontSize:18,color:C.g6,lineHeight:1.8,maxWidth:480,margin:"0 auto 40px",wordBreak:"keep-all"}}>더나일의 페이서(PACER) 후원자를 위한 전문 양육 상담 서비스입니다.</p></FI>
       <FI delay={.3}><p style={{fontSize:18,fontWeight:600,color:C.navy,marginBottom:24}}>페이서이신가요?</p></FI>
       <FI delay={.35}><div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap"}}>
-        <Btn onClick={()=>setStep("form")} style={{minWidth:140,fontSize:16,padding:"16px 40px"}}>네, 페이서입니다</Btn>
-        <Btn primary={false} onClick={()=>setStep("notPacer")} style={{minWidth:140,fontSize:16,padding:"16px 40px"}}>아니요</Btn>
+        <Btn onClick={()=>setStep("form")} style={{minWidth:140,fontSize:18,padding:"16px 40px"}}>네, 페이서입니다</Btn>
+        <Btn primary={false} onClick={()=>setStep("notPacer")} style={{minWidth:140,fontSize:18,padding:"16px 40px"}}>아니요</Btn>
       </div></FI>
     </Box></section>
   </>);
@@ -2397,11 +2397,11 @@ const CounselPage=()=>{
     <section style={{paddingTop:120,paddingBottom:80,background:C.warm,minHeight:"60vh",display:"flex",alignItems:"center"}}><Box style={{textAlign:"center"}}>
       <FI><div style={{fontSize:48,marginBottom:24}}>💛</div></FI>
       <FI delay={.1}><H2>페이서가 되시면 상담을 받으실 수 있습니다</H2></FI>
-      <FI delay={.2}><p style={{fontSize:16,color:C.g6,lineHeight:1.8,maxWidth:520,margin:"0 auto 16px",wordBreak:"keep-all"}}>페이서(PACER)는 더나일과 함께 걷는 후원자입니다. 월 정기후원을 통해 페이서가 되시면 전문 양육 상담 서비스를 이용하실 수 있습니다.</p></FI>
-      <FI delay={.25}><p style={{fontSize:15,color:C.g6,lineHeight:1.8,maxWidth:520,margin:"0 auto 40px",wordBreak:"keep-all"}}>가족의 가치를 회복하는 여정에 함께해 주세요.</p></FI>
+      <FI delay={.2}><p style={{fontSize:18,color:C.g6,lineHeight:1.8,maxWidth:520,margin:"0 auto 16px",wordBreak:"keep-all"}}>페이서(PACER)는 더나일과 함께 걷는 후원자입니다. 월 정기후원을 통해 페이서가 되시면 전문 양육 상담 서비스를 이용하실 수 있습니다.</p></FI>
+      <FI delay={.25}><p style={{fontSize:17,color:C.g6,lineHeight:1.8,maxWidth:520,margin:"0 auto 40px",wordBreak:"keep-all"}}>가족의 가치를 회복하는 여정에 함께해 주세요.</p></FI>
       <FI delay={.3}><div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap"}}>
-        <BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{fontSize:16,padding:"16px 40px"}}>후원하고 페이서 되기</BG>
-        <Btn primary={false} onClick={()=>setStep("ask")} style={{fontSize:14,padding:"12px 24px"}}>돌아가기</Btn>
+        <BG onClick={()=>window.open(DONATE_URL,"_blank")} style={{fontSize:18,padding:"16px 40px"}}>후원하고 페이서 되기</BG>
+        <Btn primary={false} onClick={()=>setStep("ask")} style={{fontSize:16,padding:"12px 24px"}}>돌아가기</Btn>
       </div></FI>
     </Box></section>
   </>);
@@ -2411,7 +2411,7 @@ const CounselPage=()=>{
     <section style={{paddingTop:120,paddingBottom:80,background:C.warm,minHeight:"60vh",display:"flex",alignItems:"center"}}><Box style={{textAlign:"center"}}>
       <FI><div style={{fontSize:48,marginBottom:24}}>✅</div></FI>
       <FI delay={.1}><H2>상담 신청이 완료되었습니다</H2></FI>
-      <FI delay={.2}><p style={{fontSize:16,color:C.g6,lineHeight:1.8,marginTop:16,wordBreak:"keep-all"}}>담당자가 확인 후 연락드리겠습니다.<br/>감사합니다.</p></FI>
+      <FI delay={.2}><p style={{fontSize:18,color:C.g6,lineHeight:1.8,marginTop:16,wordBreak:"keep-all"}}>담당자가 확인 후 연락드리겠습니다.<br/>감사합니다.</p></FI>
       <FI delay={.3}><div style={{marginTop:32}}><Btn onClick={()=>{setStep("ask");setForm({name:"",phone:"",childAge:"",childGender:"",concerns:[],date:"",time:"",detail:""});}}>새 상담 신청</Btn></div></FI>
     </Box></section>
   </>);
@@ -2453,7 +2453,7 @@ const CounselPage=()=>{
         <div style={{marginBottom:20}}>
           <label style={labelStyle}>아이 성별 *</label>
           <div style={{display:"flex",gap:12}}>
-            {["남","여"].map(g=><div key={g} onClick={()=>setForm({...form,childGender:g})} style={{flex:1,padding:"12px 16px",borderRadius:10,textAlign:"center",cursor:"pointer",fontSize:14,fontWeight:500,border:`1px solid ${form.childGender===g?C.navy:C.g2}`,background:form.childGender===g?C.navy:"transparent",color:form.childGender===g?"#fff":C.g6,transition:"all .2s"}}>{g}</div>)}
+            {["남","여"].map(g=><div key={g} onClick={()=>setForm({...form,childGender:g})} style={{flex:1,padding:"12px 16px",borderRadius:10,textAlign:"center",cursor:"pointer",fontSize:16,fontWeight:500,border:`1px solid ${form.childGender===g?C.navy:C.g2}`,background:form.childGender===g?C.navy:"transparent",color:form.childGender===g?"#fff":C.g6,transition:"all .2s"}}>{g}</div>)}
           </div>
         </div>
 
@@ -2461,7 +2461,7 @@ const CounselPage=()=>{
         <div style={{marginBottom:20}}>
           <label style={labelStyle}>고민 유형 * (중복 선택 가능)</label>
           <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
-            {CONCERN_OPTIONS.map(c=><div key={c} onClick={()=>toggleConcern(c)} style={{padding:"8px 16px",borderRadius:20,fontSize:13,cursor:"pointer",background:form.concerns.includes(c)?C.navy:C.w,color:form.concerns.includes(c)?"#fff":C.g6,border:`1px solid ${form.concerns.includes(c)?C.navy:C.g2}`,transition:"all .2s"}}>{form.concerns.includes(c)?"✓ ":""}{c}</div>)}
+            {CONCERN_OPTIONS.map(c=><div key={c} onClick={()=>toggleConcern(c)} style={{padding:"8px 16px",borderRadius:20,fontSize:15,cursor:"pointer",background:form.concerns.includes(c)?C.navy:C.w,color:form.concerns.includes(c)?"#fff":C.g6,border:`1px solid ${form.concerns.includes(c)?C.navy:C.g2}`,transition:"all .2s"}}>{form.concerns.includes(c)?"✓ ":""}{c}</div>)}
           </div>
         </div>
 
@@ -2490,8 +2490,8 @@ const CounselPage=()=>{
             onFocus={e=>e.target.style.borderColor=C.gold} onBlur={e=>e.target.style.borderColor=C.g2}/>
         </div>
 
-        <BG onClick={handleSubmit} style={{width:"100%",padding:"16px",fontSize:16,textAlign:"center",opacity:sending?.6:1,pointerEvents:sending?"none":"auto"}}>{sending?"전송 중...":"상담 신청하기"}</BG>
-        <div style={{marginTop:16,textAlign:"center"}}><span onClick={()=>setStep("ask")} style={{fontSize:13,color:C.g6,cursor:"pointer",textDecoration:"underline"}}>돌아가기</span></div>
+        <BG onClick={handleSubmit} style={{width:"100%",padding:"16px",fontSize:18,textAlign:"center",opacity:sending?.6:1,pointerEvents:sending?"none":"auto"}}>{sending?"전송 중...":"상담 신청하기"}</BG>
+        <div style={{marginTop:16,textAlign:"center"}}><span onClick={()=>setStep("ask")} style={{fontSize:15,color:C.g6,cursor:"pointer",textDecoration:"underline"}}>돌아가기</span></div>
       </div></FI>
     </Box></Sec>
   </>);
