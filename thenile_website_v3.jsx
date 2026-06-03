@@ -1820,17 +1820,25 @@ const ConferencePage=()=>{
         <div style={{fontSize:13,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SPEAKERS · 함께 모시는 발표자</div>
         <H2>연사 라인업</H2>
       </div></FI>
-      <FI delay={.1}><div style={{maxWidth:1080,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(160px,1fr))",gap:24,position:"relative"}}>
-        {speakers.map((s,i)=>(
-          <div key={i} style={{textAlign:"center"}}>
-            <div style={{width:"100%",aspectRatio:"1/1",borderRadius:"50%",overflow:"hidden",marginBottom:14,background:CC.cream,border:`2px solid ${s.color}33`,position:"relative",boxShadow:`0 4px 16px ${s.color}15`}}>
-              <img src={s.img} alt={s.n} style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";const c1=s.color,c2=s.c2,sh=s.sh,id=`fb${i}-${Math.floor(Math.random()*9999)}`;wrap.insertAdjacentHTML("beforeend",`<svg viewBox="0 0 100 100" style="width:100%;height:100%;display:block"><defs><linearGradient id="${id}" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="${c1}22"/><text x="50" y="62" text-anchor="middle" font-size="32" font-weight="700" fill="${c1}" font-family="serif">${s.n[0]}</text></svg>`)}}}/>
-            </div>
-            <div style={{display:"inline-block",fontSize:10,color:s.color,fontWeight:700,letterSpacing:".1em",marginBottom:6,padding:"3px 10px",background:`${s.color}15`,borderRadius:12}}>{s.part}</div>
-            <div style={{fontSize:16,fontWeight:700,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>{s.n}</div>
-            <div style={{fontSize:12,color:CC.inkBrown,opacity:.7,lineHeight:1.5,wordBreak:"keep-all"}}>{s.r}</div>
+      <FI delay={.1}><div style={{maxWidth:880,margin:"0 auto",position:"relative"}}>
+        {[speakers.slice(0,3),speakers.slice(3,7)].map((row,rowIdx)=>(
+          <div key={rowIdx} className={rowIdx===0?"conf-spk-row-top":"conf-spk-row-bot"} style={{display:"grid",gridTemplateColumns:`repeat(${row.length},1fr)`,gap:24,marginTop:rowIdx===0?0:32,maxWidth:rowIdx===0?660:"none",marginLeft:"auto",marginRight:"auto"}}>
+            {row.map((s,i)=>{
+              const idx=rowIdx===0?i:3+i;
+              return (
+                <div key={idx} style={{textAlign:"center"}}>
+                  <div style={{width:"100%",aspectRatio:"1/1",borderRadius:"50%",overflow:"hidden",marginBottom:14,background:CC.cream,border:`2px solid ${s.color}33`,position:"relative",boxShadow:`0 4px 16px ${s.color}15`}}>
+                    <img src={s.img} alt={s.n} style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";const c1=s.color,c2=s.c2,id=`fb${idx}-${Math.floor(Math.random()*9999)}`;wrap.insertAdjacentHTML("beforeend",`<svg viewBox="0 0 100 100" style="width:100%;height:100%;display:block"><defs><linearGradient id="${id}" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="${c1}22"/><text x="50" y="62" text-anchor="middle" font-size="32" font-weight="700" fill="${c1}" font-family="serif">${s.n[0]}</text></svg>`)}}}/>
+                  </div>
+                  <div style={{display:"inline-block",fontSize:10,color:s.color,fontWeight:700,letterSpacing:".1em",marginBottom:6,padding:"3px 10px",background:`${s.color}15`,borderRadius:12}}>{s.part}</div>
+                  <div style={{fontSize:16,fontWeight:700,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>{s.n}</div>
+                  <div style={{fontSize:12,color:CC.inkBrown,opacity:.7,lineHeight:1.5,wordBreak:"keep-all"}}>{s.r}</div>
+                </div>
+              );
+            })}
           </div>
         ))}
+        <style>{`@media (max-width:720px){.conf-spk-row-top,.conf-spk-row-bot{grid-template-columns:repeat(2,1fr)!important;max-width:none!important}}`}</style>
       </div></FI>
     </Box></Sec>
 
@@ -1879,8 +1887,9 @@ const ConferencePage=()=>{
       </div></FI>
       <FI delay={.08}><p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.7,lineHeight:1.85,maxWidth:640,margin:"16px auto 48px",textAlign:"center",wordBreak:"keep-all"}}>다른 자리에서 양육과 만나온 네 분이 자신의 양육불안을 어떻게 통과해왔는지 나누는 대화</p></FI>
 
-      {/* 모더 + 패널 4명, 2x2 그리드 */}
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:24,maxWidth:960,margin:"0 auto"}}>
+      {/* 모더 + 패널 4명, 데스크탑 2x2 그리드 */}
+      <div className="conf-panel-grid" style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:24,maxWidth:880,margin:"0 auto"}}>
+        <style>{`@media (max-width:720px){.conf-panel-grid{grid-template-columns:1fr!important}}`}</style>
         {[
           {role:"MODERATOR",label:"인터뷰 진행",name:"이혜린",pos:"쉬벤처스 부대표 · 사단법인 더나일 이사",img:"/images/speakers/이혜린.png",c:CC.lilac,c2:CC.rose,desc:"교육심리학 석사. 그로잉맘과 더나일에서 부모 마음을 가장 가까이 들여다본 경험을 바탕으로 대화의 결을 잡습니다.",sh:"heart"},
           {role:"PANEL 01",label:"고마워서그래 대표의 시선",name:"신두란",pos:"고마워서그래 대표",img:"/images/speakers/신두란.png",c:CC.lilac,c2:CC.coral,desc:"비건 식문화 브랜드 '고마워서그래'를 운영하며 일·양육·가치관이 한 사람 안에서 어떻게 자리잡는지 나눕니다.",sh:"flower"},
