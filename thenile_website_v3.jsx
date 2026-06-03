@@ -1285,14 +1285,14 @@ const APPLY_ENTRIES={
   agree:"entry.761898604",
 };
 const PARTNER_ENTRIES={
-  company:"entry.68667907",
-  contact:"entry.1228948302",
-  position:"entry.1439583423",
-  phone:"entry.818901037",
-  email:"entry.500831618",
-  type:"entry.1539263350",
-  message:"entry.1024725422",
-  agree:"entry.165316621",
+  company:"entry.739365890",
+  contact:"entry.594331275",
+  position:"entry.764472418",
+  phone:"entry.2141595619",
+  email:"entry.1963085748",
+  type:"entry.299743863",
+  message:"",  // TODO: prefilled URL 재추출로 entry ID 확보 필요
+  agree:"entry.125344078",
 };
 
 /* 구글 폼 제출 — hidden iframe + form submit 방식.
