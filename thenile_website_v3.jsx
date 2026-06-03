@@ -1602,23 +1602,25 @@ const ConferencePage=()=>{
     <PartnerFormModal open={showPartner} onClose={()=>setShowPartner(false)}/>
 
     {/* D-Day 고정 신청 바 (히어로 지나면 등장) */}
-    <div style={{position:"fixed",top:72,left:0,right:0,zIndex:90,padding:"0 16px",pointerEvents:"none",transform:stickyVisible?"translateY(0)":"translateY(-200%)",opacity:stickyVisible?1:0,transition:"transform .35s cubic-bezier(.2,.7,.3,1),opacity .25s"}}>
-      <div style={{maxWidth:920,margin:"0 auto",pointerEvents:"auto",background:CC.ink,color:CC.cream,borderRadius:50,padding:"10px 12px 10px 22px",display:"flex",alignItems:"center",gap:12,boxShadow:"0 10px 30px rgba(42,31,26,.28)",justifyContent:"space-between",flexWrap:"nowrap"}}>
-        <div style={{display:"flex",alignItems:"center",gap:10,minWidth:0,flex:1}}>
+    <div className="conf-sticky-bar" style={{position:"fixed",top:72,left:0,right:0,zIndex:90,padding:"0 12px",pointerEvents:"none",transform:stickyVisible?"translateY(0)":"translateY(-200%)",opacity:stickyVisible?1:0,transition:"transform .35s cubic-bezier(.2,.7,.3,1),opacity .25s"}}>
+      <div style={{maxWidth:960,margin:"0 auto",pointerEvents:"auto",background:CC.ink,color:CC.cream,borderRadius:50,padding:"8px 8px 8px 20px",display:"flex",alignItems:"center",gap:8,boxShadow:"0 10px 30px rgba(42,31,26,.28)"}}>
+        <div className="conf-sticky-info" style={{display:"flex",alignItems:"center",gap:8,minWidth:0,flex:1}}>
           {dday!==null&&dday>0&&(
-            <span style={{display:"inline-flex",alignItems:"baseline",gap:4,padding:"4px 12px",background:CC.coral,color:C.w,borderRadius:30,fontWeight:800,letterSpacing:".02em",flexShrink:0}}>
-              <span style={{fontFamily:"'Cormorant Garamond',serif",fontSize:"clamp(15px,2.2vw,18px)"}}>D-{dday}</span>
-            </span>
+            <span style={{padding:"4px 12px",background:CC.coral,color:C.w,borderRadius:30,fontWeight:800,letterSpacing:".02em",flexShrink:0,fontFamily:"'Cormorant Garamond',serif",fontSize:"clamp(15px,2.2vw,18px)"}}>D-{dday}</span>
           )}
           {dday===0&&(
             <span style={{padding:"4px 12px",background:CC.coral,color:C.w,borderRadius:30,fontSize:12,fontWeight:800,letterSpacing:".05em",flexShrink:0}}>D-DAY</span>
           )}
-          <span style={{fontSize:"clamp(12px,1.8vw,14px)",fontWeight:600,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>2026 양육불안 컨퍼런스</span>
+          <span className="conf-sticky-title" style={{fontSize:"clamp(12px,1.7vw,14px)",fontWeight:600,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>2026 양육불안 컨퍼런스</span>
         </div>
-        <button onClick={()=>setShowApply(true)} style={{padding:"10px 20px",background:CC.coral,color:C.w,border:"none",borderRadius:30,fontSize:"clamp(12px,1.8vw,14px)",fontWeight:700,cursor:"pointer",letterSpacing:".02em",whiteSpace:"nowrap",flexShrink:0,transition:"background .2s"}} onMouseEnter={e=>e.currentTarget.style.background=CC.peach} onMouseLeave={e=>e.currentTarget.style.background=CC.coral}>
+        <button onClick={()=>setShowPartner(true)} className="conf-sticky-partner" style={{padding:"8px 14px",background:"transparent",color:CC.cream,border:"1px solid rgba(255,248,236,.35)",borderRadius:30,fontSize:"clamp(11px,1.5vw,13px)",fontWeight:600,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0,transition:"background .2s"}} onMouseEnter={e=>e.currentTarget.style.background="rgba(255,248,236,.1)"} onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
+          제휴 문의
+        </button>
+        <button onClick={()=>setShowApply(true)} style={{padding:"10px 18px",background:CC.coral,color:C.w,border:"none",borderRadius:30,fontSize:"clamp(12px,1.7vw,14px)",fontWeight:700,cursor:"pointer",letterSpacing:".02em",whiteSpace:"nowrap",flexShrink:0,transition:"background .2s"}} onMouseEnter={e=>e.currentTarget.style.background=CC.peach} onMouseLeave={e=>e.currentTarget.style.background=CC.coral}>
           참가 신청 →
         </button>
       </div>
+      <style>{`@media (max-width:520px){.conf-sticky-title{display:none}.conf-sticky-partner{padding:8px 12px!important}}`}</style>
     </div>
     {/* HERO */}
     <Sec style={{paddingTop:140,paddingBottom:100,background:CC.cream,position:"relative",overflow:"hidden"}}><Box>
