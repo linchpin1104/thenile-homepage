@@ -1323,13 +1323,13 @@ const ConferencePage=()=>{
      · SESSION 2-2 (워크숍)     — sage
      배경: cream / white / inkBrown 3톤만 alternating */
   const speakers=[
-    {n:"장동선",r:"뇌과학자",img:"/images/장동선.jpg",part:1,color:CC.coral,c2:CC.peach,sh:"burst"},
-    {n:"이다랑",r:"더나일 이사장 · 발달심리",img:"/images/이다랑.jpg",part:1,color:CC.coral,c2:CC.rose,sh:"heart"},
-    {n:"김혜민",r:"사회자 · 전 YTN PD",img:"/images/김혜민.jpg",part:1,color:CC.coral,c2:CC.mango,sh:"flower"},
-    {n:"이혜린",r:"더나일 이사 · 부모교육 전문가",img:"/images/이혜린.jpg",part:2,color:CC.lilac,c2:CC.rose,sh:"pebble"},
-    {n:"강혁진",r:"워크숍 퍼실리테이터",img:"/images/강혁진.jpg",part:3,color:CC.sage,c2:CC.mint,sh:"flower"},
-    {n:"정지우",r:"작가 · 변호사",img:"/images/정지우.jpg",part:3,color:CC.sage,c2:CC.mint,sh:"arch"},
-    {n:"후추맘",r:"육아 크리에이터",img:"/images/후추맘.jpg",part:3,color:CC.sage,c2:CC.mint,sh:"leaf"},
+    {n:"장동선",r:"뇌과학자",img:"/images/speakers/장동선.png",part:"SESSION 1",color:CC.coral,c2:CC.peach,sh:"burst"},
+    {n:"이다랑",r:"더나일 이사장 · 발달심리",img:"/images/speakers/이다랑.png",part:"SESSION 1",color:CC.coral,c2:CC.rose,sh:"heart"},
+    {n:"이혜린",r:"더나일 이사 · 인터뷰 모더레이터",img:"/images/speakers/이혜린.png",part:"SESSION 2-1",color:CC.lilac,c2:CC.rose,sh:"pebble"},
+    {n:"신두란",r:"고마워서그래 대표",img:"/images/speakers/신두란.png",part:"SESSION 2-1",color:CC.lilac,c2:CC.coral,sh:"flower"},
+    {n:"정지우",r:"작가 · 변호사",img:"/images/speakers/정지우.png",part:"SESSION 2-1",color:CC.lilac,c2:CC.sage,sh:"arch"},
+    {n:"후추맘",r:"육아 크리에이터",img:"/images/speakers/후추맘.png",part:"SESSION 2-1",color:CC.lilac,c2:CC.mint,sh:"leaf"},
+    {n:"강혁진",r:"워크숍 퍼실리테이터",img:"/images/speakers/강혁진.png",part:"SESSION 2-2",color:CC.sage,c2:CC.mint,sh:"flower"},
   ];
   return(<>
     {/* HERO */}
@@ -1448,9 +1448,9 @@ const ConferencePage=()=>{
         {[
           {t:"11:00 – 11:20",s:"오프닝",d:"등록 · 환영 인사 및 행사 소개",c:CC.inkBrown,kind:"intro"},
           {t:"11:20 – 12:50",s:"SESSION 1 · 키노트",sub:"90분 · 메인홀",d:"양육불안의 원인을 진단합니다 — 뇌과학(장동선) + 발달심리(이다랑) 두 키노트와 종합 패널",c:CC.coral,kind:"session"},
-          {t:"12:50 – 13:30",s:"점심 · 밍글링",d:"네트워킹 및 기업 부스 탐방",c:CC.inkBrown,kind:"break"},
+          {t:"12:50 – 13:30",s:"점심 · 밍글링",d:"참가자 네트워킹",c:CC.inkBrown,kind:"break"},
           {t:"13:30 – 15:00",s:"SESSION 2 · 병행 세션 (택 1)",sub:"90분",d:"두 세션 중 한 곳을 선택해 참여",c:CC.lilac,kind:"session-parent"},
-          {t:"",s:"SESSION 2-1 · 인터뷰",sub:"메인홀",d:"양육불안과 함께 살아간다는 것 — 김혜민 모더레이터 + 패널 3명",c:CC.lilac,kind:"sub"},
+          {t:"",s:"SESSION 2-1 · 인터뷰",sub:"메인홀",d:"양육불안과 함께 살아간다는 것 — 이혜린 모더레이터 + 패널 3명 (신두란·정지우·후추맘)",c:CC.lilac,kind:"sub"},
           {t:"",s:"SESSION 2-2 · 워크숍",sub:"소그룹룸",d:"내 양육불안 다루기 — 강혁진 퍼실리테이터 + 더나일 상담팀 테이블 모더레이터",c:CC.sage,kind:"sub"},
         ].map((x,i,a)=>(
           <div key={i} style={{display:"grid",gridTemplateColumns:"clamp(120px,22vw,150px) 1fr",gap:16,padding:x.kind==="sub"?"14px 24px 14px 48px":"18px 24px",borderBottom:i<a.length-1?`1px solid ${C.g1}`:"none",alignItems:"start",background:x.kind==="sub"?CC.cream:C.w}}>
@@ -1482,7 +1482,7 @@ const ConferencePage=()=>{
             <div style={{width:"100%",aspectRatio:"1/1",borderRadius:"50%",overflow:"hidden",marginBottom:14,background:CC.cream,border:`2px solid ${s.color}33`,position:"relative",boxShadow:`0 4px 16px ${s.color}15`}}>
               <img src={s.img} alt={s.n} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";const c1=s.color,c2=s.c2,sh=s.sh,id=`fb${i}-${Math.floor(Math.random()*9999)}`;wrap.insertAdjacentHTML("beforeend",`<svg viewBox="0 0 100 100" style="width:100%;height:100%;display:block"><defs><linearGradient id="${id}" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="${c1}22"/><text x="50" y="62" text-anchor="middle" font-size="32" font-weight="700" fill="${c1}" font-family="serif">${s.n[0]}</text></svg>`)}}}/>
             </div>
-            <div style={{display:"inline-block",fontSize:10,color:s.color,fontWeight:700,letterSpacing:".1em",marginBottom:6,padding:"3px 10px",background:`${s.color}15`,borderRadius:12}}>PART {s.part}</div>
+            <div style={{display:"inline-block",fontSize:10,color:s.color,fontWeight:700,letterSpacing:".1em",marginBottom:6,padding:"3px 10px",background:`${s.color}15`,borderRadius:12}}>{s.part}</div>
             <div style={{fontSize:16,fontWeight:700,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>{s.n}</div>
             <div style={{fontSize:12,color:CC.inkBrown,opacity:.7,lineHeight:1.5,wordBreak:"keep-all"}}>{s.r}</div>
           </div>
@@ -1497,123 +1497,131 @@ const ConferencePage=()=>{
         <H2>양육불안의 원인을 진단합니다</H2>
         <p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.7,lineHeight:1.8,maxWidth:560,margin:"16px auto 0",wordBreak:"keep-all"}}>뇌과학과 발달심리학, 두 시선이 한 자리에서 만나 양육불안의 뿌리를 짚어드립니다.</p>
       </div></FI>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:24,maxWidth:920,margin:"0 auto"}}>
+      <div style={{display:"grid",gap:24,maxWidth:960,margin:"0 auto"}}>
         {[
-          {n:"KEYNOTE 01",c:CC.coral,c2:CC.peach,name:"장동선",role:"뇌과학자",img:"/images/장동선.jpg",title:"부모의 뇌, 양육불안의 신경학적 풍경",items:["부모가 된 이후 뇌에서 일어나는 변화","옥시토신·도파민·편도체가 만드는 정서 신호","양육불안이 생물학적 현상이기도 하다는 점"],sh:"burst"},
-          {n:"KEYNOTE 02",c:CC.coral,c2:CC.rose,name:"이다랑",role:"발달심리 · 더나일 이사장",img:"/images/이다랑.jpg",title:"한국 부모의 양육불안, 무엇이 다른가",items:["7만 명 부모를 만나며 본 한국형 양육불안","정서불안·능력불안·관계불안의 세 차원","자체 양육불안척도(PAI)로 본 부모 마음의 지도"],sh:"heart"},
+          {n:"KEYNOTE 01",c:CC.coral,c2:CC.peach,name:"장동선",role:"뇌과학자",img:"/images/speakers/장동선.png",title:"부모의 뇌, 양육불안의 신경학적 풍경",items:["부모가 된 이후 뇌에서 일어나는 변화","옥시토신·도파민·편도체가 만드는 정서 신호","양육불안이 생물학적 현상이기도 하다는 점"],sh:"burst"},
+          {n:"KEYNOTE 02",c:CC.coral,c2:CC.rose,name:"이다랑",role:"발달심리 · 더나일 이사장",img:"/images/speakers/이다랑.png",title:"한국 부모의 양육불안, 무엇이 다른가",items:["7만 명 부모를 만나며 본 한국형 양육불안","정서불안·능력불안·관계불안의 세 차원","자체 양육불안척도(PAI)로 본 부모 마음의 지도"],sh:"heart"},
         ].map((k,i)=>(
-          <FI key={i} delay={i*.1}><div style={{padding:"32px 28px",background:CC.cream,borderRadius:24,height:"100%",position:"relative",overflow:"hidden"}}>
-            <div style={{position:"absolute",top:-30,right:-30,opacity:.35,pointerEvents:"none"}}><EmoShape shape={k.sh} c1={k.c} c2={k.c2} size={140} rotate={20} eyes={false}/></div>
-            <div style={{position:"relative"}}>
-              <div style={{fontSize:11,color:k.c,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>{k.n} · 20분 발표</div>
-              <div style={{display:"flex",alignItems:"center",gap:16,marginBottom:20}}>
-                <div style={{width:64,height:64,borderRadius:"50%",overflow:"hidden",flexShrink:0,background:C.w,border:`2px solid ${k.c}33`,boxShadow:`0 4px 12px ${k.c}22`}}>
-                  <img src={k.img} alt={k.name} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:24px;color:${k.c};font-weight:700;background:${k.c}15;font-family:'Noto Serif KR',serif">${k.name[0]}</div>`)}}}/>
-                </div>
-                <div>
-                  <div style={{fontSize:22,fontWeight:800,color:CC.ink,marginBottom:2,fontFamily:"'Noto Serif KR',serif"}}>{k.name}</div>
-                  <div style={{fontSize:12,color:CC.inkBrown,opacity:.65,wordBreak:"keep-all"}}>{k.role}</div>
-                </div>
+          <FI key={i} delay={i*.1}><div style={{display:"grid",gridTemplateColumns:"minmax(180px,260px) 1fr",gap:0,background:CC.cream,borderRadius:28,overflow:"hidden",position:"relative"}} className="conf-keynote-card">
+            {/* 좌측 큰 인물 사진 */}
+            <div style={{position:"relative",aspectRatio:"4/5",background:`linear-gradient(135deg,${k.c}22 0%,${k.c2}22 100%)`,overflow:"hidden"}}>
+              <img src={k.img} alt={k.name} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;color:${k.c};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">${k.name[0]}</div>`)}}}/>
+              <div style={{position:"absolute",bottom:14,left:14,padding:"5px 12px",background:"rgba(0,0,0,.55)",backdropFilter:"blur(8px)",borderRadius:20,fontSize:10,color:C.w,fontWeight:700,letterSpacing:".12em"}}>{k.n} · 20분</div>
+            </div>
+            {/* 우측 정보 */}
+            <div style={{padding:"32px 32px",position:"relative",overflow:"hidden"}}>
+              <div style={{position:"absolute",top:-30,right:-30,opacity:.25,pointerEvents:"none"}}><EmoShape shape={k.sh} c1={k.c} c2={k.c2} size={130} rotate={20} eyes={false}/></div>
+              <div style={{position:"relative"}}>
+                <div style={{fontSize:28,fontWeight:800,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>{k.name}</div>
+                <div style={{fontSize:13,color:CC.inkBrown,opacity:.65,marginBottom:20,wordBreak:"keep-all"}}>{k.role}</div>
+                <h4 style={{fontSize:"clamp(16px,2.3vw,19px)",fontWeight:700,color:CC.ink,marginBottom:18,lineHeight:1.4,wordBreak:"keep-all",paddingBottom:16,borderBottom:`1px solid ${k.c}33`}}>{k.title}</h4>
+                {k.items.map((it,j)=>(
+                  <div key={j} style={{display:"flex",gap:10,padding:"6px 0",fontSize:13,color:CC.inkBrown,opacity:.82,lineHeight:1.7,wordBreak:"keep-all"}}>
+                    <span style={{color:k.c,flexShrink:0,fontWeight:700}}>·</span><span>{it}</span>
+                  </div>
+                ))}
               </div>
-              <h4 style={{fontSize:"clamp(15px,2vw,17px)",fontWeight:700,color:CC.ink,marginBottom:14,lineHeight:1.45,wordBreak:"keep-all",paddingBottom:14,borderBottom:`1px solid ${k.c}22`}}>{k.title}</h4>
-              {k.items.map((it,j)=>(
-                <div key={j} style={{display:"flex",gap:10,padding:"5px 0",fontSize:13,color:CC.inkBrown,opacity:.82,lineHeight:1.7,wordBreak:"keep-all"}}>
-                  <span style={{color:k.c,flexShrink:0,fontWeight:700}}>·</span><span>{it}</span>
+            </div>
+          </div></FI>
+        ))}
+      </div>
+      <FI delay={.25}><div style={{maxWidth:960,margin:"24px auto 0",padding:"18px 24px",background:CC.inkBrown,color:CC.cream,borderRadius:16,display:"flex",gap:16,alignItems:"center",flexWrap:"wrap"}}>
+        <span style={{fontSize:11,color:CC.peach,fontWeight:700,letterSpacing:".1em",background:"rgba(255,255,255,.08)",padding:"4px 12px",borderRadius:20,flexShrink:0}}>종합 패널 · 이혜린 모더레이터</span>
+        <span style={{fontSize:13,color:"rgba(255,248,236,.85)",lineHeight:1.7,wordBreak:"keep-all"}}>두 키노트가 만나는 자리. 뇌과학과 발달심리의 시선이 한 부모 안에서 어떻게 동시에 작동하는지 함께 풀어봅니다.</span>
+      </div></FI>
+      <style>{`@media (max-width:680px){.conf-keynote-card{grid-template-columns:1fr!important}.conf-keynote-card>div:first-child{aspect-ratio:16/10!important}}`}</style>
+    </Box></Sec>
+
+    {/* SESSION 2 · 병행 세션 통합 — 좌(인터뷰 lilac) / 우(워크숍 sage) */}
+    <Sec bg={CC.cream} style={{position:"relative",overflow:"hidden"}}><Box>
+      <FI><div style={{textAlign:"center",marginBottom:48}}>
+        <div style={{fontSize:13,color:CC.inkBrown,opacity:.55,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 2 · 13:30 – 15:00 · 병행 세션 (택 1)</div>
+        <H2><span style={{display:"inline-block"}}>같은 시간,</span>{" "}<span style={{display:"inline-block"}}>두 갈래의 방식.</span></H2>
+        <p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.7,lineHeight:1.8,maxWidth:640,margin:"16px auto 0",wordBreak:"keep-all"}}>듣는 자리와 풀어내는 자리. 두 세션이 같은 시간대에 병행 진행되며, 신청 시 한 곳을 선택하실 수 있습니다.</p>
+      </div></FI>
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(320px,1fr))",gap:24,maxWidth:1120,margin:"0 auto"}}>
+
+        {/* 좌 — SESSION 2-1 · 인터뷰 (lilac) */}
+        <FI delay={.1}><div style={{background:CC.lilacL,borderRadius:28,padding:"36px 32px",position:"relative",overflow:"hidden",border:`2px solid ${CC.lilac}33`}}>
+          <div style={{position:"absolute",top:-30,right:-30,opacity:.35,pointerEvents:"none"}}><EmoShape shape="heart" c1={CC.lilac} c2={CC.rose} size={140} rotate={20} eyes={false}/></div>
+          <div style={{position:"relative"}}>
+            <div style={{display:"inline-block",padding:"4px 12px",background:CC.lilac,color:C.w,borderRadius:20,fontSize:10,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 2-1 · 메인홀</div>
+            <h3 style={{fontFamily:"'Noto Serif KR',serif",fontSize:"clamp(22px,3vw,28px)",fontWeight:800,color:CC.ink,marginBottom:8,wordBreak:"keep-all",lineHeight:1.3}}>인터뷰</h3>
+            <p style={{fontSize:14,color:CC.inkBrown,opacity:.75,lineHeight:1.7,marginBottom:28,wordBreak:"keep-all"}}>양육불안과 함께 살아간다는 것 — 다른 자리에서 양육과 만나온 세 분의 정직한 대화</p>
+
+            {/* 모더레이터 */}
+            <div style={{display:"flex",alignItems:"center",gap:14,padding:"14px 18px",background:C.w,borderRadius:50,marginBottom:24}}>
+              <div style={{width:46,height:46,borderRadius:"50%",overflow:"hidden",flexShrink:0,background:CC.cream,border:`2px solid ${CC.lilac}55`}}>
+                <img src="/images/speakers/이혜린.png" alt="이혜린" style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:18px;color:${CC.lilac};font-weight:700;background:${CC.lilac}15;font-family:'Noto Serif KR',serif">이</div>`)}}}/>
+              </div>
+              <div style={{flex:1}}>
+                <div style={{fontSize:10,color:CC.lilac,fontWeight:700,letterSpacing:".15em"}}>MODERATOR</div>
+                <div style={{fontSize:15,fontWeight:700,color:CC.ink,fontFamily:"'Noto Serif KR',serif"}}>이혜린</div>
+                <div style={{fontSize:11,color:CC.inkBrown,opacity:.6}}>사단법인 더나일 이사</div>
+              </div>
+            </div>
+
+            {/* 패널 3명 — 큰 사진 그리드 */}
+            <div style={{fontSize:11,color:CC.lilac,fontWeight:700,letterSpacing:".15em",marginBottom:14}}>PANELS</div>
+            <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:10,marginBottom:8}}>
+              {[
+                {name:"신두란",role:"고마워서그래 대표",img:"/images/speakers/신두란.png"},
+                {name:"정지우",role:"작가 · 변호사",img:"/images/speakers/정지우.png"},
+                {name:"후추맘",role:"육아 크리에이터",img:"/images/speakers/후추맘.png"},
+              ].map((p,j)=>(
+                <div key={j} style={{textAlign:"center"}}>
+                  <div style={{width:"100%",aspectRatio:"1/1",borderRadius:18,overflow:"hidden",marginBottom:10,background:C.w,border:`2px solid ${CC.lilac}33`}}>
+                    <img src={p.img} alt={p.name} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:34px;color:${CC.lilac};font-weight:700;background:${CC.lilac}15;font-family:'Noto Serif KR',serif">${p.name[0]}</div>`)}}}/>
+                  </div>
+                  <div style={{fontSize:13,fontWeight:700,color:CC.ink,marginBottom:2,fontFamily:"'Noto Serif KR',serif"}}>{p.name}</div>
+                  <div style={{fontSize:10,color:CC.inkBrown,opacity:.65,lineHeight:1.4,wordBreak:"keep-all"}}>{p.role}</div>
                 </div>
               ))}
             </div>
-          </div></FI>
-        ))}
-      </div>
-      <FI delay={.25}><div style={{maxWidth:920,margin:"24px auto 0",padding:"18px 24px",background:CC.inkBrown,color:CC.cream,borderRadius:16,display:"flex",gap:16,alignItems:"center",flexWrap:"wrap"}}>
-        <span style={{fontSize:11,color:CC.peach,fontWeight:700,letterSpacing:".1em",background:"rgba(255,255,255,.08)",padding:"4px 12px",borderRadius:20,flexShrink:0}}>종합 패널 · 김혜민 모더레이터</span>
-        <span style={{fontSize:13,color:"rgba(255,248,236,.85)",lineHeight:1.7,wordBreak:"keep-all"}}>두 키노트가 만나는 자리. 뇌과학과 발달심리의 시선이 한 부모 안에서 어떻게 동시에 작동하는지 함께 풀어봅니다.</span>
-      </div></FI>
-    </Box></Sec>
-
-    {/* 인터뷰 세션 (SESSION 2-1) */}
-    <Sec bg={CC.cream} style={{position:"relative",overflow:"hidden"}}><Box>
-      <div style={{position:"absolute",top:50,right:"4%",pointerEvents:"none",opacity:.45}}><EmoShape shape="heart" c1={CC.lilac} c2={CC.rose} size={65} rotate={-15} eyes={false}/></div>
-      <div style={{position:"absolute",bottom:80,left:"3%",pointerEvents:"none",opacity:.4}}><EmoShape shape="leaf" c1={CC.lilac} c2={CC.rose} size={85} rotate={20} eyes={false}/></div>
-      <FI><div style={{textAlign:"center",marginBottom:48,position:"relative"}}>
-        <div style={{fontSize:13,color:CC.lilac,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 2-1 · 인터뷰 · 메인홀 · 90분</div>
-        <H2>양육불안과 함께 살아간다는 것</H2>
-        <p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.7,lineHeight:1.8,maxWidth:600,margin:"16px auto 0",wordBreak:"keep-all"}}>다른 자리에서 양육과 만나온 세 분이 자신의 양육불안을 어떻게 통과해왔는지 나누는 대화</p>
-      </div></FI>
-      <FI delay={.08}><div style={{maxWidth:680,margin:"0 auto 32px",padding:"14px 20px",background:C.w,borderRadius:50,display:"flex",alignItems:"center",gap:14,flexWrap:"wrap",justifyContent:"center"}}>
-        <div style={{width:36,height:36,borderRadius:"50%",overflow:"hidden",flexShrink:0,border:`2px solid ${CC.lilac}55`}}>
-          <img src="/images/김혜민.jpg" alt="김혜민" style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{e.currentTarget.style.display="none";e.currentTarget.parentElement.style.background=`${CC.lilac}22`}}/>
-        </div>
-        <span style={{fontSize:11,color:CC.lilac,fontWeight:700,letterSpacing:".15em"}}>MODERATOR</span>
-        <span style={{fontSize:15,fontWeight:700,color:CC.ink}}>김혜민</span>
-        <span style={{fontSize:13,color:CC.inkBrown,opacity:.65}}>사단법인 더나일 이사</span>
-      </div></FI>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))",gap:20,maxWidth:1080,margin:"0 auto",position:"relative"}}>
-        {[
-          {n:"PANEL 01",c:CC.lilac,c2:CC.rose,name:"이혜린",role:"사단법인 더나일 이사 · 부모교육 전문가",img:"/images/이혜린.jpg",lens:"임상 영역의 시선",d:"교육심리학 석사. 그로잉맘과 더나일에서 부모 마음을 가장 가까이 들여다본 경험을 나눕니다.",sh:"pebble"},
-          {n:"PANEL 02",c:CC.lilac,c2:CC.coral,name:"정지우",role:"작가 · 변호사",img:"/images/정지우.jpg",lens:"글 쓰는 아빠의 시선",d:"양육과 시대를 함께 쓰는 에세이스트. 일과 글, 양육이 한 사람 안에서 부딪힐 때 무엇이 남는가.",sh:"arch"},
-          {n:"PANEL 03",c:CC.lilac,c2:CC.sage,name:"후추맘",role:"자유로운 양육을 실천해온 부모",img:"/images/후추맘.jpg",lens:"결을 다르게 둔 양육의 시선",d:"정해진 트랙을 따라가지 않는 양육의 결. 불안을 통과하는 또 하나의 길을 정직하게 풀어냅니다.",sh:"leaf"},
-        ].map((p,i)=>(
-          <FI key={i} delay={.1+i*.08}><div style={{padding:"28px 24px",background:C.w,borderRadius:20,height:"100%",position:"relative",overflow:"hidden"}}>
-            <div style={{position:"absolute",top:-15,right:-15,opacity:.25,pointerEvents:"none"}}><EmoShape shape={p.sh} c1={p.c} c2={p.c2} size={90} rotate={15} eyes={false}/></div>
-            <div style={{position:"relative"}}>
-              <div style={{display:"flex",alignItems:"center",gap:14,marginBottom:14}}>
-                <div style={{width:56,height:56,borderRadius:"50%",overflow:"hidden",flexShrink:0,border:`2px solid ${p.c}33`,background:CC.cream}}>
-                  <img src={p.img} alt={p.name} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:20px;color:${p.c};font-weight:700;background:${p.c}15;font-family:'Noto Serif KR',serif">${p.name[0]}</div>`)}}}/>
-                </div>
-                <div>
-                  <div style={{display:"inline-block",fontSize:10,color:p.c,fontWeight:700,letterSpacing:".15em",marginBottom:4,padding:"2px 8px",background:`${p.c}15`,borderRadius:10}}>{p.n}</div>
-                  <div style={{fontSize:18,fontWeight:800,color:CC.ink,fontFamily:"'Noto Serif KR',serif"}}>{p.name}</div>
-                </div>
-              </div>
-              <div style={{fontSize:12,color:CC.inkBrown,opacity:.6,marginBottom:14,wordBreak:"keep-all"}}>{p.role}</div>
-              <div style={{fontSize:13,color:p.c,fontWeight:700,marginBottom:8,wordBreak:"keep-all",paddingTop:14,borderTop:`1px solid ${p.c}22`}}>{p.lens}</div>
-              <p style={{fontSize:13,color:CC.inkBrown,opacity:.75,lineHeight:1.75,wordBreak:"keep-all"}}>{p.d}</p>
-            </div>
-          </div></FI>
-        ))}
-      </div>
-    </Box></Sec>
-
-    {/* 워크숍 세션 (SESSION 2-2) */}
-    <Sec bg={C.w} style={{position:"relative",overflow:"hidden"}}><Box>
-      <div style={{position:"absolute",top:50,left:"4%",pointerEvents:"none",opacity:.4}}><EmoShape shape="leaf" c1={CC.sage} c2={CC.mint} size={70} rotate={-15} eyes={false}/></div>
-      <div style={{position:"absolute",bottom:60,right:"4%",pointerEvents:"none",opacity:.4}}><EmoShape shape="pebble" c1={CC.sage} c2={CC.mint} size={80} rotate={15} eyes={false}/></div>
-      <FI><div style={{textAlign:"center",marginBottom:48,position:"relative"}}>
-        <div style={{fontSize:13,color:CC.sage,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 2-2 · 워크숍 · 소그룹룸 · 90분</div>
-        <H2>내 양육불안 다루기</H2>
-        <p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.7,lineHeight:1.8,maxWidth:640,margin:"16px auto 0",wordBreak:"keep-all"}}>자기 안의 불안을 한 덩어리의 감정이 아니라, 여러 층위의 신호로 읽어내는 사례 개념화 워크숍</p>
-      </div></FI>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,260px) 1fr)",gap:32,maxWidth:1000,margin:"0 auto",alignItems:"start",position:"relative"}}>
-        <FI delay={.08}><div style={{padding:"32px 22px",background:CC.cream,borderRadius:24,textAlign:"center",position:"relative",overflow:"hidden"}}>
-          <div style={{position:"absolute",bottom:-20,right:-20,opacity:.3,pointerEvents:"none"}}><EmoShape shape="flower" c1={CC.sage} c2={CC.mint} size={110} eyes={false}/></div>
-          <div style={{position:"relative"}}>
-            <div style={{fontSize:11,color:CC.sage,fontWeight:700,letterSpacing:".15em",marginBottom:14}}>MAIN FACILITATOR</div>
-            <div style={{width:120,height:120,borderRadius:"50%",overflow:"hidden",margin:"0 auto 16px",background:C.w,border:`2px solid ${CC.sage}55`,boxShadow:`0 6px 20px ${CC.sage}22`}}>
-              <img src="/images/강혁진.jpg" alt="강혁진" style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:42px;color:${CC.sage};font-weight:700;background:${CC.sage}15;font-family:'Noto Serif KR',serif">강</div>`)}}}/>
-            </div>
-            <div style={{fontSize:22,fontWeight:800,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>강혁진</div>
-            <div style={{fontSize:12,color:CC.inkBrown,opacity:.7,lineHeight:1.6,wordBreak:"keep-all"}}>그룹 워크숍 디자인·진행 전문가</div>
           </div>
         </div></FI>
-        <FI delay={.15}><div>
-          <p style={{fontSize:14,color:CC.inkBrown,opacity:.78,lineHeight:1.95,marginBottom:24,wordBreak:"keep-all"}}>
-            참가자가 자신의 양육 경험을 새로운 언어로 풀어볼 도구를 가지고 행사장을 떠나도록 설계합니다. 더나일 상담팀이 테이블 모더레이터로 참여하여 개념화 작업을 함께 가이드합니다.
-          </p>
-          <div style={{display:"grid",gap:12}}>
-            {[
-              {n:"01",t:"20분 · 오프닝 세션",d:"양육불안을 발달적 · 성격적 · 원가족 측면으로 풀어보는 개념 도입"},
-              {n:"02",t:"40분 · 개념화 시트 작업",d:"참가자가 자신의 양육 상황을 시트에 정리하고 테이블 모더레이터가 함께 풀어냅니다"},
-              {n:"03",t:"30분 · 테이블 토의 · 나눔",d:"정리된 내용을 같은 테이블에서 나누고 자기 안의 불안을 여러 층위의 신호로 다시 읽습니다"},
-            ].map((s,i)=>(
-              <div key={i} style={{display:"grid",gridTemplateColumns:"42px 1fr",gap:14,padding:"14px 18px",background:CC.cream,borderRadius:14,alignItems:"start"}}>
-                <div style={{width:32,height:32,borderRadius:"50%",background:CC.sage,color:C.w,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:800}}>{s.n}</div>
-                <div>
-                  <div style={{fontSize:14,fontWeight:700,color:CC.ink,marginBottom:4,wordBreak:"keep-all"}}>{s.t}</div>
-                  <div style={{fontSize:13,color:CC.inkBrown,opacity:.75,lineHeight:1.7,wordBreak:"keep-all"}}>{s.d}</div>
-                </div>
+
+        {/* 우 — SESSION 2-2 · 워크숍 (sage) */}
+        <FI delay={.2}><div style={{background:CC.sageL,borderRadius:28,padding:"36px 32px",position:"relative",overflow:"hidden",border:`2px solid ${CC.sage}44`}}>
+          <div style={{position:"absolute",top:-30,right:-30,opacity:.35,pointerEvents:"none"}}><EmoShape shape="flower" c1={CC.sage} c2={CC.mint} size={140} rotate={-15} eyes={false}/></div>
+          <div style={{position:"relative"}}>
+            <div style={{display:"inline-block",padding:"4px 12px",background:CC.sage,color:C.w,borderRadius:20,fontSize:10,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 2-2 · 소그룹룸</div>
+            <h3 style={{fontFamily:"'Noto Serif KR',serif",fontSize:"clamp(22px,3vw,28px)",fontWeight:800,color:CC.ink,marginBottom:8,wordBreak:"keep-all",lineHeight:1.3}}>워크숍</h3>
+            <p style={{fontSize:14,color:CC.inkBrown,opacity:.75,lineHeight:1.7,marginBottom:28,wordBreak:"keep-all"}}>내 양육불안 다루기 — 자기 안의 불안을 여러 층위의 신호로 읽어내는 사례 개념화 워크숍</p>
+
+            {/* 퍼실리테이터 */}
+            <div style={{display:"flex",alignItems:"center",gap:14,padding:"14px 18px",background:C.w,borderRadius:50,marginBottom:24}}>
+              <div style={{width:46,height:46,borderRadius:"50%",overflow:"hidden",flexShrink:0,background:CC.cream,border:`2px solid ${CC.sage}55`}}>
+                <img src="/images/speakers/강혁진.png" alt="강혁진" style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:18px;color:${CC.sage};font-weight:700;background:${CC.sage}15;font-family:'Noto Serif KR',serif">강</div>`)}}}/>
               </div>
-            ))}
+              <div style={{flex:1}}>
+                <div style={{fontSize:10,color:CC.sage,fontWeight:700,letterSpacing:".15em"}}>FACILITATOR</div>
+                <div style={{fontSize:15,fontWeight:700,color:CC.ink,fontFamily:"'Noto Serif KR',serif"}}>강혁진</div>
+                <div style={{fontSize:11,color:CC.inkBrown,opacity:.6}}>그룹 워크숍 디자인·진행 전문가</div>
+              </div>
+            </div>
+
+            {/* 90분 흐름 */}
+            <div style={{fontSize:11,color:CC.sage,fontWeight:700,letterSpacing:".15em",marginBottom:14}}>90분 흐름</div>
+            <div style={{display:"grid",gap:10}}>
+              {[
+                {n:"01",t:"오프닝 세션",dur:"20분",d:"양육불안을 발달적·성격적·원가족 측면으로 풀어보는 개념 도입"},
+                {n:"02",t:"개념화 시트 작업",dur:"40분",d:"자신의 양육 상황을 시트에 정리하고 테이블 모더레이터와 함께 풀어냅니다"},
+                {n:"03",t:"테이블 토의·나눔",dur:"30분",d:"같은 테이블에서 나누며 자기 안의 불안을 여러 층위의 신호로 다시 읽습니다"},
+              ].map((s,i)=>(
+                <div key={i} style={{display:"grid",gridTemplateColumns:"36px 1fr",gap:12,padding:"12px 14px",background:C.w,borderRadius:12,alignItems:"start"}}>
+                  <div style={{width:28,height:28,borderRadius:"50%",background:CC.sage,color:C.w,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:800}}>{s.n}</div>
+                  <div>
+                    <div style={{display:"flex",alignItems:"baseline",gap:8,flexWrap:"wrap"}}>
+                      <span style={{fontSize:13,fontWeight:700,color:CC.ink,wordBreak:"keep-all"}}>{s.t}</span>
+                      <span style={{fontSize:10,color:CC.sage,fontWeight:700,padding:"1px 6px",background:`${CC.sage}15`,borderRadius:10}}>{s.dur}</span>
+                    </div>
+                    <div style={{fontSize:12,color:CC.inkBrown,opacity:.7,lineHeight:1.6,marginTop:4,wordBreak:"keep-all"}}>{s.d}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p style={{fontSize:11,color:CC.inkBrown,opacity:.55,marginTop:14,lineHeight:1.6,wordBreak:"keep-all"}}>* 더나일 상담팀이 테이블 모더레이터로 참여합니다.</p>
           </div>
         </div></FI>
       </div>
@@ -1629,7 +1637,7 @@ const ConferencePage=()=>{
       <FI delay={.1}><div style={{maxWidth:1000,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:16,marginBottom:24}}>
         {[
           {src:"/images/venue/heyground-exterior.jpg",label:"HEYGROUND · 외관",fallback:CC.sage,sh:"arch"},
-          {src:"/images/venue/heyground-bricks-hall.jpg",label:"BRICKS HALL · MAIN VENUE",fallback:CC.coral,sh:"pebble"},
+          {src:"/images/venue/heyground-bricks-hall.jpg",label:"BRICKS HALL · 메인 베뉴",fallback:CC.coral,sh:"pebble"},
         ].map((v,i)=>(
           <div key={i} style={{position:"relative",aspectRatio:"4/3",borderRadius:20,overflow:"hidden",background:C.g1}}>
             <img src={v.src} alt={v.label} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.style.background=`linear-gradient(135deg,${v.fallback}33 0%,${v.fallback}11 100%)`;wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px"><div style="font-size:13px;color:${CC.inkBrown};opacity:.5;letter-spacing:.1em;font-weight:600">${v.label}</div><div style="font-size:11px;color:${CC.inkBrown};opacity:.4">이미지 추가 예정</div></div>`)}}}/>
