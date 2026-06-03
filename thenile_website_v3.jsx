@@ -1295,18 +1295,45 @@ const PARTNER_ENTRIES={
   agree:"entry.165316621",
 };
 
-/* 구글 폼 POST 헬퍼 — no-cors 모드로 응답은 못 받지만 데이터는 정상 전송 */
-async function submitToGoogleForm(formId,entries,values){
-  const fd=new FormData();
-  Object.entries(values).forEach(([k,v])=>{
-    /* boolean true → "동의합니다" (체크박스 필수 동의) / false → 미전송 */
-    if(v===true) v="동의합니다";
-    if(v===undefined||v===null||v===""||v===false) return;
-    const eid=entries[k];if(!eid) return;
-    if(Array.isArray(v)) v.forEach(x=>fd.append(eid,x));else fd.append(eid,v);
-  });
-  await fetch(`https://docs.google.com/forms/d/e/${formId}/formResponse`,{
-    method:"POST",body:fd,mode:"no-cors",
+/* 구글 폼 제출 — hidden iframe + form submit 방식.
+   fetch + no-cors 는 Google Forms 가 silent reject 하는 경우 있어 비추.
+   iframe target 방식은 cross-origin form post 가 정상 처리되는 표준 우회법. */
+function submitToGoogleForm(formId,entries,values){
+  return new Promise((resolve)=>{
+    const iframeName="gf-"+Date.now()+"-"+Math.floor(Math.random()*9999);
+    const iframe=document.createElement("iframe");
+    iframe.name=iframeName;
+    iframe.style.cssText="position:absolute;width:0;height:0;border:0;visibility:hidden;left:-9999px;top:-9999px";
+    document.body.appendChild(iframe);
+
+    const form=document.createElement("form");
+    form.action=`https://docs.google.com/forms/d/e/${formId}/formResponse`;
+    form.method="POST";
+    form.target=iframeName;
+    form.style.cssText="position:absolute;width:0;height:0;overflow:hidden;visibility:hidden;left:-9999px;top:-9999px";
+
+    Object.entries(values).forEach(([k,v])=>{
+      if(v===true) v="동의합니다";
+      if(v===undefined||v===null||v===""||v===false) return;
+      const eid=entries[k];if(!eid) return;
+      const arr=Array.isArray(v)?v:[v];
+      arr.forEach(val=>{
+        const input=document.createElement("input");
+        input.type="hidden";
+        input.name=eid;
+        input.value=String(val);
+        form.appendChild(input);
+      });
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+
+    setTimeout(()=>{
+      try{form.remove()}catch(e){}
+      try{iframe.remove()}catch(e){}
+      resolve();
+    },1500);
   });
 }
 
