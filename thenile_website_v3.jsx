@@ -1568,7 +1568,7 @@ const ConferencePage=()=>{
   const speakers=[
     {n:"장동선",r:"뇌과학자",img:"/images/speakers/장동선.png",part:"SESSION 1",color:CC.coral,c2:CC.peach,sh:"burst"},
     {n:"이다랑",r:"더나일 이사장 · 발달심리",img:"/images/speakers/이다랑.png",part:"SESSION 1",color:CC.coral,c2:CC.rose,sh:"heart"},
-    {n:"이혜린",r:"더나일 이사 · 인터뷰 모더레이터",img:"/images/speakers/이혜린.png",part:"SESSION 2-1",color:CC.lilac,c2:CC.rose,sh:"pebble"},
+    {n:"이혜린",r:"쉬벤처스 부대표 · 사단법인 더나일 이사",img:"/images/speakers/이혜린.png",part:"SESSION 2-1",color:CC.lilac,c2:CC.rose,sh:"pebble"},
     {n:"신두란",r:"고마워서그래 대표",img:"/images/speakers/신두란.png",part:"SESSION 2-1",color:CC.lilac,c2:CC.coral,sh:"flower"},
     {n:"정지우",r:"작가 · 변호사",img:"/images/speakers/정지우.png",part:"SESSION 2-1",color:CC.lilac,c2:CC.sage,sh:"arch"},
     {n:"후추맘",r:"육아 크리에이터",img:"/images/speakers/후추맘.png",part:"SESSION 2-1",color:CC.lilac,c2:CC.mint,sh:"leaf"},
@@ -1607,7 +1607,7 @@ const ConferencePage=()=>{
           {[
             {k:"일시",v:"2026.07.09 (목)",sub:"11:00 – 15:00",c:CC.coral},
             {k:"장소",v:"헤이그라운드",sub:"브릭스홀",c:CC.mango},
-            {k:"규모",v:"100–120명",sub:"무료 / 사전신청",c:CC.mint},
+            {k:"인원",v:"100–120명",sub:"무료 / 사전신청",c:CC.mint},
             {k:"주최",v:"사단법인 더나일",sub:"협력 · 성동구청",c:CC.lilac},
           ].map((x,i)=>(
             <div key={i} style={{padding:"22px 18px",background:C.w,borderRadius:16,textAlign:"left",border:`2px solid ${x.c}33`,position:"relative"}}>
@@ -1664,8 +1664,8 @@ const ConferencePage=()=>{
     {/* 3개 키 메시지 */}
     <Sec bg={C.w} style={{paddingTop:96,paddingBottom:48}}><Box>
       <FI><div style={{textAlign:"center",marginBottom:64}}>
-        <div style={{fontSize:13,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>KEY MESSAGES · 컨퍼런스가 다루는 세 가지 질문</div>
-        <H2>함께 이야기 나눕니다.</H2>
+        <div style={{fontSize:13,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>KEY MESSAGES</div>
+        <H2><span style={{display:"inline-block"}}>세 가지 질문에 대해</span>{" "}<span style={{display:"inline-block"}}>함께 이야기 나눕니다.</span></H2>
       </div></FI>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:24,maxWidth:1080,margin:"0 auto"}}>
         {[
@@ -1695,7 +1695,7 @@ const ConferencePage=()=>{
       <FI delay={.1}><div style={{maxWidth:880,margin:"0 auto",borderRadius:24,overflow:"hidden",background:C.w,boxShadow:"0 4px 24px rgba(0,0,0,.05)"}}>
         {[
           {t:"11:00 – 11:20",s:"오프닝",d:"등록 · 환영 인사 및 행사 소개",c:CC.inkBrown},
-          {t:"11:20 – 12:50",s:"SESSION 1 · 키노트",sub:"90분 · 메인홀",d:"양육불안의 원인을 진단합니다 — 뇌과학(장동선) + 발달심리(이다랑)",c:CC.coral},
+          {t:"11:20 – 12:50",s:"SESSION 1 · 키노트",sub:"90분 · 메인홀",d:"양육불안은 어디에서 오는가 — 장동선 / 이다랑",c:CC.coral},
           {t:"12:50 – 13:30",s:"점심 · 밍글링",d:"참가자 네트워킹",c:CC.inkBrown},
         ].map((x,i)=>(
           <div key={i} style={{display:"grid",gridTemplateColumns:"clamp(120px,22vw,150px) 1fr",gap:16,padding:"18px 24px",borderBottom:`1px solid ${C.g1}`,alignItems:"start"}}>
@@ -1763,13 +1763,13 @@ const ConferencePage=()=>{
     <Sec bg={C.w}><Box>
       <FI><div style={{textAlign:"center",marginBottom:48}}>
         <div style={{fontSize:13,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 1 · 키노트 · 오전 90분</div>
-        <H2>양육불안의 원인을 진단합니다</H2>
+        <H2>양육불안은 어디에서 오는가</H2>
         <p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.7,lineHeight:1.8,maxWidth:560,margin:"16px auto 0",wordBreak:"keep-all"}}>뇌과학과 발달심리학, 두 시선이 한 자리에서 만나 양육불안의 뿌리를 짚어드립니다.</p>
       </div></FI>
       <div style={{display:"grid",gap:24,maxWidth:960,margin:"0 auto"}}>
         {[
-          {n:"KEYNOTE 01",c:CC.coral,c2:CC.peach,name:"장동선",role:"뇌과학자",img:"/images/speakers/장동선.png",title:"부모의 뇌, 양육불안의 신경학적 풍경",items:["부모가 된 이후 뇌에서 일어나는 변화","옥시토신·도파민·편도체가 만드는 정서 신호","양육불안이 생물학적 현상이기도 하다는 점"],sh:"burst"},
-          {n:"KEYNOTE 02",c:CC.coral,c2:CC.rose,name:"이다랑",role:"발달심리 · 더나일 이사장",img:"/images/speakers/이다랑.png",title:"한국 부모의 양육불안, 무엇이 다른가",items:["7만 명 부모를 만나며 본 한국형 양육불안","정서불안·능력불안·관계불안의 세 차원","자체 양육불안척도(PAI)로 본 부모 마음의 지도"],sh:"heart"},
+          {n:"KEYNOTE 01",c:CC.coral,c2:CC.peach,name:"장동선",role:"뇌과학자",img:"/images/speakers/장동선.png",title:"양육불안, 우리의 마음은 어떻게 작동될까?",desc:"부모가 된 이후 우리 뇌에서는 어떤 변화가 일어날까요? 뇌과학자의 시선으로 부모들의 양육불안의 원인을 다루어 봅니다.",sh:"burst"},
+          {n:"KEYNOTE 02",c:CC.coral,c2:CC.rose,name:"이다랑",role:"발달심리 · 더나일 이사장",img:"/images/speakers/이다랑.png",title:"한국 부모의 양육불안, 어떻게 다를까?",desc:"한국 부모들이 겪는 양육불안은 어디에서 비롯될까요? 7만 명의 부모를 만나며 그려온 마음의 지도를, 발달심리 전문가의 시선으로 함께 풀어봅니다.",sh:"heart"},
         ].map((k,i)=>(
           <FI key={i} delay={i*.1}><div style={{display:"grid",gridTemplateColumns:"minmax(180px,260px) 1fr",gap:0,background:CC.cream,borderRadius:28,overflow:"hidden",position:"relative"}} className="conf-keynote-card">
             {/* 좌측 큰 인물 사진 */}
@@ -1784,11 +1784,7 @@ const ConferencePage=()=>{
                 <div style={{fontSize:28,fontWeight:800,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>{k.name}</div>
                 <div style={{fontSize:13,color:CC.inkBrown,opacity:.65,marginBottom:20,wordBreak:"keep-all"}}>{k.role}</div>
                 <h4 style={{fontSize:"clamp(16px,2.3vw,19px)",fontWeight:700,color:CC.ink,marginBottom:18,lineHeight:1.4,wordBreak:"keep-all",paddingBottom:16,borderBottom:`1px solid ${k.c}33`}}>{k.title}</h4>
-                {k.items.map((it,j)=>(
-                  <div key={j} style={{display:"flex",gap:10,padding:"6px 0",fontSize:13,color:CC.inkBrown,opacity:.82,lineHeight:1.7,wordBreak:"keep-all"}}>
-                    <span style={{color:k.c,flexShrink:0,fontWeight:700}}>·</span><span>{it}</span>
-                  </div>
-                ))}
+                <p style={{fontSize:14,color:CC.inkBrown,opacity:.82,lineHeight:1.85,wordBreak:"keep-all",margin:0}}>{k.desc}</p>
               </div>
             </div>
           </div></FI>
@@ -1797,33 +1793,38 @@ const ConferencePage=()=>{
       <style>{`@media (max-width:680px){.conf-keynote-card{grid-template-columns:1fr!important}.conf-keynote-card>div:first-child{aspect-ratio:16/10!important}}`}</style>
     </Box></Sec>
 
-    {/* SESSION 2-1 · 인터뷰 (단독 섹션, 키노트와 같은 시원한 레이아웃) */}
+    {/* SESSION 2-1 · 토크세션 (단독 섹션, 2x2 그리드) */}
     <Sec bg={CC.cream}><Box>
-      <FI><div style={{textAlign:"center",marginBottom:48}}>
-        <div style={{fontSize:13,color:CC.lilac,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 2-1 · 인터뷰 · 메인홀 · 13:30 – 15:00</div>
+      <FI><div style={{textAlign:"center",marginBottom:16}}>
+        <div style={{fontSize:13,color:CC.lilac,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 2-1 · 메인홀 · 13:30 – 15:00</div>
         <H2>양육불안과 함께 살아간다는 것</H2>
-        <p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.7,lineHeight:1.8,maxWidth:600,margin:"16px auto 0",wordBreak:"keep-all"}}>다른 자리에서 양육과 만나온 네 분이 자신의 양육불안을 어떻게 통과해왔는지 나누는 대화</p>
+        <div style={{display:"inline-block",marginTop:14,padding:"6px 16px",background:`${CC.lilac}15`,borderRadius:30,fontSize:13,color:CC.lilac,fontWeight:700,letterSpacing:".02em"}}>
+          토크세션 · 이혜린 / 신두란 / 정지우 / 후추맘
+        </div>
       </div></FI>
+      <FI delay={.08}><p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.7,lineHeight:1.85,maxWidth:640,margin:"16px auto 48px",textAlign:"center",wordBreak:"keep-all"}}>다른 자리에서 양육과 만나온 네 분이 자신의 양육불안을 어떻게 통과해왔는지 나누는 대화</p></FI>
 
-      {/* 모더 + 패널 = 4명 모두 큰 가로 카드. 키노트와 동일 형식 */}
-      <div style={{display:"grid",gap:24,maxWidth:960,margin:"0 auto"}}>
+      {/* 모더 + 패널 4명, 2x2 그리드 */}
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:24,maxWidth:960,margin:"0 auto"}}>
         {[
-          {role:"MODERATOR",label:"인터뷰 진행",name:"이혜린",pos:"사단법인 더나일 이사",img:"/images/speakers/이혜린.png",c:CC.lilac,c2:CC.rose,desc:"교육심리학 석사. 그로잉맘과 더나일에서 부모 마음을 가장 가까이 들여다본 경험을 바탕으로 대화의 결을 잡습니다.",sh:"heart"},
-          {role:"PANEL 01",label:"고마워서그래 대표",name:"신두란",pos:"고마워서그래 대표",img:"/images/speakers/신두란.png",c:CC.lilac,c2:CC.coral,desc:"비건 식문화 브랜드 '고마워서그래'를 운영하며 일·양육·가치관이 한 사람 안에서 어떻게 자리잡는지 나눕니다.",sh:"flower"},
+          {role:"MODERATOR",label:"인터뷰 진행",name:"이혜린",pos:"쉬벤처스 부대표 · 사단법인 더나일 이사",img:"/images/speakers/이혜린.png",c:CC.lilac,c2:CC.rose,desc:"교육심리학 석사. 그로잉맘과 더나일에서 부모 마음을 가장 가까이 들여다본 경험을 바탕으로 대화의 결을 잡습니다.",sh:"heart"},
+          {role:"PANEL 01",label:"고마워서그래 대표의 시선",name:"신두란",pos:"고마워서그래 대표",img:"/images/speakers/신두란.png",c:CC.lilac,c2:CC.coral,desc:"비건 식문화 브랜드 '고마워서그래'를 운영하며 일·양육·가치관이 한 사람 안에서 어떻게 자리잡는지 나눕니다.",sh:"flower"},
           {role:"PANEL 02",label:"글 쓰는 아빠의 시선",name:"정지우",pos:"작가 · 변호사",img:"/images/speakers/정지우.png",c:CC.lilac,c2:CC.peach,desc:"양육과 시대를 함께 쓰는 에세이스트. 일과 글, 양육이 한 사람 안에서 부딪힐 때 무엇이 남는지 정직하게 풀어냅니다.",sh:"arch"},
           {role:"PANEL 03",label:"결을 다르게 둔 양육의 시선",name:"후추맘",pos:"육아 크리에이터",img:"/images/speakers/후추맘.png",c:CC.lilac,c2:CC.sage,desc:"정해진 트랙을 따라가지 않는 양육의 결. 불안을 통과하는 또 하나의 길을 자신의 일상으로 보여줍니다.",sh:"leaf"},
         ].map((p,i)=>(
-          <FI key={i} delay={i*.08}><div className="conf-keynote-card" style={{display:"grid",gridTemplateColumns:"minmax(180px,260px) 1fr",gap:0,background:C.w,borderRadius:28,overflow:"hidden",position:"relative",border:`1px solid ${p.c}22`}}>
-            <div style={{position:"relative",aspectRatio:"4/5",background:`linear-gradient(135deg,${p.c}22 0%,${p.c2}22 100%)`,overflow:"hidden"}}>
+          <FI key={i} delay={i*.08}><div style={{background:C.w,borderRadius:24,overflow:"hidden",position:"relative",border:`1px solid ${p.c}22`,height:"100%",display:"flex",flexDirection:"column"}}>
+            {/* 상단 큰 이미지 */}
+            <div style={{position:"relative",aspectRatio:"4/3",background:`linear-gradient(135deg,${p.c}22 0%,${p.c2}22 100%)`,overflow:"hidden"}}>
               <img src={p.img} alt={p.name} style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;color:${p.c};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">${p.name[0]}</div>`)}}}/>
               <div style={{position:"absolute",bottom:14,left:14,padding:"5px 12px",background:"rgba(0,0,0,.55)",backdropFilter:"blur(8px)",borderRadius:20,fontSize:10,color:C.w,fontWeight:700,letterSpacing:".12em"}}>{p.role}</div>
             </div>
-            <div style={{padding:"32px 32px",position:"relative",overflow:"hidden"}}>
-              <div style={{position:"absolute",top:-30,right:-30,opacity:.2,pointerEvents:"none"}}><EmoShape shape={p.sh} c1={p.c} c2={p.c2} size={130} rotate={20} eyes={false}/></div>
-              <div style={{position:"relative"}}>
-                <div style={{fontSize:28,fontWeight:800,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>{p.name}</div>
-                <div style={{fontSize:13,color:CC.inkBrown,opacity:.65,marginBottom:16,wordBreak:"keep-all"}}>{p.pos}</div>
-                <div style={{fontSize:13,color:p.c,fontWeight:700,marginBottom:14,paddingBottom:14,borderBottom:`1px solid ${p.c}33`,wordBreak:"keep-all"}}>{p.label}</div>
+            {/* 하단 정보 */}
+            <div style={{padding:"28px 28px",position:"relative",overflow:"hidden",flex:1,display:"flex",flexDirection:"column"}}>
+              <div style={{position:"absolute",top:-20,right:-20,opacity:.18,pointerEvents:"none"}}><EmoShape shape={p.sh} c1={p.c} c2={p.c2} size={110} rotate={20} eyes={false}/></div>
+              <div style={{position:"relative",flex:1}}>
+                <div style={{fontSize:24,fontWeight:800,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>{p.name}</div>
+                <div style={{fontSize:13,color:CC.inkBrown,opacity:.65,marginBottom:14,wordBreak:"keep-all"}}>{p.pos}</div>
+                <div style={{fontSize:13,color:p.c,fontWeight:700,marginBottom:12,paddingBottom:12,borderBottom:`1px solid ${p.c}33`,wordBreak:"keep-all"}}>{p.label}</div>
                 <p style={{fontSize:14,color:CC.inkBrown,opacity:.82,lineHeight:1.85,wordBreak:"keep-all",margin:0}}>{p.desc}</p>
               </div>
             </div>
@@ -1834,15 +1835,18 @@ const ConferencePage=()=>{
 
     {/* SESSION 2-2 · 워크숍 (단독 섹션) */}
     <Sec bg={C.w}><Box>
-      <FI><div style={{textAlign:"center",marginBottom:48}}>
-        <div style={{fontSize:13,color:CC.sage,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 2-2 · 워크숍 · 소그룹룸 · 13:30 – 15:00</div>
+      <FI><div style={{textAlign:"center",marginBottom:16}}>
+        <div style={{fontSize:13,color:CC.sage,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>SESSION 2-2 · 소그룹룸 · 13:30 – 15:00</div>
         <H2>내 양육불안 다루기</H2>
-        <p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.7,lineHeight:1.8,maxWidth:600,margin:"16px auto 0",wordBreak:"keep-all"}}>자기 안의 불안을 한 덩어리의 감정이 아니라, 여러 층위의 신호로 읽어내는 사례 개념화 워크숍</p>
+        <div style={{display:"inline-block",marginTop:14,padding:"6px 16px",background:`${CC.sage}18`,borderRadius:30,fontSize:13,color:CC.sage,fontWeight:700,letterSpacing:".02em"}}>
+          워크숍 · 강혁진 / 더나일 크루
+        </div>
       </div></FI>
+      <FI delay={.08}><p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.75,lineHeight:1.85,maxWidth:640,margin:"16px auto 48px",textAlign:"center",wordBreak:"keep-all"}}>내 안의 양육불안에 대해 함께 다루어보고, 개념화 작업을 통해 불안을 잘 다룰 수 있는 나만의 자원을 찾아봅니다.</p></FI>
 
       <div style={{maxWidth:960,margin:"0 auto"}}>
         {/* 강혁진 — 키노트와 동일한 큰 가로 카드 */}
-        <FI><div className="conf-keynote-card" style={{display:"grid",gridTemplateColumns:"minmax(180px,260px) 1fr",gap:0,background:CC.cream,borderRadius:28,overflow:"hidden",position:"relative",marginBottom:24}}>
+        <FI><div className="conf-keynote-card" style={{display:"grid",gridTemplateColumns:"minmax(180px,260px) 1fr",gap:0,background:CC.cream,borderRadius:28,overflow:"hidden",position:"relative",marginBottom:32}}>
           <div style={{position:"relative",aspectRatio:"4/5",background:`linear-gradient(135deg,${CC.sage}22 0%,${CC.mint}22 100%)`,overflow:"hidden"}}>
             <img src="/images/speakers/강혁진.png" alt="강혁진" style={{width:"100%",height:"100%",objectFit:"cover",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;color:${CC.sage};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">강</div>`)}}}/>
             <div style={{position:"absolute",bottom:14,left:14,padding:"5px 12px",background:"rgba(0,0,0,.55)",backdropFilter:"blur(8px)",borderRadius:20,fontSize:10,color:C.w,fontWeight:700,letterSpacing:".12em"}}>FACILITATOR · 90분</div>
@@ -1852,7 +1856,7 @@ const ConferencePage=()=>{
             <div style={{position:"relative"}}>
               <div style={{fontSize:28,fontWeight:800,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>강혁진</div>
               <div style={{fontSize:13,color:CC.inkBrown,opacity:.65,marginBottom:20}}>그룹 워크숍 디자인·진행 전문가</div>
-              <p style={{fontSize:14,color:CC.inkBrown,opacity:.82,lineHeight:1.85,wordBreak:"keep-all",margin:0}}>참가자가 자신의 양육 경험을 새로운 언어로 풀어볼 도구를 가지고 행사장을 떠나도록 설계합니다. 더나일 상담팀이 테이블 모더레이터로 참여하여 개념화 작업을 함께 가이드합니다.</p>
+              <p style={{fontSize:14,color:CC.inkBrown,opacity:.82,lineHeight:1.85,wordBreak:"keep-all",margin:0}}>참가자가 자신의 양육 경험을 새로운 언어로 풀어볼 도구를 가지고 행사장을 떠나도록 설계합니다. 더나일 크루가 테이블 모더레이터로 참여하여 개념화 작업을 함께 가이드합니다.</p>
             </div>
           </div>
         </div></FI>
@@ -1876,7 +1880,7 @@ const ConferencePage=()=>{
               </div>
             ))}
           </div>
-          <p style={{fontSize:12,color:CC.inkBrown,opacity:.55,marginTop:16,lineHeight:1.6,wordBreak:"keep-all",textAlign:"center"}}>* 더나일 상담팀이 테이블 모더레이터로 참여합니다.</p>
+          <p style={{fontSize:12,color:CC.inkBrown,opacity:.55,marginTop:16,lineHeight:1.6,wordBreak:"keep-all",textAlign:"center"}}>* 더나일 크루가 테이블 모더레이터로 참여합니다.</p>
         </div></FI>
       </div>
     </Box></Sec>
@@ -1921,12 +1925,12 @@ const ConferencePage=()=>{
       <div style={{position:"absolute",top:60,right:"4%",pointerEvents:"none",opacity:.45}}><EmoShape shape="heart" c1={CC.coral} c2={CC.rose} size={75} rotate={15} eyes={false}/></div>
       <div style={{position:"absolute",bottom:80,left:"4%",pointerEvents:"none",opacity:.4}}><EmoShape shape="star" c1={CC.sage} c2={CC.mint} size={60} rotate={-10} eyes={false}/></div>
       <FI><div style={{textAlign:"center",marginBottom:48,maxWidth:760,margin:"0 auto",position:"relative"}}>
-        <div style={{fontSize:13,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>PARTNERSHIP · 함께 걷는 기업</div>
+        <div style={{fontSize:13,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>PARTNERSHIP · 함께하는 분들</div>
         <H2><span style={{display:"inline-block"}}>혼자 풀 수 없는 문제,</span>{" "}<span style={{display:"inline-block"}}>함께 만들고 싶습니다.</span></H2>
         <p style={{fontSize:"clamp(14px,2vw,16px)",color:CC.inkBrown,opacity:.75,lineHeight:1.9,marginTop:24,wordBreak:"keep-all"}}>
           <span style={{display:"inline-block"}}>양육불안은 한 부모, 한 단체의 힘만으로는 풀리지 않는 문제입니다.</span>{" "}
           <span style={{display:"inline-block"}}>같은 문제 의식을 가진 기업과 기관이 함께 모일 때,</span>{" "}
-          <span style={{display:"inline-block"}}>이 자리는 비로소 사회의 변화를 일으키는 출발점이 됩니다.</span>
+          <span style={{display:"inline-block"}}>이 자리는 비로소 사회의 변화를 일으키는 출발점이 될 것이라 믿습니다.</span>
         </p>
         <p style={{fontSize:"clamp(13px,1.8vw,14px)",color:CC.inkBrown,opacity:.6,lineHeight:1.8,marginTop:16,wordBreak:"keep-all"}}>
           현금 후원, 현물·서비스 협찬, 콘텐츠 협력 등 함께할 수 있는 방식은 다양합니다. 더나일은 지정기부금단체로 기부금영수증 발급이 가능합니다.
