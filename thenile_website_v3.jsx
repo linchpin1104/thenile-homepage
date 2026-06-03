@@ -1570,13 +1570,13 @@ const ConferencePage=()=>{
      · SESSION 2-2 (워크숍)     — sage
      배경: cream / white / inkBrown 3톤만 alternating */
   const speakers=[
-    {n:"장동선",r:"뇌과학자",img:"/images/speakers/장동선.png",part:"SESSION 1",color:CC.coral,c2:CC.peach,sh:"burst"},
-    {n:"이다랑",r:"더나일 이사장 · 발달심리",img:"/images/speakers/이다랑.png",part:"SESSION 1",color:CC.coral,c2:CC.rose,sh:"heart"},
-    {n:"이혜린",r:"쉬벤처스 부대표 · 사단법인 더나일 이사",img:"/images/speakers/이혜린.png",part:"SESSION 2-1",color:CC.lilac,c2:CC.rose,sh:"pebble"},
-    {n:"신두란",r:"고마워서그래 대표",img:"/images/speakers/신두란.png",part:"SESSION 2-1",color:CC.lilac,c2:CC.coral,sh:"flower"},
-    {n:"정지우",r:"작가 · 변호사",img:"/images/speakers/정지우.png",part:"SESSION 2-1",color:CC.lilac,c2:CC.sage,sh:"arch"},
-    {n:"후추맘",r:"육아 크리에이터",img:"/images/speakers/후추맘.png",part:"SESSION 2-1",color:CC.lilac,c2:CC.mint,sh:"leaf"},
-    {n:"강혁진",r:"워크숍 퍼실리테이터",img:"/images/speakers/강혁진.png",part:"SESSION 2-2",color:CC.sage,c2:CC.mint,sh:"flower"},
+    {n:"장동선",r:"뇌과학자",img:"/images/speakers/장동선.jpg",part:"SESSION 1",color:CC.coral,c2:CC.peach,sh:"burst"},
+    {n:"이다랑",r:"더나일 이사장 · 발달심리",img:"/images/speakers/이다랑.jpg",part:"SESSION 1",color:CC.coral,c2:CC.rose,sh:"heart"},
+    {n:"이혜린",r:"쉬벤처스 부대표 · 사단법인 더나일 이사",img:"/images/speakers/이혜린.jpg",part:"SESSION 2-1",color:CC.lilac,c2:CC.rose,sh:"pebble"},
+    {n:"신두란",r:"고마워서그래 대표",img:"/images/speakers/신두란.jpg",part:"SESSION 2-1",color:CC.lilac,c2:CC.coral,sh:"flower"},
+    {n:"정지우",r:"작가 · 변호사",img:"/images/speakers/정지우.jpg",part:"SESSION 2-1",color:CC.lilac,c2:CC.sage,sh:"arch"},
+    {n:"후추맘",r:"육아 크리에이터",img:"/images/speakers/후추맘.jpg",part:"SESSION 2-1",color:CC.lilac,c2:CC.mint,sh:"leaf"},
+    {n:"강혁진",r:"워크숍 퍼실리테이터",img:"/images/speakers/강혁진.jpg",part:"SESSION 2-2",color:CC.sage,c2:CC.mint,sh:"flower"},
   ];
   const [showApply,setShowApply]=useState(false);
   const [showPartner,setShowPartner]=useState(false);
@@ -1816,8 +1816,8 @@ const ConferencePage=()=>{
       </div></FI>
       <div style={{display:"grid",gap:24,maxWidth:960,margin:"0 auto"}}>
         {[
-          {n:"KEYNOTE 01",c:CC.coral,c2:CC.peach,name:"장동선",role:"뇌과학자",img:"/images/speakers/장동선.png",title:"양육불안, 우리의 마음은 어떻게 작동될까?",desc:"부모가 된 이후 우리 뇌에서는 어떤 변화가 일어날까요? 뇌과학자의 시선으로 부모들의 양육불안의 원인을 다루어 봅니다.",sh:"burst"},
-          {n:"KEYNOTE 02",c:CC.coral,c2:CC.rose,name:"이다랑",role:"발달심리 · 더나일 이사장",img:"/images/speakers/이다랑.png",title:"한국 부모의 양육불안, 어떻게 다를까?",desc:"한국 부모들이 겪는 양육불안은 어디에서 비롯될까요? 7만 명의 부모를 만나며 그려온 마음의 지도를, 발달심리 전문가의 시선으로 함께 풀어봅니다.",sh:"heart"},
+          {n:"KEYNOTE 01",c:CC.coral,c2:CC.peach,name:"장동선",role:"뇌과학자",img:"/images/speakers/장동선.jpg",title:"양육불안, 우리의 마음은 어떻게 작동될까?",desc:"부모가 된 이후 우리 뇌에서는 어떤 변화가 일어날까요? 뇌과학자의 시선으로 부모들의 양육불안의 원인을 다루어 봅니다.",sh:"burst"},
+          {n:"KEYNOTE 02",c:CC.coral,c2:CC.rose,name:"이다랑",role:"발달심리 · 더나일 이사장",img:"/images/speakers/이다랑.jpg",title:"한국 부모의 양육불안, 어떻게 다를까?",desc:"한국 부모들이 겪는 양육불안은 어디에서 비롯될까요? 7만 명의 부모를 만나며 그려온 마음의 지도를, 발달심리 전문가의 시선으로 함께 풀어봅니다.",sh:"heart"},
         ].map((k,i)=>(
           <FI key={i} delay={i*.1}><div style={{display:"grid",gridTemplateColumns:"minmax(180px,260px) 1fr",gap:0,background:CC.cream,borderRadius:28,overflow:"hidden",position:"relative"}} className="conf-keynote-card">
             {/* 좌측 큰 인물 사진 */}
@@ -1855,10 +1855,10 @@ const ConferencePage=()=>{
       {/* 모더 + 패널 4명, 2x2 그리드 */}
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:24,maxWidth:960,margin:"0 auto"}}>
         {[
-          {role:"MODERATOR",label:"인터뷰 진행",name:"이혜린",pos:"쉬벤처스 부대표 · 사단법인 더나일 이사",img:"/images/speakers/이혜린.png",c:CC.lilac,c2:CC.rose,desc:"교육심리학 석사. 그로잉맘과 더나일에서 부모 마음을 가장 가까이 들여다본 경험을 바탕으로 대화의 결을 잡습니다.",sh:"heart"},
-          {role:"PANEL 01",label:"고마워서그래 대표의 시선",name:"신두란",pos:"고마워서그래 대표",img:"/images/speakers/신두란.png",c:CC.lilac,c2:CC.coral,desc:"비건 식문화 브랜드 '고마워서그래'를 운영하며 일·양육·가치관이 한 사람 안에서 어떻게 자리잡는지 나눕니다.",sh:"flower"},
-          {role:"PANEL 02",label:"글 쓰는 아빠의 시선",name:"정지우",pos:"작가 · 변호사",img:"/images/speakers/정지우.png",c:CC.lilac,c2:CC.peach,desc:"양육과 시대를 함께 쓰는 에세이스트. 일과 글, 양육이 한 사람 안에서 부딪힐 때 무엇이 남는지 정직하게 풀어냅니다.",sh:"arch"},
-          {role:"PANEL 03",label:"결을 다르게 둔 양육의 시선",name:"후추맘",pos:"육아 크리에이터",img:"/images/speakers/후추맘.png",c:CC.lilac,c2:CC.sage,desc:"정해진 트랙을 따라가지 않는 양육의 결. 불안을 통과하는 또 하나의 길을 자신의 일상으로 보여줍니다.",sh:"leaf"},
+          {role:"MODERATOR",label:"인터뷰 진행",name:"이혜린",pos:"쉬벤처스 부대표 · 사단법인 더나일 이사",img:"/images/speakers/이혜린.jpg",c:CC.lilac,c2:CC.rose,desc:"교육심리학 석사. 그로잉맘과 더나일에서 부모 마음을 가장 가까이 들여다본 경험을 바탕으로 대화의 결을 잡습니다.",sh:"heart"},
+          {role:"PANEL 01",label:"고마워서그래 대표의 시선",name:"신두란",pos:"고마워서그래 대표",img:"/images/speakers/신두란.jpg",c:CC.lilac,c2:CC.coral,desc:"비건 식문화 브랜드 '고마워서그래'를 운영하며 일·양육·가치관이 한 사람 안에서 어떻게 자리잡는지 나눕니다.",sh:"flower"},
+          {role:"PANEL 02",label:"글 쓰는 아빠의 시선",name:"정지우",pos:"작가 · 변호사",img:"/images/speakers/정지우.jpg",c:CC.lilac,c2:CC.peach,desc:"양육과 시대를 함께 쓰는 에세이스트. 일과 글, 양육이 한 사람 안에서 부딪힐 때 무엇이 남는지 정직하게 풀어냅니다.",sh:"arch"},
+          {role:"PANEL 03",label:"결을 다르게 둔 양육의 시선",name:"후추맘",pos:"육아 크리에이터",img:"/images/speakers/후추맘.jpg",c:CC.lilac,c2:CC.sage,desc:"정해진 트랙을 따라가지 않는 양육의 결. 불안을 통과하는 또 하나의 길을 자신의 일상으로 보여줍니다.",sh:"leaf"},
         ].map((p,i)=>(
           <FI key={i} delay={i*.08}><div style={{background:C.w,borderRadius:24,overflow:"hidden",position:"relative",border:`1px solid ${p.c}22`,height:"100%",display:"flex",flexDirection:"column"}}>
             {/* 상단 큰 이미지 */}
@@ -1896,7 +1896,7 @@ const ConferencePage=()=>{
         {/* 강혁진 — 키노트와 동일한 큰 가로 카드 */}
         <FI><div className="conf-keynote-card" style={{display:"grid",gridTemplateColumns:"minmax(180px,260px) 1fr",gap:0,background:CC.cream,borderRadius:28,overflow:"hidden",position:"relative",marginBottom:32}}>
           <div style={{position:"relative",aspectRatio:"4/5",background:`linear-gradient(135deg,${CC.sage}22 0%,${CC.mint}22 100%)`,overflow:"hidden"}}>
-            <img src="/images/speakers/강혁진.png" alt="강혁진" style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;color:${CC.sage};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">강</div>`)}}}/>
+            <img src="/images/speakers/강혁진.jpg" alt="강혁진" style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;color:${CC.sage};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">강</div>`)}}}/>
             <div style={{position:"absolute",bottom:14,left:14,padding:"5px 12px",background:"rgba(0,0,0,.55)",backdropFilter:"blur(8px)",borderRadius:20,fontSize:10,color:C.w,fontWeight:700,letterSpacing:".12em"}}>FACILITATOR · 90분</div>
           </div>
           <div style={{padding:"32px 32px",position:"relative",overflow:"hidden"}}>
