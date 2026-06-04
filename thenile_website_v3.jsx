@@ -1398,8 +1398,10 @@ const ApplyFormModal=({open,onClose})=>{
     if(!v.name||!v.phone||!v.email||!v.type||!v.agree){alert("필수 항목을 모두 입력해 주세요.");return}
     setStep("submitting");
     try{
-      // 폼에 남아있는 "참여 희망 세션" 필수 필드 silent reject 방지용 기본값
-      await submitToGoogleForm(CONFERENCE_APPLY_FORM_ID,APPLY_ENTRIES,{...v,session:v.session||"SESSION 2 · 패널토크"});
+      // 폼의 "참여 희망 세션" 라디오 필드는 옛 옵션 ("SESSION 2-1 · 인터뷰 (메인홀)") 만 존재함.
+      // 라디오는 정의된 옵션 값만 받기 때문에 임의 문자열 보내면 silent reject.
+      // 따라서 폼에 실제 존재하는 옵션 값을 그대로 전송.
+      await submitToGoogleForm(CONFERENCE_APPLY_FORM_ID,APPLY_ENTRIES,{...v,session:v.session||"SESSION 2-1 · 인터뷰 (메인홀)"});
       setStep("success");
     }catch(err){console.error(err);setStep("error")}
   };
