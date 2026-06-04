@@ -1757,38 +1757,8 @@ const ConferencePage=()=>{
       </div>
     </Box></Sec>
 
-    {/* 시간표 */}
-    <Sec bg={CC.cream} style={{paddingTop:96,position:"relative",overflow:"hidden"}}><Box>
-      <div style={{position:"absolute",top:60,right:"4%",pointerEvents:"none",opacity:.55}}><EmoShape shape="star" c1={CC.coral} c2={CC.peach} size={70} rotate={15} eyes={false}/></div>
-      <FI><div style={{textAlign:"center",marginBottom:48,position:"relative"}}>
-        <div style={{fontSize:15,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>PROGRAM · 2026.07.09 (목)</div>
-        <H2>시간표</H2>
-      </div></FI>
-      <FI delay={.1}><div style={{maxWidth:880,margin:"0 auto",borderRadius:24,overflow:"hidden",background:C.w,boxShadow:"0 4px 24px rgba(0,0,0,.05)"}}>
-        {[
-          {t:"10:50 – 11:00",s:"등록",d:"체크인 · 입장",c:CC.inkBrown},
-          {t:"11:00 – 12:30",s:"SESSION 1 · 키노트",sub:"90분 · 메인홀",d:"양육불안은 어디에서 오는가 — 장동선 / 이다랑 · 사회 김혜민",c:CC.coral},
-          {t:"12:30 – 13:00",s:"밍글링 / 식사",d:"참가자 네트워킹 · 가벼운 식사",c:CC.inkBrown},
-          {t:"13:00 – 14:30",s:"SESSION 2 · 패널토크",sub:"90분 · 메인홀",d:"양육불안과 함께 살아간다는 것 — 이혜린 모더레이터 + 신두란 / 정지우 / 후추맘",c:CC.lilac},
-          {t:"14:30",s:"클로징",d:"마무리 인사 및 후원사 소개",c:CC.inkBrown},
-        ].map((x,i,a)=>(
-          <div key={i} style={{display:"grid",gridTemplateColumns:"clamp(120px,22vw,150px) 1fr",gap:16,padding:"18px 24px",borderBottom:i<a.length-1?`1px solid ${C.g1}`:"none",alignItems:"start"}}>
-            <div style={{fontSize:15,color:x.c,fontWeight:700,letterSpacing:".02em"}}>{x.t}</div>
-            <div>
-              <div style={{display:"flex",alignItems:"baseline",gap:10,flexWrap:"wrap",marginBottom:6}}>
-                <span style={{fontSize:"clamp(16px,2vw,17px)",fontWeight:700,color:CC.ink,wordBreak:"keep-all",lineHeight:1.4}}>{x.s}</span>
-                {x.sub&&<span style={{fontSize:11,color:x.c,fontWeight:700,padding:"2px 8px",background:`${x.c}15`,borderRadius:12,letterSpacing:".05em"}}>{x.sub}</span>}
-              </div>
-              <div style={{fontSize:15,color:CC.inkBrown,opacity:.7,lineHeight:1.7,wordBreak:"keep-all"}}>{x.d}</div>
-            </div>
-          </div>
-        ))}
-      </div></FI>
-      <FI delay={.2}><p style={{textAlign:"center",fontSize:12,color:CC.inkBrown,opacity:.55,marginTop:24,wordBreak:"keep-all"}}>오프닝 등록은 10:50부터 시작됩니다. 시간에 맞춰 도착해 주세요.</p></FI>
-    </Box></Sec>
-
     {/* 연사 라인업 */}
-    <Sec bg={C.w} style={{position:"relative",overflow:"hidden"}}><Box>
+    <Sec bg={CC.cream} style={{paddingTop:96,position:"relative",overflow:"hidden"}}><Box>
       <div style={{position:"absolute",top:40,left:"4%",pointerEvents:"none",opacity:.45}}><EmoShape shape="pebble" c1={CC.sage} c2={CC.mint} size={70} rotate={-10} eyes={false}/></div>
       <div style={{position:"absolute",bottom:60,right:"5%",pointerEvents:"none",opacity:.45}}><EmoShape shape="cloud" c1={CC.lilac} c2={CC.rose} size={75} rotate={10} eyes={false}/></div>
       <FI><div style={{textAlign:"center",marginBottom:48,position:"relative"}}>
@@ -1815,6 +1785,36 @@ const ConferencePage=()=>{
         ))}
         <style>{`@media (max-width:720px){.conf-spk-row-top,.conf-spk-row-bot{grid-template-columns:repeat(2,1fr)!important;max-width:none!important}}`}</style>
       </div></FI>
+    </Box></Sec>
+
+    {/* 시간표 */}
+    <Sec bg={C.w} style={{position:"relative",overflow:"hidden"}}><Box>
+      <div style={{position:"absolute",top:60,right:"4%",pointerEvents:"none",opacity:.55}}><EmoShape shape="star" c1={CC.coral} c2={CC.peach} size={70} rotate={15} eyes={false}/></div>
+      <FI><div style={{textAlign:"center",marginBottom:48,position:"relative"}}>
+        <div style={{fontSize:15,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>PROGRAM · 2026.07.09 (목)</div>
+        <H2>시간표</H2>
+      </div></FI>
+      <FI delay={.1}><div style={{maxWidth:880,margin:"0 auto",borderRadius:24,overflow:"hidden",background:CC.cream,boxShadow:"0 4px 24px rgba(0,0,0,.05)"}}>
+        {[
+          {t:"10:50 – 11:00",s:"등록",d:"체크인 · 입장",c:CC.inkBrown},
+          {t:"11:00 – 12:30",s:"SESSION 1 · 키노트",sub:"90분 · 메인홀",d:"양육불안은 어디에서 오는가 — 장동선 / 이다랑 · 사회 김혜민",c:CC.coral},
+          {t:"12:30 – 13:00",s:"밍글링 / 식사",d:"참가자 네트워킹 · 가벼운 식사",c:CC.inkBrown},
+          {t:"13:00 – 14:30",s:"SESSION 2 · 패널토크",sub:"90분 · 메인홀",d:"양육불안과 함께 살아간다는 것 — 이혜린 모더레이터 + 신두란 / 정지우 / 후추맘",c:CC.lilac},
+          {t:"14:30",s:"클로징",d:"마무리 인사 및 후원사 소개",c:CC.inkBrown},
+        ].map((x,i,a)=>(
+          <div key={i} style={{display:"grid",gridTemplateColumns:"clamp(120px,22vw,150px) 1fr",gap:16,padding:"18px 24px",borderBottom:i<a.length-1?`1px solid ${C.g1}`:"none",alignItems:"start"}}>
+            <div style={{fontSize:15,color:x.c,fontWeight:700,letterSpacing:".02em"}}>{x.t}</div>
+            <div>
+              <div style={{display:"flex",alignItems:"baseline",gap:10,flexWrap:"wrap",marginBottom:6}}>
+                <span style={{fontSize:"clamp(16px,2vw,17px)",fontWeight:700,color:CC.ink,wordBreak:"keep-all",lineHeight:1.4}}>{x.s}</span>
+                {x.sub&&<span style={{fontSize:11,color:x.c,fontWeight:700,padding:"2px 8px",background:`${x.c}15`,borderRadius:12,letterSpacing:".05em"}}>{x.sub}</span>}
+              </div>
+              <div style={{fontSize:15,color:CC.inkBrown,opacity:.7,lineHeight:1.7,wordBreak:"keep-all"}}>{x.d}</div>
+            </div>
+          </div>
+        ))}
+      </div></FI>
+      <FI delay={.2}><p style={{textAlign:"center",fontSize:12,color:CC.inkBrown,opacity:.55,marginTop:24,wordBreak:"keep-all"}}>오프닝 등록은 10:50부터 시작됩니다. 시간에 맞춰 도착해 주세요.</p></FI>
     </Box></Sec>
 
     {/* 키노트 상세 (SESSION 1) */}
