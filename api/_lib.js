@@ -8,7 +8,10 @@ const {
   SOLAPI_API_KEY,
   SOLAPI_API_SECRET,
   SOLAPI_FROM,
-  ADMIN_PHONE, // (옵션) 기업 제휴 시 관리자 SMS 알림 받을 번호 (없으면 미발송)
+  ADMIN_PHONE,         // (옵션) 관리자 SMS 알림 번호
+  RESEND_API_KEY,      // (옵션) Resend 이메일 API 키 (없으면 메일 미발송)
+  ADMIN_EMAIL,         // (옵션) 관리자 이메일 알림 받을 주소
+  RESEND_FROM,         // (옵션) 발신 주소. 없으면 onboarding@resend.dev
 } = process.env;
 
 /** Supabase REST 직접 호출 — supabase-js 의존성 없이 가볍게 */
@@ -87,6 +90,39 @@ export async function sendAdminSms(text) {
     await sendSms(ADMIN_PHONE, text);
   } catch (err) {
     console.error("[admin-sms] 발송 실패:", err.message);
+  }
+}
+
+/** Resend로 이메일 발송 (RESEND_API_KEY가 등록되어 있을 때만) */
+export async function sendEmail({ to, subject, html, text }) {
+  if (!RESEND_API_KEY || !to) return { skipped: true };
+  const from = RESEND_FROM || "더나일 컨퍼런스 <onboarding@resend.dev>";
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from,
+      to: Array.isArray(to) ? to : [to],
+      subject,
+      html,
+      text,
+    }),
+  });
+  const body = await res.text();
+  if (!res.ok) throw new Error(`Resend ${res.status}: ${body}`);
+  return { ok: true };
+}
+
+/** 관리자에게 알림 메일 (ADMIN_EMAIL 환경변수 있을 때만) */
+export async function sendAdminEmail({ subject, html, text }) {
+  if (!ADMIN_EMAIL) return;
+  try {
+    await sendEmail({ to: ADMIN_EMAIL, subject, html, text });
+  } catch (err) {
+    console.error("[admin-email] 발송 실패:", err.message);
   }
 }
 

@@ -5,3 +5,5 @@ dist
 .claude
 상단 롤링배너
 이사진-사진원본
+.vercel
+.env*.local
