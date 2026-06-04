@@ -1418,7 +1418,7 @@ const ApplyFormModal=({open,onClose})=>{
           <FormField label="이메일" required>
             <input type="email" value={v.email} onChange={e=>upd("email",e.target.value)} style={FF_INPUT} placeholder="you@example.com"/>
           </FormField>
-          <FormField label="참가자 유형" required>
+          <FormField label="참가자 유형" required help="기존 더나일의 후원자인 페이서는 '페이서'로 신청해 주세요.">
             <RadioGroup name="type" options={["부모","학계 · 정책 전문가","미디어","페이서","기타"]} value={v.type} onChange={x=>upd("type",x)}/>
           </FormField>
           <FormField label="양육 자녀 연령대 (선택)">
