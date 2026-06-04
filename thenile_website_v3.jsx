@@ -1874,29 +1874,33 @@ const ConferencePage=()=>{
       </div></FI>
       <FI delay={.08}><p style={{fontSize:"clamp(16px,2vw,18px)",color:CC.inkBrown,opacity:.7,lineHeight:1.85,maxWidth:640,margin:"16px auto 48px",textAlign:"center",wordBreak:"keep-all"}}>다른 자리에서 양육과 만나온 네 분이 자신의 양육불안을 어떻게 통과해왔는지 나누는 대화</p></FI>
 
-      {/* 모더 + 패널 4명, 데스크탑 2x2 그리드 */}
-      <div className="conf-panel-grid" style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:24,maxWidth:880,margin:"0 auto"}}>
-        <style>{`@media (max-width:720px){.conf-panel-grid{grid-template-columns:1fr!important}}`}</style>
+      {/* 모더 + 패널 4명 — PC 4열 · 태블릿 2열 · 모바일 1열 */}
+      <div className="conf-panel-grid" style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:18,maxWidth:1100,margin:"0 auto"}}>
+        <style>{`
+          @media (max-width:1023px){.conf-panel-grid{grid-template-columns:repeat(2,1fr)!important;max-width:880px!important;gap:24px!important}}
+          @media (max-width:560px){.conf-panel-grid{grid-template-columns:1fr!important}}
+        `}</style>
         {[
-          {role:"MODERATOR",label:"패널토크 진행",name:"이혜린",pos:"쉬벤처스 부대표 · 사단법인 더나일 이사",img:"/images/speakers/이혜린.png",c:CC.lilac,c2:CC.rose,desc:"교육심리학 석사. 그로잉맘과 더나일에서 부모 마음을 가장 가까이 들여다본 경험을 바탕으로 대화의 결을 잡습니다.",sh:"heart"},
+          {role:"MODERATOR",label:"패널토크 진행",name:"이혜린",pos:"쉬벤처스 부대표 · 더나일 이사",img:"/images/speakers/이혜린.png",c:CC.lilac,c2:CC.rose,desc:"교육심리학 석사. 그로잉맘과 더나일에서 부모 마음을 가장 가까이 들여다본 경험을 바탕으로 대화의 결을 잡습니다.",sh:"heart"},
           {role:"PANEL 01",label:"고마워서그래 대표의 시선",name:"신두란",pos:"고마워서그래 대표",img:"/images/speakers/신두란.png",c:CC.lilac,c2:CC.coral,desc:"비건 식문화 브랜드 '고마워서그래'를 운영하며 일·양육·가치관이 한 사람 안에서 어떻게 자리잡는지 나눕니다.",sh:"flower"},
           {role:"PANEL 02",label:"글 쓰는 아빠의 시선",name:"정지우",pos:"작가 · 변호사",img:"/images/speakers/정지우.png",c:CC.lilac,c2:CC.peach,desc:"양육과 시대를 함께 쓰는 에세이스트. 일과 글, 양육이 한 사람 안에서 부딪힐 때 무엇이 남는지 정직하게 풀어냅니다.",sh:"arch"},
           {role:"PANEL 03",label:"결을 다르게 둔 양육의 시선",name:"후추맘",pos:"육아 크리에이터",img:"/images/speakers/후추맘.png",c:CC.lilac,c2:CC.sage,desc:"정해진 트랙을 따라가지 않는 양육의 결. 불안을 통과하는 또 하나의 길을 자신의 일상으로 보여줍니다.",sh:"leaf"},
         ].map((p,i)=>(
-          <FI key={i} delay={i*.08}><div style={{background:C.w,borderRadius:24,overflow:"hidden",position:"relative",border:`1px solid ${p.c}22`,height:"100%",display:"flex",flexDirection:"column"}}>
-            {/* 상단 큰 이미지 */}
-            <div style={{position:"relative",aspectRatio:"4/3",background:`linear-gradient(135deg,${p.c}22 0%,${p.c2}22 100%)`,overflow:"hidden"}}>
-              <img src={p.img} alt={p.name} style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;color:${p.c};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">${p.name[0]}</div>`)}}}/>
-              <div style={{position:"absolute",bottom:14,left:14,padding:"5px 12px",background:"rgba(0,0,0,.55)",backdropFilter:"blur(8px)",borderRadius:20,fontSize:10,color:C.w,fontWeight:700,letterSpacing:".12em"}}>{p.role}</div>
+          <FI key={i} delay={i*.08}><div style={{background:C.w,borderRadius:20,overflow:"hidden",position:"relative",border:`1px solid ${p.c}22`,height:"100%",display:"flex",flexDirection:"column"}}>
+            {/* 상단 이미지 — PC 정사각, 모바일 4:3 */}
+            <div className="conf-panel-img" style={{position:"relative",aspectRatio:"1/1",background:`linear-gradient(135deg,${p.c}22 0%,${p.c2}22 100%)`,overflow:"hidden"}}>
+              <style>{`@media (max-width:1023px){.conf-panel-img{aspect-ratio:4/3!important}}`}</style>
+              <img src={p.img} alt={p.name} style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:72px;color:${p.c};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">${p.name[0]}</div>`)}}}/>
+              <div style={{position:"absolute",bottom:12,left:12,padding:"4px 10px",background:"rgba(0,0,0,.55)",backdropFilter:"blur(8px)",borderRadius:18,fontSize:9,color:C.w,fontWeight:700,letterSpacing:".12em"}}>{p.role}</div>
             </div>
             {/* 하단 정보 */}
-            <div style={{padding:"28px 28px",position:"relative",overflow:"hidden",flex:1,display:"flex",flexDirection:"column"}}>
-              <div style={{position:"absolute",top:-20,right:-20,opacity:.18,pointerEvents:"none"}}><EmoShape shape={p.sh} c1={p.c} c2={p.c2} size={110} rotate={20} eyes={false}/></div>
+            <div style={{padding:"20px 20px",position:"relative",overflow:"hidden",flex:1,display:"flex",flexDirection:"column"}}>
+              <div style={{position:"absolute",top:-18,right:-18,opacity:.15,pointerEvents:"none"}}><EmoShape shape={p.sh} c1={p.c} c2={p.c2} size={90} rotate={20} eyes={false}/></div>
               <div style={{position:"relative",flex:1}}>
-                <div style={{fontSize:24,fontWeight:800,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>{p.name}</div>
-                <div style={{fontSize:15,color:CC.inkBrown,opacity:.65,marginBottom:14,wordBreak:"keep-all"}}>{p.pos}</div>
-                <div style={{fontSize:15,color:p.c,fontWeight:700,marginBottom:12,paddingBottom:12,borderBottom:`1px solid ${p.c}33`,wordBreak:"keep-all"}}>{p.label}</div>
-                <p style={{fontSize:16,color:CC.inkBrown,opacity:.82,lineHeight:1.85,wordBreak:"keep-all",margin:0}}>{p.desc}</p>
+                <div style={{fontSize:20,fontWeight:800,color:CC.ink,marginBottom:3,fontFamily:"'Noto Serif KR',serif"}}>{p.name}</div>
+                <div style={{fontSize:13,color:CC.inkBrown,opacity:.65,marginBottom:10,wordBreak:"keep-all"}}>{p.pos}</div>
+                <div style={{fontSize:13,color:p.c,fontWeight:700,marginBottom:10,paddingBottom:10,borderBottom:`1px solid ${p.c}33`,wordBreak:"keep-all",lineHeight:1.4}}>{p.label}</div>
+                <p style={{fontSize:14,color:CC.inkBrown,opacity:.82,lineHeight:1.75,wordBreak:"keep-all",margin:0}}>{p.desc}</p>
               </div>
             </div>
           </div></FI>
