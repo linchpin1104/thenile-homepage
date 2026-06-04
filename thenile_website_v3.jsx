@@ -1540,7 +1540,7 @@ const ConferencePage=()=>{
      · SESSION 2 (패널토크)     — lilac
      배경: cream / white / inkBrown 3톤만 alternating */
   const speakers=[
-    {n:"장동선",r:"뇌과학자",img:"/images/speakers/장동선.png",part:"SESSION 1",color:CC.coral,c2:CC.peach,sh:"burst"},
+    {n:"장동선",r:"뇌과학자",img:"/images/speakers/장동선-dark.png",part:"SESSION 1",color:CC.coral,c2:CC.peach,sh:"burst"},
     {n:"이다랑",r:"아동심리전문가 · 사단법인 더나일 이사장",img:"/images/speakers/이다랑.png",part:"SESSION 1",color:CC.coral,c2:CC.rose,sh:"heart"},
     {n:"김혜민",r:"사회자 · 사단법인 더나일 이사",img:"/images/김혜민.png",part:"SESSION 1",color:CC.coral,c2:CC.mango,sh:"flower"},
     {n:"이혜린",r:"쉬벤처스 부대표 · 사단법인 더나일 이사",img:"/images/speakers/이혜린.png",part:"SESSION 2",color:CC.lilac,c2:CC.rose,sh:"pebble"},
@@ -1772,7 +1772,7 @@ const ConferencePage=()=>{
       </div></FI>
       <div style={{display:"grid",gap:24,maxWidth:960,margin:"0 auto"}}>
         {[
-          {n:"KEYNOTE 01",c:CC.coral,c2:CC.peach,name:"장동선",role:"뇌과학자",img:"/images/speakers/장동선.png",title:"양육불안, 우리의 마음은 어떻게 작동될까?",desc:"부모가 된 이후 우리 뇌에서는 어떤 변화가 일어날까요? 뇌과학자의 시선으로 부모들의 양육불안의 원인을 다루어 봅니다.",sh:"burst"},
+          {n:"KEYNOTE 01",c:CC.coral,c2:CC.peach,name:"장동선",role:"뇌과학자",img:"/images/speakers/장동선-dark.png",title:"양육불안, 우리의 마음은 어떻게 작동될까?",desc:"부모가 된 이후 우리 뇌에서는 어떤 변화가 일어날까요? 뇌과학자의 시선으로 부모들의 양육불안의 원인을 다루어 봅니다.",sh:"burst"},
           {n:"KEYNOTE 02",c:CC.coral,c2:CC.rose,name:"이다랑",role:"아동심리전문가 · 사단법인 더나일 이사장",img:"/images/speakers/이다랑.png",title:"한국 부모의 양육불안, 어떻게 다를까?",desc:"한국 부모들이 겪는 양육불안은 어디에서 비롯될까요? 7만 명의 부모를 만나며 그려온 마음의 지도를, 아동심리전문가의 시선으로 함께 풀어봅니다.",sh:"heart"},
         ].map((k,i)=>(
           <FI key={i} delay={i*.1}><div style={{display:"grid",gridTemplateColumns:"minmax(180px,260px) 1fr",gap:0,background:CC.cream,borderRadius:28,overflow:"hidden",position:"relative"}} className="conf-keynote-card">
@@ -1796,14 +1796,30 @@ const ConferencePage=()=>{
       </div>
       <style>{`@media (max-width:680px){.conf-keynote-card{grid-template-columns:1fr!important}.conf-keynote-card>div:first-child{aspect-ratio:16/10!important}}`}</style>
 
-      {/* SESSION 1 사회자 — 김혜민 */}
-      <FI delay={.25}><div style={{maxWidth:960,margin:"24px auto 0",padding:"14px 20px",background:C.w,border:`1px solid ${CC.coral}33`,borderRadius:50,display:"flex",alignItems:"center",gap:14,flexWrap:"wrap",justifyContent:"center"}}>
-        <div style={{width:46,height:46,borderRadius:"50%",overflow:"hidden",flexShrink:0,background:CC.cream,border:`2px solid ${CC.coral}55`}}>
-          <img src="/images/김혜민.png" alt="김혜민" style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:18px;color:${CC.coral};font-weight:700;background:${CC.coral}15;font-family:'Noto Serif KR',serif">김</div>`)}}}/>
+      {/* SESSION 1 사회자 — 김혜민 (키노트 카드와 동등한 사이즈로 확장) */}
+      <FI delay={.25}><div style={{display:"grid",gridTemplateColumns:"minmax(180px,260px) 1fr",gap:0,background:CC.cream,borderRadius:28,overflow:"hidden",position:"relative",maxWidth:960,margin:"24px auto 0"}} className="conf-keynote-card">
+        {/* 좌측 김혜민 사진 */}
+        <div style={{position:"relative",aspectRatio:"4/5",background:`linear-gradient(135deg,${CC.coral}22 0%,${CC.mango}22 100%)`,overflow:"hidden"}}>
+          <img src="/images/김혜민.png" alt="김혜민" style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;color:${CC.coral};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">김</div>`)}}}/>
+          <div style={{position:"absolute",bottom:14,left:14,padding:"5px 12px",background:"rgba(0,0,0,.55)",backdropFilter:"blur(8px)",borderRadius:20,fontSize:10,color:C.w,fontWeight:700,letterSpacing:".12em"}}>MC · 사회 · 90분</div>
         </div>
-        <span style={{fontSize:11,color:CC.coral,fontWeight:700,letterSpacing:".15em"}}>MC · 사회</span>
-        <span style={{fontSize:17,fontWeight:700,color:CC.ink,fontFamily:"'Noto Serif KR',serif"}}>김혜민</span>
-        <span style={{fontSize:15,color:CC.inkBrown,opacity:.65}}>사단법인 더나일 이사</span>
+        {/* 우측 정보 */}
+        <div style={{padding:"32px 32px",position:"relative",overflow:"hidden"}}>
+          <div style={{position:"absolute",top:-30,right:-30,opacity:.25,pointerEvents:"none"}}><EmoShape shape="flower" c1={CC.coral} c2={CC.mango} size={130} rotate={20} eyes={false}/></div>
+          <div style={{position:"relative"}}>
+            <div style={{fontSize:28,fontWeight:800,color:CC.ink,marginBottom:4,fontFamily:"'Noto Serif KR',serif"}}>김혜민</div>
+            <div style={{fontSize:15,color:CC.inkBrown,opacity:.65,marginBottom:20,wordBreak:"keep-all"}}>사단법인 더나일 이사</div>
+            <div style={{display:"inline-block",fontSize:13,fontWeight:700,color:CC.coral,padding:"4px 14px",background:`${CC.coral}15`,borderRadius:20,letterSpacing:".05em",marginBottom:18}}>SESSION 1 진행 · MC</div>
+            <ul style={{listStyle:"none",padding:0,margin:0,fontSize:15,color:CC.inkBrown,lineHeight:1.9,wordBreak:"keep-all"}}>
+              {["(전) YTN 라디오 PD","극동방송 아나운서","한국자살예방협회 홍보위원장","국무총리 표창"].map((line,i)=>(
+                <li key={i} style={{display:"flex",alignItems:"flex-start",gap:8}}>
+                  <span style={{color:CC.coral,fontSize:11,marginTop:7,flexShrink:0}}>●</span>
+                  <span style={{opacity:.85}}>{line}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div></FI>
     </Box></Sec>
 
