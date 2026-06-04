@@ -1272,19 +1272,19 @@ const RefundPage=()=>(<>
    → [참가] 솔라피 SMS / [제휴] lin@sheventures.kr 이메일 */
 /* 폼 ID는 응답 POST endpoint용 'hashed ID' (편집 URL ID와 다름) */
 // 새 폼 셋업 — 더나일 계정에서 setup() 재실행 (2026-06-04)
-// 트리거 + 응답 시트 모두 새 폼에 연결됨
+// entry ID는 사용자 prefilled URL로 재검증 (폼 필드 수정으로 ID가 갱신됐었음)
 const CONFERENCE_APPLY_FORM_ID="1FAIpQLSewLh3zJlqekLPCwzgbg3tgCGS4DgsUmAJhqj7sZX0uN6wwPg";
 const CONFERENCE_PARTNER_FORM_ID="1FAIpQLSfoDfxK2gz4xUqUeJNlX9F_pFQfBgYzxJTyr7fgISiSq283Tw";
 const APPLY_ENTRIES={
-  name:"entry.255248949",
-  phone:"entry.262089588",
-  email:"entry.610602797",
-  type:"entry.1326939896",
-  session:"entry.144630429",  // setup()이 생성한 폼의 라디오. 옵션은 "SESSION 2-1 · 인터뷰 (메인홀)" 등
-  childAge:"entry.1171579765",
-  channel:"entry.2007969002",
-  message:"entry.985253090",
-  agree:"entry.1396717137",
+  name:"entry.1025511881",
+  phone:"entry.135667976",
+  email:"entry.652031224",
+  type:"entry.541713377",
+  session:"entry.820410094",  // 라디오 옵션은 "SESSION 2-1 · 인터뷰 (메인홀)" 등
+  childAge:"entry.1832726499",
+  channel:"entry.1631457910",
+  message:"entry.824920315",
+  agree:"entry.805148236",
 };
 const PARTNER_ENTRIES={
   company:"entry.934844306",
