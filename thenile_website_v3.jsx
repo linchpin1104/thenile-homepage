@@ -1268,75 +1268,20 @@ const RefundPage=()=>(<>
 </>);
 
 /* ═══ 2026 양육불안 컨퍼런스 페이지 ═══ */
-/* 자체 모달 폼 → Google Forms POST → 시트 자동 누적 → Apps Script 트리거
-   → [참가] 솔라피 SMS / [제휴] lin@sheventures.kr 이메일 */
-/* 폼 ID는 응답 POST endpoint용 'hashed ID' (편집 URL ID와 다름) */
-// 새 폼 셋업 — 더나일 계정에서 setup() 재실행 (2026-06-04)
-// entry ID는 사용자 prefilled URL로 재검증 (폼 필드 수정으로 ID가 갱신됐었음)
-const CONFERENCE_APPLY_FORM_ID="1FAIpQLSewLh3zJlqekLPCwzgbg3tgCGS4DgsUmAJhqj7sZX0uN6wwPg";
-const CONFERENCE_PARTNER_FORM_ID="1FAIpQLSfoDfxK2gz4xUqUeJNlX9F_pFQfBgYzxJTyr7fgISiSq283Tw";
-const APPLY_ENTRIES={
-  name:"entry.1025511881",
-  phone:"entry.135667976",
-  email:"entry.652031224",
-  type:"entry.541713377",
-  session:"entry.820410094",  // 라디오 옵션은 "SESSION 2-1 · 인터뷰 (메인홀)" 등
-  childAge:"entry.1832726499",
-  channel:"entry.1631457910",
-  message:"entry.824920315",
-  agree:"entry.805148236",
-};
-const PARTNER_ENTRIES={
-  company:"entry.2035916561",
-  contact:"entry.2010235553",
-  position:"entry.1366874953",
-  phone:"entry.315071678",
-  email:"entry.858429111",
-  type:"entry.914061428",         // 라디오 옵션: "현금 후원" / "현물 · 서비스 협찬" / "콘텐츠 협력" / "기타 · 상담하며 결정"
-  message:"entry.1850149320",
-  agree:"entry.1183876604",
-};
-
-/* 구글 폼 제출 — hidden iframe + form submit 방식.
-   fetch + no-cors 는 Google Forms 가 silent reject 하는 경우 있어 비추.
-   iframe target 방식은 cross-origin form post 가 정상 처리되는 표준 우회법. */
-function submitToGoogleForm(formId,entries,values){
-  return new Promise((resolve)=>{
-    const iframeName="gf-"+Date.now()+"-"+Math.floor(Math.random()*9999);
-    const iframe=document.createElement("iframe");
-    iframe.name=iframeName;
-    iframe.style.cssText="position:absolute;width:0;height:0;border:0;visibility:hidden;left:-9999px;top:-9999px";
-    document.body.appendChild(iframe);
-
-    const form=document.createElement("form");
-    form.action=`https://docs.google.com/forms/d/e/${formId}/formResponse`;
-    form.method="POST";
-    form.target=iframeName;
-    form.style.cssText="position:absolute;width:0;height:0;overflow:hidden;visibility:hidden;left:-9999px;top:-9999px";
-
-    Object.entries(values).forEach(([k,v])=>{
-      if(v===true) v="동의합니다";
-      if(v===undefined||v===null||v===""||v===false) return;
-      const eid=entries[k];if(!eid) return;
-      const arr=Array.isArray(v)?v:[v];
-      arr.forEach(val=>{
-        const input=document.createElement("input");
-        input.type="hidden";
-        input.name=eid;
-        input.value=String(val);
-        form.appendChild(input);
-      });
-    });
-
-    document.body.appendChild(form);
-    form.submit();
-
-    setTimeout(()=>{
-      try{form.remove()}catch(e){}
-      try{iframe.remove()}catch(e){}
-      resolve();
-    },1500);
+/* 자체 모달 폼 → /api/{apply,partner} → Supabase INSERT + Solapi SMS.
+   Google Forms / Apps Script 의존성 제거. silent reject·entry ID 매핑 문제 없음. */
+async function submitToApi(endpoint, payload) {
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
   });
+  let data = {};
+  try { data = await res.json(); } catch {}
+  if (!res.ok || !data.ok) {
+    throw new Error(data.error || `HTTP ${res.status}`);
+  }
+  return data;
 }
 
 /* 폼 공통 스타일 */
@@ -1400,10 +1345,7 @@ const ApplyFormModal=({open,onClose})=>{
     if(!v.name||!v.phone||!v.email||!v.type||!v.agree){alert("필수 항목을 모두 입력해 주세요.");return}
     setStep("submitting");
     try{
-      // 폼의 "참여 희망 세션" 라디오 필드는 옛 옵션 ("SESSION 2-1 · 인터뷰 (메인홀)") 만 존재함.
-      // 라디오는 정의된 옵션 값만 받기 때문에 임의 문자열 보내면 silent reject.
-      // 따라서 폼에 실제 존재하는 옵션 값을 그대로 전송.
-      await submitToGoogleForm(CONFERENCE_APPLY_FORM_ID,APPLY_ENTRIES,{...v,session:v.session||"SESSION 2-1 · 인터뷰 (메인홀)"});
+      await submitToApi("/api/apply", v);
       setStep("success");
     }catch(err){console.error(err);setStep("error")}
   };
@@ -1483,7 +1425,7 @@ const PartnerFormModal=({open,onClose})=>{
     if(!v.company||!v.contact||!v.phone||!v.email||!v.agree){alert("필수 항목을 모두 입력해 주세요.");return}
     setStep("submitting");
     try{
-      await submitToGoogleForm(CONFERENCE_PARTNER_FORM_ID,PARTNER_ENTRIES,v);
+      await submitToApi("/api/partner", v);
       setStep("success");
     }catch(err){console.error(err);setStep("error")}
   };
