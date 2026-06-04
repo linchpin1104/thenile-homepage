@@ -1449,7 +1449,7 @@ const ApplyFormModal=({open,onClose})=>{
         <div style={{padding:"32px 0 16px",textAlign:"center"}}>
           <div style={{width:72,height:72,borderRadius:"50%",background:`${CC.coral}22`,display:"flex",alignItems:"center",justifyContent:"center",margin:"0 auto 20px",fontSize:36,color:CC.coral}}>✓</div>
           <h4 style={{fontSize:20,fontWeight:800,color:"#2A1F1A",marginBottom:12,fontFamily:"'Noto Serif KR',serif"}}>신청이 접수되었습니다</h4>
-          <p style={{fontSize:16,color:"#5A5650",lineHeight:1.8,marginBottom:28,wordBreak:"keep-all"}}>제출하신 정보로 자리를 안내드리겠습니다.<br/>등록 결과는 모집 마감 후 안내됩니다.</p>
+          <p style={{fontSize:16,color:"#5A5650",lineHeight:1.8,marginBottom:28,wordBreak:"keep-all"}}>제출하신 정보로 행사 관련 안내를 드립니다.<br/>선착순 모집으로 정원이 차면 마감됩니다.</p>
           <button onClick={handleClose} style={{padding:"12px 32px",background:CC.coral,color:"#fff",border:"none",borderRadius:50,fontSize:16,fontWeight:700,cursor:"pointer"}}>확인</button>
         </div>
       )}
@@ -1764,7 +1764,7 @@ const ConferencePage=()=>{
       </div></FI>
       <FI delay={.1}><div style={{maxWidth:880,margin:"0 auto",borderRadius:24,overflow:"hidden",background:C.w,boxShadow:"0 4px 24px rgba(0,0,0,.05)"}}>
         {[
-          {t:"10:50 – 11:00",s:"등록",d:"체크인 · 자리 안내",c:CC.inkBrown},
+          {t:"10:50 – 11:00",s:"등록",d:"체크인 · 입장",c:CC.inkBrown},
           {t:"11:00 – 12:30",s:"SESSION 1 · 키노트",sub:"90분 · 메인홀",d:"양육불안은 어디에서 오는가 — 장동선 / 이다랑 · 사회 김혜민",c:CC.coral},
           {t:"12:30 – 13:00",s:"밍글링 / 식사",d:"참가자 네트워킹 · 가벼운 식사",c:CC.inkBrown},
           {t:"13:00 – 14:30",s:"SESSION 2 · 패널토크",sub:"90분 · 메인홀",d:"양육불안과 함께 살아간다는 것 — 이혜린 모더레이터 + 신두란 / 정지우 / 후추맘",c:CC.lilac},
@@ -1990,8 +1990,8 @@ const ConferencePage=()=>{
           <span style={{display:"inline-block"}}>더나일과 함께해주세요</span>
         </h2>
         <p style={{fontSize:"clamp(16px,2vw,18px)",color:"rgba(255,248,236,.7)",lineHeight:1.9,marginBottom:48,wordBreak:"keep-all"}}>
-          참가비는 없지만, 자리는 100–120명으로 한정되어 있습니다.<br/>
-          사전 신청서를 작성해주시면 자리를 안내드립니다.
+          참가비는 없지만, 선착순 100–120명으로 마감됩니다.<br/>
+          신청해주신 정보로 행사 관련 안내를 드립니다.
         </p>
       </div></FI>
       <FI delay={.15}><div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap",maxWidth:560,margin:"0 auto",position:"relative"}}>
