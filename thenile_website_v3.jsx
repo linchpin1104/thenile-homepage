@@ -1287,14 +1287,14 @@ const APPLY_ENTRIES={
   agree:"entry.805148236",
 };
 const PARTNER_ENTRIES={
-  company:"entry.934844306",
-  contact:"entry.1541180681",
-  position:"entry.190425816",
-  phone:"entry.768225854",
-  email:"entry.1672839342",
-  type:"entry.1244949068",
-  message:"entry.1587614414",
-  agree:"entry.1528673339",
+  company:"entry.2035916561",
+  contact:"entry.2010235553",
+  position:"entry.1366874953",
+  phone:"entry.315071678",
+  email:"entry.858429111",
+  type:"entry.914061428",         // 라디오 옵션: "현금 후원" / "현물 · 서비스 협찬" / "콘텐츠 협력" / "기타 · 상담하며 결정"
+  message:"entry.1850149320",
+  agree:"entry.1183876604",
 };
 
 /* 구글 폼 제출 — hidden iframe + form submit 방식.
