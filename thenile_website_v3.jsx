@@ -418,7 +418,7 @@ const HomePage=({go})=>(<>
         {[
           {name:"이혜린 이사",img:"/images/이혜린.jpg",lines:["(현) 쉬벤처스 부대표","(전) 그로잉맘 부대표","교육학 석사, 창업학 박사과정중","부모교육전문가,","청소년상담사,","비즈니스 빌더"]},
           {name:"정우열 이사",img:"/images/정우열.jpg",lines:["정신과 전문의","생각과 느낌 원장","2016년 여성가족부장관표창","2017년 국무총리표창"]},
-          {name:"김혜민 이사",img:"/images/김혜민.jpg",lines:["(전) YTN 라디오PD","극동방송 아나운서","한국자살예방협회 홍보위원장","국무총리표창"]},
+          {name:"김혜민 이사",img:"/images/김혜민.png",lines:["(전) YTN 라디오PD","극동방송 아나운서","한국자살예방협회 홍보위원장","국무총리표창"]},
           {name:"박장원 이사",img:"/images/변장원.jpg",lines:["정책학 박사","(전공: 필란트로피)","(전) 국가균형발전","위원회 정책홍보팀장"]},
           {name:"김혜진 이사",img:"/images/김혜진.jpg",lines:["(현) 옥소폴리틱스 운영총괄","(전) 실리콘밸리 글로벌 기업 근무","(Roblox, Myriad Genetics, Counsyl 등)","저서 「실리콘밸리를 그리다」","커리어 코치 및 글로벌 조직문화 강연자"]},
         ].map((m,i)=>(
@@ -575,7 +575,7 @@ const AboutPage=({go})=>(<>
       {[
         {name:"이혜린 이사",img:"/images/이혜린.jpg",lines:["(현) 쉬벤처스 부대표","(전) 그로잉맘 부대표","교육학 석사, 창업학 박사과정중","부모교육전문가,","청소년상담사,","비즈니스 빌더"]},
         {name:"정우열 이사",img:"/images/정우열.jpg",lines:["정신과 전문의","생각과 느낌 원장","2016년 여성가족부장관표창","2017년 국무총리표창"]},
-        {name:"김혜민 이사",img:"/images/김혜민.jpg",lines:["(전) YTN 라디오PD","극동방송 아나운서","한국자살예방협회 홍보위원장","국무총리표창"]},
+        {name:"김혜민 이사",img:"/images/김혜민.png",lines:["(전) YTN 라디오PD","극동방송 아나운서","한국자살예방협회 홍보위원장","국무총리표창"]},
         {name:"박장원 이사",img:"/images/변장원.jpg",lines:["정책학 박사","(전공: 필란트로피)","(전) 국가균형발전","위원회 정책홍보팀장"]},
         {name:"김혜진 이사",img:"/images/김혜진.jpg",lines:["(현) 옥소폴리틱스 운영총괄","(전) 실리콘밸리 글로벌 기업 근무","(Roblox, Myriad Genetics, Counsyl 등)","저서 「실리콘밸리를 그리다」","커리어 코치 및 글로벌 조직문화 강연자"]},
       ].map((m,i)=>(
@@ -1542,7 +1542,7 @@ const ConferencePage=()=>{
   const speakers=[
     {n:"장동선",r:"뇌과학자",img:"/images/speakers/장동선.png",part:"SESSION 1",color:CC.coral,c2:CC.peach,sh:"burst"},
     {n:"이다랑",r:"아동심리전문가 · 사단법인 더나일 이사장",img:"/images/speakers/이다랑.png",part:"SESSION 1",color:CC.coral,c2:CC.rose,sh:"heart"},
-    {n:"김혜민",r:"사회자 · 사단법인 더나일 이사",img:"/images/김혜민.jpg",part:"SESSION 1",color:CC.coral,c2:CC.mango,sh:"flower"},
+    {n:"김혜민",r:"사회자 · 사단법인 더나일 이사",img:"/images/김혜민.png",part:"SESSION 1",color:CC.coral,c2:CC.mango,sh:"flower"},
     {n:"이혜린",r:"쉬벤처스 부대표 · 사단법인 더나일 이사",img:"/images/speakers/이혜린.png",part:"SESSION 2",color:CC.lilac,c2:CC.rose,sh:"pebble"},
     {n:"신두란",r:"고마워서그래 대표",img:"/images/speakers/신두란.png",part:"SESSION 2",color:CC.lilac,c2:CC.coral,sh:"flower"},
     {n:"정지우",r:"작가 · 변호사",img:"/images/speakers/정지우.png",part:"SESSION 2",color:CC.lilac,c2:CC.sage,sh:"arch"},
@@ -1799,7 +1799,7 @@ const ConferencePage=()=>{
       {/* SESSION 1 사회자 — 김혜민 */}
       <FI delay={.25}><div style={{maxWidth:960,margin:"24px auto 0",padding:"14px 20px",background:C.w,border:`1px solid ${CC.coral}33`,borderRadius:50,display:"flex",alignItems:"center",gap:14,flexWrap:"wrap",justifyContent:"center"}}>
         <div style={{width:46,height:46,borderRadius:"50%",overflow:"hidden",flexShrink:0,background:CC.cream,border:`2px solid ${CC.coral}55`}}>
-          <img src="/images/김혜민.jpg" alt="김혜민" style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:18px;color:${CC.coral};font-weight:700;background:${CC.coral}15;font-family:'Noto Serif KR',serif">김</div>`)}}}/>
+          <img src="/images/김혜민.png" alt="김혜민" style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:18px;color:${CC.coral};font-weight:700;background:${CC.coral}15;font-family:'Noto Serif KR',serif">김</div>`)}}}/>
         </div>
         <span style={{fontSize:11,color:CC.coral,fontWeight:700,letterSpacing:".15em"}}>MC · 사회</span>
         <span style={{fontSize:17,fontWeight:700,color:CC.ink,fontFamily:"'Noto Serif KR',serif"}}>김혜민</span>
