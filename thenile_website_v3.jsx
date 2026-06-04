@@ -1278,6 +1278,7 @@ const APPLY_ENTRIES={
   phone:"entry.769543470",
   email:"entry.910879252",
   type:"entry.1151620531",
+  session:"entry.737504116",  // 폼 자체 필드는 살아있으므로 silent reject 방지용 기본값 자동 전송
   childAge:"entry.203192727",
   channel:"entry.1278543734",
   message:"entry.133618965",
@@ -1397,7 +1398,8 @@ const ApplyFormModal=({open,onClose})=>{
     if(!v.name||!v.phone||!v.email||!v.type||!v.agree){alert("필수 항목을 모두 입력해 주세요.");return}
     setStep("submitting");
     try{
-      await submitToGoogleForm(CONFERENCE_APPLY_FORM_ID,APPLY_ENTRIES,v);
+      // 폼에 남아있는 "참여 희망 세션" 필수 필드 silent reject 방지용 기본값
+      await submitToGoogleForm(CONFERENCE_APPLY_FORM_ID,APPLY_ENTRIES,{...v,session:v.session||"SESSION 2 · 패널토크"});
       setStep("success");
     }catch(err){console.error(err);setStep("error")}
   };
