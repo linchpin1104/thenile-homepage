@@ -1271,28 +1271,30 @@ const RefundPage=()=>(<>
 /* 자체 모달 폼 → Google Forms POST → 시트 자동 누적 → Apps Script 트리거
    → [참가] 솔라피 SMS / [제휴] lin@sheventures.kr 이메일 */
 /* 폼 ID는 응답 POST endpoint용 'hashed ID' (편집 URL ID와 다름) */
-const CONFERENCE_APPLY_FORM_ID="1FAIpQLSfIiuqQmHDgQcFz9DX-WYpYnXnxrSNStY0eSvcePR5RUghzCw";
-const CONFERENCE_PARTNER_FORM_ID="1FAIpQLSdxQHlM5yd2p6IgQjGib_Gtopbmh4YKcAKxXOtGz7bYfRyHRQ";
+// 새 폼 셋업 — 더나일 계정에서 setup() 재실행 (2026-06-04)
+// 트리거 + 응답 시트 모두 새 폼에 연결됨
+const CONFERENCE_APPLY_FORM_ID="1FAIpQLSewLh3zJlqekLPCwzgbg3tgCGS4DgsUmAJhqj7sZX0uN6wwPg";
+const CONFERENCE_PARTNER_FORM_ID="1FAIpQLSfoDfxK2gz4xUqUeJNlX9F_pFQfBgYzxJTyr7fgISiSq283Tw";
 const APPLY_ENTRIES={
-  name:"entry.1955864862",
-  phone:"entry.769543470",
-  email:"entry.910879252",
-  type:"entry.1151620531",
-  session:"entry.737504116",  // 폼 자체 필드는 살아있으므로 silent reject 방지용 기본값 자동 전송
-  childAge:"entry.203192727",
-  channel:"entry.1278543734",
-  message:"entry.133618965",
-  agree:"entry.761898604",
+  name:"entry.255248949",
+  phone:"entry.262089588",
+  email:"entry.610602797",
+  type:"entry.1326939896",
+  session:"entry.144630429",  // setup()이 생성한 폼의 라디오. 옵션은 "SESSION 2-1 · 인터뷰 (메인홀)" 등
+  childAge:"entry.1171579765",
+  channel:"entry.2007969002",
+  message:"entry.985253090",
+  agree:"entry.1396717137",
 };
 const PARTNER_ENTRIES={
-  company:"entry.739365890",
-  contact:"entry.594331275",
-  position:"entry.764472418",
-  phone:"entry.2141595619",
-  email:"entry.1963085748",
-  type:"entry.299743863",
-  message:"entry.1814694000",
-  agree:"entry.125344078",
+  company:"entry.934844306",
+  contact:"entry.1541180681",
+  position:"entry.190425816",
+  phone:"entry.768225854",
+  email:"entry.1672839342",
+  type:"entry.1244949068",
+  message:"entry.1587614414",
+  agree:"entry.1528673339",
 };
 
 /* 구글 폼 제출 — hidden iframe + form submit 방식.
