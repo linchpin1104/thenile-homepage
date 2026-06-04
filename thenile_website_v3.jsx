@@ -1593,7 +1593,8 @@ const ConferencePage=()=>{
      배경: cream / white / inkBrown 3톤만 alternating */
   const speakers=[
     {n:"장동선",r:"뇌과학자",img:"/images/speakers/장동선.png",part:"SESSION 1",color:CC.coral,c2:CC.peach,sh:"burst"},
-    {n:"이다랑",r:"더나일 이사장 · 발달심리",img:"/images/speakers/이다랑.png",part:"SESSION 1",color:CC.coral,c2:CC.rose,sh:"heart"},
+    {n:"이다랑",r:"아동심리전문가 · 사단법인 더나일 이사장",img:"/images/speakers/이다랑.png",part:"SESSION 1",color:CC.coral,c2:CC.rose,sh:"heart"},
+    {n:"김혜민",r:"사회자 · 사단법인 더나일 이사",img:"/images/김혜민.jpg",part:"SESSION 1",color:CC.coral,c2:CC.mango,sh:"flower"},
     {n:"이혜린",r:"쉬벤처스 부대표 · 사단법인 더나일 이사",img:"/images/speakers/이혜린.png",part:"SESSION 2",color:CC.lilac,c2:CC.rose,sh:"pebble"},
     {n:"신두란",r:"고마워서그래 대표",img:"/images/speakers/신두란.png",part:"SESSION 2",color:CC.lilac,c2:CC.coral,sh:"flower"},
     {n:"정지우",r:"작가 · 변호사",img:"/images/speakers/정지우.png",part:"SESSION 2",color:CC.lilac,c2:CC.sage,sh:"arch"},
@@ -1764,7 +1765,7 @@ const ConferencePage=()=>{
       <FI delay={.1}><div style={{maxWidth:880,margin:"0 auto",borderRadius:24,overflow:"hidden",background:C.w,boxShadow:"0 4px 24px rgba(0,0,0,.05)"}}>
         {[
           {t:"10:50 – 11:00",s:"등록",d:"체크인 · 자리 안내",c:CC.inkBrown},
-          {t:"11:00 – 12:30",s:"SESSION 1 · 키노트",sub:"90분 · 메인홀",d:"양육불안은 어디에서 오는가 — 장동선 / 이다랑",c:CC.coral},
+          {t:"11:00 – 12:30",s:"SESSION 1 · 키노트",sub:"90분 · 메인홀",d:"양육불안은 어디에서 오는가 — 장동선 / 이다랑 · 사회 김혜민",c:CC.coral},
           {t:"12:30 – 13:00",s:"밍글링 / 식사",d:"참가자 네트워킹 · 가벼운 식사",c:CC.inkBrown},
           {t:"13:00 – 14:30",s:"SESSION 2 · 패널토크",sub:"90분 · 메인홀",d:"양육불안과 함께 살아간다는 것 — 이혜린 모더레이터 + 신두란 / 정지우 / 후추맘",c:CC.lilac},
           {t:"14:30",s:"클로징",d:"마무리 인사 및 후원사 소개",c:CC.inkBrown},
@@ -1793,8 +1794,8 @@ const ConferencePage=()=>{
         <H2>연사 라인업</H2>
       </div></FI>
       <FI delay={.1}><div style={{maxWidth:880,margin:"0 auto",position:"relative"}}>
-        {[speakers.slice(0,3),speakers.slice(3,6)].map((row,rowIdx)=>(
-          <div key={rowIdx} className={rowIdx===0?"conf-spk-row-top":"conf-spk-row-bot"} style={{display:"grid",gridTemplateColumns:`repeat(${row.length},1fr)`,gap:24,marginTop:rowIdx===0?0:32,maxWidth:660,marginLeft:"auto",marginRight:"auto"}}>
+        {[speakers.slice(0,3),speakers.slice(3,7)].map((row,rowIdx)=>(
+          <div key={rowIdx} className={rowIdx===0?"conf-spk-row-top":"conf-spk-row-bot"} style={{display:"grid",gridTemplateColumns:`repeat(${row.length},1fr)`,gap:24,marginTop:rowIdx===0?0:32,maxWidth:rowIdx===0?660:"none",marginLeft:"auto",marginRight:"auto"}}>
             {row.map((s,i)=>{
               const idx=rowIdx===0?i:3+i;
               return (
@@ -1824,7 +1825,7 @@ const ConferencePage=()=>{
       <div style={{display:"grid",gap:24,maxWidth:960,margin:"0 auto"}}>
         {[
           {n:"KEYNOTE 01",c:CC.coral,c2:CC.peach,name:"장동선",role:"뇌과학자",img:"/images/speakers/장동선.png",title:"양육불안, 우리의 마음은 어떻게 작동될까?",desc:"부모가 된 이후 우리 뇌에서는 어떤 변화가 일어날까요? 뇌과학자의 시선으로 부모들의 양육불안의 원인을 다루어 봅니다.",sh:"burst"},
-          {n:"KEYNOTE 02",c:CC.coral,c2:CC.rose,name:"이다랑",role:"발달심리 · 더나일 이사장",img:"/images/speakers/이다랑.png",title:"한국 부모의 양육불안, 어떻게 다를까?",desc:"한국 부모들이 겪는 양육불안은 어디에서 비롯될까요? 7만 명의 부모를 만나며 그려온 마음의 지도를, 발달심리 전문가의 시선으로 함께 풀어봅니다.",sh:"heart"},
+          {n:"KEYNOTE 02",c:CC.coral,c2:CC.rose,name:"이다랑",role:"아동심리전문가 · 사단법인 더나일 이사장",img:"/images/speakers/이다랑.png",title:"한국 부모의 양육불안, 어떻게 다를까?",desc:"한국 부모들이 겪는 양육불안은 어디에서 비롯될까요? 7만 명의 부모를 만나며 그려온 마음의 지도를, 아동심리전문가의 시선으로 함께 풀어봅니다.",sh:"heart"},
         ].map((k,i)=>(
           <FI key={i} delay={i*.1}><div style={{display:"grid",gridTemplateColumns:"minmax(180px,260px) 1fr",gap:0,background:CC.cream,borderRadius:28,overflow:"hidden",position:"relative"}} className="conf-keynote-card">
             {/* 좌측 큰 인물 사진 */}
@@ -1846,6 +1847,16 @@ const ConferencePage=()=>{
         ))}
       </div>
       <style>{`@media (max-width:680px){.conf-keynote-card{grid-template-columns:1fr!important}.conf-keynote-card>div:first-child{aspect-ratio:16/10!important}}`}</style>
+
+      {/* SESSION 1 사회자 — 김혜민 */}
+      <FI delay={.25}><div style={{maxWidth:960,margin:"24px auto 0",padding:"14px 20px",background:C.w,border:`1px solid ${CC.coral}33`,borderRadius:50,display:"flex",alignItems:"center",gap:14,flexWrap:"wrap",justifyContent:"center"}}>
+        <div style={{width:46,height:46,borderRadius:"50%",overflow:"hidden",flexShrink:0,background:CC.cream,border:`2px solid ${CC.coral}55`}}>
+          <img src="/images/김혜민.jpg" alt="김혜민" style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:18px;color:${CC.coral};font-weight:700;background:${CC.coral}15;font-family:'Noto Serif KR',serif">김</div>`)}}}/>
+        </div>
+        <span style={{fontSize:11,color:CC.coral,fontWeight:700,letterSpacing:".15em"}}>MC · 사회</span>
+        <span style={{fontSize:17,fontWeight:700,color:CC.ink,fontFamily:"'Noto Serif KR',serif"}}>김혜민</span>
+        <span style={{fontSize:15,color:CC.inkBrown,opacity:.65}}>사단법인 더나일 이사</span>
+      </div></FI>
     </Box></Sec>
 
     {/* SESSION 2 · 패널토크 (단독 섹션, 2x2 그리드) */}
