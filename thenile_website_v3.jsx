@@ -1623,7 +1623,7 @@ const ConferencePage=()=>{
         <div className="conf-info-grid" style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:12}}>
           {[
             {k:"일시",v:"2026.07.09 (목)",sub:"11:00 – 15:00",c:CC.coral},
-            {k:"장소",v:"헤이그라운드",sub:"브릭스홀",c:CC.mango},
+            {k:"장소",v:"헤이그라운드",sub:"성수시작점",c:CC.mango},
             {k:"인원",v:"100–120명",sub:"무료 / 사전신청",c:CC.mint},
             {k:"주최",v:"사단법인 더나일",sub:"협력 · 성동구청",c:CC.lilac},
           ].map((x,i)=>(
@@ -1746,7 +1746,7 @@ const ConferencePage=()=>{
           {t:"11:00 – 12:30",s:"SESSION 1 · 키노트",sub:"90분 · 메인홀",d:"양육불안은 어디에서 오는가 — 장동선 / 이다랑 · 사회 김혜민",c:CC.coral},
           {t:"12:30 – 13:00",s:"밍글링 / 식사",d:"참가자 네트워킹 · 가벼운 식사",c:CC.inkBrown},
           {t:"13:00 – 14:30",s:"SESSION 2 · 패널토크",sub:"90분 · 메인홀",d:"양육불안과 함께 살아간다는 것 — 이혜린 모더레이터 + 신두란 / 정지우 / 후추맘",c:CC.lilac},
-          {t:"14:30",s:"클로징",d:"마무리 인사 및 후원사 소개",c:CC.inkBrown},
+          {t:"14:30 – 15:00",s:"클로징",d:"마무리 인사 및 후원사 소개",c:CC.inkBrown},
         ].map((x,i,a)=>(
           <div key={i} style={{display:"grid",gridTemplateColumns:"clamp(120px,22vw,150px) 1fr",gap:16,padding:"18px 24px",borderBottom:i<a.length-1?`1px solid ${C.g1}`:"none",alignItems:"start"}}>
             <div style={{fontSize:15,color:x.c,fontWeight:700,letterSpacing:".02em"}}>{x.t}</div>
@@ -1856,7 +1856,7 @@ const ConferencePage=()=>{
     <Sec bg={CC.cream}><Box>
       <FI><div style={{textAlign:"center",marginBottom:48}}>
         <div style={{fontSize:15,color:CC.coral,fontWeight:700,letterSpacing:".15em",marginBottom:16}}>VENUE · 장소 안내</div>
-        <H2>헤이그라운드 브릭스홀</H2>
+        <H2>헤이그라운드 성수시작점</H2>
         <p style={{fontSize:"clamp(16px,2vw,18px)",color:CC.inkBrown,opacity:.7,lineHeight:1.8,maxWidth:560,margin:"16px auto 0",wordBreak:"keep-all"}}>성수동, 사회혁신 그룹들이 함께 모인 공간. 100~120명을 포근하게 담아낼 수 있는 메인홀입니다.</p>
       </div></FI>
       <FI delay={.1}><div style={{maxWidth:1000,margin:"0 auto",display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:16,marginBottom:24}}>
@@ -1925,7 +1925,6 @@ const ConferencePage=()=>{
         <button onClick={()=>setShowPartner(true)} style={{padding:"18px 44px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:17,fontWeight:700,cursor:"pointer",transition:"all .25s",boxShadow:`0 8px 24px ${CC.ink}33`}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.transform="translateY(-2px)"}} onMouseLeave={e=>{e.currentTarget.style.background=CC.ink;e.currentTarget.style.transform="translateY(0)"}}>
           함께 걷고 싶어요 · 제휴 문의 →
         </button>
-        <p style={{fontSize:12,color:CC.inkBrown,opacity:.5,marginTop:16,wordBreak:"keep-all"}}>회신 요청 · 2026.05.22 (목)까지</p>
       </div></FI>
     </Box></Sec>
 
@@ -2392,7 +2391,7 @@ const PAGE_META={
   counsel:{title:"페이서 상담 | 사단법인 더나일",desc:"페이서 후원자를 위한 전문 양육 상담 신청 페이지입니다."},
   contact:{title:"협력문의 | 사단법인 더나일",desc:"기업 CSR, 강연, 기관 협업, 연구 협력, 후원 협약 등 더나일과의 협력을 문의하세요."},
   refund:{title:"환불 정책 | 사단법인 더나일",desc:"사단법인 더나일 상담·교육 서비스의 환불 및 취소 규정 안내."},
-  conference:{title:"2026 양육불안 컨퍼런스 | 사단법인 더나일",desc:"부모의 불안은 어디에서 오는가 — 뇌과학·발달심리·당사자의 시선으로 양육불안을 함께 풀어보는 비영리 컨퍼런스. 2026.07.09 헤이그라운드 브릭스홀."},
+  conference:{title:"2026 양육불안 컨퍼런스 | 사단법인 더나일",desc:"부모의 불안은 어디에서 오는가 — 뇌과학·발달심리·당사자의 시선으로 양육불안을 함께 풀어보는 비영리 컨퍼런스. 2026.07.09 헤이그라운드 성수시작점."},
 };
 
 const PATH_MAP={"/":"home","/about":"about","/programs":"programs","/delight":"delight","/conference":"conference","/parentscan":"parentscan","/pacer":"pacer","/shop":"shop","/counsel":"counsel","/contact":"contact","/refund":"refund"};
