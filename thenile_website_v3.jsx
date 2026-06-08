@@ -42,8 +42,11 @@ const Dot=()=><div style={{width:4,height:4,borderRadius:2,background:C.gold,fle
 
 const PAGES=[
   {id:"home",label:"Home"},{id:"about",label:"더나일 소개"},{id:"programs",label:"사업소개"},
-  {id:"delight",label:"딜라이트 프로젝트"},
-  {id:"parentscan",label:"양육불안검사"},{id:"pacer",label:"후원하기"},{id:"shop",label:"상품"},{id:"counsel",label:"페이서 상담"},{id:"contact",label:"협력문의"},
+  {id:"pacer",label:"후원하기"},{id:"shop",label:"상품"},{id:"contact",label:"협력문의"},
+  // 메뉴 숨김 (페이지·라우트는 살아있음, 직접 URL로만 접근 가능):
+  // {id:"delight",label:"딜라이트 프로젝트"},
+  // {id:"parentscan",label:"양육불안검사"},
+  // {id:"counsel",label:"페이서 상담"},
 ];
 
 const Nav=({page,go})=>{
