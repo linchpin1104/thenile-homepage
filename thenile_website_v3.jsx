@@ -340,7 +340,7 @@ const HomePage=({go})=>(<>
     <Box>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:48,alignItems:"center"}}>
         <FI><div style={{textAlign:"center"}}>
-          <img src="/images/이다랑.jpg" alt="이다랑 이사장" style={{width:"100%",maxWidth:320,borderRadius:20,margin:"0 auto 20px",objectFit:"cover",display:"block",boxShadow:"0 8px 32px rgba(27,42,74,.12)"}}/>
+          <img src="/images/lee-darang.jpg" alt="이다랑 이사장" style={{width:"100%",maxWidth:320,borderRadius:20,margin:"0 auto 20px",objectFit:"cover",display:"block",boxShadow:"0 8px 32px rgba(27,42,74,.12)"}}/>
           <div style={{fontSize:20,fontWeight:700,color:C.navy}}>이다랑 이사장</div>
           <div style={{fontSize:15,color:C.gold,fontWeight:600,marginTop:4}}>아동심리전문가</div>
           <div style={{fontSize:12,color:C.g4,marginTop:8,lineHeight:1.6}}>아동학 학사 / 발달심리학 석사<br/>아동심리박사과정 / (주)그로잉맘 창업자</div>
@@ -419,11 +419,11 @@ const HomePage=({go})=>(<>
       <FI><div style={{textAlign:"center",marginBottom:48}}><Tag>이사진</Tag><H2>주요 이사진</H2></div></FI>
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(150px,1fr))",gap:20}}>
         {[
-          {name:"이혜린 이사",img:"/images/이혜린.jpg",lines:["(현) 쉬벤처스 부대표","(전) 그로잉맘 부대표","교육학 석사, 창업학 박사과정중","부모교육전문가,","청소년상담사,","비즈니스 빌더"]},
-          {name:"정우열 이사",img:"/images/정우열.jpg",lines:["정신과 전문의","생각과 느낌 원장","2016년 여성가족부장관표창","2017년 국무총리표창"]},
-          {name:"김혜민 이사",img:"/images/김혜민.png",lines:["(전) YTN 라디오PD","극동방송 아나운서","한국자살예방협회 홍보위원장","국무총리표창"]},
-          {name:"박장원 이사",img:"/images/변장원.jpg",lines:["정책학 박사","(전공: 필란트로피)","(전) 국가균형발전","위원회 정책홍보팀장"]},
-          {name:"김혜진 이사",img:"/images/김혜진.jpg",lines:["(현) 옥소폴리틱스 운영총괄","(전) 실리콘밸리 글로벌 기업 근무","(Roblox, Myriad Genetics, Counsyl 등)","저서 「실리콘밸리를 그리다」","커리어 코치 및 글로벌 조직문화 강연자"]},
+          {name:"이혜린 이사",img:"/images/lee-hyerin.jpg",lines:["(현) 쉬벤처스 부대표","(전) 그로잉맘 부대표","교육학 석사, 창업학 박사과정중","부모교육전문가,","청소년상담사,","비즈니스 빌더"]},
+          {name:"정우열 이사",img:"/images/jeong-wooyeol.jpg",lines:["정신과 전문의","생각과 느낌 원장","2016년 여성가족부장관표창","2017년 국무총리표창"]},
+          {name:"김혜민 이사",img:"/images/kim-hyemin.png",lines:["(전) YTN 라디오PD","극동방송 아나운서","한국자살예방협회 홍보위원장","국무총리표창"]},
+          {name:"박장원 이사",img:"/images/bak-jangwon.jpg",lines:["정책학 박사","(전공: 필란트로피)","(전) 국가균형발전","위원회 정책홍보팀장"]},
+          {name:"김혜진 이사",img:"/images/kim-hyejin.jpg",lines:["(현) 옥소폴리틱스 운영총괄","(전) 실리콘밸리 글로벌 기업 근무","(Roblox, Myriad Genetics, Counsyl 등)","저서 「실리콘밸리를 그리다」","커리어 코치 및 글로벌 조직문화 강연자"]},
         ].map((m,i)=>(
           <FI key={i} delay={i*.08}>
             <div style={{textAlign:"center",padding:20,background:C.w,borderRadius:16,border:`1px solid ${C.g2}`,height:"100%"}}>
@@ -553,7 +553,7 @@ const AboutPage=({go})=>(<>
     <FI><Tag>이다랑 이사장</Tag></FI>
     <FI delay={.1}><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:48,alignItems:"start",marginTop:16}}>
       <div className="about-photo" style={{textAlign:"center"}}>
-        <img src="/images/이다랑.jpg" alt="이다랑 이사장" style={{width:"100%",maxWidth:280,borderRadius:20,margin:"0 auto 20px",objectFit:"cover",display:"block",boxShadow:"0 8px 32px rgba(27,42,74,.12)"}}/>
+        <img src="/images/lee-darang.jpg" alt="이다랑 이사장" style={{width:"100%",maxWidth:280,borderRadius:20,margin:"0 auto 20px",objectFit:"cover",display:"block",boxShadow:"0 8px 32px rgba(27,42,74,.12)"}}/>
         <div style={{fontSize:24,fontWeight:700,color:C.navy}}>이다랑</div>
         <div style={{fontSize:16,color:C.g6,marginTop:4}}>아동학 학사 / 발달심리학 석사 / 아동심리박사과정<br/>(주)그로잉맘 창업자 / 아동심리전문가</div>
       </div>
@@ -576,11 +576,11 @@ const AboutPage=({go})=>(<>
     <FI><Tag>이사진</Tag></FI>
     <FI delay={.1}><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(155px,1fr))",gap:20,marginTop:16}}>
       {[
-        {name:"이혜린 이사",img:"/images/이혜린.jpg",lines:["(현) 쉬벤처스 부대표","(전) 그로잉맘 부대표","교육학 석사, 창업학 박사과정중","부모교육전문가,","청소년상담사,","비즈니스 빌더"]},
-        {name:"정우열 이사",img:"/images/정우열.jpg",lines:["정신과 전문의","생각과 느낌 원장","2016년 여성가족부장관표창","2017년 국무총리표창"]},
-        {name:"김혜민 이사",img:"/images/김혜민.png",lines:["(전) YTN 라디오PD","극동방송 아나운서","한국자살예방협회 홍보위원장","국무총리표창"]},
-        {name:"박장원 이사",img:"/images/변장원.jpg",lines:["정책학 박사","(전공: 필란트로피)","(전) 국가균형발전","위원회 정책홍보팀장"]},
-        {name:"김혜진 이사",img:"/images/김혜진.jpg",lines:["(현) 옥소폴리틱스 운영총괄","(전) 실리콘밸리 글로벌 기업 근무","(Roblox, Myriad Genetics, Counsyl 등)","저서 「실리콘밸리를 그리다」","커리어 코치 및 글로벌 조직문화 강연자"]},
+        {name:"이혜린 이사",img:"/images/lee-hyerin.jpg",lines:["(현) 쉬벤처스 부대표","(전) 그로잉맘 부대표","교육학 석사, 창업학 박사과정중","부모교육전문가,","청소년상담사,","비즈니스 빌더"]},
+        {name:"정우열 이사",img:"/images/jeong-wooyeol.jpg",lines:["정신과 전문의","생각과 느낌 원장","2016년 여성가족부장관표창","2017년 국무총리표창"]},
+        {name:"김혜민 이사",img:"/images/kim-hyemin.png",lines:["(전) YTN 라디오PD","극동방송 아나운서","한국자살예방협회 홍보위원장","국무총리표창"]},
+        {name:"박장원 이사",img:"/images/bak-jangwon.jpg",lines:["정책학 박사","(전공: 필란트로피)","(전) 국가균형발전","위원회 정책홍보팀장"]},
+        {name:"김혜진 이사",img:"/images/kim-hyejin.jpg",lines:["(현) 옥소폴리틱스 운영총괄","(전) 실리콘밸리 글로벌 기업 근무","(Roblox, Myriad Genetics, Counsyl 등)","저서 「실리콘밸리를 그리다」","커리어 코치 및 글로벌 조직문화 강연자"]},
       ].map((m,i)=>(
         <FI key={i} delay={i*.08}><div style={{textAlign:"center",padding:20,background:C.w,borderRadius:16,border:`1px solid ${C.g2}`,height:"100%"}}>
           {m.img ? <img src={m.img} alt={m.name} style={{width:110,height:110,borderRadius:"50%",margin:"0 auto 16px",objectFit:"cover",display:"block",border:`3px solid ${C.goldL}`}}/> : <div style={{width:110,height:110,borderRadius:"50%",margin:"0 auto 16px",background:`linear-gradient(135deg,${C.goldP},${C.g1})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:36,color:C.navy}}>{m.name[0]}</div>}
@@ -895,7 +895,7 @@ const PacerPage=()=>(<>
   <Sec bg={C.warm}><Box>
     <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:48,alignItems:"center"}}>
       <FI><div style={{textAlign:"center"}}>
-        <img src="/images/이다랑.jpg" alt="이다랑 이사장" style={{width:"100%",maxWidth:280,borderRadius:20,margin:"0 auto",objectFit:"cover",display:"block",boxShadow:"0 8px 32px rgba(27,42,74,.12)"}}/>
+        <img src="/images/lee-darang.jpg" alt="이다랑 이사장" style={{width:"100%",maxWidth:280,borderRadius:20,margin:"0 auto",objectFit:"cover",display:"block",boxShadow:"0 8px 32px rgba(27,42,74,.12)"}}/>
       </div></FI>
       <FI delay={.15}><div>
         <Tag>FROM THE CHAIRMAN</Tag>
@@ -1545,7 +1545,7 @@ const ConferencePage=()=>{
   const speakers=[
     {n:"장동선",r:"뇌과학자",img:"/images/speakers/장동선-dark.png",part:"SESSION 1",color:CC.coral,c2:CC.peach,sh:"burst"},
     {n:"이다랑",r:"아동심리전문가 · 사단법인 더나일 이사장",img:"/images/speakers/이다랑.png",part:"SESSION 1",color:CC.coral,c2:CC.rose,sh:"heart"},
-    {n:"김혜민",r:"사회자 · 사단법인 더나일 이사",img:"/images/김혜민.png",part:"SESSION 1",color:CC.coral,c2:CC.mango,sh:"flower"},
+    {n:"김혜민",r:"사회자 · 사단법인 더나일 이사",img:"/images/kim-hyemin.png",part:"SESSION 1",color:CC.coral,c2:CC.mango,sh:"flower"},
     {n:"이혜린",r:"쉬벤처스 부대표 · 사단법인 더나일 이사",img:"/images/speakers/이혜린.png",part:"SESSION 2",color:CC.lilac,c2:CC.rose,sh:"pebble"},
     {n:"신두란",r:"고마워서그래 대표",img:"/images/speakers/신두란.png",part:"SESSION 2",color:CC.lilac,c2:CC.coral,sh:"flower"},
     {n:"정지우",r:"작가 · 변호사",img:"/images/speakers/정지우.png",part:"SESSION 2",color:CC.lilac,c2:CC.sage,sh:"arch"},
@@ -1803,7 +1803,7 @@ const ConferencePage=()=>{
       <FI delay={.25}><div style={{display:"grid",gridTemplateColumns:"minmax(180px,260px) 1fr",gap:0,background:CC.cream,borderRadius:28,overflow:"hidden",position:"relative",maxWidth:960,margin:"24px auto 0"}} className="conf-keynote-card">
         {/* 좌측 김혜민 사진 */}
         <div style={{position:"relative",aspectRatio:"4/5",background:`linear-gradient(135deg,${CC.coral}22 0%,${CC.mango}22 100%)`,overflow:"hidden"}}>
-          <img src="/images/김혜민.png" alt="김혜민" style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;color:${CC.coral};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">김</div>`)}}}/>
+          <img src="/images/kim-hyemin.png" alt="김혜민" style={{width:"100%",height:"100%",objectFit:"cover",objectPosition:"center 18%",display:"block"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;color:${CC.coral};font-weight:700;font-family:'Noto Serif KR',serif;opacity:.7">김</div>`)}}}/>
           <div style={{position:"absolute",bottom:14,left:14,padding:"5px 12px",background:"rgba(0,0,0,.55)",backdropFilter:"blur(8px)",borderRadius:20,fontSize:10,color:C.w,fontWeight:700,letterSpacing:".12em"}}>MC · 사회 · 90분</div>
         </div>
         {/* 우측 정보 */}
