@@ -6,6 +6,6 @@
   ],
   "rewrites": [
     { "source": "/conference", "destination": "/conference.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/((?!api/|images/|assets/|fonts/|favicon|robots|sitemap|.*\\..*).*)", "destination": "/index.html" }
   ]
 }
