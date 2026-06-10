@@ -1,5 +1,5 @@
 // POST /api/apply — 참가 신청
-import { supabaseInsert, sendSms, sendAdminEmail, envFingerprint, withCors } from "./_lib.js";
+import { supabaseInsert, sendSms, safeSendSlack, envFingerprint, withCors } from "./_lib.js";
 
 async function handler(req, res) {
   try {
@@ -40,24 +40,19 @@ async function handler(req, res) {
       console.error("[apply] SMS 실패:", err.message);
     }
 
-    // 3) 관리자 이메일 알림 (cross@thenile.kr)
-    const fields = [
-      ["이름", name], ["연락처", phone], ["이메일", email], ["참가자 유형", type],
-      ["자녀 연령", childAge], ["알게 된 경로", channel], ["듣고 싶은 이야기", message],
-    ];
-    const html =
-      `<h2 style="font-family:Pretendard,sans-serif;color:#2A1F1A">2026 양육불안 컨퍼런스 · 참가 신청 접수</h2>` +
-      `<table style="border-collapse:collapse;font-family:Pretendard,sans-serif;font-size:14px">` +
-      fields.map(([k, v]) =>
-        `<tr><td style="padding:6px 12px;border-bottom:1px solid #eee;color:#666;width:120px">${k}</td>` +
-        `<td style="padding:6px 12px;border-bottom:1px solid #eee">${v || "(미입력)"}</td></tr>`
-      ).join("") +
-      `</table>` +
-      `<p style="color:#999;font-size:12px;margin-top:16px">Supabase apply 테이블에서 전체 확인 가능</p>`;
-    await sendAdminEmail({
-      subject: `[더나일 컨퍼런스] 참가 신청 — ${name} (${type})`,
-      html,
-      text: fields.map(([k, v]) => `${k}: ${v || "(미입력)"}`).join("\n"),
+    // 3) Slack 알림
+    await safeSendSlack({
+      headline: `🎯 참가 신청 · ${name} (${type})`,
+      color: "#FF6B6B",
+      fields: [
+        ["이름", name],
+        ["연락처", phone],
+        ["이메일", email],
+        ["참가자 유형", type],
+        ["자녀 연령", childAge],
+        ["알게 된 경로", channel],
+        ["듣고 싶은 이야기", message],
+      ],
     });
 
     return res.status(200).json({ ok: true, smsOk });

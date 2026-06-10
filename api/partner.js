@@ -1,5 +1,5 @@
 // POST /api/partner — 기업 제휴 문의
-import { supabaseInsert, sendSms, sendAdminSms, sendAdminEmail, envFingerprint, withCors } from "./_lib.js";
+import { supabaseInsert, sendSms, sendAdminSms, safeSendSlack, envFingerprint, withCors } from "./_lib.js";
 
 async function handler(req, res) {
   try {
@@ -43,25 +43,19 @@ async function handler(req, res) {
       `[더나일 제휴] ${company} / ${contact} (${phone}) 문의 접수. type=${type || "-"}`
     );
 
-    // 4) 관리자 알림 이메일 (cross@thenile.kr)
-    const fields = [
-      ["기업/기관명", company], ["담당자명", contact], ["직책", position],
-      ["연락처", phone], ["이메일", email], ["함께하고 싶은 방식", type],
-      ["메시지", message],
-    ];
-    const html =
-      `<h2 style="font-family:Pretendard,sans-serif;color:#2A1F1A">2026 양육불안 컨퍼런스 · 기업 제휴 문의 접수</h2>` +
-      `<table style="border-collapse:collapse;font-family:Pretendard,sans-serif;font-size:14px">` +
-      fields.map(([k, v]) =>
-        `<tr><td style="padding:6px 12px;border-bottom:1px solid #eee;color:#666;width:140px">${k}</td>` +
-        `<td style="padding:6px 12px;border-bottom:1px solid #eee">${v || "(미입력)"}</td></tr>`
-      ).join("") +
-      `</table>` +
-      `<p style="color:#999;font-size:12px;margin-top:16px">영업일 기준 3일 이내 회신 부탁드립니다. Supabase partner 테이블에서 전체 확인 가능</p>`;
-    await sendAdminEmail({
-      subject: `[더나일 컨퍼런스] 기업 제휴 문의 — ${company} / ${contact}`,
-      html,
-      text: fields.map(([k, v]) => `${k}: ${v || "(미입력)"}`).join("\n"),
+    // 4) Slack 알림
+    await safeSendSlack({
+      headline: `🤝 기업 제휴 · ${company} / ${contact}`,
+      color: "#C6A8E8",
+      fields: [
+        ["기업/기관명", company],
+        ["담당자명", contact],
+        ["직책", position],
+        ["연락처", phone],
+        ["이메일", email],
+        ["함께하고 싶은 방식", type],
+        ["메시지", message],
+      ],
     });
 
     return res.status(200).json({ ok: true, smsOk });
