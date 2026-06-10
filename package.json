@@ -16,6 +16,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
+    "pptxgenjs": "^4.0.1",
+    "sharp": "^0.34.5",
     "vite": "^6.0.0"
   }
 }
