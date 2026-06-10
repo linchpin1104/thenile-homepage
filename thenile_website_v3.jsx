@@ -1929,17 +1929,21 @@ const ConferencePage=()=>{
         <div style={{display:"flex",justifyContent:"center",alignItems:"center",gap:"clamp(32px,5vw,72px)",flexWrap:"wrap",padding:"36px 24px",background:CC.cream,borderRadius:24}}>
           {[
             {n:"성동구청",img:"/images/partners/seongdong.png",c:CC.coral},
-            {n:"헤이그라운드",img:"/images/partners/heyground.png",c:CC.sage},
+            {n:"헤이그라운드",img:"/images/partners/heyground.png",c:CC.sage,big:true},
             {n:"Take Root",img:"/images/partners/takeroot.png",c:CC.sage},
             {n:"BICYCLE",img:"/images/partners/bicycle.png",c:CC.lilac},
             {n:"고마워서그래",img:"/images/partners/gomaweo.png",c:CC.ink},
             {n:"AZURE852",img:"/images/partners/azure852.png",c:CC.sky},
             {n:"sheventures",img:"/images/partners/sheventures.webp",c:CC.mint},
-          ].map((p,i)=>(
-            <div key={i} style={{height:64,display:"flex",alignItems:"center",justifyContent:"center",minWidth:120}}>
-              <img src={p.img} alt={p.n} style={{maxHeight:60,maxWidth:160,objectFit:"contain"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="font-size:15px;color:${p.c};font-weight:700;letterSpacing:.02em">${p.n}</div>`)}}}/>
+          ].map((p,i)=>{
+            const h = p.big ? 90 : 60;
+            const wMax = p.big ? 220 : 160;
+            const containerH = p.big ? 96 : 64;
+            return (
+            <div key={i} style={{height:containerH,display:"flex",alignItems:"center",justifyContent:"center",minWidth:120}}>
+              <img src={p.img} alt={p.n} style={{maxHeight:h,maxWidth:wMax,objectFit:"contain",mixBlendMode:p.big?"multiply":undefined}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="font-size:15px;color:${p.c};font-weight:700;letterSpacing:.02em">${p.n}</div>`)}}}/>
             </div>
-          ))}
+          );})}
         </div>
       </div></FI>
 
