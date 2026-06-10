@@ -48,16 +48,15 @@ const photo = {
   후추맘: imgB64(path.join(SPEAKERS_DIR, "후추맘.png")),
 };
 
-// 협력사 로고: cream 배경으로 합성 → 흰 배경 잡티 제거 + 가로 폭 통일
-async function partnerLogoOnCream(filePath, targetW = 360, targetH = 140) {
+// 협력사 로고: 흰색 배경 그대로 두고 사이즈만 정규화 (포스터에선 후원사 영역도 흰 박스라 자연스러움)
+async function partnerLogoNormalize(filePath, targetW = 360, targetH = 140) {
   if (!fs.existsSync(filePath)) return null;
-  // 1) cream 배경 캔버스 위에 로고 fit(contain) 합성
   const resized = await sharp(filePath)
-    .resize({ width: targetW - 20, height: targetH - 20, fit: "inside", background: { r: 255, g: 248, b: 236, alpha: 0 } })
+    .resize({ width: targetW - 20, height: targetH - 20, fit: "inside", background: { r: 255, g: 255, b: 255, alpha: 0 } })
     .toBuffer();
-  const meta = await sharp(resized).metadata();
+  // 흰색 배경 캔버스에 fit (로고 배경이 흰색이든 투명이든 모두 자연스럽게 동일하게 보임)
   const buf = await sharp({
-    create: { width: targetW, height: targetH, channels: 4, background: { r: 255, g: 248, b: 236, alpha: 1 } },
+    create: { width: targetW, height: targetH, channels: 4, background: { r: 255, g: 255, b: 255, alpha: 1 } },
   }).composite([{ input: resized, gravity: "centre" }]).png().toBuffer();
   return "data:image/png;base64," + buf.toString("base64");
 }
@@ -73,7 +72,7 @@ const partners = [
 ];
 
 for (const p of partners) {
-  p.img = await partnerLogoOnCream(path.join(PARTNERS_DIR, p.path));
+  p.img = await partnerLogoNormalize(path.join(PARTNERS_DIR, p.path));
 }
 
 const PATHS = {
@@ -187,7 +186,7 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
             ${circlePhoto(x, photoY, r, s.img, C.coral, 5)}
             <rect x="${x - 70}" y="${photoY + r + 18}" rx="15" ry="15" width="140" height="32" fill="${C.coral}"/>
             <text x="${x}" y="${photoY + r + 40}" font-family="Pretendard" font-size="14" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="1.5">${s.badge}</text>
-            ${nameRole(x, photoY + r + 92, s.name, s.role, { nameSize: 26, roleSize: 16 })}
+            ${nameRole(x, photoY + r + 95, s.name, s.role, { nameSize: 32, roleSize: 17 })}
           </g>
         `;
       }).join("");
@@ -213,29 +212,29 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
             ${circlePhoto(x, photoY, r, s.img, C.lilac, 5)}
             <rect x="${x - 60}" y="${photoY + r + 16}" rx="13" ry="13" width="120" height="28" fill="${C.lilac}"/>
             <text x="${x}" y="${photoY + r + 35}" font-family="Pretendard" font-size="13" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="1.4">${s.badge}</text>
-            ${nameRole(x, photoY + r + 80, s.name, s.role, { nameSize: 22, roleSize: 14 })}
+            ${nameRole(x, photoY + r + 82, s.name, s.role, { nameSize: 26, roleSize: 15 })}
           </g>
         `;
       }).join("");
     })()}
   </g>
 
-  <!-- 후원/협찬 한 줄 -->
+  <!-- 후원/협찬: 흰 박스 안에 한 줄 로고 (로고 배경과 자연스럽게 어울림) -->
   <g>
-    <text x="${W / 2}" y="1808" font-family="Pretendard" font-size="15" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.55" letter-spacing="3">PARTNERS · 후원 / 협찬</text>
+    <text x="${W / 2}" y="1780" font-family="Pretendard" font-size="16" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.6" letter-spacing="3">PARTNERS · 후원 / 협찬</text>
+    <rect x="20" y="1800" rx="20" ry="20" width="${W - 40}" height="100" fill="${C.white}" stroke="${C.inkBrown}" stroke-opacity="0.08" stroke-width="1"/>
 
     ${(() => {
-      // 7개 한 줄 균등 배치
       const n = partners.length;
-      const margin = 30;
-      const cellW = (W - margin * 2) / n;  // ≈ 145
-      const logoMaxW = 120;
-      const logoMaxH = 56;
-      const y = 1860;
+      const boxX = 20, boxW = W - 40;
+      const cellW = boxW / n;  // 약 148
+      const logoMaxW = 140;
+      const logoMaxH = 76;
+      const y = 1850;  // 박스 가운데
       return partners.map((p, i) => {
-        const x = margin + cellW * i + cellW / 2;
+        const x = boxX + cellW * i + cellW / 2;
         if (!p.img) {
-          return `<text x="${x}" y="${y + 6}" font-family="Pretendard" font-size="14" font-weight="700" fill="${C.inkBrown}" text-anchor="middle">${p.name}</text>`;
+          return `<text x="${x}" y="${y + 6}" font-family="Pretendard" font-size="15" font-weight="700" fill="${C.inkBrown}" text-anchor="middle">${p.name}</text>`;
         }
         return `<image x="${x - logoMaxW/2}" y="${y - logoMaxH/2}" width="${logoMaxW}" height="${logoMaxH}" href="${p.img}" preserveAspectRatio="xMidYMid meet"/>`;
       }).join("");
