@@ -48,20 +48,17 @@ const photo = {
   후추맘: imgB64(path.join(SPEAKERS_DIR, "후추맘.png")),
 };
 
-// 협력사 로고 (PNG → 흰 배경 cream으로 합성하면서 깔끔하게)
-async function partnerLogoOnCream(filePath) {
+// 협력사 로고: cream 배경으로 합성 → 흰 배경 잡티 제거 + 가로 폭 통일
+async function partnerLogoOnCream(filePath, targetW = 360, targetH = 140) {
   if (!fs.existsSync(filePath)) return null;
-  const meta = await sharp(filePath).metadata();
-  const creamBg = { r: 255, g: 248, b: 236, alpha: 1 };
-  // 가로 폭 400으로 통일 (비율 유지)
-  const targetW = 400;
-  const targetH = Math.round((meta.height / meta.width) * targetW);
+  // 1) cream 배경 캔버스 위에 로고 fit(contain) 합성
   const resized = await sharp(filePath)
-    .resize({ width: targetW, height: targetH, fit: "inside" })
+    .resize({ width: targetW - 20, height: targetH - 20, fit: "inside", background: { r: 255, g: 248, b: 236, alpha: 0 } })
     .toBuffer();
+  const meta = await sharp(resized).metadata();
   const buf = await sharp({
-    create: { width: targetW, height: targetH, channels: 4, background: creamBg },
-  }).composite([{ input: resized }]).png().toBuffer();
+    create: { width: targetW, height: targetH, channels: 4, background: { r: 255, g: 248, b: 236, alpha: 1 } },
+  }).composite([{ input: resized, gravity: "centre" }]).png().toBuffer();
   return "data:image/png;base64," + buf.toString("base64");
 }
 
@@ -115,19 +112,17 @@ const circlePhoto = (cx, cy, r, dataUri, borderColor, borderWidth = 5) => {
 };
 
 const nameRole = (cx, cy, name, role, opts = {}) => {
-  const { nameSize = 22, roleSize = 15 } = opts;
+  const { nameSize = 28, roleSize = 17 } = opts;
   return `<text x="${cx}" y="${cy}" font-family="Pretendard" text-anchor="middle">
-    <tspan font-size="${nameSize}" font-weight="800" fill="${C.ink}">${name}</tspan><tspan font-size="${Math.round(roleSize * 0.85)}" fill="${C.inkBrown}" opacity="0.45">  ㅣ  </tspan><tspan font-size="${roleSize}" font-weight="600" fill="${C.inkBrown}" opacity="0.78">${role}</tspan>
+    <tspan font-size="${nameSize}" font-weight="800" fill="${C.ink}">${name}</tspan><tspan font-size="${Math.round(roleSize * 0.85)}" fill="${C.inkBrown}" opacity="0.45">  ㅣ  </tspan><tspan font-size="${roleSize}" font-weight="600" fill="${C.inkBrown}" opacity="0.82">${role}</tspan>
   </text>`;
 };
 
-// 모든 SESSION 1 (장동선·이다랑·김혜민 동일 크기)
 const session1 = [
   { name: "장동선", role: "뇌과학자",         img: photo.장동선, badge: "KEYNOTE 01" },
   { name: "이다랑", role: "아동심리전문가",    img: photo.이다랑, badge: "KEYNOTE 02" },
   { name: "김혜민", role: "PD · 사회",         img: photo.김혜민, badge: "MC" },
 ];
-
 const session2 = [
   { name: "이혜린", role: "쉬벤처스 부대표",  img: photo.이혜린, badge: "MODERATOR" },
   { name: "신두란", role: "고마워서그래 대표", img: photo.신두란, badge: "PANEL" },
@@ -146,12 +141,11 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
     </linearGradient>
   </defs>
 
-  <!-- 배경 캐릭터 (감각적 5개) -->
+  <!-- 배경 캐릭터 -->
   ${emo(1010, 140, 200, "burst", C.coral, C.mango, { rotate: 18, opacity: 0.92 })}
   ${emo(95, 430, 150, "heart", C.rose, C.lilac, { rotate: -12, opacity: 0.85 })}
-  ${emo(995, 640, 95, "flower", C.mango, C.peach, { rotate: 14, opacity: 0.75 })}
-  ${emo(80, 1240, 105, "drop", C.lilac, C.sky, { rotate: -15, opacity: 0.7 })}
-  ${emo(1005, 1640, 115, "leaf", C.sage, C.mint, { rotate: 22, opacity: 0.75 })}
+  ${emo(60, 1230, 100, "drop", C.lilac, C.sky, { rotate: -15, opacity: 0.7 })}
+  ${emo(1020, 1680, 95, "leaf", C.sage, C.mint, { rotate: 22, opacity: 0.65 })}
 
   <!-- 헤더 칩 -->
   <g>
@@ -163,53 +157,52 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
   <text x="${W / 2}" y="340" font-family="Pretendard" font-size="115" font-weight="900" fill="url(#titleGrad)" text-anchor="middle" letter-spacing="-3">불안을</text>
   <text x="${W / 2}" y="480" font-family="Pretendard" font-size="115" font-weight="900" fill="url(#titleGrad)" text-anchor="middle" letter-spacing="-3">불안해하지 마세요</text>
 
-  <!-- 설명문 -->
-  <text x="${W / 2}" y="580" font-family="Pretendard" font-size="26" font-weight="700" fill="${C.ink}" text-anchor="middle">양육불안의 시대, 우리는 괜찮은 걸까요?</text>
-  <text x="${W / 2}" y="640" font-family="Pretendard" font-size="21" font-weight="500" fill="${C.inkBrown}" text-anchor="middle" opacity="0.85">양육불안은 이제 개인의 문제가 아니라 사회의 의제라는 것,</text>
-  <text x="${W / 2}" y="675" font-family="Pretendard" font-size="21" font-weight="500" fill="${C.inkBrown}" text-anchor="middle" opacity="0.85">함께 이야기 나누어 보아요.</text>
+  <!-- 설명문 (질문 1줄 + 본문 1줄) -->
+  <text x="${W / 2}" y="575" font-family="Pretendard" font-size="30" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안의 시대, 우리는 괜찮은 걸까요?</text>
+  <text x="${W / 2}" y="625" font-family="Pretendard" font-size="22" font-weight="500" fill="${C.inkBrown}" text-anchor="middle" opacity="0.88">양육불안은 이제 개인의 문제가 아니라 사회의 의제라는 것, 함께 이야기 나누어 보아요.</text>
 
-  <!-- 일시·장소 박스 -->
-  <g transform="translate(${W / 2}, 800)">
-    <rect x="-470" y="-58" rx="48" ry="48" width="940" height="116" fill="${C.ink}"/>
-    <text font-family="Pretendard" font-size="32" font-weight="800" fill="${C.cream}" text-anchor="middle" dy="-8">2026.07.09 (목) 11:00 – 15:00</text>
-    <text y="30" font-family="Pretendard" font-size="20" font-weight="600" fill="${C.peach}" text-anchor="middle">헤이그라운드 성수시작점 · 선착순 100~120명 · 무료</text>
+  <!-- 일시·장소 박스 (더 크게) -->
+  <g transform="translate(${W / 2}, 730)">
+    <rect x="-470" y="-62" rx="50" ry="50" width="940" height="124" fill="${C.ink}"/>
+    <text font-family="Pretendard" font-size="36" font-weight="800" fill="${C.cream}" text-anchor="middle" dy="-10">2026.07.09 (목) 11:00 – 15:00</text>
+    <text y="32" font-family="Pretendard" font-size="22" font-weight="600" fill="${C.peach}" text-anchor="middle">헤이그라운드 성수시작점 · 선착순 100~120명 · 무료</text>
   </g>
 
-  <!-- SESSION 1 (3명 동일 크기) -->
+  <!-- SESSION 1 (사진 + 이름·역할 폰트 키움) -->
   <g>
-    <rect x="380" y="900" rx="22" ry="22" width="320" height="44" fill="${C.coral}"/>
-    <text x="${W / 2}" y="930" font-family="Pretendard" font-size="18" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="2">SESSION 1 · 키노트</text>
-    <text x="${W / 2}" y="985" font-family="Pretendard" font-size="30" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안은 어디에서 오는가</text>
+    <rect x="370" y="845" rx="24" ry="24" width="340" height="50" fill="${C.coral}"/>
+    <text x="${W / 2}" y="877" font-family="Pretendard" font-size="20" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="2">SESSION 1 · 키노트</text>
+    <text x="${W / 2}" y="935" font-family="Pretendard" font-size="34" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안은 어디에서 오는가</text>
 
     ${(() => {
-      const photoY = 1120;
-      const r = 80;            // 세 명 모두 동일 크기
-      const gap = 280;
-      const totalW = gap * 2;  // 3명, 간격 2개
+      const photoY = 1090;
+      const r = 88;
+      const gap = 285;
+      const totalW = gap * 2;
       const startX = W / 2 - totalW / 2;
       return session1.map((s, i) => {
         const x = startX + i * gap;
         return `
           <g>
             ${circlePhoto(x, photoY, r, s.img, C.coral, 5)}
-            <rect x="${x - 60}" y="${photoY + r + 16}" rx="13" ry="13" width="120" height="28" fill="${C.coral}"/>
-            <text x="${x}" y="${photoY + r + 35}" font-family="Pretendard" font-size="13" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="1.5">${s.badge}</text>
-            ${nameRole(x, photoY + r + 75, s.name, s.role, { nameSize: 22, roleSize: 14 })}
+            <rect x="${x - 70}" y="${photoY + r + 18}" rx="15" ry="15" width="140" height="32" fill="${C.coral}"/>
+            <text x="${x}" y="${photoY + r + 40}" font-family="Pretendard" font-size="14" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="1.5">${s.badge}</text>
+            ${nameRole(x, photoY + r + 92, s.name, s.role, { nameSize: 26, roleSize: 16 })}
           </g>
         `;
       }).join("");
     })()}
   </g>
 
-  <!-- SESSION 2 -->
+  <!-- SESSION 2 (간격 확보 + 폰트 키움) -->
   <g>
-    <rect x="380" y="1280" rx="22" ry="22" width="320" height="44" fill="${C.lilac}"/>
-    <text x="${W / 2}" y="1310" font-family="Pretendard" font-size="18" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="2">SESSION 2 · 패널토크</text>
-    <text x="${W / 2}" y="1365" font-family="Pretendard" font-size="30" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안과 함께 살아간다는 것</text>
+    <rect x="370" y="1340" rx="24" ry="24" width="340" height="50" fill="${C.lilac}"/>
+    <text x="${W / 2}" y="1372" font-family="Pretendard" font-size="20" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="2">SESSION 2 · 패널토크</text>
+    <text x="${W / 2}" y="1430" font-family="Pretendard" font-size="34" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안과 함께 살아간다는 것</text>
 
     ${(() => {
-      const photoY = 1495;
-      const r = 68;
+      const photoY = 1565;
+      const r = 73;
       const gap = 235;
       const totalW = gap * 3;
       const startX = W / 2 - totalW / 2;
@@ -218,47 +211,35 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
         return `
           <g>
             ${circlePhoto(x, photoY, r, s.img, C.lilac, 5)}
-            <rect x="${x - 55}" y="${photoY + r + 14}" rx="12" ry="12" width="110" height="26" fill="${C.lilac}"/>
-            <text x="${x}" y="${photoY + r + 31}" font-family="Pretendard" font-size="12" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="1.4">${s.badge}</text>
-            ${nameRole(x, photoY + r + 62, s.name, s.role, { nameSize: 18, roleSize: 13 })}
+            <rect x="${x - 60}" y="${photoY + r + 16}" rx="13" ry="13" width="120" height="28" fill="${C.lilac}"/>
+            <text x="${x}" y="${photoY + r + 35}" font-family="Pretendard" font-size="13" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="1.4">${s.badge}</text>
+            ${nameRole(x, photoY + r + 80, s.name, s.role, { nameSize: 22, roleSize: 14 })}
           </g>
         `;
       }).join("");
     })()}
   </g>
 
-  <!-- 협찬사 라벨 + 로고 그리드 -->
+  <!-- 후원/협찬 한 줄 -->
   <g>
-    <text x="${W / 2}" y="1735" font-family="Pretendard" font-size="14" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.55" letter-spacing="3">PARTNERS · 후원 / 협찬</text>
+    <text x="${W / 2}" y="1808" font-family="Pretendard" font-size="15" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.55" letter-spacing="3">PARTNERS · 후원 / 협찬</text>
 
     ${(() => {
-      // 7개를 두 줄로: 위 4 + 아래 3
-      const row1 = partners.slice(0, 4);
-      const row2 = partners.slice(4, 7);
-      const cellW = 230;
-      const cellH = 60;
-      const logoMaxW = 160;
-      const logoMaxH = 50;
-
-      function placeRow(arr, y) {
-        const totalW = cellW * (arr.length - 1);
-        const startX = W / 2 - totalW / 2;
-        return arr.map((p, i) => {
-          const x = startX + i * cellW;
-          if (!p.img) {
-            return `<text x="${x}" y="${y + 6}" font-family="Pretendard" font-size="15" font-weight="700" fill="${C.inkBrown}" text-anchor="middle">${p.name}</text>`;
-          }
-          // 로고를 box 안에 fit
-          return `<image x="${x - logoMaxW/2}" y="${y - logoMaxH/2}" width="${logoMaxW}" height="${logoMaxH}" href="${p.img}" preserveAspectRatio="xMidYMid meet"/>`;
-        }).join("");
-      }
-
-      return placeRow(row1, 1780) + placeRow(row2, 1845);
+      // 7개 한 줄 균등 배치
+      const n = partners.length;
+      const margin = 30;
+      const cellW = (W - margin * 2) / n;  // ≈ 145
+      const logoMaxW = 120;
+      const logoMaxH = 56;
+      const y = 1860;
+      return partners.map((p, i) => {
+        const x = margin + cellW * i + cellW / 2;
+        if (!p.img) {
+          return `<text x="${x}" y="${y + 6}" font-family="Pretendard" font-size="14" font-weight="700" fill="${C.inkBrown}" text-anchor="middle">${p.name}</text>`;
+        }
+        return `<image x="${x - logoMaxW/2}" y="${y - logoMaxH/2}" width="${logoMaxW}" height="${logoMaxH}" href="${p.img}" preserveAspectRatio="xMidYMid meet"/>`;
+      }).join("");
     })()}
-  </g>
-
-  <!-- CTA -->
-  <g transform="translate(${W / 2}, 1900)" style="display:none">
   </g>
 </svg>`;
 
@@ -267,7 +248,6 @@ const pngStat = fs.statSync(OUT_PNG);
 console.log(`✓ PNG: ${OUT_PNG}`);
 console.log(`  ${(pngStat.size / 1024).toFixed(1)} KB · ${W}×${H} px`);
 
-// PPTX 생성
 const pptx = new PptxGenJS();
 pptx.defineLayout({ name: "POSTER_9_16", width: 11.25, height: 20 });
 pptx.layout = "POSTER_9_16";
