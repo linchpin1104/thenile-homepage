@@ -1,5 +1,5 @@
 // POST /api/partner — 기업 제휴 문의
-import { supabaseInsert, sendSms, sendAdminSms, safeSendSlack, envFingerprint, withCors } from "./_lib.js";
+import { supabaseInsert, sendSms, sendAdminSms, safeSendSlack, safeCreateNotion, notionProp, NOTION_DBS, envFingerprint, withCors } from "./_lib.js";
 
 async function handler(req, res) {
   try {
@@ -57,6 +57,19 @@ async function handler(req, res) {
         ["메시지", message],
       ],
     });
+
+    // 5) Notion DB 추가
+    await safeCreateNotion(NOTION_DBS.partner, Object.fromEntries(Object.entries({
+      "기업/기관명":          notionProp.title(company),
+      "담당자명":             notionProp.text(contact),
+      "직책":                notionProp.text(position),
+      "연락처":               notionProp.phone(phone),
+      "이메일":               notionProp.email(email),
+      "함께하고 싶은 방식":     notionProp.select(type),
+      "메시지":               notionProp.text(message),
+      "신청일시":             notionProp.date(new Date().toISOString()),
+      "진행상태":             notionProp.select("검토"),
+    }).filter(([_, v]) => v !== null)));
 
     return res.status(200).json({ ok: true, smsOk });
   } catch (err) {

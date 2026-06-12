@@ -14,6 +14,9 @@ const {
   GMAIL_USER,          // (옵션) Gmail SMTP 발신 계정
   GMAIL_APP_PASSWORD,  // (옵션) Google 앱 비밀번호
   SLACK_WEBHOOK_URL,   // (옵션) Slack Incoming Webhook URL — 신청 알림 채널
+  NOTION_API_KEY,      // (옵션) Notion Internal Integration Secret
+  NOTION_APPLY_DB_ID,  // (옵션) 참가 신청 노션 DB ID
+  NOTION_PARTNER_DB_ID,// (옵션) 기업 제휴 노션 DB ID
 } = process.env;
 
 /** Supabase REST 직접 호출 — supabase-js 의존성 없이 가볍게 */
@@ -166,6 +169,47 @@ export async function safeSendSlack(payload) {
   try { await sendSlack(payload); }
   catch (err) { console.error("[slack] 발송 실패:", err.message); }
 }
+
+/** Notion DB에 row 추가 (NOTION_API_KEY + 해당 DB_ID 둘 다 있을 때만) */
+export async function createNotionPage(databaseId, properties) {
+  if (!NOTION_API_KEY || !databaseId) return { skipped: true };
+  const res = await fetch("https://api.notion.com/v1/pages", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${NOTION_API_KEY}`,
+      "Notion-Version": "2022-06-28",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      parent: { database_id: databaseId },
+      properties,
+    }),
+  });
+  if (!res.ok) throw new Error(`Notion ${res.status}: ${await res.text()}`);
+  return { ok: true };
+}
+
+/** Notion property 빌더 (값이 비어 있으면 해당 키 자체를 누락) */
+export const notionProp = {
+  title: (text) => text ? { title: [{ text: { content: String(text).slice(0, 2000) } }] } : null,
+  text:  (text) => text ? { rich_text: [{ text: { content: String(text).slice(0, 2000) } }] } : null,
+  email: (v) => v ? { email: String(v) } : null,
+  phone: (v) => v ? { phone_number: String(v) } : null,
+  select:(name) => name ? { select: { name: String(name).slice(0, 100) } } : null,
+  date:  (iso) => iso ? { date: { start: iso } } : null,
+};
+
+/** Notion 호출의 try/catch 래퍼 */
+export async function safeCreateNotion(databaseId, properties) {
+  try { await createNotionPage(databaseId, properties); }
+  catch (err) { console.error("[notion] 발송 실패:", err.message); }
+}
+
+/** Notion DB_ID 노출 (apply/partner.js에서 사용) */
+export const NOTION_DBS = {
+  apply: NOTION_APPLY_DB_ID,
+  partner: NOTION_PARTNER_DB_ID,
+};
 
 /** CORS / preflight 핸들링 */
 export function withCors(handler) {

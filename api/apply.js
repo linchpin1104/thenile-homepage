@@ -1,5 +1,5 @@
 // POST /api/apply — 참가 신청
-import { supabaseInsert, sendSms, safeSendSlack, envFingerprint, withCors } from "./_lib.js";
+import { supabaseInsert, sendSms, safeSendSlack, safeCreateNotion, notionProp, NOTION_DBS, envFingerprint, withCors } from "./_lib.js";
 
 async function handler(req, res) {
   try {
@@ -54,6 +54,19 @@ async function handler(req, res) {
         ["듣고 싶은 이야기", message],
       ],
     });
+
+    // 4) Notion DB 추가
+    await safeCreateNotion(NOTION_DBS.apply, Object.fromEntries(Object.entries({
+      "이름":               notionProp.title(name),
+      "연락처":             notionProp.phone(phone),
+      "이메일":             notionProp.email(email),
+      "참가자 유형":         notionProp.select(type),
+      "자녀 연령":           notionProp.select(childAge),
+      "알게 된 경로":         notionProp.text(channel),
+      "듣고 싶은 이야기":     notionProp.text(message),
+      "신청일시":             notionProp.date(new Date().toISOString()),
+      "상태":                notionProp.select("신규"),
+    }).filter(([_, v]) => v !== null)));
 
     return res.status(200).json({ ok: true, smsOk });
   } catch (err) {
