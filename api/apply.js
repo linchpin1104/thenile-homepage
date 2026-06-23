@@ -3,6 +3,11 @@ import { supabaseInsert, sendSms, safeSendSlack, safeCreateNotion, notionProp, N
 
 async function handler(req, res) {
   try {
+    // 참가 신청 마감 — 안전망 (사이트 UI는 이미 마감 표시지만 API 직접 호출 차단)
+    if (process.env.APPLY_CLOSED === "true") {
+      return res.status(403).json({ ok: false, error: "참가 신청이 마감되었습니다." });
+    }
+
     const body = req.body || {};
     const { name, phone, email, type, childAge, channel, message, agree } = body;
 

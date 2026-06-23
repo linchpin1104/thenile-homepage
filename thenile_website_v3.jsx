@@ -1553,6 +1553,12 @@ const ConferencePage=()=>{
   ];
   const [showApply,setShowApply]=useState(false);
   const [showPartner,setShowPartner]=useState(false);
+  /* 참가 신청 마감 (선착순 정원 초과) — 기업 제휴는 계속 받음 */
+  const APPLY_CLOSED=true;
+  const onApplyClick=()=>{
+    if(APPLY_CLOSED){alert("참가 신청이 마감되었습니다.\n많은 관심과 신청에 감사드립니다.\n행사 당일 뵙겠습니다 :)");return}
+    setShowApply(true);
+  };
   /* D-Day 카운트다운 (컨퍼런스: 2026-07-09 11:00 KST) */
   const [dday,setDday]=useState(null);
   const [stickyVisible,setStickyVisible]=useState(false);
@@ -1593,8 +1599,8 @@ const ConferencePage=()=>{
         <button onClick={()=>setShowPartner(true)} className="conf-sticky-partner" style={{padding:"8px 14px",background:"transparent",color:CC.cream,border:"1px solid rgba(255,248,236,.35)",borderRadius:30,fontSize:"clamp(11px,1.5vw,15px)",fontWeight:600,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0,transition:"background .2s"}} onMouseEnter={e=>e.currentTarget.style.background="rgba(255,248,236,.1)"} onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
           제휴 문의
         </button>
-        <button onClick={()=>setShowApply(true)} style={{padding:"10px 18px",background:CC.coral,color:C.w,border:"none",borderRadius:30,fontSize:"clamp(12px,1.7vw,16px)",fontWeight:700,cursor:"pointer",letterSpacing:".02em",whiteSpace:"nowrap",flexShrink:0,transition:"background .2s"}} onMouseEnter={e=>e.currentTarget.style.background=CC.peach} onMouseLeave={e=>e.currentTarget.style.background=CC.coral}>
-          참가 신청 →
+        <button onClick={onApplyClick} style={{padding:"10px 18px",background:APPLY_CLOSED?"rgba(255,255,255,.15)":CC.coral,color:C.w,border:APPLY_CLOSED?"1px solid rgba(255,255,255,.3)":"none",borderRadius:30,fontSize:"clamp(12px,1.7vw,16px)",fontWeight:700,cursor:"pointer",letterSpacing:".02em",whiteSpace:"nowrap",flexShrink:0,transition:"background .2s"}}>
+          {APPLY_CLOSED?"신청 마감":"참가 신청 →"}
         </button>
       </div>
       <style>{`@media (max-width:520px){.conf-sticky-title{display:none}.conf-sticky-partner{padding:8px 12px!important}}`}</style>
@@ -1642,10 +1648,10 @@ const ConferencePage=()=>{
       </div></FI>
 
       <FI delay={.25}><div style={{textAlign:"center",marginTop:56,position:"relative"}}>
-        <button onClick={()=>setShowApply(true)} style={{padding:"18px 56px",background:CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:18,fontWeight:700,cursor:"pointer",letterSpacing:".02em",transition:"all .25s",boxShadow:`0 8px 24px ${CC.ink}33`}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.transform="translateY(-2px)"}} onMouseLeave={e=>{e.currentTarget.style.background=CC.ink;e.currentTarget.style.transform="translateY(0)"}}>
-          참가 신청하기 →
+        <button onClick={onApplyClick} style={{padding:"18px 56px",background:APPLY_CLOSED?"#999":CC.ink,color:CC.cream,border:"none",borderRadius:50,fontSize:18,fontWeight:700,cursor:APPLY_CLOSED?"not-allowed":"pointer",letterSpacing:".02em",transition:"all .25s",boxShadow:APPLY_CLOSED?"none":`0 8px 24px ${CC.ink}33`}}>
+          {APPLY_CLOSED?"참가 신청 마감":"참가 신청하기 →"}
         </button>
-        <p style={{fontSize:15,color:CC.inkBrown,marginTop:16,opacity:.65}}>참가 무료 · 사전 신청 필수</p>
+        <p style={{fontSize:15,color:CC.inkBrown,marginTop:16,opacity:.65}}>{APPLY_CLOSED?"많은 관심에 감사드립니다. 행사 당일 뵙겠습니다.":"참가 무료 · 사전 신청 필수"}</p>
       </div></FI>
     </Box></Sec>
 
@@ -1967,14 +1973,13 @@ const ConferencePage=()=>{
           <span style={{display:"inline-block"}}>더나일과 함께해주세요</span>
         </h2>
         <p style={{fontSize:"clamp(16px,2vw,18px)",color:"rgba(255,248,236,.7)",lineHeight:1.9,marginBottom:48,wordBreak:"keep-all"}}>
-          참가비는 없지만, 선착순 100–120명으로 마감됩니다.<br/>
-          신청해주신 정보로 행사 관련 안내를 드립니다.
+          {APPLY_CLOSED?(<><strong style={{color:CC.peach}}>참가 신청이 마감되었습니다.</strong><br/>많은 관심과 신청에 감사드립니다. 행사 당일 뵙겠습니다 :)<br/>기업 제휴 문의는 계속 받고 있습니다.</>):(<>참가비는 없지만, 선착순 100–120명으로 마감됩니다.<br/>신청해주신 정보로 행사 관련 안내를 드립니다.</>)}
         </p>
       </div></FI>
       <FI delay={.15}><div style={{display:"flex",gap:12,justifyContent:"center",flexWrap:"wrap",maxWidth:560,margin:"0 auto",position:"relative"}}>
-        <button onClick={()=>setShowApply(true)} style={{padding:"18px 40px",background:CC.cream,color:CC.inkBrown,border:"none",borderRadius:50,fontSize:18,fontWeight:700,cursor:"pointer",transition:"all .25s"}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.color=CC.cream}} onMouseLeave={e=>{e.currentTarget.style.background=CC.cream;e.currentTarget.style.color=CC.inkBrown}}>
+        {!APPLY_CLOSED && <button onClick={onApplyClick} style={{padding:"18px 40px",background:CC.cream,color:CC.inkBrown,border:"none",borderRadius:50,fontSize:18,fontWeight:700,cursor:"pointer",transition:"all .25s"}} onMouseEnter={e=>{e.currentTarget.style.background=CC.coral;e.currentTarget.style.color=CC.cream}} onMouseLeave={e=>{e.currentTarget.style.background=CC.cream;e.currentTarget.style.color=CC.inkBrown}}>
           참가 신청하기 →
-        </button>
+        </button>}
         <button onClick={()=>setShowPartner(true)} style={{padding:"18px 40px",background:"transparent",color:CC.cream,border:"1px solid rgba(255,248,236,.3)",borderRadius:50,fontSize:18,fontWeight:700,cursor:"pointer",transition:"all .25s"}} onMouseEnter={e=>e.currentTarget.style.background="rgba(255,248,236,.08)"} onMouseLeave={e=>e.currentTarget.style.background="transparent"}>
           기업 제휴 문의
         </button>
