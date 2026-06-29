@@ -127,11 +127,15 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
   <!-- 좌측 컬러 바 -->
   <rect x="0" y="0" width="50" height="${H}" fill="url(#g)"/>
 
-  <!-- 배경 캐릭터 (다양, 크게, 좌측 슬로건 영역 주변) -->
-  ${emo(2950, 240, 180, "heart", C.rose, C.lilac, { rotate: -10, opacity: 0.9 })}
-  ${emo(2880, 540, 130, "burst", C.coral, C.mango, { rotate: 15, opacity: 0.85 })}
-  ${emo(170, 670, 110, "drop", C.lilac, C.sky, { rotate: -12, opacity: 0.55 })}
-  ${emo(80, 230, 90, "flower", C.mango, C.peach, { rotate: 10, opacity: 0.5, eyes: false })}
+  <!-- 배경 캐릭터 8개 (다양·크게·동적 배치) -->
+  ${emo(3000, 200, 180, "heart", C.rose, C.lilac, { rotate: -10, opacity: 0.85 })}
+  ${emo(3100, 480, 140, "burst", C.coral, C.mango, { rotate: 15, opacity: 0.82 })}
+  ${emo(2880, 620, 100, "star", C.mango, C.peach, { rotate: -8, opacity: 0.7 })}
+  ${emo(150, 250, 110, "flower", C.mango, C.peach, { rotate: 12, opacity: 0.7 })}
+  ${emo(180, 600, 130, "drop", C.lilac, C.sky, { rotate: -15, opacity: 0.65 })}
+  ${emo(2300, 80, 90, "leaf", C.sage, C.mint, { rotate: 25, opacity: 0.7 })}
+  ${emo(3220, 50, 80, "cloud", C.sky, C.mint, { rotate: -10, opacity: 0.65, eyes: false })}
+  ${emo(3290, 670, 110, "blob", C.rose, C.coral, { rotate: 15, opacity: 0.6 })}
 
   <!-- 좌측 (160~3300): 칩 + 슬로건 + 날짜·시간·장소 -->
   <g transform="translate(160, 0)">
@@ -139,34 +143,34 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
     <rect x="0" y="70" rx="44" ry="44" width="780" height="86" fill="#FFFFFF" stroke="${C.coral}" stroke-width="4" stroke-opacity="0.5"/>
     <text x="390" y="124" font-family="Pretendard" font-size="38" font-weight="800" fill="${C.coral}" text-anchor="middle" letter-spacing="3">사단법인 더나일 · 양육불안 컨퍼런스</text>
 
-    <!-- 메인 슬로건 한 줄 (칩과 간격 충분히, y 230 → 480) -->
-    <text x="0" y="480" font-family="Pretendard" font-size="220" font-weight="900" fill="url(#g)" letter-spacing="-8">"불안을 불안해하지 마세요"</text>
+    <!-- 메인 슬로건 한 줄 (살짝 위로 — y 480 → 420) -->
+    <text x="0" y="420" font-family="Pretendard" font-size="220" font-weight="900" fill="url(#g)" letter-spacing="-8">"불안을 불안해하지 마세요"</text>
 
-    <!-- 날짜·시간·장소 한 줄 (장소 색 통일) -->
-    <text x="0" y="625" font-family="Pretendard" font-size="58" font-weight="800" fill="${C.ink}" letter-spacing="-1">
+    <!-- 날짜·시간·장소 한 줄 -->
+    <text x="0" y="570" font-family="Pretendard" font-size="58" font-weight="800" fill="${C.ink}" letter-spacing="-1">
       <tspan>2026.07.09 (목)</tspan><tspan dx="40" font-weight="500" fill="${C.inkBrown}" opacity="0.4">|</tspan><tspan dx="40">오전 11시 — 오후 3시</tspan><tspan dx="40" font-weight="500" fill="${C.inkBrown}" opacity="0.4">|</tspan><tspan dx="40">헤이그라운드 B1</tspan>
     </text>
   </g>
 
-  <!-- 우측 (3340~4960): SESSION 1·2 (텍스트만, 사진 제거, 사이즈 키움) -->
+  <!-- 우측 (3340~4960): SESSION 1·2 (라벨 옆에 연사 인라인, 타이틀 큼) -->
   <g transform="translate(3340, 0)">
-    <!-- SESSION 1 (y: 100~330) -->
+    <!-- SESSION 1 (y: 100~360) -->
     <g>
-      <rect x="0" y="100" rx="22" ry="22" width="280" height="56" fill="${C.coral}"/>
-      <text x="140" y="138" font-family="Pretendard" font-size="32" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 1 · 키노트</text>
-      <text x="0" y="225" font-family="Pretendard" font-size="56" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안은 어디에서 오는가</text>
-      <text x="0" y="290" font-family="Pretendard" font-size="32" font-weight="600" fill="${C.inkBrown}" opacity="0.75">장동선 · 이다랑 · 김혜민 (PD)</text>
+      <rect x="0" y="100" rx="22" ry="22" width="280" height="58" fill="${C.coral}"/>
+      <text x="140" y="140" font-family="Pretendard" font-size="32" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 1 · 키노트</text>
+      <text x="310" y="140" font-family="Pretendard" font-size="26" font-weight="600" fill="${C.inkBrown}" opacity="0.75">장동선 · 이다랑 · 김혜민 (PD)</text>
+      <text x="0" y="270" font-family="Pretendard" font-size="68" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안은 어디에서 오는가</text>
     </g>
 
     <!-- 구분선 -->
-    <line x1="0" y1="370" x2="1620" y2="370" stroke="${C.inkBrown}" stroke-opacity="0.12" stroke-width="2"/>
+    <line x1="0" y1="380" x2="1620" y2="380" stroke="${C.inkBrown}" stroke-opacity="0.12" stroke-width="2"/>
 
-    <!-- SESSION 2 (y: 410~640) -->
+    <!-- SESSION 2 (y: 420~660) -->
     <g>
-      <rect x="0" y="410" rx="22" ry="22" width="300" height="56" fill="${C.lilac}"/>
-      <text x="150" y="448" font-family="Pretendard" font-size="32" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 2 · 패널토크</text>
-      <text x="0" y="535" font-family="Pretendard" font-size="56" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안과 함께 살아간다는 것</text>
-      <text x="0" y="600" font-family="Pretendard" font-size="32" font-weight="600" fill="${C.inkBrown}" opacity="0.75">이혜린 · 신두란 · 정지우 · 후추맘</text>
+      <rect x="0" y="420" rx="22" ry="22" width="300" height="58" fill="${C.lilac}"/>
+      <text x="150" y="460" font-family="Pretendard" font-size="32" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 2 · 패널토크</text>
+      <text x="330" y="460" font-family="Pretendard" font-size="26" font-weight="600" fill="${C.inkBrown}" opacity="0.75">이혜린 · 신두란 · 정지우 · 후추맘</text>
+      <text x="0" y="590" font-family="Pretendard" font-size="68" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안과 함께 살아간다는 것</text>
     </g>
   </g>
 
