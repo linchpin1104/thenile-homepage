@@ -139,79 +139,34 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
     <rect x="0" y="70" rx="44" ry="44" width="780" height="86" fill="#FFFFFF" stroke="${C.coral}" stroke-width="4" stroke-opacity="0.5"/>
     <text x="390" y="124" font-family="Pretendard" font-size="38" font-weight="800" fill="${C.coral}" text-anchor="middle" letter-spacing="3">사단법인 더나일 · 양육불안 컨퍼런스</text>
 
-    <!-- 메인 슬로건 한 줄 (그라데이션, 매우 큰 글씨) -->
-    <text x="0" y="410" font-family="Pretendard" font-size="220" font-weight="900" fill="url(#g)" letter-spacing="-8">"불안을 불안해하지 마세요"</text>
+    <!-- 메인 슬로건 한 줄 (칩과 간격 충분히, y 230 → 480) -->
+    <text x="0" y="480" font-family="Pretendard" font-size="220" font-weight="900" fill="url(#g)" letter-spacing="-8">"불안을 불안해하지 마세요"</text>
 
-    <!-- 날짜·시간·장소 한 줄 (메인 슬로건 바로 아래) -->
-    <text x="0" y="555" font-family="Pretendard" font-size="58" font-weight="800" fill="${C.ink}" letter-spacing="-1">
-      <tspan>2026.07.09 (목)</tspan><tspan dx="40" font-weight="500" fill="${C.inkBrown}">|</tspan><tspan dx="40">오전 11시 — 오후 3시</tspan><tspan dx="40" font-weight="500" fill="${C.inkBrown}">|</tspan><tspan dx="40" fill="${C.coral}">헤이그라운드 B1</tspan>
+    <!-- 날짜·시간·장소 한 줄 (장소 색 통일) -->
+    <text x="0" y="625" font-family="Pretendard" font-size="58" font-weight="800" fill="${C.ink}" letter-spacing="-1">
+      <tspan>2026.07.09 (목)</tspan><tspan dx="40" font-weight="500" fill="${C.inkBrown}" opacity="0.4">|</tspan><tspan dx="40">오전 11시 — 오후 3시</tspan><tspan dx="40" font-weight="500" fill="${C.inkBrown}" opacity="0.4">|</tspan><tspan dx="40">헤이그라운드 B1</tspan>
     </text>
   </g>
 
-  <!-- 우측 (3340~4960): SESSION 1·2 (가로 스피커) -->
+  <!-- 우측 (3340~4960): SESSION 1·2 (텍스트만, 사진 제거, 사이즈 키움) -->
   <g transform="translate(3340, 0)">
-    <!-- SESSION 1 (y: 60~340) -->
+    <!-- SESSION 1 (y: 100~330) -->
     <g>
-      <rect x="0" y="50" rx="20" ry="20" width="260" height="50" fill="${C.coral}"/>
-      <text x="130" y="84" font-family="Pretendard" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 1 · 키노트</text>
-      <text x="0" y="155" font-family="Pretendard" font-size="44" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안은 어디에서 오는가</text>
-
-      <!-- 스피커 3명 가로 (작은 원형 + 이름) -->
-      ${(() => {
-        const photoY = 250;
-        const r = 42;
-        const startX = 60;
-        const gap = 230;
-        const names = [
-          { name: "장동선", role: "뇌과학자",       img: photo.장동선 },
-          { name: "이다랑", role: "아동심리전문가",  img: photo.이다랑 },
-          { name: "김혜민", role: "PD · 사회",       img: photo.김혜민 },
-        ];
-        return names.map((s, i) => {
-          const x = startX + i * gap;
-          return `
-            <g>
-              ${circlePhoto(x, photoY, r, s.img, C.coral, 3)}
-              <text x="${x + r + 16}" y="${photoY - 5}" font-family="Pretendard" font-size="26" font-weight="800" fill="${C.ink}">${s.name}</text>
-              <text x="${x + r + 16}" y="${photoY + 22}" font-family="Pretendard" font-size="16" font-weight="600" fill="${C.inkBrown}" opacity="0.7">${s.role}</text>
-            </g>
-          `;
-        }).join("");
-      })()}
+      <rect x="0" y="100" rx="22" ry="22" width="280" height="56" fill="${C.coral}"/>
+      <text x="140" y="138" font-family="Pretendard" font-size="32" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 1 · 키노트</text>
+      <text x="0" y="225" font-family="Pretendard" font-size="56" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안은 어디에서 오는가</text>
+      <text x="0" y="290" font-family="Pretendard" font-size="32" font-weight="600" fill="${C.inkBrown}" opacity="0.75">장동선 · 이다랑 · 김혜민 (PD)</text>
     </g>
 
     <!-- 구분선 -->
     <line x1="0" y1="370" x2="1620" y2="370" stroke="${C.inkBrown}" stroke-opacity="0.12" stroke-width="2"/>
 
-    <!-- SESSION 2 (y: 400~690) -->
+    <!-- SESSION 2 (y: 410~640) -->
     <g>
-      <rect x="0" y="390" rx="20" ry="20" width="280" height="50" fill="${C.lilac}"/>
-      <text x="140" y="424" font-family="Pretendard" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 2 · 패널토크</text>
-      <text x="0" y="495" font-family="Pretendard" font-size="44" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안과 함께 살아간다는 것</text>
-
-      <!-- 스피커 4명 가로 -->
-      ${(() => {
-        const photoY = 590;
-        const r = 38;
-        const startX = 50;
-        const gap = 195;
-        const names = [
-          { name: "이혜린", role: "쉬벤처스",    img: photo.이혜린 },
-          { name: "신두란", role: "고마워서그래", img: photo.신두란 },
-          { name: "정지우", role: "작가·변호사",  img: photo.정지우 },
-          { name: "후추맘", role: "크리에이터",   img: photo.후추맘 },
-        ];
-        return names.map((s, i) => {
-          const x = startX + i * gap;
-          return `
-            <g>
-              ${circlePhoto(x, photoY, r, s.img, C.lilac, 3)}
-              <text x="${x + r + 14}" y="${photoY - 4}" font-family="Pretendard" font-size="22" font-weight="800" fill="${C.ink}">${s.name}</text>
-              <text x="${x + r + 14}" y="${photoY + 18}" font-family="Pretendard" font-size="14" font-weight="600" fill="${C.inkBrown}" opacity="0.7">${s.role}</text>
-            </g>
-          `;
-        }).join("");
-      })()}
+      <rect x="0" y="410" rx="22" ry="22" width="300" height="56" fill="${C.lilac}"/>
+      <text x="150" y="448" font-family="Pretendard" font-size="32" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 2 · 패널토크</text>
+      <text x="0" y="535" font-family="Pretendard" font-size="56" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안과 함께 살아간다는 것</text>
+      <text x="0" y="600" font-family="Pretendard" font-size="32" font-weight="600" fill="${C.inkBrown}" opacity="0.75">이혜린 · 신두란 · 정지우 · 후추맘</text>
     </g>
   </g>
 
