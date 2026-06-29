@@ -1936,7 +1936,6 @@ const ConferencePage=()=>{
           {[
             {n:"성동구청",img:"/images/partners/seongdong.png",c:CC.coral},
             {n:"헤이그라운드",img:"/images/partners/heyground.png",c:CC.sage,big:true},
-            {n:"Take Root",img:"/images/partners/takeroot.png",c:CC.sage},
             {n:"BICYCLE",img:"/images/partners/bicycle.png",c:CC.lilac},
             {n:"고마워서그래",img:"/images/partners/gomaweo.png",c:CC.ink},
             {n:"AZURE852",img:"/images/partners/azure852.png",c:CC.sky},
