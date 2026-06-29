@@ -14,9 +14,36 @@ const C = {
   lilac:"#C6A8E8", rose:"#F8A8C0", sage:"#A8C9A0", mint:"#7BD7B7", sky:"#87C5E8",
 };
 
+const SPEAKERS_DIR = path.join(ROOT, "public/images/speakers");
 const PARTNERS_DIR = path.join(ROOT, "public/images/partners");
+const KIM = path.join(ROOT, "public/images/김혜민.png");
 
-async function partnerLogo(filePath, targetW = 300, targetH = 130) {
+async function compositeOnDarkBg(srcPath) {
+  const meta = await sharp(srcPath).metadata();
+  const buf = await sharp({
+    create: { width: meta.width || 800, height: meta.height || 800, channels: 4, background: { r: 92, g: 82, b: 78, alpha: 1 } },
+  }).composite([{ input: srcPath }]).png().toBuffer();
+  return "data:image/png;base64," + buf.toString("base64");
+}
+
+function imgB64(filePath) {
+  if (!fs.existsSync(filePath)) return null;
+  const ext = path.extname(filePath).slice(1).toLowerCase();
+  const mime = ext === "jpg" || ext === "jpeg" ? "jpeg" : ext;
+  return `data:image/${mime};base64,` + fs.readFileSync(filePath).toString("base64");
+}
+
+const photo = {
+  장동선: await compositeOnDarkBg(path.join(SPEAKERS_DIR, "장동선.png")),
+  이다랑: imgB64(path.join(SPEAKERS_DIR, "이다랑.png")),
+  김혜민: imgB64(KIM),
+  이혜린: imgB64(path.join(SPEAKERS_DIR, "이혜린.png")),
+  신두란: imgB64(path.join(SPEAKERS_DIR, "신두란.png")),
+  정지우: imgB64(path.join(SPEAKERS_DIR, "정지우.png")),
+  후추맘: imgB64(path.join(SPEAKERS_DIR, "후추맘.png")),
+};
+
+async function partnerLogo(filePath, targetW = 280, targetH = 100) {
   if (!fs.existsSync(filePath)) return null;
   const resized = await sharp(filePath)
     .resize({ width: targetW - 20, height: targetH - 20, fit: "inside", background: { r: 255, g: 255, b: 255, alpha: 0 } })
@@ -47,13 +74,19 @@ for (const p of partners) {
 }
 
 const PATHS = {
+  blob:"M50 8c18 0 34 12 38 28s-6 36-22 44-38 4-46-10-6-34 6-46S38 8 50 8z",
+  star:"M50 8l9 24h25l-20 15 8 25-22-15-22 15 8-25L16 32h25z",
   heart:"M50 84C30 70 14 56 14 38c0-12 9-22 21-22 8 0 12 4 15 9 3-5 7-9 15-9 12 0 21 10 21 22 0 18-16 32-36 46z",
+  cloud:"M30 70c-12 0-20-8-20-18 0-9 7-16 16-17 1-13 12-23 26-23 13 0 24 9 26 21 11 1 18 9 18 18 0 11-9 19-20 19H30z",
+  drop:"M50 8c10 18 30 32 30 50 0 16-13 28-30 28S20 74 20 58c0-18 20-32 30-50z",
+  flower:"M50 18c0-6 5-10 10-10s10 5 10 10c0 4-2 7-5 9 5 1 9 5 9 10s-4 9-9 10c3 2 5 5 5 9 0 6-5 10-10 10s-10-4-10-10c-2 4-6 6-10 6-6 0-10-5-10-10s4-9 10-9c-4-2-6-5-6-9 0-5 4-9 9-10-3-2-5-5-5-9 0-5 4-9 9-9 5 0 9 4 10 9z",
   burst:"M50 4l8 14 16-6-2 17 16 5-12 12 12 12-16 5 2 17-16-6-8 14-8-14-16 6 2-17-16-5 12-12-12-12 16-5-2-17 16 6z",
+  leaf:"M50 8C30 24 14 40 14 60c0 16 14 28 36 28s36-12 36-28C86 40 70 24 50 8z",
 };
 
 let _id = 0;
 const emo = (cx, cy, size, shape, c1, c2, opts = {}) => {
-  const { rotate = 0, opacity = 1 } = opts;
+  const { rotate = 0, opacity = 1, eyes = true } = opts;
   const d = PATHS[shape];
   const id = `e${++_id}`;
   const scale = size / 100;
@@ -63,16 +96,22 @@ const emo = (cx, cy, size, shape, c1, c2, opts = {}) => {
         <stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/>
       </linearGradient></defs>
       <path d="${d}" fill="url(#${id})"/>
+      ${eyes ? `<g fill="#1a1a1a"><ellipse cx="40" cy="45" rx="3" ry="4"/><ellipse cx="60" cy="45" rx="3" ry="4"/></g>` : ""}
     </g></g>`;
 };
 
+const circlePhoto = (cx, cy, r, dataUri, borderColor, borderWidth = 4) => {
+  if (!dataUri) return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${borderColor}22"/>`;
+  const id = `c${++_id}`;
+  return `<defs><clipPath id="${id}"><circle cx="${cx}" cy="${cy}" r="${r}"/></clipPath></defs>
+    <circle cx="${cx}" cy="${cy}" r="${r + borderWidth}" fill="${borderColor}"/>
+    <image x="${cx - r}" y="${cy - r * 1.2}" width="${r * 2}" height="${r * 2.4}" href="${dataUri}" preserveAspectRatio="xMidYMin slice" clip-path="url(#${id})"/>`;
+};
+
 // 레이아웃 (5000×900):
-// 상단 메인 (y 0 ~ 700):
-//   [60-1850]    좌: 칩 + 슬로건 두 줄
-//   [1900-2900]  중: 일시·장소 박스
-//   [3000-4960]  우: 세션 1·2 제목
-// 하단 푸터 (y 700 ~ 900, 200px):
-//   가로 라인 + "주최/후원" + 협찬사 13개 가로 작게
+// 좌측 (60~3300): 칩 + 슬로건 한 줄 + 날짜·시간·장소
+// 우측 (3320~4960): SESSION 1, 2 (가로 스피커)
+// 하단 (700~900, 흰 배경): 주최 + 협찬사 13개 가로
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <rect width="${W}" height="${H}" fill="${C.cream}"/>
@@ -85,48 +124,99 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
     </linearGradient>
   </defs>
 
-  <!-- 좌측 강조 컬러 바 -->
-  <rect x="0" y="0" width="60" height="${H}" fill="url(#g)"/>
+  <!-- 좌측 컬러 바 -->
+  <rect x="0" y="0" width="50" height="${H}" fill="url(#g)"/>
 
-  <!-- 좌측 (160 ~ 1850): 칩 + 슬로건 두 줄 -->
+  <!-- 배경 캐릭터 (다양, 크게, 좌측 슬로건 영역 주변) -->
+  ${emo(2950, 240, 180, "heart", C.rose, C.lilac, { rotate: -10, opacity: 0.9 })}
+  ${emo(2880, 540, 130, "burst", C.coral, C.mango, { rotate: 15, opacity: 0.85 })}
+  ${emo(170, 670, 110, "drop", C.lilac, C.sky, { rotate: -12, opacity: 0.55 })}
+  ${emo(80, 230, 90, "flower", C.mango, C.peach, { rotate: 10, opacity: 0.5, eyes: false })}
+
+  <!-- 좌측 (160~3300): 칩 + 슬로건 + 날짜·시간·장소 -->
   <g transform="translate(160, 0)">
-    <rect x="0" y="45" rx="42" ry="42" width="600" height="80" fill="#FFFFFF" stroke="${C.coral}" stroke-width="4" stroke-opacity="0.5"/>
-    <text x="300" y="98" font-family="Pretendard" font-size="38" font-weight="800" fill="${C.coral}" text-anchor="middle" letter-spacing="3">2026 양육불안 컨퍼런스</text>
+    <!-- 상단 칩 -->
+    <rect x="0" y="70" rx="44" ry="44" width="780" height="86" fill="#FFFFFF" stroke="${C.coral}" stroke-width="4" stroke-opacity="0.5"/>
+    <text x="390" y="124" font-family="Pretendard" font-size="38" font-weight="800" fill="${C.coral}" text-anchor="middle" letter-spacing="3">사단법인 더나일 · 양육불안 컨퍼런스</text>
 
-    <text x="0" y="350" font-family="Pretendard" font-size="200" font-weight="900" fill="url(#g)" letter-spacing="-7">"불안을</text>
-    <text x="0" y="580" font-family="Pretendard" font-size="200" font-weight="900" fill="url(#g)" letter-spacing="-7">불안해하지 마세요"</text>
+    <!-- 메인 슬로건 한 줄 (그라데이션, 매우 큰 글씨) -->
+    <text x="0" y="410" font-family="Pretendard" font-size="220" font-weight="900" fill="url(#g)" letter-spacing="-8">"불안을 불안해하지 마세요"</text>
+
+    <!-- 날짜·시간·장소 한 줄 (메인 슬로건 바로 아래) -->
+    <text x="0" y="555" font-family="Pretendard" font-size="58" font-weight="800" fill="${C.ink}" letter-spacing="-1">
+      <tspan>2026.07.09 (목)</tspan><tspan dx="40" font-weight="500" fill="${C.inkBrown}">|</tspan><tspan dx="40">오전 11시 — 오후 3시</tspan><tspan dx="40" font-weight="500" fill="${C.inkBrown}">|</tspan><tspan dx="40" fill="${C.coral}">헤이그라운드 B1</tspan>
+    </text>
   </g>
 
-  <!-- 캐릭터 액센트 -->
-  ${emo(1960, 200, 100, "heart", C.rose, C.lilac, { rotate: -10, opacity: 0.85 })}
-  ${emo(1960, 480, 80, "burst", C.coral, C.mango, { rotate: 15, opacity: 0.75 })}
+  <!-- 우측 (3340~4960): SESSION 1·2 (가로 스피커) -->
+  <g transform="translate(3340, 0)">
+    <!-- SESSION 1 (y: 60~340) -->
+    <g>
+      <rect x="0" y="50" rx="20" ry="20" width="260" height="50" fill="${C.coral}"/>
+      <text x="130" y="84" font-family="Pretendard" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 1 · 키노트</text>
+      <text x="0" y="155" font-family="Pretendard" font-size="44" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안은 어디에서 오는가</text>
 
-  <!-- 중앙 (2080 ~ 3010): 일시·장소 (박스 없이 깔끔) -->
-  <g transform="translate(2540, 100)">
-    <line x1="-340" y1="60" x2="340" y2="60" stroke="${C.coral}" stroke-width="3" stroke-opacity="0.5"/>
-    <text font-family="Pretendard" font-size="110" font-weight="800" fill="${C.ink}" text-anchor="middle" dy="180" letter-spacing="-2">2026.07.09 (목)</text>
-    <text font-family="Pretendard" font-size="60" font-weight="600" fill="${C.inkBrown}" text-anchor="middle" dy="270" opacity="0.78">오전 11시 — 오후 3시</text>
-    <text font-family="Pretendard" font-size="68" font-weight="800" fill="${C.coral}" text-anchor="middle" dy="370">헤이그라운드 B1</text>
-    <line x1="-340" y1="420" x2="340" y2="420" stroke="${C.coral}" stroke-width="3" stroke-opacity="0.5"/>
+      <!-- 스피커 3명 가로 (작은 원형 + 이름) -->
+      ${(() => {
+        const photoY = 250;
+        const r = 42;
+        const startX = 60;
+        const gap = 230;
+        const names = [
+          { name: "장동선", role: "뇌과학자",       img: photo.장동선 },
+          { name: "이다랑", role: "아동심리전문가",  img: photo.이다랑 },
+          { name: "김혜민", role: "PD · 사회",       img: photo.김혜민 },
+        ];
+        return names.map((s, i) => {
+          const x = startX + i * gap;
+          return `
+            <g>
+              ${circlePhoto(x, photoY, r, s.img, C.coral, 3)}
+              <text x="${x + r + 16}" y="${photoY - 5}" font-family="Pretendard" font-size="26" font-weight="800" fill="${C.ink}">${s.name}</text>
+              <text x="${x + r + 16}" y="${photoY + 22}" font-family="Pretendard" font-size="16" font-weight="600" fill="${C.inkBrown}" opacity="0.7">${s.role}</text>
+            </g>
+          `;
+        }).join("");
+      })()}
+    </g>
+
+    <!-- 구분선 -->
+    <line x1="0" y1="370" x2="1620" y2="370" stroke="${C.inkBrown}" stroke-opacity="0.12" stroke-width="2"/>
+
+    <!-- SESSION 2 (y: 400~690) -->
+    <g>
+      <rect x="0" y="390" rx="20" ry="20" width="280" height="50" fill="${C.lilac}"/>
+      <text x="140" y="424" font-family="Pretendard" font-size="28" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 2 · 패널토크</text>
+      <text x="0" y="495" font-family="Pretendard" font-size="44" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안과 함께 살아간다는 것</text>
+
+      <!-- 스피커 4명 가로 -->
+      ${(() => {
+        const photoY = 590;
+        const r = 38;
+        const startX = 50;
+        const gap = 195;
+        const names = [
+          { name: "이혜린", role: "쉬벤처스",    img: photo.이혜린 },
+          { name: "신두란", role: "고마워서그래", img: photo.신두란 },
+          { name: "정지우", role: "작가·변호사",  img: photo.정지우 },
+          { name: "후추맘", role: "크리에이터",   img: photo.후추맘 },
+        ];
+        return names.map((s, i) => {
+          const x = startX + i * gap;
+          return `
+            <g>
+              ${circlePhoto(x, photoY, r, s.img, C.lilac, 3)}
+              <text x="${x + r + 14}" y="${photoY - 4}" font-family="Pretendard" font-size="22" font-weight="800" fill="${C.ink}">${s.name}</text>
+              <text x="${x + r + 14}" y="${photoY + 18}" font-family="Pretendard" font-size="14" font-weight="600" fill="${C.inkBrown}" opacity="0.7">${s.role}</text>
+            </g>
+          `;
+        }).join("");
+      })()}
+    </g>
   </g>
 
-  <!-- 우측 (3120 ~ 4960): 세션 2개 제목 -->
-  <g transform="translate(3120, 100)">
-    <rect x="0" y="20" rx="22" ry="22" width="320" height="56" fill="${C.coral}"/>
-    <text x="160" y="58" font-family="Pretendard" font-size="32" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 1 · 키노트</text>
-    <text x="0" y="160" font-family="Pretendard" font-size="64" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안은 어디에서 오는가</text>
-    <text x="0" y="220" font-family="Pretendard" font-size="30" font-weight="600" fill="${C.inkBrown}" opacity="0.7">장동선 · 이다랑 · 김혜민 (PD)</text>
-
-    <line x1="0" y1="290" x2="1700" y2="290" stroke="${C.inkBrown}" stroke-opacity="0.15" stroke-width="2"/>
-
-    <rect x="0" y="330" rx="22" ry="22" width="340" height="56" fill="${C.lilac}"/>
-    <text x="170" y="368" font-family="Pretendard" font-size="32" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 2 · 패널토크</text>
-    <text x="0" y="470" font-family="Pretendard" font-size="64" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안과 함께 살아간다는 것</text>
-    <text x="0" y="530" font-family="Pretendard" font-size="30" font-weight="600" fill="${C.inkBrown}" opacity="0.7">이혜린 · 신두란 · 정지우 · 후추맘</text>
-  </g>
-
-  <!-- 하단 푸터 (y 700 ~ 900, 200px): 흰 배경 + 가로 로고 -->
-  <rect x="60" y="700" width="${W - 60}" height="${H - 700}" fill="#FFFFFF"/>
+  <!-- 하단 흰 배경 (y 700~900): 주최 + 협찬사 -->
+  <rect x="50" y="700" width="${W - 50}" height="${H - 700}" fill="#FFFFFF"/>
 
   <g>
     <text x="160" y="810" font-family="Pretendard" font-size="32" font-weight="800" fill="${C.coral}" letter-spacing="3">주최</text>
@@ -135,7 +225,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
 
     ${(() => {
       const startX = 820, endX = W - 100;
-      const logoW = 220, logoH = 110;
+      const logoW = 220, logoH = 100;
       const n = partners.length;
       const span = (endX - startX) / n;
       return partners.map((p, i) => {
