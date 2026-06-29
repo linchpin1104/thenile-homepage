@@ -56,7 +56,6 @@ async function partnerLogo(filePath, targetW = 280, targetH = 100) {
 
 const partners = [
   { name: "성동구청",        path: "seongdong.png" },
-  { name: "헤이그라운드",     path: "heyground.png" },
   { name: "Take Root",       path: "takeroot.png" },
   { name: "BICYCLE",         path: "bicycle.png" },
   { name: "고마워서그래",     path: "gomaweo.png" },

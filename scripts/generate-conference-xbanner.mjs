@@ -56,7 +56,6 @@ async function partnerLogoNormalize(filePath, targetW = 300, targetH = 110) {
 
 const partners = [
   { name: "성동구청",        path: "seongdong.png" },
-  { name: "헤이그라운드",     path: "heyground.png" },
   { name: "Take Root",       path: "takeroot.png" },
   { name: "BICYCLE",         path: "bicycle.png" },
   { name: "고마워서그래",     path: "gomaweo.png" },
@@ -211,7 +210,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
     <rect x="40" y="3290" rx="24" ry="24" width="${W-80}" height="290" fill="#FFFFFF" stroke="${C.inkBrown}" stroke-opacity="0.1" stroke-width="2"/>
 
     ${(() => {
-      const rows = [partners.slice(0, 7), partners.slice(7, 13)];
+      const rows = [partners.slice(0, 6), partners.slice(6, 12)];
       const boxX = 40, boxW = W - 80;
       const logoMaxW = 145;
       const logoMaxH = 75;
