@@ -1941,6 +1941,12 @@ const ConferencePage=()=>{
             {n:"고마워서그래",img:"/images/partners/gomaweo.png",c:CC.ink},
             {n:"AZURE852",img:"/images/partners/azure852.png",c:CC.sky},
             {n:"sheventures",img:"/images/partners/sheventures.webp",c:CC.mint},
+            {n:"몽클",img:"/images/partners/mongcle.png",c:CC.ink},
+            {n:"봄마음",img:"/images/partners/bommaeum.png",c:CC.peach},
+            {n:"BOBOMAMA",img:"/images/partners/bobomama.png",c:CC.inkBrown},
+            {n:"원니스코칭센터",img:"/images/partners/oneness.png",c:CC.sage},
+            {n:"앙즈로 산후조리원",img:"/images/partners/angelot.png",c:CC.lilac},
+            {n:"hey you",img:"/images/partners/heyyou.png",c:CC.mango},
           ].map((p,i)=>{
             const h = p.big ? 90 : 60;
             const wMax = p.big ? 220 : 160;

@@ -62,13 +62,19 @@ async function partnerLogoNormalize(filePath, targetW = 360, targetH = 140) {
 }
 
 const partners = [
-  { name: "성동구청",    path: "seongdong.png" },
-  { name: "헤이그라운드", path: "heyground.png" },
-  { name: "Take Root",   path: "takeroot.png" },
-  { name: "BICYCLE",     path: "bicycle.png" },
-  { name: "고마워서그래", path: "gomaweo.png" },
-  { name: "AZURE852",    path: "azure852.png" },
-  { name: "sheventures", path: "sheventures.webp" },
+  { name: "성동구청",        path: "seongdong.png" },
+  { name: "헤이그라운드",     path: "heyground.png" },
+  { name: "Take Root",       path: "takeroot.png" },
+  { name: "BICYCLE",         path: "bicycle.png" },
+  { name: "고마워서그래",     path: "gomaweo.png" },
+  { name: "AZURE852",        path: "azure852.png" },
+  { name: "sheventures",     path: "sheventures.webp" },
+  { name: "몽클",            path: "mongcle.png" },
+  { name: "봄마음",          path: "bommaeum.png" },
+  { name: "BOBOMAMA",        path: "bobomama.png" },
+  { name: "원니스코칭센터",   path: "oneness.png" },
+  { name: "앙즈로 산후조리원", path: "angelot.png" },
+  { name: "hey you",         path: "heyyou.png" },
 ];
 
 for (const p of partners) {
@@ -219,25 +225,31 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
     })()}
   </g>
 
-  <!-- 후원/협찬: 흰 박스 안에 한 줄 로고 (로고 배경과 자연스럽게 어울림) -->
+  <!-- 후원/협찬: 흰 박스 안에 두 줄 로고 (위 7 + 아래 6) -->
   <g>
-    <text x="${W / 2}" y="1780" font-family="Pretendard" font-size="16" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.6" letter-spacing="3">PARTNERS · 후원 / 협찬</text>
-    <rect x="20" y="1800" rx="20" ry="20" width="${W - 40}" height="100" fill="${C.white}" stroke="${C.inkBrown}" stroke-opacity="0.08" stroke-width="1"/>
+    <text x="${W / 2}" y="1740" font-family="Pretendard" font-size="16" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.6" letter-spacing="3">PARTNERS · 후원 / 협찬</text>
+    <rect x="20" y="1760" rx="20" ry="20" width="${W - 40}" height="155" fill="#FFFFFF" stroke="${C.inkBrown}" stroke-opacity="0.08" stroke-width="1"/>
 
     ${(() => {
-      const n = partners.length;
+      // 13개를 두 줄로: 위 7 + 아래 6
+      const row1 = partners.slice(0, 7);
+      const row2 = partners.slice(7, 13);
       const boxX = 20, boxW = W - 40;
-      const cellW = boxW / n;  // 약 148
-      const logoMaxW = 140;
-      const logoMaxH = 76;
-      const y = 1850;  // 박스 가운데
-      return partners.map((p, i) => {
-        const x = boxX + cellW * i + cellW / 2;
-        if (!p.img) {
-          return `<text x="${x}" y="${y + 6}" font-family="Pretendard" font-size="15" font-weight="700" fill="${C.inkBrown}" text-anchor="middle">${p.name}</text>`;
-        }
-        return `<image x="${x - logoMaxW/2}" y="${y - logoMaxH/2}" width="${logoMaxW}" height="${logoMaxH}" href="${p.img}" preserveAspectRatio="xMidYMid meet"/>`;
-      }).join("");
+      const logoMaxW = 130;
+      const logoMaxH = 60;
+
+      function placeRow(arr, y) {
+        const cellW = boxW / arr.length;
+        return arr.map((p, i) => {
+          const x = boxX + cellW * i + cellW / 2;
+          if (!p.img) {
+            return `<text x="${x}" y="${y + 6}" font-family="Pretendard" font-size="13" font-weight="700" fill="${C.inkBrown}" text-anchor="middle">${p.name}</text>`;
+          }
+          return `<image x="${x - logoMaxW/2}" y="${y - logoMaxH/2}" width="${logoMaxW}" height="${logoMaxH}" href="${p.img}" preserveAspectRatio="xMidYMid meet"/>`;
+        }).join("");
+      }
+
+      return placeRow(row1, 1808) + placeRow(row2, 1872);
     })()}
   </g>
 </svg>`;
