@@ -98,54 +98,49 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
   </g>
 
   <!-- 캐릭터 액센트 -->
-  ${emo(1960, 200, 110, "heart", C.rose, C.lilac, { rotate: -10, opacity: 0.85 })}
-  ${emo(1960, 470, 90, "burst", C.coral, C.mango, { rotate: 15, opacity: 0.78 })}
+  ${emo(1960, 200, 100, "heart", C.rose, C.lilac, { rotate: -10, opacity: 0.85 })}
+  ${emo(1960, 480, 80, "burst", C.coral, C.mango, { rotate: 15, opacity: 0.75 })}
 
-  <!-- 중앙 (2080 ~ 3010): 일시·장소 박스 -->
-  <g transform="translate(2540, 360)">
-    <rect x="-470" y="-290" rx="55" ry="55" width="940" height="580" fill="${C.ink}"/>
-    <text font-family="Pretendard" font-size="38" font-weight="700" fill="${C.peach}" text-anchor="middle" dy="-200" letter-spacing="6">WHEN · WHERE</text>
-    <text font-family="Pretendard" font-size="120" font-weight="800" fill="${C.cream}" text-anchor="middle" dy="-60">2026.07.09 (목)</text>
-    <text font-family="Pretendard" font-size="64" font-weight="700" fill="${C.cream}" text-anchor="middle" dy="60">오전 11시 — 오후 3시</text>
-    <text font-family="Pretendard" font-size="64" font-weight="700" fill="${C.mango}" text-anchor="middle" dy="170">헤이그라운드 B1</text>
+  <!-- 중앙 (2080 ~ 3010): 일시·장소 (박스 없이 깔끔) -->
+  <g transform="translate(2540, 100)">
+    <line x1="-340" y1="60" x2="340" y2="60" stroke="${C.coral}" stroke-width="3" stroke-opacity="0.5"/>
+    <text font-family="Pretendard" font-size="110" font-weight="800" fill="${C.ink}" text-anchor="middle" dy="180" letter-spacing="-2">2026.07.09 (목)</text>
+    <text font-family="Pretendard" font-size="60" font-weight="600" fill="${C.inkBrown}" text-anchor="middle" dy="270" opacity="0.78">오전 11시 — 오후 3시</text>
+    <text font-family="Pretendard" font-size="68" font-weight="800" fill="${C.coral}" text-anchor="middle" dy="370">헤이그라운드 B1</text>
+    <line x1="-340" y1="420" x2="340" y2="420" stroke="${C.coral}" stroke-width="3" stroke-opacity="0.5"/>
   </g>
 
   <!-- 우측 (3120 ~ 4960): 세션 2개 제목 -->
   <g transform="translate(3120, 100)">
-    <!-- SESSION 1 -->
     <rect x="0" y="20" rx="22" ry="22" width="320" height="56" fill="${C.coral}"/>
     <text x="160" y="58" font-family="Pretendard" font-size="32" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 1 · 키노트</text>
     <text x="0" y="160" font-family="Pretendard" font-size="64" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안은 어디에서 오는가</text>
-    <text x="0" y="220" font-family="Pretendard" font-size="32" font-weight="600" fill="${C.inkBrown}" opacity="0.7">장동선 · 이다랑 · 김혜민 (PD)</text>
+    <text x="0" y="220" font-family="Pretendard" font-size="30" font-weight="600" fill="${C.inkBrown}" opacity="0.7">장동선 · 이다랑 · 김혜민 (PD)</text>
 
-    <!-- 구분선 -->
     <line x1="0" y1="290" x2="1700" y2="290" stroke="${C.inkBrown}" stroke-opacity="0.15" stroke-width="2"/>
 
-    <!-- SESSION 2 -->
     <rect x="0" y="330" rx="22" ry="22" width="340" height="56" fill="${C.lilac}"/>
     <text x="170" y="368" font-family="Pretendard" font-size="32" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 2 · 패널토크</text>
     <text x="0" y="470" font-family="Pretendard" font-size="64" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안과 함께 살아간다는 것</text>
-    <text x="0" y="530" font-family="Pretendard" font-size="32" font-weight="600" fill="${C.inkBrown}" opacity="0.7">이혜린 · 신두란 · 정지우 · 후추맘</text>
+    <text x="0" y="530" font-family="Pretendard" font-size="30" font-weight="600" fill="${C.inkBrown}" opacity="0.7">이혜린 · 신두란 · 정지우 · 후추맘</text>
   </g>
 
-  <!-- 하단 푸터 (y 720 ~ 900): 주최/후원 + 협찬사 가로 -->
-  <line x1="160" y1="720" x2="${W - 100}" y2="720" stroke="${C.inkBrown}" stroke-opacity="0.15" stroke-width="2"/>
+  <!-- 하단 푸터 (y 700 ~ 900, 200px): 흰 배경 + 가로 로고 -->
+  <rect x="60" y="700" width="${W - 60}" height="${H - 700}" fill="#FFFFFF"/>
 
   <g>
-    <!-- 좌측: 주최/후원 라벨 -->
-    <text x="160" y="790" font-family="Pretendard" font-size="32" font-weight="800" fill="${C.coral}" letter-spacing="3">주최</text>
-    <text x="260" y="790" font-family="Pretendard" font-size="32" font-weight="700" fill="${C.ink}" letter-spacing="1">사단법인 더나일</text>
-    <text x="700" y="790" font-family="Pretendard" font-size="32" font-weight="800" fill="${C.coral}" letter-spacing="3">후원</text>
+    <text x="160" y="810" font-family="Pretendard" font-size="32" font-weight="800" fill="${C.coral}" letter-spacing="3">주최</text>
+    <text x="260" y="810" font-family="Pretendard" font-size="32" font-weight="700" fill="${C.ink}" letter-spacing="1">사단법인 더나일</text>
+    <text x="700" y="810" font-family="Pretendard" font-size="32" font-weight="800" fill="${C.coral}" letter-spacing="3">후원</text>
 
-    <!-- 우측 후원사 로고 13개 가로 -->
     ${(() => {
       const startX = 820, endX = W - 100;
-      const logoW = 220, logoH = 90;
+      const logoW = 220, logoH = 110;
       const n = partners.length;
-      const span = (endX - startX) / (n);
+      const span = (endX - startX) / n;
       return partners.map((p, i) => {
         const x = startX + span * i + span / 2;
-        const y = 780;
+        const y = 800;
         if (!p.img) return `<text x="${x}" y="${y + 6}" font-family="Pretendard" font-size="18" font-weight="700" fill="${C.inkBrown}" text-anchor="middle">${p.name}</text>`;
         return `<image x="${x - logoW/2}" y="${y - logoH/2}" width="${logoW}" height="${logoH}" href="${p.img}" preserveAspectRatio="xMidYMid meet"/>`;
       }).join("");
