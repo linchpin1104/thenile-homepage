@@ -174,59 +174,58 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
     })()}
   </g>
 
-  <!-- SESSION 2 (y: 2200-2700) -->
+  <!-- SESSION 2 (2×2 그리드, 키노트와 동일 크기 r=100) y: 2200-3060 -->
   <g>
     <rect x="${W/2-260}" y="2200" rx="26" ry="26" width="520" height="56" fill="${C.lilac}"/>
     <text x="${W/2}" y="2238" font-family="Pretendard" font-size="32" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="3">SESSION 2 · 패널토크</text>
     <text x="${W/2}" y="2310" font-family="Pretendard" font-size="42" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안과 함께 살아간다는 것</text>
 
     ${(() => {
-      const photoY = 2450;
-      const r = 78;
-      const gap = 255;
-      const totalW = gap * 3;
-      const startX = W/2 - totalW/2;
-      return session2.map((s, i) => {
-        const x = startX + i * gap;
-        return `
-          <g>
-            ${circlePhoto(x, photoY, r, s.img, C.lilac, 5)}
-            <text x="${x}" y="${photoY + r + 40}" font-family="Pretendard" font-size="24" font-weight="800" fill="${C.ink}" text-anchor="middle">${s.name}</text>
-            <text x="${x}" y="${photoY + r + 70}" font-family="Pretendard" font-size="17" font-weight="600" fill="${C.inkBrown}" opacity="0.7" text-anchor="middle">${s.role}</text>
-          </g>
-        `;
-      }).join("");
+      const r = 100;
+      const gapX = 460;
+      const gapY = 340;
+      const photoY1 = 2470;  // 1행
+      const photoY2 = photoY1 + gapY;  // 2행 (2810)
+      const startX = W/2 - gapX/2;  // 370
+      const positions = [
+        { ...session2[0], x: startX,         y: photoY1 },
+        { ...session2[1], x: startX + gapX,  y: photoY1 },
+        { ...session2[2], x: startX,         y: photoY2 },
+        { ...session2[3], x: startX + gapX,  y: photoY2 },
+      ];
+      return positions.map((s) => `
+        <g>
+          ${circlePhoto(s.x, s.y, r, s.img, C.lilac, 5)}
+          <text x="${s.x}" y="${s.y + r + 48}" font-family="Pretendard" font-size="28" font-weight="800" fill="${C.ink}" text-anchor="middle">${s.name}</text>
+          <text x="${s.x}" y="${s.y + r + 80}" font-family="Pretendard" font-size="19" font-weight="600" fill="${C.inkBrown}" opacity="0.7" text-anchor="middle">${s.role}</text>
+        </g>
+      `).join("");
     })()}
   </g>
 
-  <!-- 후원/협찬 컴팩트 (y: 2820-3380) -->
+  <!-- 주최 강조 텍스트 + 후원/협찬 박스 (y: 3160 ~ 3560) -->
   <g>
-    <text x="${W/2}" y="2860" font-family="Pretendard" font-size="22" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.55" letter-spacing="5">PARTNERS · 후원 / 협찬</text>
-    <rect x="40" y="2890" rx="24" ry="24" width="${W-80}" height="380" fill="#FFFFFF" stroke="${C.inkBrown}" stroke-opacity="0.1" stroke-width="2"/>
+    <text x="${W/2}" y="3200" font-family="Pretendard" font-size="32" font-weight="800" fill="${C.coral}" text-anchor="middle" letter-spacing="4">주최 · 사단법인 더나일</text>
+
+    <text x="${W/2}" y="3260" font-family="Pretendard" font-size="22" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.55" letter-spacing="5">PARTNERS · 후원 / 협찬</text>
+    <rect x="40" y="3290" rx="24" ry="24" width="${W-80}" height="290" fill="#FFFFFF" stroke="${C.inkBrown}" stroke-opacity="0.1" stroke-width="2"/>
 
     ${(() => {
-      // 3행 × ?열: 1행 5개, 2행 5개, 3행 3개
-      const rows = [partners.slice(0, 5), partners.slice(5, 10), partners.slice(10, 13)];
+      const rows = [partners.slice(0, 7), partners.slice(7, 13)];
       const boxX = 40, boxW = W - 80;
-      const logoMaxW = 180;
-      const logoMaxH = 90;
-      const yStarts = [2960, 3080, 3200];
+      const logoMaxW = 145;
+      const logoMaxH = 75;
+      const yStarts = [3360, 3490];
       return rows.map((arr, rowIdx) => {
         const y = yStarts[rowIdx];
         const cellW = boxW / arr.length;
         return arr.map((p, i) => {
           const x = boxX + cellW * i + cellW/2;
-          if (!p.img) return `<text x="${x}" y="${y+8}" font-family="Pretendard" font-size="18" font-weight="700" fill="${C.inkBrown}" text-anchor="middle">${p.name}</text>`;
+          if (!p.img) return `<text x="${x}" y="${y+8}" font-family="Pretendard" font-size="16" font-weight="700" fill="${C.inkBrown}" text-anchor="middle">${p.name}</text>`;
           return `<image x="${x - logoMaxW/2}" y="${y - logoMaxH/2}" width="${logoMaxW}" height="${logoMaxH}" href="${p.img}" preserveAspectRatio="xMidYMid meet"/>`;
         }).join("");
       }).join("");
     })()}
-  </g>
-
-  <!-- 푸터 (y: 3440-3540) -->
-  <g transform="translate(${W/2}, 3470)">
-    <text font-family="Pretendard" font-size="28" font-weight="800" fill="${C.ink}" text-anchor="middle" letter-spacing="4">주최  사단법인 더나일  ·  후원  성동구청</text>
-    <text y="50" font-family="Pretendard" font-size="22" font-weight="600" fill="${C.inkBrown}" text-anchor="middle" opacity="0.65" letter-spacing="2">www.thenile.kr/conference</text>
   </g>
 </svg>`;
 
