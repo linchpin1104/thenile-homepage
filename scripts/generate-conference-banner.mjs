@@ -67,6 +67,8 @@ const partners = [
   { name: "원니스코칭센터",   path: "oneness.png" },
   { name: "앙즈로 산후조리원", path: "angelot.png" },
   { name: "hey you",         path: "heyyou.png" },
+  { name: "레피움",          path: "lepium.jpg" },
+  { name: "앙호두",          path: "anghodu.png" },
 ];
 for (const p of partners) {
   p.img = await partnerLogo(path.join(PARTNERS_DIR, p.path));

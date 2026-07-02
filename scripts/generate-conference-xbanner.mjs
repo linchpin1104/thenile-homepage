@@ -67,6 +67,8 @@ const partners = [
   { name: "원니스코칭센터",   path: "oneness.png" },
   { name: "앙즈로 산후조리원", path: "angelot.png" },
   { name: "hey you",         path: "heyyou.png" },
+  { name: "레피움",          path: "lepium.jpg" },
+  { name: "앙호두",          path: "anghodu.png" },
 ];
 for (const p of partners) {
   p.img = await partnerLogoNormalize(path.join(PARTNERS_DIR, p.path));
@@ -210,7 +212,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
     <rect x="40" y="3290" rx="24" ry="24" width="${W-80}" height="290" fill="#FFFFFF" stroke="${C.inkBrown}" stroke-opacity="0.1" stroke-width="2"/>
 
     ${(() => {
-      const rows = [partners.slice(0, 6), partners.slice(6, 12)];
+      const rows = [partners.slice(0, 7), partners.slice(7, 14)];
       const boxX = 40, boxW = W - 80;
       const logoMaxW = 145;
       const logoMaxH = 75;

@@ -1946,6 +1946,8 @@ const ConferencePage=()=>{
             {n:"원니스코칭센터",img:"/images/partners/oneness.png",c:CC.sage},
             {n:"앙즈로 산후조리원",img:"/images/partners/angelot.png",c:CC.lilac},
             {n:"hey you",img:"/images/partners/heyyou.png",c:CC.mango},
+            {n:"레피움",img:"/images/partners/lepium.jpg",c:CC.ink},
+            {n:"앙호두",img:"/images/partners/anghodu.png",c:CC.mango},
           ].map((p,i)=>{
             const h = p.big ? 90 : 60;
             const wMax = p.big ? 220 : 160;
