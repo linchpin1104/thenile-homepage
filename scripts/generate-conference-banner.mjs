@@ -43,20 +43,22 @@ const photo = {
   후추맘: imgB64(path.join(SPEAKERS_DIR, "후추맘.png")),
 };
 
-async function partnerLogo(filePath, targetW = 280, targetH = 100) {
+// 각 로고를 세로 높이만 통일 (원본 비율 유지) → 시각적 무게 균등
+async function partnerLogo(filePath, targetH = 90) {
   if (!fs.existsSync(filePath)) return null;
-  const resized = await sharp(filePath)
-    .resize({ width: targetW - 20, height: targetH - 20, fit: "inside", background: { r: 255, g: 255, b: 255, alpha: 0 } })
+  const meta = await sharp(filePath).metadata();
+  const ratio = meta.width / meta.height;
+  const targetW = Math.round(ratio * targetH);
+  const buf = await sharp(filePath)
+    .resize({ width: targetW, height: targetH, fit: "inside", background: { r: 255, g: 255, b: 255, alpha: 1 } })
+    .flatten({ background: { r: 255, g: 255, b: 255 } })
+    .png()
     .toBuffer();
-  const buf = await sharp({
-    create: { width: targetW, height: targetH, channels: 4, background: { r: 255, g: 255, b: 255, alpha: 1 } },
-  }).composite([{ input: resized, gravity: "centre" }]).png().toBuffer();
-  return "data:image/png;base64," + buf.toString("base64");
+  return { dataUri: "data:image/png;base64," + buf.toString("base64"), width: targetW, height: targetH };
 }
 
 const partners = [
   { name: "성동구청",        path: "seongdong.png" },
-  { name: "Take Root",       path: "takeroot.png" },
   { name: "BICYCLE",         path: "bicycle.png" },
   { name: "고마워서그래",     path: "gomaweo.png" },
   { name: "AZURE852",        path: "azure852.png" },
@@ -186,14 +188,18 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
 
     ${(() => {
       const startX = 820, endX = W - 100;
-      const logoW = 220, logoH = 100;
       const n = partners.length;
       const span = (endX - startX) / n;
+      const y = 800;
       return partners.map((p, i) => {
         const x = startX + span * i + span / 2;
-        const y = 800;
         if (!p.img) return `<text x="${x}" y="${y + 6}" font-family="Pretendard" font-size="18" font-weight="700" fill="${C.inkBrown}" text-anchor="middle">${p.name}</text>`;
-        return `<image x="${x - logoW/2}" y="${y - logoH/2}" width="${logoW}" height="${logoH}" href="${p.img}" preserveAspectRatio="xMidYMid meet"/>`;
+        // 원본 비율 유지, 세로만 통일 (90px). 폭이 span 넘으면 축소
+        const maxW = span - 24;
+        const scale = Math.min(1, maxW / p.img.width);
+        const w = p.img.width * scale;
+        const h = p.img.height * scale;
+        return `<image x="${x - w/2}" y="${y - h/2}" width="${w}" height="${h}" href="${p.img.dataUri}"/>`;
       }).join("");
     })()}
   </g>

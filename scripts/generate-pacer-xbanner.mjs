@@ -72,14 +72,14 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
   <text x="${W/2}" y="700" font-family="Pretendard" font-size="120" font-weight="900" fill="${C.ink}" text-anchor="middle" letter-spacing="-3">사단법인 더나일의</text>
   <text x="${W/2}" y="860" font-family="Pretendard" font-size="120" font-weight="900" fill="url(#title)" text-anchor="middle" letter-spacing="-3">페이서가 되어주세요!</text>
 
-  <!-- 검정 박스 안: 페이서 설명 (y: 1050-1660) -->
+  <!-- 검정 박스 안: 페이서 설명 (박스 y: 1050-1650, 텍스트 수직 정중앙 정렬) -->
   <g transform="translate(${W/2}, 1350)">
     <rect x="-560" y="-300" rx="70" ry="70" width="1120" height="600" fill="${C.ink}"/>
-    <text font-family="Pretendard" font-size="58" font-weight="800" fill="${C.peach}" text-anchor="middle" dy="-210" letter-spacing="2">페이서(PACER)란</text>
-    <text font-family="Pretendard" font-size="50" fill="${C.cream}" text-anchor="middle" dy="-100">더 나은 사회를 위해</text>
-    <text font-family="Pretendard" font-size="50" fill="${C.cream}" text-anchor="middle" dy="-30">가족의 가치가 회복되어야 한다는 것에</text>
-    <text font-family="Pretendard" font-size="50" fill="${C.cream}" text-anchor="middle" dy="40">동의하며 더나일과 함께 걷는</text>
-    <text font-family="Pretendard" font-size="52" font-weight="800" fill="#FFFFFF" text-anchor="middle" dy="120">사람들입니다.</text>
+    <text font-family="Pretendard" font-size="58" font-weight="800" fill="${C.peach}" text-anchor="middle" dy="-165" letter-spacing="2">페이서(PACER)란</text>
+    <text font-family="Pretendard" font-size="50" fill="${C.cream}" text-anchor="middle" dy="-55">더 나은 사회를 위해</text>
+    <text font-family="Pretendard" font-size="50" fill="${C.cream}" text-anchor="middle" dy="15">가족의 가치가 회복되어야 한다는 것에</text>
+    <text font-family="Pretendard" font-size="50" fill="${C.cream}" text-anchor="middle" dy="85">동의하며 더나일과 함께 걷는</text>
+    <text font-family="Pretendard" font-size="52" font-weight="800" fill="#FFFFFF" text-anchor="middle" dy="165">사람들입니다.</text>
   </g>
 
   <!-- 검정 박스 아래: "오늘의 가족을~" 강조 (y: 1720-1900) -->
