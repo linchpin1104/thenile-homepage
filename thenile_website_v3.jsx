@@ -1932,7 +1932,7 @@ const ConferencePage=()=>{
       {/* 함께하는 기업 로고 */}
       <FI delay={.15}><div style={{maxWidth:1000,margin:"56px auto 0",position:"relative"}}>
         <div style={{fontSize:12,color:CC.inkBrown,opacity:.55,fontWeight:700,letterSpacing:".15em",textAlign:"center",marginBottom:32}}>이미 함께하고 있는 협력사 · 계속 모집 중</div>
-        <div style={{display:"flex",justifyContent:"center",alignItems:"center",gap:"clamp(32px,5vw,72px)",flexWrap:"wrap",padding:"36px 24px",background:CC.cream,borderRadius:24}}>
+        <div style={{display:"flex",justifyContent:"center",alignItems:"center",gap:"clamp(32px,5vw,72px)",flexWrap:"wrap",padding:"36px 24px",background:C.w,borderRadius:24,border:`1px solid ${C.g1}`}}>
           {[
             {n:"성동구청",img:"/images/partners/seongdong.png",c:CC.coral},
             {n:"헤이그라운드",img:"/images/partners/heyground.png",c:CC.sage,big:true},
@@ -1954,7 +1954,7 @@ const ConferencePage=()=>{
             const containerH = p.big ? 96 : 64;
             return (
             <div key={i} style={{height:containerH,display:"flex",alignItems:"center",justifyContent:"center",minWidth:120}}>
-              <img src={p.img} alt={p.n} style={{maxHeight:h,maxWidth:wMax,objectFit:"contain",mixBlendMode:p.big?"multiply":undefined}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="font-size:15px;color:${p.c};font-weight:700;letterSpacing:.02em">${p.n}</div>`)}}}/>
+              <img src={p.img} alt={p.n} style={{maxHeight:h,maxWidth:wMax,objectFit:"contain"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="font-size:15px;color:${p.c};font-weight:700;letterSpacing:.02em">${p.n}</div>`)}}}/>
             </div>
           );})}
         </div>
