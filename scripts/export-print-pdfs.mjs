@@ -28,6 +28,11 @@ const items = [
     widthCm: 60, heightCm: 180,
   },
   {
+    name: "더나일-컨퍼런스-포토월-대형",
+    src: path.join(HOME, "Downloads/더나일-컨퍼런스-포토월-대형.png"),
+    widthCm: 300, heightCm: 200,
+  },
+  {
     // A3 종이 포스터: 작업 사이즈 30.0×42.6cm (재단 사이즈 29.7×42.3cm, 사방 1.5mm 블리드)
     // 인스타용 포스터(3:4)가 A3 비율에 가장 근접 → contain fit + cream 여백
     name: "더나일-컨퍼런스-포스터-A3",
