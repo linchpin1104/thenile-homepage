@@ -1929,13 +1929,13 @@ const ConferencePage=()=>{
         </p>
       </div></FI>
 
-      {/* 함께하는 기업 로고 */}
-      <FI delay={.15}><div style={{maxWidth:1000,margin:"56px auto 0",position:"relative"}}>
+      {/* 함께하는 기업 로고 — 균일 카드 그리드 (모든 로고 동일 bounding box) */}
+      <FI delay={.15}><div style={{maxWidth:1080,margin:"56px auto 0",position:"relative"}}>
         <div style={{fontSize:12,color:CC.inkBrown,opacity:.55,fontWeight:700,letterSpacing:".15em",textAlign:"center",marginBottom:32}}>이미 함께하고 있는 협력사 · 계속 모집 중</div>
-        <div style={{display:"flex",justifyContent:"center",alignItems:"center",gap:"clamp(32px,5vw,72px)",flexWrap:"wrap",padding:"36px 24px",background:C.w,borderRadius:24,border:`1px solid ${C.g1}`}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill, minmax(160px, 1fr))",gap:16,padding:"32px 32px",background:C.w,borderRadius:24,border:`1px solid ${C.g1}`}}>
           {[
             {n:"성동구청",img:"/images/partners/seongdong.png",c:CC.coral},
-            {n:"헤이그라운드",img:"/images/partners/heyground.png",c:CC.sage,big:true},
+            {n:"헤이그라운드",img:"/images/partners/heyground.png",c:CC.sage},
             {n:"BICYCLE",img:"/images/partners/bicycle.png",c:CC.lilac},
             {n:"고마워서그래",img:"/images/partners/gomaweo.png",c:CC.ink},
             {n:"AZURE852",img:"/images/partners/azure852.png",c:CC.sky},
@@ -1948,15 +1948,11 @@ const ConferencePage=()=>{
             {n:"hey you",img:"/images/partners/heyyou.png",c:CC.mango},
             {n:"레피움",img:"/images/partners/lepium.jpg",c:CC.ink},
             {n:"앙호두",img:"/images/partners/anghodu.png",c:CC.mango},
-          ].map((p,i)=>{
-            const h = p.big ? 90 : 60;
-            const wMax = p.big ? 220 : 160;
-            const containerH = p.big ? 96 : 64;
-            return (
-            <div key={i} style={{height:containerH,display:"flex",alignItems:"center",justifyContent:"center",minWidth:120}}>
-              <img src={p.img} alt={p.n} style={{maxHeight:h,maxWidth:wMax,objectFit:"contain"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="font-size:15px;color:${p.c};font-weight:700;letterSpacing:.02em">${p.n}</div>`)}}}/>
+          ].map((p,i)=>(
+            <div key={i} style={{height:90,display:"flex",alignItems:"center",justifyContent:"center",padding:"10px 16px",background:C.w,borderRadius:8,overflow:"hidden"}}>
+              <img src={p.img} alt={p.n} style={{maxWidth:"100%",maxHeight:"100%",width:"auto",height:"auto",objectFit:"contain"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="font-size:14px;color:${p.c};font-weight:700;letterSpacing:.02em;text-align:center">${p.n}</div>`)}}}/>
             </div>
-          );})}
+          ))}
         </div>
       </div></FI>
 
