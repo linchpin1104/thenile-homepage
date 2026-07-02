@@ -60,7 +60,6 @@ async function partnerLogoNormalize(filePath, targetW = 360, targetH = 140) {
 
 const partners = [
   { name: "성동구청",        path: "seongdong.png" },
-  { name: "헤이그라운드",     path: "heyground.png" },
   { name: "Take Root",       path: "takeroot.png" },
   { name: "BICYCLE",         path: "bicycle.png" },
   { name: "고마워서그래",     path: "gomaweo.png" },
@@ -173,22 +172,22 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
     <text x="290" y="650" font-family="Pretendard" font-size="24" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안은 어디에서 오는가</text>
 
     ${(() => {
-      const photoY = 780;
+      // 2-1 배열: 위 행 (장동선, 이다랑) + 아래 행 (김혜민 가운데)
       const r = 52;
-      const startX = 130;
-      const gap = 160;
-      return session1.map((s, i) => {
-        const x = startX + i * gap;
-        return `
-          <g>
-            ${circlePhoto(x, photoY, r, s.img, C.coral, 4)}
-            <rect x="${x - 45}" y="${photoY + r + 10}" rx="11" ry="11" width="90" height="22" fill="${C.coral}"/>
-            <text x="${x}" y="${photoY + r + 25}" font-family="Pretendard" font-size="10" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="1.3">${s.badge}</text>
-            <text x="${x}" y="${photoY + r + 55}" font-family="Pretendard" font-size="19" font-weight="800" fill="${C.ink}" text-anchor="middle">${s.name}</text>
-            <text x="${x}" y="${photoY + r + 76}" font-family="Pretendard" font-size="12" font-weight="600" fill="${C.inkBrown}" opacity="0.78" text-anchor="middle">${s.role}</text>
-          </g>
-        `;
-      }).join("");
+      const positions = [
+        { ...session1[0], x: 205, y: 780 },  // 장동선 (위 좌)
+        { ...session1[1], x: 375, y: 780 },  // 이다랑 (위 우)
+        { ...session1[2], x: 290, y: 985 },  // 김혜민 (아래 중앙)
+      ];
+      return positions.map((s) => `
+        <g>
+          ${circlePhoto(s.x, s.y, r, s.img, C.coral, 4)}
+          <rect x="${s.x - 45}" y="${s.y + r + 10}" rx="11" ry="11" width="90" height="22" fill="${C.coral}"/>
+          <text x="${s.x}" y="${s.y + r + 25}" font-family="Pretendard" font-size="10" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="1.3">${s.badge}</text>
+          <text x="${s.x}" y="${s.y + r + 55}" font-family="Pretendard" font-size="19" font-weight="800" fill="${C.ink}" text-anchor="middle">${s.name}</text>
+          <text x="${s.x}" y="${s.y + r + 76}" font-family="Pretendard" font-size="12" font-weight="600" fill="${C.inkBrown}" opacity="0.78" text-anchor="middle">${s.role}</text>
+        </g>
+      `).join("");
     })()}
   </g>
 
@@ -199,8 +198,8 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
     <text x="790" y="650" font-family="Pretendard" font-size="24" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안과 함께 살아간다는 것</text>
 
     ${(() => {
-      // 4명을 2×2 그리드
-      const cx1 = 650, cx2 = 930;
+      // 4명을 2×2 그리드 (간격 좁게)
+      const cx1 = 675, cx2 = 905;
       const cy1 = 780, cy2 = 985;
       const r = 52;
       const positions = [
@@ -224,23 +223,18 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
   <!-- 수직 구분선 (세션 사이) -->
   <line x1="540" y1="580" x2="540" y2="1200" stroke="${C.inkBrown}" stroke-opacity="0.12" stroke-width="1"/>
 
-  <!-- 후원/협찬 3줄 (5+5+6, 여유 있게 배열) y 1265-1435 -->
+  <!-- 후원/협찬 3줄 균등 배열 y 1245-1425 -->
   <g>
-    <text x="${W / 2}" y="1280" font-family="Pretendard" font-size="13" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.6" letter-spacing="3">PARTNERS · 후원 / 협찬</text>
-    <rect x="40" y="1295" rx="16" ry="16" width="${W - 80}" height="140" fill="#FFFFFF" stroke="${C.inkBrown}" stroke-opacity="0.08" stroke-width="1"/>
+    <text x="${W / 2}" y="1260" font-family="Pretendard" font-size="13" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.6" letter-spacing="3">PARTNERS · 후원 / 협찬</text>
+    <rect x="60" y="1275" rx="16" ry="16" width="${W - 120}" height="155" fill="#FFFFFF" stroke="${C.inkBrown}" stroke-opacity="0.08" stroke-width="1"/>
 
     ${(() => {
-      const total = partners.length;
-      const perRow = Math.ceil(total / 3);
-      const rows = [
-        partners.slice(0, perRow),
-        partners.slice(perRow, perRow * 2),
-        partners.slice(perRow * 2, total),
-      ];
-      const boxX = 60, boxW = W - 120;
-      const logoMaxW = 95;
-      const logoMaxH = 35;
-      const yStarts = [1325, 1365, 1405];
+      // 14개 협찬사 → 3줄 (5+5+4) 균등 정렬
+      const rows = [partners.slice(0, 5), partners.slice(5, 10), partners.slice(10, 14)];
+      const boxX = 80, boxW = W - 160;  // 좌우 여백 여유
+      const logoMaxW = 90;
+      const logoMaxH = 32;
+      const yStarts = [1310, 1355, 1400];
 
       return rows.map((arr, rowIdx) => {
         const y = yStarts[rowIdx];
