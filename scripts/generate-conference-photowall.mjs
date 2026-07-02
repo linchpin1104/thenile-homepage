@@ -24,28 +24,42 @@ const C = {
 
 const PARTNERS_DIR = path.join(ROOT, "public/images/partners");
 const NILE_LOGO_SVG_PATH = path.join(ROOT, "public/images/thenile-logo.svg");
+const SEONGDONG_LOGO_PATH = path.join(PARTNERS_DIR, "seongdong.png");
 
-// ─── 더나일 공식 로고 렌더링 (색상 변환) ───
+// ─── 더나일 공식 로고 렌더링 ───
 const nileSvgSource = fs.readFileSync(NILE_LOGO_SVG_PATH, "utf-8");
 
-async function renderNileLogo(cellW, cellH, textColor, dotColor) {
-  // fill 색상 치환: #1E1E1E → textColor, #3985FF → dotColor
+async function renderNileLogo(targetW, targetH, textColor, dotColor) {
   const themedSvg = nileSvgSource
     .replaceAll('fill="#1E1E1E"', `fill="${textColor}"`)
     .replaceAll('fill="#3985FF"', `fill="${dotColor}"`);
-
-  // 셀 크기의 70%만 사용 (여백)
-  const targetW = Math.round(cellW * 0.65);
-  const targetH = Math.round(cellH * 0.3);
-
-  const rasterized = await sharp(Buffer.from(themedSvg), { density: 300 })
+  return await sharp(Buffer.from(themedSvg), { density: 300 })
     .resize({ width: targetW, height: targetH, fit: "inside" })
     .png()
     .toBuffer();
-  return rasterized;
 }
 
-// ─── 협찬사 로고 렌더링 ───
+async function renderImage(filePath, targetW, targetH) {
+  return await sharp(filePath)
+    .resize({ width: targetW, height: targetH, fit: "inside", background: { r: 255, g: 255, b: 255, alpha: 0 } })
+    .flatten({ background: { r: 255, g: 255, b: 255 } })
+    .png()
+    .toBuffer();
+}
+
+// ─── 헤더 영역: 좌 더나일 로고 · 우 성동구청 로고 ───
+const HEADER_H = 1200;
+const headerMargin = 400;
+const headerLogoH = HEADER_H - 300;  // 900
+
+const nileHeaderLogo = await renderNileLogo(
+  Math.round(W * 0.35), headerLogoH, C.navy, "#3985FF"
+);
+const seongdongHeaderLogo = await renderImage(SEONGDONG_LOGO_PATH, 1600, headerLogoH);
+const nileMeta = await sharp(nileHeaderLogo).metadata();
+const seongdongMeta = await sharp(seongdongHeaderLogo).metadata();
+
+// ─── 셀 협찬사 로고 렌더링 ───
 async function partnerLogoForCell(filePath, cellW, cellH) {
   if (!fs.existsSync(filePath)) return null;
   const marginX = Math.round(cellW * 0.18);
@@ -61,7 +75,7 @@ async function partnerLogoForCell(filePath, cellW, cellH) {
   return buf;
 }
 
-// 헤이그라운드 · Take Root · 봄마음 제외 (13개)
+// 헤이그라운드 · Take Root 제외 (봄마음 포함)
 const partners = [
   { name: "성동구청",        path: "seongdong.png" },
   { name: "BICYCLE",         path: "bicycle.png" },
@@ -69,6 +83,7 @@ const partners = [
   { name: "AZURE852",        path: "azure852.png" },
   { name: "sheventures",     path: "sheventures.webp" },
   { name: "몽클",            path: "mongcle.png" },
+  { name: "봄마음",          path: "bommaeum.png" },
   { name: "BOBOMAMA",        path: "bobomama.png" },
   { name: "원니스코칭센터",   path: "oneness.png" },
   { name: "앙즈로 산후조리원", path: "angelot.png" },
@@ -78,23 +93,25 @@ const partners = [
   { name: "다랑클래스",       path: "darangclass.jpg" },
 ];
 
-// ─── 그리드: 6×7 = 42셀 체스판 ───
-const COLS = 6, ROWS = 7;
+// ─── 그리드: 상단 헤더 아래 6×6 체스판 ───
+const GRID_TOP = HEADER_H;
+const GRID_H = H - HEADER_H;
+const COLS = 6, ROWS = 6;
 const CELL_W = Math.floor(W / COLS);
-const CELL_H = Math.floor(H / ROWS);
+const CELL_H = Math.floor(GRID_H / ROWS);
 
 const cells = [];
 for (let r = 0; r < ROWS; r++) {
   for (let c = 0; c < COLS; c++) {
     const isNavy = (r + c) % 2 === 0;
-    cells.push({ row: r, col: c, isNavy, x: c * CELL_W, y: r * CELL_H });
+    cells.push({ row: r, col: c, isNavy, x: c * CELL_W, y: GRID_TOP + r * CELL_H });
   }
 }
 
-// 남색 셀: 모두 더나일 로고 (크림 톤)
-const nileLogoCream = await renderNileLogo(CELL_W, CELL_H, C.cream, C.mango);
+const nileLogoCream = await renderNileLogo(
+  Math.round(CELL_W * 0.65), Math.round(CELL_H * 0.3), C.cream, C.mango
+);
 
-// 흰색 셀: 협찬사 로고 반복 배열 + 남는 셀에 더나일 로고 (남색)
 const whiteCells = cells.filter(c => !c.isNavy);
 const partnerLogos = [];
 for (const p of partners) {
@@ -103,28 +120,42 @@ for (const p of partners) {
     buf: await partnerLogoForCell(path.join(PARTNERS_DIR, p.path), CELL_W, CELL_H),
   });
 }
-const nileLogoNavy = await renderNileLogo(CELL_W, CELL_H, C.navy, "#3985FF");
-
-// 흰색 셀 21개에 협찬사 15개 → 나머지 6개 셀은 협찬사 반복 (앞 6개 재사용)
 for (let i = 0; i < whiteCells.length; i++) {
   whiteCells[i].logo = partnerLogos[i % partnerLogos.length];
 }
 
-// ─── 렌더링: 큰 캔버스 위에 composite ───
 console.log(`캔버스: ${W}×${H} (${WIDTH_CM}×${HEIGHT_CM}cm @ ${DPI}dpi)`);
-console.log(`그리드: ${COLS}×${ROWS} = ${COLS*ROWS}셀, 셀 ${CELL_W}×${CELL_H}`);
+console.log(`헤더: y 0~${HEADER_H} (더나일 좌, 성동구 우)`);
+console.log(`그리드: ${COLS}×${ROWS} = ${COLS*ROWS}셀 (y ${GRID_TOP}~${H})`);
 console.log(`남색 셀 ${cells.filter(c=>c.isNavy).length}개 · 흰색 셀 ${whiteCells.length}개`);
 console.log(`협찬사 ${partners.length}개 반복 배열 → ${whiteCells.length}칸`);
 
-// 셀 개별 렌더링 후 큰 캔버스에 composite
-const composites = [];
-
-// 남색 셀 배경 rect + 더나일 로고
+// 셀 렌더링 준비
 const navyCellBuf = await sharp({
-  create: { width: CELL_W, height: CELL_H, channels: 3, background: { r: 27, g: 42, b: 74 } },  // navy
+  create: { width: CELL_W, height: CELL_H, channels: 3, background: { r: 27, g: 42, b: 74 } },
 }).composite([{ input: nileLogoCream, gravity: "centre" }]).png().toBuffer();
 
-// 흰색 셀 각각: 협찬사 로고
+const composites = [];
+
+// 헤더: 좌 더나일 (x 여백 headerMargin, 수직 중앙), 우 성동구 (반대)
+composites.push({
+  input: nileHeaderLogo,
+  top: Math.round((HEADER_H - nileMeta.height) / 2),
+  left: headerMargin,
+});
+composites.push({
+  input: seongdongHeaderLogo,
+  top: Math.round((HEADER_H - seongdongMeta.height) / 2),
+  left: W - seongdongMeta.width - headerMargin,
+});
+
+// 헤더 아래 구분선 (얇은 남색 라인)
+const dividerBuf = await sharp({
+  create: { width: W, height: 20, channels: 3, background: { r: 27, g: 42, b: 74 } },
+}).png().toBuffer();
+composites.push({ input: dividerBuf, top: HEADER_H - 20, left: 0 });
+
+// 셀들
 for (const c of cells) {
   if (c.isNavy) {
     composites.push({ input: navyCellBuf, top: c.y, left: c.x });
