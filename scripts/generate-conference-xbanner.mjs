@@ -19,19 +19,19 @@ const PARTNERS_DIR = path.join(ROOT, "public/images/partners");
 const KIM = path.join(ROOT, "public/images/김혜민.png");
 const NILE_LOGO_SVG_PATH = path.join(ROOT, "public/images/thenile-logo.svg");
 
-// 상단 헤더 로고 — 시각 무게 균형
-// 더나일(가로형 wordmark, 5.33:1): 세로 70 → 폭 ~373
-// 성동구(정사각형 엠블럼): 세로 130 → 폭 ~130
+// 상단 헤더 로고 — 시각 크기 균형 (폭 기준 근접)
+// 더나일(가로형 wordmark, 5.33:1): 세로 55 → 폭 ~293
+// 성동구(정사각형 엠블럼): 세로 200 → 폭 ~200
 const nileSvgSource = fs.readFileSync(NILE_LOGO_SVG_PATH, "utf-8");
 const nileLogoRasterized = await sharp(Buffer.from(nileSvgSource), { density: 300 })
-  .resize({ height: 70 })
+  .resize({ height: 55 })
   .png()
   .toBuffer();
 const nileLogoB64 = "data:image/png;base64," + nileLogoRasterized.toString("base64");
 const nileLogoMeta = await sharp(nileLogoRasterized).metadata();
 
 const seongdongLogoRasterized = await sharp(path.join(PARTNERS_DIR, "seongdong.png"))
-  .resize({ height: 130 })
+  .resize({ height: 200 })
   .png()
   .toBuffer();
 const seongdongLogoB64 = "data:image/png;base64," + seongdongLogoRasterized.toString("base64");
