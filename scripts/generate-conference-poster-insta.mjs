@@ -154,26 +154,26 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
     <text x="${W / 2}" y="108" font-family="Pretendard" font-size="20" font-weight="800" fill="${C.coral}" text-anchor="middle" letter-spacing="2">2026 양육불안 컨퍼런스</text>
   </g>
 
-  <!-- 메인 슬로건 (크게 130pt 두 줄, y: 180-460) -->
-  <text x="${W / 2}" y="290" font-family="Pretendard" font-size="130" font-weight="900" fill="url(#titleGrad)" text-anchor="middle" letter-spacing="-4">불안을</text>
-  <text x="${W / 2}" y="440" font-family="Pretendard" font-size="130" font-weight="900" fill="url(#titleGrad)" text-anchor="middle" letter-spacing="-4">불안해하지 마세요</text>
+  <!-- 메인 슬로건 (크게 130pt 두 줄, y: 170-440) -->
+  <text x="${W / 2}" y="280" font-family="Pretendard" font-size="130" font-weight="900" fill="url(#titleGrad)" text-anchor="middle" letter-spacing="-4">불안을</text>
+  <text x="${W / 2}" y="420" font-family="Pretendard" font-size="130" font-weight="900" fill="url(#titleGrad)" text-anchor="middle" letter-spacing="-4">불안해하지 마세요</text>
 
-  <!-- 일시·장소 박스 (y: 500-600) -->
-  <g transform="translate(${W / 2}, 550)">
+  <!-- 일시·장소 박스 (y: 460-560) -->
+  <g transform="translate(${W / 2}, 510)">
     <rect x="-470" y="-48" rx="40" ry="40" width="940" height="96" fill="${C.ink}"/>
     <text font-family="Pretendard" font-size="28" font-weight="800" fill="${C.cream}" text-anchor="middle" dy="-7">2026.07.09 (목) 11:00 – 15:00</text>
     <text y="24" font-family="Pretendard" font-size="17" font-weight="600" fill="${C.peach}" text-anchor="middle">헤이그라운드 성수시작점 · 선착순 100~120명 · 무료</text>
   </g>
 
-  <!-- SESSION 1 (y: 600-885) -->
+  <!-- SESSION 1 (y: 590-870) 여유 있게 위로 -->
   <g>
-    <rect x="380" y="600" rx="20" ry="20" width="320" height="40" fill="${C.coral}"/>
-    <text x="${W / 2}" y="627" font-family="Pretendard" font-size="16" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="2">SESSION 1 · 키노트</text>
-    <text x="${W / 2}" y="678" font-family="Pretendard" font-size="26" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안은 어디에서 오는가</text>
+    <rect x="380" y="590" rx="20" ry="20" width="320" height="40" fill="${C.coral}"/>
+    <text x="${W / 2}" y="617" font-family="Pretendard" font-size="16" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="2">SESSION 1 · 키노트</text>
+    <text x="${W / 2}" y="665" font-family="Pretendard" font-size="26" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안은 어디에서 오는가</text>
 
     ${(() => {
-      const photoY = 778;
-      const r = 62;
+      const photoY = 755;
+      const r = 60;
       const gap = 285;
       const totalW = gap * 2;
       const startX = W / 2 - totalW / 2;
@@ -191,15 +191,15 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
     })()}
   </g>
 
-  <!-- SESSION 2 (y: 920-1230) -->
+  <!-- SESSION 2 (y: 900-1200) 여유 있게 -->
   <g>
-    <rect x="380" y="920" rx="20" ry="20" width="320" height="40" fill="${C.lilac}"/>
-    <text x="${W / 2}" y="947" font-family="Pretendard" font-size="16" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="2">SESSION 2 · 패널토크</text>
-    <text x="${W / 2}" y="998" font-family="Pretendard" font-size="26" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안과 함께 살아간다는 것</text>
+    <rect x="380" y="900" rx="20" ry="20" width="320" height="40" fill="${C.lilac}"/>
+    <text x="${W / 2}" y="927" font-family="Pretendard" font-size="16" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="2">SESSION 2 · 패널토크</text>
+    <text x="${W / 2}" y="975" font-family="Pretendard" font-size="26" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안과 함께 살아간다는 것</text>
 
     ${(() => {
-      const photoY = 1100;
-      const r = 53;
+      const photoY = 1075;
+      const r = 52;
       const gap = 235;
       const totalW = gap * 3;
       const startX = W / 2 - totalW / 2;

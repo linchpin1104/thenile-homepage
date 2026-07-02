@@ -205,20 +205,19 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
     })()}
   </g>
 
-  <!-- 주최 강조 텍스트 + 후원/협찬 박스 (y: 3160 ~ 3560) -->
+  <!-- 주최 강조 텍스트 + 후원/협찬 박스 (y: 3040 ~ 3480 — 위로 120 이동) -->
   <g>
-    <text x="${W/2}" y="3200" font-family="Pretendard" font-size="32" font-weight="800" fill="${C.coral}" text-anchor="middle" letter-spacing="4">주최 · 사단법인 더나일</text>
+    <text x="${W/2}" y="3080" font-family="Pretendard" font-size="32" font-weight="800" fill="${C.coral}" text-anchor="middle" letter-spacing="4">주최 · 사단법인 더나일</text>
 
-    <text x="${W/2}" y="3260" font-family="Pretendard" font-size="22" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.55" letter-spacing="5">PARTNERS · 후원 / 협찬</text>
-    <rect x="40" y="3290" rx="24" ry="24" width="${W-80}" height="290" fill="#FFFFFF" stroke="${C.inkBrown}" stroke-opacity="0.1" stroke-width="2"/>
+    <text x="${W/2}" y="3140" font-family="Pretendard" font-size="22" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.55" letter-spacing="5">PARTNERS · 후원 / 협찬</text>
+    <rect x="40" y="3170" rx="24" ry="24" width="${W-80}" height="290" fill="#FFFFFF" stroke="${C.inkBrown}" stroke-opacity="0.1" stroke-width="2"/>
 
     ${(() => {
-      // 15개를 3줄 (5+5+5)로 나눠 여유 있게
       const rows = [partners.slice(0, 5), partners.slice(5, 10), partners.slice(10, 15)];
-      const boxX = 80, boxW = W - 160;  // 좌우 여백 늘림
+      const boxX = 80, boxW = W - 160;
       const logoMaxW = 130;
       const logoMaxH = 55;
-      const yStarts = [3340, 3430, 3520];
+      const yStarts = [3220, 3310, 3400];
       return rows.map((arr, rowIdx) => {
         const y = yStarts[rowIdx];
         const cellW = boxW / arr.length;
