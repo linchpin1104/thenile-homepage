@@ -213,17 +213,18 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
     <rect x="40" y="3290" rx="24" ry="24" width="${W-80}" height="290" fill="#FFFFFF" stroke="${C.inkBrown}" stroke-opacity="0.1" stroke-width="2"/>
 
     ${(() => {
-      const rows = [partners.slice(0, 8), partners.slice(8, 15)];
-      const boxX = 40, boxW = W - 80;
-      const logoMaxW = 145;
-      const logoMaxH = 75;
-      const yStarts = [3360, 3490];
+      // 15개를 3줄 (5+5+5)로 나눠 여유 있게
+      const rows = [partners.slice(0, 5), partners.slice(5, 10), partners.slice(10, 15)];
+      const boxX = 80, boxW = W - 160;  // 좌우 여백 늘림
+      const logoMaxW = 130;
+      const logoMaxH = 55;
+      const yStarts = [3340, 3430, 3520];
       return rows.map((arr, rowIdx) => {
         const y = yStarts[rowIdx];
         const cellW = boxW / arr.length;
         return arr.map((p, i) => {
           const x = boxX + cellW * i + cellW/2;
-          if (!p.img) return `<text x="${x}" y="${y+8}" font-family="Pretendard" font-size="16" font-weight="700" fill="${C.inkBrown}" text-anchor="middle">${p.name}</text>`;
+          if (!p.img) return `<text x="${x}" y="${y+6}" font-family="Pretendard" font-size="14" font-weight="700" fill="${C.inkBrown}" text-anchor="middle">${p.name}</text>`;
           return `<image x="${x - logoMaxW/2}" y="${y - logoMaxH/2}" width="${logoMaxW}" height="${logoMaxH}" href="${p.img}" preserveAspectRatio="xMidYMid meet"/>`;
         }).join("");
       }).join("");
