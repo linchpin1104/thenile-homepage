@@ -24,14 +24,14 @@ const NILE_LOGO_SVG_PATH = path.join(ROOT, "public/images/thenile-logo.svg");
 // 성동구(정사각형 엠블럼): 세로 200 → 폭 ~200
 const nileSvgSource = fs.readFileSync(NILE_LOGO_SVG_PATH, "utf-8");
 const nileLogoRasterized = await sharp(Buffer.from(nileSvgSource), { density: 300 })
-  .resize({ height: 55 })
+  .resize({ height: 40 })  // 55 → 40 (약 70%)
   .png()
   .toBuffer();
 const nileLogoB64 = "data:image/png;base64," + nileLogoRasterized.toString("base64");
 const nileLogoMeta = await sharp(nileLogoRasterized).metadata();
 
 const seongdongLogoRasterized = await sharp(path.join(PARTNERS_DIR, "seongdong.png"))
-  .resize({ height: 200 })
+  .resize({ height: 140 })  // 200 → 140 (70%)
   .png()
   .toBuffer();
 const seongdongLogoB64 = "data:image/png;base64," + seongdongLogoRasterized.toString("base64");
@@ -152,7 +152,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
 
   <!-- 상단 로고 (좌: 사단법인 더나일 · 우: 성동구청) — 세로 중앙 정렬 -->
   ${(() => {
-    const baseY = 80;
+    const baseY = 40;
     const rowH = Math.max(nileLogoMeta.height, seongdongLogoMeta.height);
     const nileY = baseY + (rowH - nileLogoMeta.height) / 2;
     const sdY = baseY + (rowH - seongdongLogoMeta.height) / 2;
