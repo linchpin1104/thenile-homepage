@@ -154,16 +154,12 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
     <text x="${W / 2}" y="108" font-family="Pretendard" font-size="20" font-weight="800" fill="${C.coral}" text-anchor="middle" letter-spacing="2">2026 양육불안 컨퍼런스</text>
   </g>
 
-  <!-- 메인 슬로건 (작게 78pt 두 줄, y: 170-350) -->
-  <text x="${W / 2}" y="240" font-family="Pretendard" font-size="78" font-weight="900" fill="url(#titleGrad)" text-anchor="middle" letter-spacing="-2">불안을</text>
-  <text x="${W / 2}" y="330" font-family="Pretendard" font-size="78" font-weight="900" fill="url(#titleGrad)" text-anchor="middle" letter-spacing="-2">불안해하지 마세요</text>
+  <!-- 메인 슬로건 (크게 130pt 두 줄, y: 180-460) -->
+  <text x="${W / 2}" y="290" font-family="Pretendard" font-size="130" font-weight="900" fill="url(#titleGrad)" text-anchor="middle" letter-spacing="-4">불안을</text>
+  <text x="${W / 2}" y="440" font-family="Pretendard" font-size="130" font-weight="900" fill="url(#titleGrad)" text-anchor="middle" letter-spacing="-4">불안해하지 마세요</text>
 
-  <!-- 설명문 (y: 380-430) -->
-  <text x="${W / 2}" y="395" font-family="Pretendard" font-size="22" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안의 시대, 우리는 괜찮은 걸까요?</text>
-  <text x="${W / 2}" y="425" font-family="Pretendard" font-size="16" font-weight="500" fill="${C.inkBrown}" text-anchor="middle" opacity="0.85">양육불안은 이제 개인의 문제가 아니라 사회의 의제라는 것, 함께 이야기 나누어 보아요.</text>
-
-  <!-- 일시·장소 박스 (y: 460-560) -->
-  <g transform="translate(${W / 2}, 510)">
+  <!-- 일시·장소 박스 (y: 500-600) -->
+  <g transform="translate(${W / 2}, 550)">
     <rect x="-470" y="-48" rx="40" ry="40" width="940" height="96" fill="${C.ink}"/>
     <text font-family="Pretendard" font-size="28" font-weight="800" fill="${C.cream}" text-anchor="middle" dy="-7">2026.07.09 (목) 11:00 – 15:00</text>
     <text y="24" font-family="Pretendard" font-size="17" font-weight="600" fill="${C.peach}" text-anchor="middle">헤이그라운드 성수시작점 · 선착순 100~120명 · 무료</text>
@@ -221,19 +217,26 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
     })()}
   </g>
 
-  <!-- 후원/협찬 두 줄 (y: 1280-1420) -->
+  <!-- 후원/협찬 3줄 (5+5+6, 여유 있게 배열) y 1265-1435 -->
   <g>
-    <text x="${W / 2}" y="1295" font-family="Pretendard" font-size="13" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.6" letter-spacing="3">PARTNERS · 후원 / 협찬</text>
-    <rect x="20" y="1310" rx="18" ry="18" width="${W - 40}" height="118" fill="#FFFFFF" stroke="${C.inkBrown}" stroke-opacity="0.08" stroke-width="1"/>
+    <text x="${W / 2}" y="1280" font-family="Pretendard" font-size="13" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.6" letter-spacing="3">PARTNERS · 후원 / 협찬</text>
+    <rect x="40" y="1295" rx="16" ry="16" width="${W - 80}" height="140" fill="#FFFFFF" stroke="${C.inkBrown}" stroke-opacity="0.08" stroke-width="1"/>
 
     ${(() => {
-      const row1 = partners.slice(0, 8);
-      const row2 = partners.slice(8, 16);
-      const boxX = 20, boxW = W - 40;
-      const logoMaxW = 105;
-      const logoMaxH = 45;
+      const total = partners.length;
+      const perRow = Math.ceil(total / 3);
+      const rows = [
+        partners.slice(0, perRow),
+        partners.slice(perRow, perRow * 2),
+        partners.slice(perRow * 2, total),
+      ];
+      const boxX = 60, boxW = W - 120;
+      const logoMaxW = 95;
+      const logoMaxH = 35;
+      const yStarts = [1325, 1365, 1405];
 
-      function placeRow(arr, y) {
+      return rows.map((arr, rowIdx) => {
+        const y = yStarts[rowIdx];
         const cellW = boxW / arr.length;
         return arr.map((p, i) => {
           const x = boxX + cellW * i + cellW / 2;
@@ -242,9 +245,7 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
           }
           return `<image x="${x - logoMaxW/2}" y="${y - logoMaxH/2}" width="${logoMaxW}" height="${logoMaxH}" href="${p.img}" preserveAspectRatio="xMidYMid meet"/>`;
         }).join("");
-      }
-
-      return placeRow(row1, 1346) + placeRow(row2, 1396);
+      }).join("");
     })()}
   </g>
 </svg>`;
