@@ -24,9 +24,7 @@ const C = {
 
 const PARTNERS_DIR = path.join(ROOT, "public/images/partners");
 const NILE_LOGO_SVG_PATH = path.join(ROOT, "public/images/thenile-logo.svg");
-const SEONGDONG_LOGO_PATH = path.join(PARTNERS_DIR, "seongdong.png");
 
-// ─── 더나일 공식 로고 렌더링 ───
 const nileSvgSource = fs.readFileSync(NILE_LOGO_SVG_PATH, "utf-8");
 
 async function renderNileLogo(targetW, targetH, textColor, dotColor) {
@@ -39,27 +37,6 @@ async function renderNileLogo(targetW, targetH, textColor, dotColor) {
     .toBuffer();
 }
 
-async function renderImage(filePath, targetW, targetH) {
-  return await sharp(filePath)
-    .resize({ width: targetW, height: targetH, fit: "inside", background: { r: 255, g: 255, b: 255, alpha: 0 } })
-    .flatten({ background: { r: 255, g: 255, b: 255 } })
-    .png()
-    .toBuffer();
-}
-
-// ─── 헤더 영역: 좌 더나일 로고 · 우 성동구청 로고 ───
-const HEADER_H = 1200;
-const headerMargin = 400;
-const headerLogoH = HEADER_H - 300;  // 900
-
-const nileHeaderLogo = await renderNileLogo(
-  Math.round(W * 0.35), headerLogoH, C.navy, "#3985FF"
-);
-const seongdongHeaderLogo = await renderImage(SEONGDONG_LOGO_PATH, 1600, headerLogoH);
-const nileMeta = await sharp(nileHeaderLogo).metadata();
-const seongdongMeta = await sharp(seongdongHeaderLogo).metadata();
-
-// ─── 셀 협찬사 로고 렌더링 ───
 async function partnerLogoForCell(filePath, cellW, cellH) {
   if (!fs.existsSync(filePath)) return null;
   const marginX = Math.round(cellW * 0.18);
@@ -75,7 +52,7 @@ async function partnerLogoForCell(filePath, cellW, cellH) {
   return buf;
 }
 
-// 헤이그라운드 · Take Root 제외 (봄마음 포함)
+// 헤이그라운드 · Take Root 제외 (봄마음 포함, 14개)
 const partners = [
   { name: "성동구청",        path: "seongdong.png" },
   { name: "BICYCLE",         path: "bicycle.png" },
@@ -93,18 +70,16 @@ const partners = [
   { name: "다랑클래스",       path: "darangclass.jpg" },
 ];
 
-// ─── 그리드: 상단 헤더 아래 6×6 체스판 ───
-const GRID_TOP = HEADER_H;
-const GRID_H = H - HEADER_H;
-const COLS = 6, ROWS = 6;
+// ─── 6×7 체스판 ───
+const COLS = 6, ROWS = 7;
 const CELL_W = Math.floor(W / COLS);
-const CELL_H = Math.floor(GRID_H / ROWS);
+const CELL_H = Math.floor(H / ROWS);
 
 const cells = [];
 for (let r = 0; r < ROWS; r++) {
   for (let c = 0; c < COLS; c++) {
     const isNavy = (r + c) % 2 === 0;
-    cells.push({ row: r, col: c, isNavy, x: c * CELL_W, y: GRID_TOP + r * CELL_H });
+    cells.push({ row: r, col: c, isNavy, x: c * CELL_W, y: r * CELL_H });
   }
 }
 
@@ -125,37 +100,15 @@ for (let i = 0; i < whiteCells.length; i++) {
 }
 
 console.log(`캔버스: ${W}×${H} (${WIDTH_CM}×${HEIGHT_CM}cm @ ${DPI}dpi)`);
-console.log(`헤더: y 0~${HEADER_H} (더나일 좌, 성동구 우)`);
-console.log(`그리드: ${COLS}×${ROWS} = ${COLS*ROWS}셀 (y ${GRID_TOP}~${H})`);
+console.log(`그리드: ${COLS}×${ROWS} = ${COLS*ROWS}셀, 셀 ${CELL_W}×${CELL_H}`);
 console.log(`남색 셀 ${cells.filter(c=>c.isNavy).length}개 · 흰색 셀 ${whiteCells.length}개`);
 console.log(`협찬사 ${partners.length}개 반복 배열 → ${whiteCells.length}칸`);
 
-// 셀 렌더링 준비
 const navyCellBuf = await sharp({
   create: { width: CELL_W, height: CELL_H, channels: 3, background: { r: 27, g: 42, b: 74 } },
 }).composite([{ input: nileLogoCream, gravity: "centre" }]).png().toBuffer();
 
 const composites = [];
-
-// 헤더: 좌 더나일 (x 여백 headerMargin, 수직 중앙), 우 성동구 (반대)
-composites.push({
-  input: nileHeaderLogo,
-  top: Math.round((HEADER_H - nileMeta.height) / 2),
-  left: headerMargin,
-});
-composites.push({
-  input: seongdongHeaderLogo,
-  top: Math.round((HEADER_H - seongdongMeta.height) / 2),
-  left: W - seongdongMeta.width - headerMargin,
-});
-
-// 헤더 아래 구분선 (얇은 남색 라인)
-const dividerBuf = await sharp({
-  create: { width: W, height: 20, channels: 3, background: { r: 27, g: 42, b: 74 } },
-}).png().toBuffer();
-composites.push({ input: dividerBuf, top: HEADER_H - 20, left: 0 });
-
-// 셀들
 for (const c of cells) {
   if (c.isNavy) {
     composites.push({ input: navyCellBuf, top: c.y, left: c.x });
