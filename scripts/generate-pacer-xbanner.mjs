@@ -72,18 +72,19 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
   <text x="${W/2}" y="700" font-family="Pretendard" font-size="120" font-weight="900" fill="${C.ink}" text-anchor="middle" letter-spacing="-3">사단법인 더나일의</text>
   <text x="${W/2}" y="860" font-family="Pretendard" font-size="120" font-weight="900" fill="url(#title)" text-anchor="middle" letter-spacing="-3">페이서가 되어주세요!</text>
 
-  <!-- 강조 메시지 박스 (y: 1080-1400) -->
-  <g transform="translate(${W/2}, 1240)">
-    <rect x="-560" y="-160" rx="70" ry="70" width="1120" height="320" fill="${C.ink}"/>
-    <text font-family="Pretendard" font-size="72" font-weight="800" fill="${C.cream}" text-anchor="middle" dy="-30">오늘의 가족을 변화시키는 일에</text>
-    <text font-family="Pretendard" font-size="72" font-weight="800" fill="${C.peach}" text-anchor="middle" dy="80">힘이 되어 주세요!</text>
+  <!-- 검정 박스 안: 페이서 설명 (y: 1050-1660) -->
+  <g transform="translate(${W/2}, 1350)">
+    <rect x="-560" y="-300" rx="70" ry="70" width="1120" height="600" fill="${C.ink}"/>
+    <text font-family="Pretendard" font-size="58" font-weight="800" fill="${C.peach}" text-anchor="middle" dy="-210" letter-spacing="2">페이서(PACER)란</text>
+    <text font-family="Pretendard" font-size="50" fill="${C.cream}" text-anchor="middle" dy="-100">더 나은 사회를 위해</text>
+    <text font-family="Pretendard" font-size="50" fill="${C.cream}" text-anchor="middle" dy="-30">가족의 가치가 회복되어야 한다는 것에</text>
+    <text font-family="Pretendard" font-size="50" fill="${C.cream}" text-anchor="middle" dy="40">동의하며 더나일과 함께 걷는</text>
+    <text font-family="Pretendard" font-size="52" font-weight="800" fill="#FFFFFF" text-anchor="middle" dy="120">사람들입니다.</text>
   </g>
 
-  <!-- 페이서 설명 (y: 1500-1850) — 글자 키움 -->
-  <text x="${W/2}" y="1570" font-family="Pretendard" font-size="56" font-weight="700" fill="${C.coral}" text-anchor="middle" letter-spacing="2">페이서(PACER)란</text>
-  <text x="${W/2}" y="1680" font-family="Pretendard" font-size="50" fill="${C.inkBrown}" text-anchor="middle">더 나은 사회를 위해 가족의 가치가</text>
-  <text x="${W/2}" y="1760" font-family="Pretendard" font-size="50" fill="${C.inkBrown}" text-anchor="middle">회복되어야 한다는 것에 동의하며</text>
-  <text x="${W/2}" y="1850" font-family="Pretendard" font-size="56" font-weight="800" fill="${C.ink}" text-anchor="middle">더나일과 함께 걷는 사람들입니다.</text>
+  <!-- 검정 박스 아래: "오늘의 가족을~" 강조 (y: 1720-1900) -->
+  <text x="${W/2}" y="1810" font-family="Pretendard" font-size="60" font-weight="800" fill="${C.ink}" text-anchor="middle">오늘의 가족을 변화시키는 일에</text>
+  <text x="${W/2}" y="1890" font-family="Pretendard" font-size="60" font-weight="800" fill="${C.coral}" text-anchor="middle">힘이 되어 주세요!</text>
 
   <!-- QR 코드 영역 (y: 1980-2820) — 사이즈 880→680 -->
   <g transform="translate(${W/2}, 2400)">

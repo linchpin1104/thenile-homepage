@@ -160,8 +160,8 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
     <g>
       <rect x="0" y="100" rx="22" ry="22" width="280" height="58" fill="${C.coral}"/>
       <text x="140" y="140" font-family="Pretendard" font-size="32" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 1 · 키노트</text>
-      <text x="310" y="140" font-family="Pretendard" font-size="26" font-weight="600" fill="${C.inkBrown}" opacity="0.75">장동선 · 이다랑 · 김혜민 (PD)</text>
-      <text x="0" y="270" font-family="Pretendard" font-size="68" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안은 어디에서 오는가</text>
+      <text x="310" y="140" font-family="Pretendard" font-size="26" font-weight="600" fill="${C.inkBrown}" opacity="0.75">장동선 · 이다랑 · 김혜민</text>
+      <text x="0" y="270" font-family="Pretendard" font-size="62" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안은 어디에서 오는가</text>
     </g>
 
     <!-- 구분선 -->
@@ -172,7 +172,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
       <rect x="0" y="420" rx="22" ry="22" width="300" height="58" fill="${C.lilac}"/>
       <text x="150" y="460" font-family="Pretendard" font-size="32" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">SESSION 2 · 패널토크</text>
       <text x="330" y="460" font-family="Pretendard" font-size="26" font-weight="600" fill="${C.inkBrown}" opacity="0.75">이혜린 · 신두란 · 정지우 · 후추맘</text>
-      <text x="0" y="590" font-family="Pretendard" font-size="68" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안과 함께 살아간다는 것</text>
+      <text x="0" y="590" font-family="Pretendard" font-size="62" font-weight="800" fill="${C.ink}" letter-spacing="-2">양육불안과 함께 살아간다는 것</text>
     </g>
   </g>
 

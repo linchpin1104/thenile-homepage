@@ -106,9 +106,9 @@ const circlePhoto = (cx, cy, r, dataUri, borderColor, borderWidth = 6) => {
 };
 
 const session1 = [
-  { name: "장동선", role: "뇌과학자",        img: photo.장동선 },
-  { name: "이다랑", role: "아동심리전문가",   img: photo.이다랑 },
-  { name: "김혜민", role: "PD · 사회",        img: photo.김혜민 },
+  { name: "장동선", role: "뇌과학자",                 img: photo.장동선 },
+  { name: "이다랑", role: "아동심리전문가 · 더나일 이사장", img: photo.이다랑 },
+  { name: "김혜민", role: "PD · 사회",                img: photo.김혜민 },
 ];
 const session2 = [
   { name: "이혜린", role: "쉬벤처스 부대표",   img: photo.이혜린 },
