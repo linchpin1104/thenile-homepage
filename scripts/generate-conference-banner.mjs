@@ -43,18 +43,16 @@ const photo = {
   후추맘: imgB64(path.join(SPEAKERS_DIR, "후추맘.png")),
 };
 
-// 각 로고를 세로 높이만 통일 (원본 비율 유지) → 시각적 무게 균등
-async function partnerLogo(filePath, targetH = 90) {
+// 각 로고를 maxW × maxH 안에 fit (원본 비율 유지, 크기 균일)
+async function partnerLogo(filePath, maxW = 130, maxH = 70) {
   if (!fs.existsSync(filePath)) return null;
-  const meta = await sharp(filePath).metadata();
-  const ratio = meta.width / meta.height;
-  const targetW = Math.round(ratio * targetH);
-  const buf = await sharp(filePath)
-    .resize({ width: targetW, height: targetH, fit: "inside", background: { r: 255, g: 255, b: 255, alpha: 1 } })
+  const resized = await sharp(filePath)
+    .resize({ width: maxW, height: maxH, fit: "inside" })
     .flatten({ background: { r: 255, g: 255, b: 255 } })
     .png()
     .toBuffer();
-  return { dataUri: "data:image/png;base64," + buf.toString("base64"), width: targetW, height: targetH };
+  const meta = await sharp(resized).metadata();
+  return { dataUri: "data:image/png;base64," + resized.toString("base64"), width: meta.width, height: meta.height };
 }
 
 const partners = [
@@ -189,16 +187,13 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" 
     ${(() => {
       const startX = 820, endX = W - 100;
       const n = partners.length;
-      const span = (endX - startX) / n;
+      const span = (endX - startX) / n;   // 균등 셀 폭
       const y = 800;
       return partners.map((p, i) => {
-        const x = startX + span * i + span / 2;
+        const x = startX + span * i + span / 2;  // 각 셀 중앙
         if (!p.img) return `<text x="${x}" y="${y + 6}" font-family="Pretendard" font-size="18" font-weight="700" fill="${C.inkBrown}" text-anchor="middle">${p.name}</text>`;
-        // 원본 비율 유지, 세로만 통일 (90px). 폭이 span 넘으면 축소
-        const maxW = span - 24;
-        const scale = Math.min(1, maxW / p.img.width);
-        const w = p.img.width * scale;
-        const h = p.img.height * scale;
+        // partnerLogo가 이미 130×70 max에 fit해서 반환. 실제 크기 그대로 렌더 → 각 셀 중앙 정렬
+        const w = p.img.width, h = p.img.height;
         return `<image x="${x - w/2}" y="${y - h/2}" width="${w}" height="${h}" href="${p.img.dataUri}"/>`;
       }).join("");
     })()}
