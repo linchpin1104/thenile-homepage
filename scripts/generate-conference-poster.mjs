@@ -77,6 +77,7 @@ const partners = [
   { name: "hey you",         path: "heyyou.png" },
   { name: "레피움",          path: "lepium.jpg" },
   { name: "앙호두",          path: "anghodu.png" },
+  { name: "다랑클래스",       path: "darangclass.jpg" },
 ];
 
 for (const p of partners) {
@@ -235,7 +236,7 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
     ${(() => {
       // 13개를 두 줄로: 위 7 + 아래 6
       const row1 = partners.slice(0, 8);
-      const row2 = partners.slice(8, 15);
+      const row2 = partners.slice(8, 16);
       const boxX = 20, boxW = W - 40;
       const logoMaxW = 130;
       const logoMaxH = 60;
