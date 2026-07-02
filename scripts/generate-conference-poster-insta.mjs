@@ -147,37 +147,37 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
   ${emo(60, 880, 75, "drop", C.lilac, C.sky, { rotate: -15, opacity: 0.65 })}
   ${emo(1020, 1230, 78, "leaf", C.sage, C.mint, { rotate: 22, opacity: 0.65 })}
 
-  <!-- 헤더 칩 (y: 55-105) — 위쪽 여백 축소 -->
+  <!-- 헤더 칩 (y: 55-105) -->
   <g>
     <rect x="335" y="60" rx="28" ry="28" width="410" height="50" fill="${C.white}" stroke="${C.coral}" stroke-width="2" stroke-opacity="0.5"/>
     <text x="${W / 2}" y="93" font-family="Pretendard" font-size="20" font-weight="800" fill="${C.coral}" text-anchor="middle" letter-spacing="2">2026 양육불안 컨퍼런스</text>
   </g>
 
-  <!-- 메인 슬로건 (y: 140-380) -->
-  <text x="${W / 2}" y="250" font-family="Pretendard" font-size="130" font-weight="900" fill="url(#titleGrad)" text-anchor="middle" letter-spacing="-4">불안을</text>
-  <text x="${W / 2}" y="390" font-family="Pretendard" font-size="130" font-weight="900" fill="url(#titleGrad)" text-anchor="middle" letter-spacing="-4">불안해하지 마세요</text>
+  <!-- 메인 슬로건 (y: 145-410) — 위 여유 확보 -->
+  <text x="${W / 2}" y="240" font-family="Pretendard" font-size="130" font-weight="900" fill="url(#titleGrad)" text-anchor="middle" letter-spacing="-4">불안을</text>
+  <text x="${W / 2}" y="380" font-family="Pretendard" font-size="130" font-weight="900" fill="url(#titleGrad)" text-anchor="middle" letter-spacing="-4">불안해하지 마세요</text>
 
-  <!-- 일시·장소 박스 (y: 430-530) -->
-  <g transform="translate(${W / 2}, 480)">
+  <!-- 일시·장소 박스 (y: 470-570) — 슬로건과 60px 간격 -->
+  <g transform="translate(${W / 2}, 520)">
     <rect x="-470" y="-48" rx="40" ry="40" width="940" height="96" fill="${C.ink}"/>
     <text font-family="Pretendard" font-size="28" font-weight="800" fill="${C.cream}" text-anchor="middle" dy="-7">2026.07.09 (목) 11:00 – 15:00</text>
     <text y="24" font-family="Pretendard" font-size="17" font-weight="600" fill="${C.peach}" text-anchor="middle">헤이그라운드 성수시작점 · 선착순 100~120명 · 무료</text>
   </g>
 
-  <!-- 세션 좌우 병렬 (y: 570-1180) — 좌: SESSION 1 · 우: SESSION 2 -->
+  <!-- 세션 좌우 병렬 (y: 630-1220) — 일시 박스와 60px 간격 -->
   <!-- SESSION 1 (좌, x 20~530) -->
   <g>
-    <rect x="70" y="570" rx="20" ry="20" width="440" height="42" fill="${C.coral}"/>
-    <text x="290" y="598" font-family="Pretendard" font-size="18" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="2">SESSION 1 · 키노트</text>
-    <text x="290" y="650" font-family="Pretendard" font-size="24" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안은 어디에서 오는가</text>
+    <rect x="70" y="630" rx="20" ry="20" width="440" height="42" fill="${C.coral}"/>
+    <text x="290" y="658" font-family="Pretendard" font-size="18" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="2">SESSION 1 · 키노트</text>
+    <text x="290" y="710" font-family="Pretendard" font-size="24" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안은 어디에서 오는가</text>
 
     ${(() => {
       // 2-1 배열: 위 행 (장동선, 이다랑) + 아래 행 (김혜민 가운데)
       const r = 52;
       const positions = [
-        { ...session1[0], x: 205, y: 780 },  // 장동선 (위 좌)
-        { ...session1[1], x: 375, y: 780 },  // 이다랑 (위 우)
-        { ...session1[2], x: 290, y: 985 },  // 김혜민 (아래 중앙)
+        { ...session1[0], x: 205, y: 830 },
+        { ...session1[1], x: 375, y: 830 },
+        { ...session1[2], x: 290, y: 1030 },
       ];
       return positions.map((s) => `
         <g>
@@ -193,14 +193,13 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
 
   <!-- SESSION 2 (우, x 550~1060) -->
   <g>
-    <rect x="570" y="570" rx="20" ry="20" width="440" height="42" fill="${C.lilac}"/>
-    <text x="790" y="598" font-family="Pretendard" font-size="18" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="2">SESSION 2 · 패널토크</text>
-    <text x="790" y="650" font-family="Pretendard" font-size="24" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안과 함께 살아간다는 것</text>
+    <rect x="570" y="630" rx="20" ry="20" width="440" height="42" fill="${C.lilac}"/>
+    <text x="790" y="658" font-family="Pretendard" font-size="18" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="2">SESSION 2 · 패널토크</text>
+    <text x="790" y="710" font-family="Pretendard" font-size="24" font-weight="800" fill="${C.ink}" text-anchor="middle">양육불안과 함께 살아간다는 것</text>
 
     ${(() => {
-      // 4명을 2×2 그리드 (간격 좁게)
       const cx1 = 675, cx2 = 905;
-      const cy1 = 780, cy2 = 985;
+      const cy1 = 830, cy2 = 1030;
       const r = 52;
       const positions = [
         { ...session2[0], x: cx1, y: cy1 },
@@ -221,20 +220,19 @@ const poster = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H
   </g>
 
   <!-- 수직 구분선 (세션 사이) -->
-  <line x1="540" y1="580" x2="540" y2="1200" stroke="${C.inkBrown}" stroke-opacity="0.12" stroke-width="1"/>
+  <line x1="540" y1="640" x2="540" y2="1240" stroke="${C.inkBrown}" stroke-opacity="0.12" stroke-width="1"/>
 
-  <!-- 후원/협찬 3줄 균등 배열 y 1245-1425 -->
+  <!-- 후원/협찬 3줄 균등 배열 y 1290-1425 (세션과 60px 간격) -->
   <g>
-    <text x="${W / 2}" y="1260" font-family="Pretendard" font-size="13" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.6" letter-spacing="3">PARTNERS · 후원 / 협찬</text>
-    <rect x="60" y="1275" rx="16" ry="16" width="${W - 120}" height="155" fill="#FFFFFF" stroke="${C.inkBrown}" stroke-opacity="0.08" stroke-width="1"/>
+    <text x="${W / 2}" y="1300" font-family="Pretendard" font-size="13" font-weight="800" fill="${C.inkBrown}" text-anchor="middle" opacity="0.6" letter-spacing="3">PARTNERS · 후원 / 협찬</text>
+    <rect x="60" y="1315" rx="16" ry="16" width="${W - 120}" height="115" fill="#FFFFFF" stroke="${C.inkBrown}" stroke-opacity="0.08" stroke-width="1"/>
 
     ${(() => {
-      // 14개 협찬사 → 3줄 (5+5+4) 균등 정렬
       const rows = [partners.slice(0, 5), partners.slice(5, 10), partners.slice(10, 14)];
-      const boxX = 80, boxW = W - 160;  // 좌우 여백 여유
-      const logoMaxW = 90;
-      const logoMaxH = 32;
-      const yStarts = [1310, 1355, 1400];
+      const boxX = 80, boxW = W - 160;
+      const logoMaxW = 80;
+      const logoMaxH = 26;
+      const yStarts = [1340, 1372, 1404];
 
       return rows.map((arr, rowIdx) => {
         const y = yStarts[rowIdx];
