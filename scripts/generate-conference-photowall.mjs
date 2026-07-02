@@ -61,16 +61,14 @@ async function partnerLogoForCell(filePath, cellW, cellH) {
   return buf;
 }
 
-// 헤이그라운드 제외
+// 헤이그라운드 · Take Root · 봄마음 제외 (13개)
 const partners = [
   { name: "성동구청",        path: "seongdong.png" },
-  { name: "Take Root",       path: "takeroot.png" },
   { name: "BICYCLE",         path: "bicycle.png" },
   { name: "고마워서그래",     path: "gomaweo.png" },
   { name: "AZURE852",        path: "azure852.png" },
   { name: "sheventures",     path: "sheventures.webp" },
   { name: "몽클",            path: "mongcle.png" },
-  { name: "봄마음",          path: "bommaeum.png" },
   { name: "BOBOMAMA",        path: "bobomama.png" },
   { name: "원니스코칭센터",   path: "oneness.png" },
   { name: "앙즈로 산후조리원", path: "angelot.png" },
