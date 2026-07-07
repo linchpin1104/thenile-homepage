@@ -21,7 +21,7 @@ const Logo = ({ light, s = 1 }) => (
     </svg>
     <div>
       <div style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:18*s, fontWeight:600, color:light?"#fff":C.navy, letterSpacing:2, lineHeight:1 }}>The NILE</div>
-      {s>=.85&&<div style={{ fontSize:7.5*s, color:light?"rgba(255,255,255,.5)":C.g4, letterSpacing:2.5, marginTop:2 }}>Nurtuning Into Light Everyday</div>}
+      {s>=.85&&<div style={{ fontSize:7.5*s, color:light?"rgba(255,255,255,.5)":C.g4, letterSpacing:2.5, marginTop:2 }}>Nurtuning Into the Light Everyday</div>}
     </div>
   </div>
 );
@@ -289,7 +289,7 @@ const HeroBanner = ({go}) => {
       <div style={{position:"absolute",bottom:0,left:0,right:0,height:120,background:"linear-gradient(to top, rgba(27,42,74,.9), transparent)",zIndex:1}}/>
       {/* 콘텐츠 */}
       <Box style={{position:"relative",zIndex:2}}>
-        <FI><div style={{fontSize:16,color:C.gold,letterSpacing:3,marginBottom:24,fontWeight:500}}>사단법인 더나일 · Nurtuning Into Light Everyday</div></FI>
+        <FI><div style={{fontSize:16,color:C.gold,letterSpacing:3,marginBottom:24,fontWeight:500}}>사단법인 더나일 · Nurtuning Into the Light Everyday</div></FI>
         <FI delay={.2}><h1 style={{fontFamily:"'Noto Serif KR',serif",fontSize:"clamp(32px,5vw,52px)",fontWeight:700,color:"#fff",lineHeight:1.4,marginBottom:24,maxWidth:600,textShadow:"0 2px 20px rgba(0,0,0,.3)"}}>부모됨의 두려움이<br/><span style={{color:C.gold}}>기쁨</span>으로 전환되는<br/>여정을 함께 합니다</h1></FI>
         <FI delay={.4}><p style={{fontSize:20,color:"rgba(255,255,255,.8)",lineHeight:1.8,maxWidth:480,marginBottom:40}}>Parenthood : From dread to delight</p></FI>
         <FI delay={.6}><div style={{display:"flex",gap:16,flexWrap:"wrap"}}><BG onClick={()=>go("parentscan")}>양육불안검사 하기</BG><Btn primary={false} onClick={()=>go("about")} style={{borderColor:"rgba(255,255,255,.4)",color:"#fff"}}>더나일 알아보기</Btn></div></FI>
@@ -498,7 +498,7 @@ const HomePage=({go})=>(<>
 const AboutPage=({go})=>(<>
   <section style={{paddingTop:120,paddingBottom:80,background:C.warm}}><Box>
     <FI><Tag>더나일 소개</Tag></FI>
-    <FI delay={.1}><H2>The NILE · Nurtuning Into Light Everyday</H2></FI>
+    <FI delay={.1}><H2>The NILE · Nurtuning Into the Light Everyday</H2></FI>
     <FI delay={.2}><Desc>서울특별시 산하 비영리법인 / 기획재정부 지정 지정기부금 단체</Desc></FI>
   </Box></section>
 
