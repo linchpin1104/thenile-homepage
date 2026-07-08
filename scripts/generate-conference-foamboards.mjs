@@ -1,4 +1,5 @@
-// 2026 양육불안 컨퍼런스 폼보드 7종 (A3 세로, 30.0×42.6cm 작업 사이즈 · 사방 1.5mm 블리드)
+// 2026 양육불안 컨퍼런스 폼보드 7종 (A3 가로, 42.6×30.0cm 작업 사이즈)
+// 오려서 폼보드에 붙일 용도 → 슬로건+캐릭터 가득, 상단/하단 브랜드 최소화
 // 실행: node scripts/generate-conference-foamboards.mjs
 import sharp from "sharp";
 import { PDFDocument } from "pdf-lib";
@@ -10,11 +11,10 @@ const CM_PER_INCH = 2.54;
 const PT_PER_INCH = 72;
 const DPI = 300;
 
-// A3 작업 사이즈 (사방 1.5mm 블리드 포함)
-const WIDTH_CM = 30.0, HEIGHT_CM = 42.6;
-const W = Math.round((WIDTH_CM / CM_PER_INCH) * DPI);   // 3543
-const H = Math.round((HEIGHT_CM / CM_PER_INCH) * DPI);  // 5031
-const SAFE_MARGIN = 200;  // 안전 영역 (재단선에서 안쪽으로)
+// A3 가로 작업 사이즈 (사방 1.5mm 블리드 포함)
+const WIDTH_CM = 42.6, HEIGHT_CM = 30.0;
+const W = Math.round((WIDTH_CM / CM_PER_INCH) * DPI);   // 5031
+const H = Math.round((HEIGHT_CM / CM_PER_INCH) * DPI);  // 3543
 
 const OUT_DIR = path.join(process.env.HOME, "Downloads/더나일-폼보드");
 fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -24,35 +24,28 @@ const C = {
   coral:"#FF6B6B", peach:"#FFB088", mango:"#FFC93C",
   lilac:"#C6A8E8", rose:"#F8A8C0",
   sage:"#A8C9A0", mint:"#7BD7B7", sky:"#87C5E8",
-  white:"#FFFFFF", navy:"#1B2A4A",
+  white:"#FFFFFF", navy:"#1B2A4A", gold:"#B8860B",
 };
 
-const PARTNERS_DIR = path.join(ROOT, "public/images/partners");
-const NILE_LOGO_SVG_PATH = path.join(ROOT, "public/images/thenile-logo.svg");
-const nileSvgSource = fs.readFileSync(NILE_LOGO_SVG_PATH, "utf-8");
-
-const nileLogoBuf = await sharp(Buffer.from(nileSvgSource), { density: 300 })
-  .resize({ height: 90 }).png().toBuffer();
-const nileLogoB64 = "data:image/png;base64," + nileLogoBuf.toString("base64");
-const nileLogoMeta = await sharp(nileLogoBuf).metadata();
-
-const seongdongLogoBuf = await sharp(path.join(PARTNERS_DIR, "seongdong.png"))
-  .resize({ height: 200 }).png().toBuffer();
-const seongdongLogoB64 = "data:image/png;base64," + seongdongLogoBuf.toString("base64");
-const seongdongLogoMeta = await sharp(seongdongLogoBuf).metadata();
-
-const PATHS = {
+// ─── 사이트 EmoShape 경로 그대로 ───
+const SHAPES = {
+  blob:"M50 8c18 0 34 12 38 28s-6 36-22 44-38 4-46-10-6-34 6-46S38 8 50 8z",
+  star:"M50 8l9 24h25l-20 15 8 25-22-15-22 15 8-25L16 32h25z",
   heart:"M50 84C30 70 14 56 14 38c0-12 9-22 21-22 8 0 12 4 15 9 3-5 7-9 15-9 12 0 21 10 21 22 0 18-16 32-36 46z",
+  cloud:"M30 70c-12 0-20-8-20-18 0-9 7-16 16-17 1-13 12-23 26-23 13 0 24 9 26 21 11 1 18 9 18 18 0 11-9 19-20 19H30z",
   drop:"M50 8c10 18 30 32 30 50 0 16-13 28-30 28S20 74 20 58c0-18 20-32 30-50z",
+  arch:"M16 90V46c0-19 15-34 34-34s34 15 34 34v44H16z",
+  flower:"M50 18c0-6 5-10 10-10s10 5 10 10c0 4-2 7-5 9 5 1 9 5 9 10s-4 9-9 10c3 2 5 5 5 9 0 6-5 10-10 10s-10-4-10-10c-2 4-6 6-10 6-6 0-10-5-10-10s4-9 10-9c-4-2-6-5-6-9 0-5 4-9 9-10-3-2-5-5-5-9 0-5 4-9 9-9 5 0 9 4 10 9z",
   burst:"M50 4l8 14 16-6-2 17 16 5-12 12 12 12-16 5 2 17-16-6-8 14-8-14-16 6 2-17-16-5 12-12-12-12 16-5-2-17 16 6z",
+  pebble:"M50 12c20 0 36 14 36 34S70 88 50 88 14 72 14 46s16-34 36-34z",
   leaf:"M50 8C30 24 14 40 14 60c0 16 14 28 36 28s36-12 36-28C86 40 70 24 50 8z",
 };
 
 let _idc = 0;
 const emo = (cx, cy, size, shape, c1, c2, opts = {}) => {
-  const { rotate = 0, opacity = 1 } = opts;
-  const d = PATHS[shape];
-  const id = `fbg${++_idc}`;
+  const { rotate = 0, opacity = 1, eyes = false } = opts;
+  const d = SHAPES[shape] || SHAPES.blob;
+  const id = `emo${++_idc}`;
   const scale = size / 100;
   return `<g transform="translate(${cx - size / 2},${cy - size / 2})" opacity="${opacity}">
     <g transform="rotate(${rotate} ${size / 2} ${size / 2}) scale(${scale})">
@@ -60,73 +53,114 @@ const emo = (cx, cy, size, shape, c1, c2, opts = {}) => {
         <stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/>
       </linearGradient></defs>
       <path d="${d}" fill="url(#${id})"/>
+      ${eyes ? `<g fill="#1a1a1a"><ellipse cx="40" cy="45" rx="2.5" ry="3.5"/><ellipse cx="60" cy="45" rx="2.5" ry="3.5"/></g>` : ""}
     </g></g>`;
 };
 
-// 폼보드 정의: 슬로건 / 스타일 프리셋 / 라인 분할 규칙
+// ─── 배경 캐릭터 조밀 배치 (사이트 HERO 톤) ───
+// 캔버스 5031×3543. 캐릭터 22개+ 조밀하게 흩뿌림.
+// 슬로건 중심 (y ~1600-2100) 은 비워두고 주변을 채움.
+function bgCharacters() {
+  return [
+    // 상단 왼쪽 존
+    emo(  460,  380, 340, "burst",  C.coral,  C.mango,  { rotate: -8,  opacity: 0.55 }),
+    emo(  980,  580, 240, "cloud",  C.sky,    C.mint,   { rotate:  6,  opacity: 0.5 }),
+    emo( 1600,  360, 200, "star",   C.mango,  C.peach,  { rotate: -12, opacity: 0.55 }),
+    emo(  280,  820, 260, "heart",  C.rose,   C.lilac,  { rotate: 10,  opacity: 0.5 }),
+
+    // 상단 오른쪽 존
+    emo( 4650,  400, 320, "blob",   C.peach,  C.rose,   { rotate: -15, opacity: 0.5 }),
+    emo( 4180,  660, 220, "flower", C.mint,   C.sky,    { rotate: 20,  opacity: 0.55 }),
+    emo( 3550,  340, 180, "drop",   C.lilac,  C.rose,   { rotate: -10, opacity: 0.55 }),
+    emo( 4780,  920, 240, "leaf",   C.sage,   C.mint,   { rotate: 22,  opacity: 0.5 }),
+
+    // 좌측 세로 존 (슬로건 옆)
+    emo(  340, 1500, 280, "flower", C.coral,  C.mango,  { rotate: 12,  opacity: 0.45 }),
+    emo(  240, 2000, 220, "pebble", C.sage,   C.mint,   { rotate: -6,  opacity: 0.5 }),
+    emo(  420, 2400, 260, "arch",   C.mango,  C.peach,  { rotate:  8,  opacity: 0.45 }),
+
+    // 우측 세로 존 (슬로건 옆)
+    emo( 4700, 1500, 260, "star",   C.lilac,  C.rose,   { rotate: -14, opacity: 0.5 }),
+    emo( 4820, 2000, 220, "drop",   C.mint,   C.sky,    { rotate: 18,  opacity: 0.5 }),
+    emo( 4620, 2400, 300, "cloud",  C.peach,  C.rose,   { rotate: -8,  opacity: 0.45 }),
+
+    // 하단 왼쪽 존
+    emo(  580, 3020, 280, "burst",  C.mango,  C.peach,  { rotate: 15,  opacity: 0.5 }),
+    emo( 1200, 3200, 220, "heart",  C.rose,   C.coral,  { rotate: -10, opacity: 0.5 }),
+    emo( 1800, 3060, 200, "leaf",   C.sage,   C.mint,   { rotate:  6,  opacity: 0.55 }),
+
+    // 하단 오른쪽 존
+    emo( 4400, 3060, 260, "flower", C.lilac,  C.mango,  { rotate: -12, opacity: 0.5 }),
+    emo( 3760, 3220, 220, "blob",   C.mint,   C.sky,    { rotate: 10,  opacity: 0.5 }),
+    emo( 3200, 3080, 240, "star",   C.coral,  C.peach,  { rotate: -6,  opacity: 0.5 }),
+
+    // 상단 중앙 (헤더 아래)
+    emo( 2200,  520, 160, "drop",   C.sky,    C.mint,   { rotate: 15,  opacity: 0.4 }),
+    emo( 2900,  520, 160, "heart",  C.rose,   C.lilac,  { rotate: -15, opacity: 0.4 }),
+
+    // 하단 중앙
+    emo( 2400, 3180, 180, "pebble", C.mango,  C.peach,  { rotate:  0,  opacity: 0.4 }),
+    emo( 2700, 3180, 180, "flower", C.lilac,  C.mint,   { rotate: 12,  opacity: 0.4 }),
+  ].join("\n  ");
+}
+
+// ─── 폼보드 정의 ───
 const boards = [
   {
     name: "01-메인타이틀",
     lines: ["2026", "양육불안 컨퍼런스"],
-    lineSize: [500, 300],
+    lineSize: [520, 340],
     fill: [C.coral, "gradient"],
-    weight: 900,
-    letterSpacing: -8,
-    kind: "title",
+    letterSpacing: [-14, -8],
+    lineGap: 40,
   },
   {
     name: "02-불안을-불안해하지-마세요",
-    lines: ["불안을", "불안해하지 마세요"],
-    lineSize: [420, 300],
+    lines: ["불안을 불안해하지", "마세요"],
+    lineSize: [420, 420],
     fill: ["gradient", "gradient"],
-    weight: 900,
-    letterSpacing: -6,
-    kind: "slogan",
+    letterSpacing: [-8, -8],
+    lineGap: 30,
   },
   {
     name: "03-불안을-넘어-행복으로",
     lines: ["불안을 넘어", "행복으로"],
-    lineSize: [360, 360],
+    lineSize: [440, 480],
     fill: ["gradient", "gradient"],
-    weight: 900,
-    letterSpacing: -6,
-    kind: "slogan",
+    letterSpacing: [-8, -8],
+    lineGap: 30,
   },
   {
     name: "04-걱정-많은-부모-여기-있습니다",
     lines: ["걱정 많은 부모,", "여기 있습니다"],
-    lineSize: [280, 320],
+    lineSize: [380, 420],
     fill: ["gradient", "gradient"],
-    weight: 900,
-    letterSpacing: -6,
-    kind: "slogan",
+    letterSpacing: [-6, -8],
+    lineGap: 30,
   },
   {
     name: "05-나만-불안한-게-아니었어",
     lines: ["나만 불안한 게", "아니었어!"],
-    lineSize: [300, 340],
+    lineSize: [400, 460],
     fill: ["gradient", "gradient"],
-    weight: 900,
-    letterSpacing: -6,
-    kind: "slogan",
+    letterSpacing: [-6, -8],
+    lineGap: 30,
   },
   {
     name: "06-불안하지만-잘하고-있습니다",
     lines: ["불안하지만,", "잘하고 있습니다"],
-    lineSize: [320, 300],
+    lineSize: [420, 400],
     fill: ["gradient", "gradient"],
-    weight: 900,
-    letterSpacing: -6,
-    kind: "slogan",
+    letterSpacing: [-8, -6],
+    lineGap: 30,
   },
   {
     name: "07-우리의-양육-다시-다정하게",
     lines: ["우리의 양육,", "다시 다정하게"],
-    lineSize: [320, 320],
+    lineSize: [420, 420],
     fill: ["gradient", "gradient"],
-    weight: 900,
-    letterSpacing: -6,
-    kind: "slogan",
+    letterSpacing: [-6, -8],
+    lineGap: 30,
   },
 ];
 
@@ -134,15 +168,16 @@ function renderBoard(b) {
   const gradFill = `url(#titleGradient)`;
   const resolveFill = (v) => v === "gradient" ? gradFill : v;
 
-  // 세로 중앙 정렬
-  const totalTextH = b.lines.reduce((sum, _, i) => sum + b.lineSize[i], 0) + (b.lines.length - 1) * 50;
+  // 세로 중앙 정렬 계산
+  const totalTextH = b.lines.reduce((sum, _, i) => sum + b.lineSize[i], 0) + (b.lines.length - 1) * b.lineGap;
   let cursorY = (H - totalTextH) / 2 + b.lineSize[0] * 0.85;
 
   const lineElements = b.lines.map((line, i) => {
     const fs = b.lineSize[i];
     const fill = resolveFill(b.fill[i]);
-    const el = `<text x="${W / 2}" y="${cursorY}" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="${fs}" font-weight="${b.weight}" fill="${fill}" text-anchor="middle" letter-spacing="${b.letterSpacing}">${line}</text>`;
-    cursorY += fs + 50;
+    const ls = Array.isArray(b.letterSpacing) ? b.letterSpacing[i] : b.letterSpacing;
+    const el = `<text x="${W / 2}" y="${cursorY}" font-family="'Noto Serif KR', 'Pretendard', sans-serif" font-size="${fs}" font-weight="900" fill="${fill}" text-anchor="middle" letter-spacing="${ls}">${line}</text>`;
+    cursorY += fs + b.lineGap;
     return el;
   }).join("\n    ");
 
@@ -157,38 +192,11 @@ function renderBoard(b) {
     </linearGradient>
   </defs>
 
-  <!-- 배경 캐릭터 (로고 영역 피해서 배치) -->
-  ${emo(W / 2, H - 900, 380, "burst", C.coral, C.mango, { rotate: 18, opacity: 0.35 })}
-  ${emo(240, H - 1450, 300, "heart", C.rose, C.lilac, { rotate: -12, opacity: 0.5 })}
-  ${emo(200, H - 550, 260, "drop", C.lilac, C.sky, { rotate: -15, opacity: 0.5 })}
-  ${emo(W - 280, H - 500, 280, "leaf", C.sage, C.mint, { rotate: 22, opacity: 0.5 })}
+  <!-- 배경 캐릭터 24종 조밀 배치 -->
+  ${bgCharacters()}
 
-  <!-- 상단 로고 (좌 더나일, 우 성동구) -->
-  ${(() => {
-    const baseY = 240;
-    const rowH = Math.max(nileLogoMeta.height, seongdongLogoMeta.height);
-    const nileY = baseY + (rowH - nileLogoMeta.height) / 2;
-    const sdY = baseY + (rowH - seongdongLogoMeta.height) / 2;
-    return `
-      <image x="${SAFE_MARGIN}" y="${nileY}" width="${nileLogoMeta.width}" height="${nileLogoMeta.height}" href="${nileLogoB64}"/>
-      <image x="${W - seongdongLogoMeta.width - SAFE_MARGIN}" y="${sdY}" width="${seongdongLogoMeta.width}" height="${seongdongLogoMeta.height}" href="${seongdongLogoB64}"/>
-    `;
-  })()}
-
-  <!-- 상단 헤더 칩 (메인 타이틀이 아닌 경우만) -->
-  ${b.kind !== "title" ? `
-    <g transform="translate(${W / 2}, 620)">
-      <rect x="-560" y="-70" rx="60" ry="60" width="1120" height="140" fill="${C.white}" stroke="${C.coral}" stroke-width="4" stroke-opacity="0.55"/>
-      <text x="0" y="18" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="80" font-weight="800" fill="${C.coral}" text-anchor="middle" letter-spacing="8">2026 양육불안 컨퍼런스</text>
-    </g>
-  ` : ""}
-
-  <!-- 메인 텍스트 -->
+  <!-- 메인 슬로건 텍스트 -->
   ${lineElements}
-
-  <!-- 하단 브랜드 라인 -->
-  <text x="${W / 2}" y="${H - 320}" font-family="'Cormorant Garamond',serif" font-size="72" font-style="italic" font-weight="500" fill="${C.g4}" text-anchor="middle" letter-spacing="4">Nurtuning Into the Light Everyday</text>
-  <text x="${W / 2}" y="${H - 220}" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="52" font-weight="700" fill="${C.inkBrown}" text-anchor="middle" letter-spacing="6" opacity="0.75">2026. 7. 9. (목) · 헤이그라운드 성수시작점</text>
 </svg>`;
 }
 
@@ -200,7 +208,6 @@ async function saveBoard(b) {
     .toFile(outPng);
   const pngStat = fs.statSync(outPng);
 
-  // PDF 생성 (실제 물리 사이즈: cm → pt)
   const widthPt = (WIDTH_CM / CM_PER_INCH) * PT_PER_INCH;
   const heightPt = (HEIGHT_CM / CM_PER_INCH) * PT_PER_INCH;
   const pdfPath = path.join(OUT_DIR, `${b.name}.pdf`);
@@ -208,7 +215,7 @@ async function saveBoard(b) {
   const pdfDoc = await PDFDocument.create();
   pdfDoc.setTitle(`2026 양육불안 컨퍼런스 - 폼보드 ${b.name}`);
   pdfDoc.setAuthor("사단법인 더나일");
-  pdfDoc.setSubject(`${WIDTH_CM}×${HEIGHT_CM}cm A3 인쇄 발주용`);
+  pdfDoc.setSubject(`${WIDTH_CM}×${HEIGHT_CM}cm A3 가로 인쇄 발주용`);
   const pngBytes = fs.readFileSync(outPng);
   const pngImage = await pdfDoc.embedPng(pngBytes);
   const page = pdfDoc.addPage([widthPt, heightPt]);
@@ -219,12 +226,11 @@ async function saveBoard(b) {
 
   console.log(`✓ [${b.name}]`);
   console.log(`  PNG: ${(pngStat.size / 1024 / 1024).toFixed(2)} MB · ${W}×${H} px`);
-  console.log(`  PDF: ${(pdfStat.size / 1024 / 1024).toFixed(2)} MB · ${widthPt.toFixed(0)}×${heightPt.toFixed(0)} pt (${WIDTH_CM}×${HEIGHT_CM}cm)`);
+  console.log(`  PDF: ${(pdfStat.size / 1024 / 1024).toFixed(2)} MB · ${widthPt.toFixed(0)}×${heightPt.toFixed(0)} pt`);
 }
 
-console.log(`\n═══ 폼보드 A3 발주용 생성 ═══`);
+console.log(`\n═══ 폼보드 A3 가로 발주용 생성 ═══`);
 console.log(`캔버스: ${W}×${H} (${WIDTH_CM}×${HEIGHT_CM}cm @ ${DPI}dpi)`);
-console.log(`재단 사이즈: 29.7×42.3cm · 사방 1.5mm 블리드 포함`);
 console.log(`저장 위치: ${OUT_DIR}\n`);
 
 for (const b of boards) {
