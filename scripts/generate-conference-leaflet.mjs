@@ -475,9 +475,17 @@ const backSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${
   <text x="${W / 2}" y="${H - 25}" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="14"        fill="${C.g5}" text-anchor="middle" letter-spacing="3">The NILE · thenile.kr · Nurtuning Into the Light Everyday</text>
 </svg>`;
 
-// ─── 두 페이지 PNG 생성 ───
-await sharp(Buffer.from(frontSvg)).png({ quality: 95 }).toFile(OUT_FRONT);
-await sharp(Buffer.from(backSvg)).png({ quality: 95 }).toFile(OUT_BACK);
+// ─── 두 페이지 PNG 생성 (A4 300dpi = 2480×3508) ───
+// SVG viewBox: 1080×1528 → density 300으로 4500×6367 raster → 2480×3508로 resize (lanczos)
+const A4_PX_W = 2480, A4_PX_H = 3508;   // A4 300dpi
+async function renderPage(svgStr, outPath) {
+  await sharp(Buffer.from(svgStr), { density: 300 })
+    .resize({ width: A4_PX_W, height: A4_PX_H, kernel: "lanczos3" })
+    .png({ compressionLevel: 9 })
+    .toFile(outPath);
+}
+await renderPage(frontSvg, OUT_FRONT);
+await renderPage(backSvg, OUT_BACK);
 const frontStat = fs.statSync(OUT_FRONT);
 const backStat = fs.statSync(OUT_BACK);
 
