@@ -104,10 +104,7 @@ const boards = [
     lineGap: 40,
     bg: C.cream,                                          // 크림 (브랜드 기본)
     gradStops: [C.coral, C.mango, C.lilac],
-    charPalette: [                                         // 코랄·망고·라일락 계열
-      [C.coral, C.mango], [C.rose, C.lilac], [C.mint, C.sky],
-      [C.lilac, C.rose], [C.mango, C.peach], [C.sage, C.mint],
-    ],
+    noCharacters: true,                                    // 텍스트 최대한 살리기
   },
   {
     name: "02-불안을-불안해하지-마세요",
@@ -118,10 +115,7 @@ const boards = [
     lineGap: 30,
     bg: "#DFF3E9",                                         // 소프트 민트
     gradStops: [C.coral, C.mango, C.lilac],
-    charPalette: [
-      [C.coral, C.rose], [C.mango, C.peach], [C.lilac, C.sky],
-      [C.rose, C.lilac], [C.coral, C.peach], [C.mango, C.rose],
-    ],
+    noCharacters: true,                                    // 민트 배경 + 그라디언트 상충 방지
   },
   {
     name: "03-불안을-넘어-행복으로",
@@ -188,10 +182,7 @@ const boards = [
     lineGap: 30,
     bg: "#FFF0C7",                                         // 소프트 버터 옐로우
     gradStops: [C.coral, C.lilac, C.sage],
-    charPalette: [
-      [C.coral, C.rose], [C.lilac, C.rose], [C.sage, C.mint],
-      [C.rose, C.lilac], [C.mint, C.sky], [C.coral, C.lilac],
-    ],
+    noCharacters: true,                                    // 옐로우 배경 + 파스텔 캐릭터 상충 방지
   },
 ];
 
@@ -230,8 +221,8 @@ function renderBoard(b) {
     </linearGradient>
   </defs>
 
-  <!-- 배경 캐릭터 (팔레트 순환) -->
-  ${bgCharacters(palette)}
+  <!-- 배경 캐릭터 (팔레트 순환) — noCharacters 시 skip -->
+  ${b.noCharacters ? "" : bgCharacters(palette)}
 
   <!-- 메인 슬로건 텍스트 -->
   ${lineElements}
