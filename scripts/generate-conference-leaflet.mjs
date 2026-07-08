@@ -309,26 +309,29 @@ const frontSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="$
     }).join("\n");
   })()}
 
-  <!-- 슬라이도 QR + 뒷면 안내 (컴팩트) -->
-  <g transform="translate(0, 1215)">
-    <!-- Slido QR 카드 (좌) -->
+  <!-- 슬라이도 QR + 뒷면 안내 (여유 확대) -->
+  <g transform="translate(0, 1135)">
+    <!-- Slido QR 카드 (좌) — QR 140 · 카드 190 -->
     <g transform="translate(70, 0)">
-      <rect x="0" y="0" rx="16" ry="16" width="440" height="105" fill="${C.white}" stroke="${C.sky}" stroke-width="2" stroke-opacity="0.55"/>
+      <rect x="0" y="0" rx="18" ry="18" width="440" height="190" fill="${C.white}" stroke="${C.sky}" stroke-width="2" stroke-opacity="0.55"/>
       ${slidoQR
-        ? `<image x="12" y="12" width="80" height="80" href="${slidoQR}"/>`
-        : `<rect x="12" y="12" width="80" height="80" fill="#EEE"/>`}
-      <text x="106" y="38" font-family="${FONT}" font-size="16" font-weight="800" fill="${C.sky}">실시간 질문 · SLIDO</text>
-      <text x="106" y="62" font-family="${FONT}" font-size="12" font-weight="600" fill="${C.inkBrown}" opacity="0.75">궁금한 점을 남겨주세요</text>
-      <text x="106" y="84" font-family="${FONT}" font-size="11" font-weight="600" fill="${C.inkBrown}" opacity="0.55">QR 스캔하여 실시간 참여</text>
+        ? `<image x="22" y="25" width="140" height="140" href="${slidoQR}"/>`
+        : `<rect x="22" y="25" width="140" height="140" fill="#EEE"/>`}
+      <text x="185" y="62" font-family="${FONT}" font-size="15" font-weight="700" fill="${C.sky}" letter-spacing="2">SLIDO</text>
+      <text x="185" y="100" font-family="${FONT}" font-size="22" font-weight="800" fill="${C.ink}" letter-spacing="-0.5">실시간 질문</text>
+      <text x="185" y="128" font-family="${FONT}" font-size="13" font-weight="600" fill="${C.inkBrown}" opacity="0.75">궁금한 점을</text>
+      <text x="185" y="147" font-family="${FONT}" font-size="13" font-weight="600" fill="${C.inkBrown}" opacity="0.75">남겨주세요</text>
+      <text x="185" y="172" font-family="${FONT}" font-size="11" font-weight="700" fill="${C.sky}">→ QR 스캔하여 참여</text>
     </g>
 
-    <!-- 뒷면 안내 카드 (우) -->
+    <!-- 뒷면 안내 카드 (우) — 카드 190 -->
     <g transform="translate(${W - 510}, 0)">
-      <rect x="0" y="0" rx="16" ry="16" width="440" height="105" fill="${C.ink}"/>
-      <text x="24" y="32" font-family="${FONT}" font-size="12" font-weight="800" fill="${C.mango}" letter-spacing="3">THE NILE</text>
-      <text x="24" y="60" font-family="${FONT}" font-size="18" font-weight="800" fill="${C.cream}" letter-spacing="-0.5">사단법인 더나일 이야기</text>
-      <text x="24" y="80" font-family="${FONT}" font-size="12" font-weight="500" fill="${C.peach}">부모됨의 여정을 함께 걷는 사람들</text>
-      <text x="24" y="97" font-family="${FONT}" font-size="10" font-weight="700" fill="${C.mango}">→ 뒷면에서 계속됩니다</text>
+      <rect x="0" y="0" rx="18" ry="18" width="440" height="190" fill="${C.ink}"/>
+      <text x="32" y="52" font-family="${FONT}" font-size="14" font-weight="800" fill="${C.mango}" letter-spacing="4">THE NILE</text>
+      <text x="32" y="98" font-family="${FONT}" font-size="24" font-weight="800" fill="${C.cream}" letter-spacing="-1">사단법인 더나일 이야기</text>
+      <text x="32" y="134" font-family="${FONT}" font-size="13" font-weight="500" fill="${C.peach}">부모됨의 여정을</text>
+      <text x="32" y="153" font-family="${FONT}" font-size="13" font-weight="500" fill="${C.peach}">함께 걷는 사람들</text>
+      <text x="32" y="178" font-family="${FONT}" font-size="12" font-weight="700" fill="${C.mango}">→ 뒷면에서 계속됩니다</text>
     </g>
   </g>
 
