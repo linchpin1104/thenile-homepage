@@ -78,10 +78,11 @@ const seongdongLogoBuf = await sharp(path.join(PARTNERS_DIR, "seongdong.png"))
 const seongdongLogoB64 = "data:image/png;base64," + seongdongLogoBuf.toString("base64");
 const seongdongLogoMeta = await sharp(seongdongLogoBuf).metadata();
 
-async function partnerLogoNormalize(filePath, targetW = 200, targetH = 60) {
+// 파트너 로고 정규화: 표시 셀 종횡비(140:44 ≈ 3.18:1)와 동일 · 여백 최소로 시각 크기 균일
+async function partnerLogoNormalize(filePath, targetW = 420, targetH = 132) {
   if (!fs.existsSync(filePath)) return null;
   const resized = await sharp(filePath)
-    .resize({ width: targetW - 20, height: targetH - 10, fit: "inside", background: { r: 255, g: 255, b: 255, alpha: 0 } })
+    .resize({ width: targetW - 24, height: targetH - 12, fit: "inside", background: { r: 255, g: 255, b: 255, alpha: 0 } })
     .toBuffer();
   const buf = await sharp({
     create: { width: targetW, height: targetH, channels: 4, background: { r: 255, g: 255, b: 255, alpha: 1 } },
@@ -331,21 +332,21 @@ const frontSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="$
     </g>
   </g>
 
-  <!-- 후원 / 협찬 (흰 배경 박스) -->
-  <g transform="translate(0, 1340)">
-    <rect x="70" y="0" rx="16" ry="16" width="${W - 140}" height="150"
+  <!-- 후원 / 협찬 (흰 배경 박스) — 균일 셀 크기 -->
+  <g transform="translate(0, 1330)">
+    <rect x="70" y="0" rx="16" ry="16" width="${W - 140}" height="168"
           fill="${C.white}" stroke="${C.inkBrown}" stroke-opacity="0.12" stroke-width="1"/>
-    <text x="${W / 2}" y="24" font-family="${FONT}" font-size="11" font-weight="800"
+    <text x="${W / 2}" y="26" font-family="${FONT}" font-size="11" font-weight="800"
           fill="${C.inkBrown}" text-anchor="middle" opacity="0.55" letter-spacing="3">PARTNERS · 후원 / 협찬</text>
 
     ${(() => {
       const cols = 5;
       const cellW = 180;
-      const cellH = 38;
+      const cellH = 44;
       const gridW = cols * cellW;
       const gridX = (W - gridW) / 2;
-      const gridTopY = 42;
-      const logoW = 100, logoH = 28;
+      const gridTopY = 44;
+      const logoW = 140, logoH = 40;   // 셀 안 로고 크기 확대 (더 균일하게 보임)
       return partners.map((p, i) => {
         const col = i % cols;
         const row = Math.floor(i / cols);
@@ -478,7 +479,7 @@ const backSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${
     }).join("");
   })()}
 
-  <!-- 페이서 후원 CTA — QR 축소 · 텍스트 확대로 균형 재조정 -->
+  <!-- 페이서 후원 CTA — 메인 문구 한 줄 + 크게, 가운데 여백 채움 -->
   <g transform="translate(0, 1220)">
     <rect x="70" y="0" rx="20" ry="20" width="${W - 140}" height="270" fill="${C.navy}"/>
 
@@ -487,7 +488,7 @@ const backSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${
       const QR_X = W - 100 - QR_SIZE;
       const QR_Y = 55;
       return `
-        <!-- 오른쪽: 후원 QR + 하단 라벨 확대 -->
+        <!-- 오른쪽: 후원 QR + 하단 라벨 -->
         ${donationQR
           ? `<image x="${QR_X}" y="${QR_Y}" width="${QR_SIZE}" height="${QR_SIZE}" href="${donationQR}"/>`
           : `<rect x="${QR_X}" y="${QR_Y}" width="${QR_SIZE}" height="${QR_SIZE}" fill="#EEE"/>`}
@@ -495,18 +496,14 @@ const backSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${
       `;
     })()}
 
-    <!-- 왼쪽: 문구 확대 -->
+    <!-- 왼쪽: 문구 (메인 한 줄 · 확대) -->
     <text x="110" y="62" font-family="${FONT}" font-size="15" font-weight="700"
           fill="${C.mango}" letter-spacing="4">PACER · 페이서 되기</text>
-    <text x="110" y="120" font-family="${FONT}" font-size="36" font-weight="800"
-          fill="${C.cream}" letter-spacing="-1">부모됨의 여정을</text>
-    <text x="110" y="168" font-family="${FONT}" font-size="36" font-weight="800"
-          fill="${C.cream}" letter-spacing="-1">함께 걸어주세요</text>
-    <text x="110" y="210" font-family="${FONT}" font-size="14" font-weight="500"
-          fill="rgba(255,248,236,0.78)">페이서 = 함께 걷는 사람들.</text>
-    <text x="110" y="232" font-family="${FONT}" font-size="14" font-weight="500"
-          fill="rgba(255,248,236,0.78)">더 나은 사회를 위해 힘을 모으는 후원자입니다.</text>
-    <text x="110" y="257" font-family="${FONT}" font-size="12" font-weight="700"
+    <text x="110" y="140" font-family="${FONT}" font-size="52" font-weight="800"
+          fill="${C.cream}" letter-spacing="-2">부모됨의 여정을 함께 걸어주세요</text>
+    <text x="110" y="192" font-family="${FONT}" font-size="14" font-weight="500"
+          fill="rgba(255,248,236,0.78)">페이서 = 함께 걷는 사람들. 더 나은 사회를 위해 힘을 모으는 후원자입니다.</text>
+    <text x="110" y="222" font-family="${FONT}" font-size="13" font-weight="700"
           fill="${C.mango}">→ 지정기부금 영수증 발급 가능</text>
   </g>
 
