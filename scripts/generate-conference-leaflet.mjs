@@ -308,32 +308,61 @@ const frontSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="$
     }).join("\n");
   })()}
 
-  <!-- 슬라이도 QR + 뒷면 안내 -->
-  <g transform="translate(0, 1230)">
+  <!-- 슬라이도 QR + 뒷면 안내 (컴팩트) -->
+  <g transform="translate(0, 1215)">
     <!-- Slido QR 카드 (좌) -->
     <g transform="translate(70, 0)">
-      <rect x="0" y="0" rx="18" ry="18" width="440" height="150" fill="${C.white}" stroke="${C.sky}" stroke-width="2" stroke-opacity="0.55"/>
+      <rect x="0" y="0" rx="16" ry="16" width="440" height="105" fill="${C.white}" stroke="${C.sky}" stroke-width="2" stroke-opacity="0.55"/>
       ${slidoQR
-        ? `<image x="18" y="18" width="115" height="115" href="${slidoQR}"/>`
-        : `<rect x="18" y="18" width="115" height="115" fill="#EEE"/>`}
-      <text x="150" y="52" font-family="Pretendard" font-size="18" font-weight="800" fill="${C.sky}">실시간 질문 · SLIDO</text>
-      <text x="150" y="78" font-family="Pretendard" font-size="13" font-weight="600" fill="${C.inkBrown}" opacity="0.75">궁금한 점을 남겨주세요</text>
-      <text x="150" y="102" font-family="Pretendard" font-size="12" font-weight="600" fill="${C.inkBrown}" opacity="0.55">QR 스캔하여 실시간 참여</text>
-      <text x="150" y="128" font-family="Pretendard" font-size="10" font-weight="600" fill="${C.g5}" opacity="0.6">app.sli.do</text>
+        ? `<image x="12" y="12" width="80" height="80" href="${slidoQR}"/>`
+        : `<rect x="12" y="12" width="80" height="80" fill="#EEE"/>`}
+      <text x="106" y="38" font-family="${FONT}" font-size="16" font-weight="800" fill="${C.sky}">실시간 질문 · SLIDO</text>
+      <text x="106" y="62" font-family="${FONT}" font-size="12" font-weight="600" fill="${C.inkBrown}" opacity="0.75">궁금한 점을 남겨주세요</text>
+      <text x="106" y="84" font-family="${FONT}" font-size="11" font-weight="600" fill="${C.inkBrown}" opacity="0.55">QR 스캔하여 실시간 참여</text>
     </g>
 
     <!-- 뒷면 안내 카드 (우) -->
     <g transform="translate(${W - 510}, 0)">
-      <rect x="0" y="0" rx="18" ry="18" width="440" height="150" fill="${C.ink}"/>
-      <text x="30" y="42" font-family="${FONT}" font-size="14" font-weight="800" fill="${C.mango}" letter-spacing="3">THE NILE</text>
-      <text x="30" y="80" font-family="${FONT}" font-size="22" font-weight="800" fill="${C.cream}" letter-spacing="-0.5">사단법인 더나일 이야기</text>
-      <text x="30" y="108" font-family="${FONT}" font-size="13" font-weight="500" fill="${C.peach}">부모됨의 여정을 함께 걷는 사람들</text>
-      <text x="30" y="132" font-family="${FONT}" font-size="12" font-weight="700" fill="${C.mango}" letter-spacing="0.5">→ 뒷면에서 계속됩니다</text>
+      <rect x="0" y="0" rx="16" ry="16" width="440" height="105" fill="${C.ink}"/>
+      <text x="24" y="32" font-family="${FONT}" font-size="12" font-weight="800" fill="${C.mango}" letter-spacing="3">THE NILE</text>
+      <text x="24" y="60" font-family="${FONT}" font-size="18" font-weight="800" fill="${C.cream}" letter-spacing="-0.5">사단법인 더나일 이야기</text>
+      <text x="24" y="80" font-family="${FONT}" font-size="12" font-weight="500" fill="${C.peach}">부모됨의 여정을 함께 걷는 사람들</text>
+      <text x="24" y="97" font-family="${FONT}" font-size="10" font-weight="700" fill="${C.mango}">→ 뒷면에서 계속됩니다</text>
     </g>
   </g>
 
+  <!-- 후원 / 협찬 (흰 배경 박스) -->
+  <g transform="translate(0, 1340)">
+    <rect x="70" y="0" rx="16" ry="16" width="${W - 140}" height="150"
+          fill="${C.white}" stroke="${C.inkBrown}" stroke-opacity="0.12" stroke-width="1"/>
+    <text x="${W / 2}" y="24" font-family="${FONT}" font-size="11" font-weight="800"
+          fill="${C.inkBrown}" text-anchor="middle" opacity="0.55" letter-spacing="3">PARTNERS · 후원 / 협찬</text>
+
+    ${(() => {
+      const cols = 5;
+      const cellW = 180;
+      const cellH = 38;
+      const gridW = cols * cellW;
+      const gridX = (W - gridW) / 2;
+      const gridTopY = 42;
+      const logoW = 100, logoH = 28;
+      return partners.map((p, i) => {
+        const col = i % cols;
+        const row = Math.floor(i / cols);
+        const cx = gridX + col * cellW + cellW / 2;
+        const cy = gridTopY + row * cellH + cellH / 2;
+        if (!p.img) {
+          return `<text x="${cx}" y="${cy + 4}" font-family="${FONT}" font-size="11" font-weight="700" fill="${C.inkBrown}" text-anchor="middle">${p.name}</text>`;
+        }
+        return `<image x="${cx - logoW/2}" y="${cy - logoH/2}" width="${logoW}" height="${logoH}"
+                       href="${p.img}" preserveAspectRatio="xMidYMid meet"/>`;
+      }).join("");
+    })()}
+  </g>
+
   <!-- 최하단 브랜드 라인 -->
-  <text x="${W / 2}" y="${H - 30}" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="15"        fill="${C.g5}" text-anchor="middle" letter-spacing="3">The NILE · thenile.kr</text>
+  <text x="${W / 2}" y="${H - 18}" font-family="${FONT}" font-size="12"
+        fill="${C.g5}" text-anchor="middle" letter-spacing="3">The NILE · thenile.kr</text>
 </svg>`;
 
 // ═══════════════════════════════════════════════
