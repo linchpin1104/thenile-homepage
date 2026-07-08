@@ -213,9 +213,9 @@ const frontSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="$
   <!-- 타임테이블 -->
   ${(() => {
     const TIME_X = 90;
-    const TIME_W = 170;
-    const CONTENT_X = 300;
-    const SPEAKER_R = 30;
+    const TIME_W = 180;
+    const CONTENT_X = 310;
+    const SPEAKER_R = 34;
 
     const schedule = [
       { time: "10:50 – 11:00", title: "등록 · 체크인 · 입장", kind: "plain" },
@@ -253,50 +253,65 @@ const frontSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="$
         ],
         kind: "session",
       },
+      // 슬라이도 인라인: 세션 2 아래에 QR 바로
+      { time: "SLIDO", kind: "slido", accent: C.sky },
       { time: "14:30 – 15:00", title: "클로징 · 후원사 소개 · 마무리", kind: "plain" },
     ];
 
     let cy = 500;
     return schedule.map((row, idx) => {
       const isSession = row.kind === "session";
-      const rowH = isSession ? 220 : 55;
+      const isSlido = row.kind === "slido";
+      const rowH = isSession ? 240 : isSlido ? 130 : 60;
       const top = cy;
 
       const timeBadge = `
-        <rect x="${TIME_X}" y="${top + (isSession ? 8 : 8)}" rx="10" ry="10" width="${TIME_W}" height="40"
-              fill="${isSession ? row.accent : C.ink}"/>
-        <text x="${TIME_X + TIME_W / 2}" y="${top + 34}"
-              font-family="Pretendard" font-size="18" font-weight="800" fill="${C.white}" text-anchor="middle">${row.time}</text>
+        <rect x="${TIME_X}" y="${top + 10}" rx="10" ry="10" width="${TIME_W}" height="44"
+              fill="${isSession || isSlido ? row.accent : C.ink}"/>
+        <text x="${TIME_X + TIME_W / 2}" y="${top + 40}"
+              font-family="${FONT}" font-size="20" font-weight="800" fill="${C.white}" text-anchor="middle" letter-spacing="${isSlido ? 3 : 0}">${row.time}</text>
       `;
 
       let content;
       if (isSession) {
-        // 세션 헤더 + 부제 + 설명 2줄 + 연사 얼굴만 (역할·훅 제거로 간결화)
         const speakerCount = row.speakers.length;
-        const speakerAreaW = 720;                             // CONTENT_X ~ CONTENT_X+720
+        const speakerAreaW = 700;
         const speakerGap = speakerAreaW / speakerCount;
         const speakerX0 = CONTENT_X + speakerGap / 2;
         const speakerFaces = row.speakers.map((s, i) => {
           const sx = speakerX0 + i * speakerGap;
-          const sy = top + 155;
+          const sy = top + 168;
           return `
             <g>
               ${circlePhoto(sx, sy, SPEAKER_R, s.img, row.accent, 2)}
-              <text x="${sx}" y="${sy + SPEAKER_R + 22}" font-family="${FONT}" font-size="14" font-weight="700" fill="${C.ink}" text-anchor="middle">${s.name}</text>
+              <text x="${sx}" y="${sy + SPEAKER_R + 24}" font-family="${FONT}" font-size="16" font-weight="700" fill="${C.ink}" text-anchor="middle">${s.name}</text>
             </g>
           `;
         }).join("");
 
         content = `
-          <text x="${CONTENT_X}" y="${top + 30}" font-family="${FONT}" font-size="16" font-weight="800" fill="${row.accent}" letter-spacing="1">${row.badge}</text>
-          <text x="${CONTENT_X}" y="${top + 62}" font-family="${FONT}" font-size="22" font-weight="800" fill="${C.ink}">${row.title}</text>
-          <text x="${CONTENT_X}" y="${top + 90}" font-family="${FONT}" font-size="13" font-weight="500" fill="${C.g5}">${row.descLines[0]}</text>
-          <text x="${CONTENT_X}" y="${top + 110}" font-family="${FONT}" font-size="13" font-weight="500" fill="${C.g5}">${row.descLines[1]}</text>
+          <text x="${CONTENT_X}" y="${top + 34}" font-family="${FONT}" font-size="18" font-weight="800" fill="${row.accent}" letter-spacing="1">${row.badge}</text>
+          <text x="${CONTENT_X}" y="${top + 70}" font-family="${FONT}" font-size="26" font-weight="800" fill="${C.ink}">${row.title}</text>
+          <text x="${CONTENT_X}" y="${top + 100}" font-family="${FONT}" font-size="14" font-weight="500" fill="${C.g5}">${row.descLines[0]}</text>
+          <text x="${CONTENT_X}" y="${top + 122}" font-family="${FONT}" font-size="14" font-weight="500" fill="${C.g5}">${row.descLines[1]}</text>
           ${speakerFaces}
+        `;
+      } else if (isSlido) {
+        // Slido 인라인 · 좌측 문구 + 우측 QR
+        const QR_SIZE = 100;
+        const QR_X = W - TIME_X - QR_SIZE - 30;
+        const QR_Y = top + 15;
+        content = `
+          <text x="${CONTENT_X}" y="${top + 46}" font-family="${FONT}" font-size="22" font-weight="800" fill="${row.accent}">실시간 질문 · SLIDO</text>
+          <text x="${CONTENT_X}" y="${top + 78}" font-family="${FONT}" font-size="15" font-weight="500" fill="${C.g5}">SESSION 2 패널에게 궁금한 점을</text>
+          <text x="${CONTENT_X}" y="${top + 100}" font-family="${FONT}" font-size="15" font-weight="500" fill="${C.g5}">QR 스캔하여 실시간 남겨주세요</text>
+          ${slidoQR
+            ? `<image x="${QR_X}" y="${QR_Y}" width="${QR_SIZE}" height="${QR_SIZE}" href="${slidoQR}"/>`
+            : `<rect x="${QR_X}" y="${QR_Y}" width="${QR_SIZE}" height="${QR_SIZE}" fill="#EEE"/>`}
         `;
       } else {
         content = `
-          <text x="${CONTENT_X}" y="${top + 34}" font-family="${FONT}" font-size="19" font-weight="600" fill="${C.inkBrown}">${row.title}</text>
+          <text x="${CONTENT_X}" y="${top + 38}" font-family="${FONT}" font-size="21" font-weight="600" fill="${C.inkBrown}">${row.title}</text>
         `;
       }
 
@@ -309,47 +324,21 @@ const frontSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="$
     }).join("\n");
   })()}
 
-  <!-- 슬라이도 QR + 뒷면 안내 (여유 확대) -->
-  <g transform="translate(0, 1135)">
-    <!-- Slido QR 카드 (좌) — QR 140 · 카드 190 -->
-    <g transform="translate(70, 0)">
-      <rect x="0" y="0" rx="18" ry="18" width="440" height="190" fill="${C.white}" stroke="${C.sky}" stroke-width="2" stroke-opacity="0.55"/>
-      ${slidoQR
-        ? `<image x="22" y="25" width="140" height="140" href="${slidoQR}"/>`
-        : `<rect x="22" y="25" width="140" height="140" fill="#EEE"/>`}
-      <text x="185" y="62" font-family="${FONT}" font-size="15" font-weight="700" fill="${C.sky}" letter-spacing="2">SLIDO</text>
-      <text x="185" y="100" font-family="${FONT}" font-size="22" font-weight="800" fill="${C.ink}" letter-spacing="-0.5">실시간 질문</text>
-      <text x="185" y="128" font-family="${FONT}" font-size="13" font-weight="600" fill="${C.inkBrown}" opacity="0.75">궁금한 점을</text>
-      <text x="185" y="147" font-family="${FONT}" font-size="13" font-weight="600" fill="${C.inkBrown}" opacity="0.75">남겨주세요</text>
-      <text x="185" y="172" font-family="${FONT}" font-size="11" font-weight="700" fill="${C.sky}">→ QR 스캔하여 참여</text>
-    </g>
-
-    <!-- 뒷면 안내 카드 (우) — 카드 190 -->
-    <g transform="translate(${W - 510}, 0)">
-      <rect x="0" y="0" rx="18" ry="18" width="440" height="190" fill="${C.ink}"/>
-      <text x="32" y="52" font-family="${FONT}" font-size="14" font-weight="800" fill="${C.mango}" letter-spacing="4">THE NILE</text>
-      <text x="32" y="98" font-family="${FONT}" font-size="24" font-weight="800" fill="${C.cream}" letter-spacing="-1">사단법인 더나일 이야기</text>
-      <text x="32" y="134" font-family="${FONT}" font-size="13" font-weight="500" fill="${C.peach}">부모됨의 여정을</text>
-      <text x="32" y="153" font-family="${FONT}" font-size="13" font-weight="500" fill="${C.peach}">함께 걷는 사람들</text>
-      <text x="32" y="178" font-family="${FONT}" font-size="12" font-weight="700" fill="${C.mango}">→ 뒷면에서 계속됩니다</text>
-    </g>
-  </g>
-
-  <!-- 후원 / 협찬 (흰 배경 박스) — 균일 셀 크기 -->
-  <g transform="translate(0, 1330)">
-    <rect x="70" y="0" rx="16" ry="16" width="${W - 140}" height="168"
-          fill="${C.white}" stroke="${C.inkBrown}" stroke-opacity="0.12" stroke-width="1"/>
-    <text x="${W / 2}" y="26" font-family="${FONT}" font-size="11" font-weight="800"
-          fill="${C.inkBrown}" text-anchor="middle" opacity="0.55" letter-spacing="3">PARTNERS · 후원 / 협찬</text>
+  <!-- 후원 / 협찬 (흰 배경 박스) — 확대 · 크게 · 여유 있게 -->
+  <g transform="translate(0, 1300)">
+    <rect x="70" y="0" rx="18" ry="18" width="${W - 140}" height="200"
+          fill="${C.white}" stroke="${C.inkBrown}" stroke-opacity="0.15" stroke-width="1.5"/>
+    <text x="${W / 2}" y="38" font-family="${FONT}" font-size="14" font-weight="800"
+          fill="${C.inkBrown}" text-anchor="middle" opacity="0.6" letter-spacing="4">PARTNERS · 후원 / 협찬</text>
 
     ${(() => {
       const cols = 5;
       const cellW = 180;
-      const cellH = 44;
+      const cellH = 52;
       const gridW = cols * cellW;
       const gridX = (W - gridW) / 2;
-      const gridTopY = 44;
-      const logoW = 140, logoH = 40;   // 셀 안 로고 크기 확대 (더 균일하게 보임)
+      const gridTopY = 54;
+      const logoW = 150, logoH = 44;   // 로고 셀 크게
       return partners.map((p, i) => {
         const col = i % cols;
         const row = Math.floor(i / cols);
@@ -365,7 +354,7 @@ const frontSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="$
   </g>
 
   <!-- 최하단 브랜드 라인 -->
-  <text x="${W / 2}" y="${H - 18}" font-family="${FONT}" font-size="12"
+  <text x="${W / 2}" y="${H - 10}" font-family="${FONT}" font-size="12"
         fill="${C.g5}" text-anchor="middle" letter-spacing="3">The NILE · thenile.kr</text>
 </svg>`;
 
@@ -502,8 +491,8 @@ const backSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${
     <!-- 왼쪽: 문구 (메인 한 줄 · 확대) -->
     <text x="110" y="62" font-family="${FONT}" font-size="15" font-weight="700"
           fill="${C.mango}" letter-spacing="4">PACER · 페이서 되기</text>
-    <text x="110" y="140" font-family="${FONT}" font-size="52" font-weight="800"
-          fill="${C.cream}" letter-spacing="-2">부모됨의 여정을 함께 걸어주세요</text>
+    <text x="110" y="130" font-family="${FONT}" font-size="36" font-weight="800"
+          fill="${C.cream}" letter-spacing="-1">부모됨의 여정을 함께 걸어주세요</text>
     <text x="110" y="192" font-family="${FONT}" font-size="14" font-weight="500"
           fill="rgba(255,248,236,0.78)">페이서 = 함께 걷는 사람들. 더 나은 사회를 위해 힘을 모으는 후원자입니다.</text>
     <text x="110" y="222" font-family="${FONT}" font-size="13" font-weight="700"
