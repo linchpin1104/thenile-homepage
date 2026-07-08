@@ -57,21 +57,32 @@ const emo = (cx, cy, size, shape, c1, c2, opts = {}) => {
     </g></g>`;
 };
 
-// ─── 캐릭터 대형 배치 (텍스트 오릴 때 함께 잘려 붙기 좋게) ───
-// 12개 위치 · 각 위치의 shape/rotation은 고정, 색상은 팔레트에서 인덱스로 참조
+// ─── 캐릭터 대형 배치 (글자 뒤/근접 · 오려낼 때 함께 딸려나오도록) ───
+// 텍스트 존은 캔버스 중앙 (y 1200~2350, x 1200~3800).
+// - 대형(700~900): 텍스트 뒤 겹치게 · opacity 0.6~0.72 (텍스트가 위에서 덮어씀)
+// - 중형(450~600): 텍스트 라인 바로 옆 · opacity 0.78~0.9
+// - 소형(280~380): 상하단 여백 액센트 · opacity 0.7~0.8
 const charSlots = [
-  { cx:  520, cy: 1250, size: 780, shape: "burst",  rotate: -12, opacity: 0.85 },
-  { cx:  340, cy: 2100, size: 600, shape: "heart",  rotate: 15,  opacity: 0.75 },
-  { cx:  680, cy: 2820, size: 520, shape: "flower", rotate: -8,  opacity: 0.8  },
-  { cx: 4520, cy: 1200, size: 740, shape: "blob",   rotate: 18,  opacity: 0.8  },
-  { cx: 4700, cy: 2100, size: 620, shape: "star",   rotate: -14, opacity: 0.85 },
-  { cx: 4380, cy: 2860, size: 560, shape: "cloud",  rotate: 10,  opacity: 0.75 },
-  { cx: 1500, cy:  460, size: 380, shape: "drop",   rotate: 20,  opacity: 0.7  },
-  { cx: 2600, cy:  380, size: 460, shape: "leaf",   rotate: -10, opacity: 0.72 },
-  { cx: 3600, cy:  460, size: 380, shape: "pebble", rotate: 15,  opacity: 0.7  },
-  { cx: 1600, cy: 3180, size: 400, shape: "flower", rotate: 15,  opacity: 0.72 },
-  { cx: 2500, cy: 3230, size: 440, shape: "arch",   rotate: -8,  opacity: 0.75 },
-  { cx: 3500, cy: 3180, size: 400, shape: "heart",  rotate: 12,  opacity: 0.72 },
+  // 텍스트 뒤 (중앙 겹침, 저 opacity)
+  { cx: 1500, cy: 1500, size: 850, shape: "burst",  rotate: -10, opacity: 0.62 },
+  { cx: 3500, cy: 1500, size: 820, shape: "flower", rotate: 15,  opacity: 0.62 },
+  { cx: 2500, cy: 2200, size: 900, shape: "blob",   rotate: -8,  opacity: 0.55 },
+  { cx: 1500, cy: 2200, size: 720, shape: "cloud",  rotate: 12,  opacity: 0.6  },
+  { cx: 3500, cy: 2200, size: 720, shape: "heart",  rotate: -14, opacity: 0.6  },
+
+  // 텍스트 라인 근접 (양쪽)
+  { cx:  760, cy: 1600, size: 560, shape: "star",   rotate: -18, opacity: 0.88 },
+  { cx: 4270, cy: 1600, size: 560, shape: "drop",   rotate: 22,  opacity: 0.85 },
+  { cx:  820, cy: 2400, size: 520, shape: "leaf",   rotate: 12,  opacity: 0.85 },
+  { cx: 4230, cy: 2400, size: 520, shape: "pebble", rotate: -8,  opacity: 0.85 },
+
+  // 상하 액센트 (텍스트 위/아래 살짝 걸침)
+  { cx: 2500, cy:  900, size: 420, shape: "arch",   rotate: 0,   opacity: 0.78 },
+  { cx: 2500, cy: 2900, size: 460, shape: "flower", rotate: 10,  opacity: 0.8  },
+  { cx: 1400, cy:  850, size: 340, shape: "heart",  rotate: -15, opacity: 0.78 },
+  { cx: 3600, cy:  850, size: 340, shape: "drop",   rotate: 18,  opacity: 0.78 },
+  { cx: 1500, cy: 2900, size: 360, shape: "cloud",  rotate: 8,   opacity: 0.75 },
+  { cx: 3500, cy: 2900, size: 360, shape: "burst",  rotate: -12, opacity: 0.78 },
 ];
 
 function bgCharacters(palette) {
