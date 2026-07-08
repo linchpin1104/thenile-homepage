@@ -424,51 +424,61 @@ const backSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${
       { n: "03", t: "양육문화 개선", d: "정서적 유대감·사회적 지지망 강화", c: C.mint, sh: "leaf" },
       { n: "04", t: "환경 · 구조", d: "제도적 변화를 이끄는 정책 옹호 활동", c: C.lilac, sh: "arch" },
     ];
+    // 한 줄 레이아웃: [01] [마음돌봄] [설명 텍스트] [이모지]
     const gap = 14;
     const boxW = (W - 140 - gap) / 2;
     return axes.map((a, i) => {
       const col = i % 2;
       const row = Math.floor(i / 2);
       const x = 70 + col * (boxW + gap);
-      const y = 1030 + row * 100;
+      const y = 1030 + row * 74;
+      const cy = y + 30;
       return `
         <g>
-          <rect x="${x}" y="${y}" rx="14" ry="14" width="${boxW}" height="85"
+          <rect x="${x}" y="${y}" rx="14" ry="14" width="${boxW}" height="60"
                 fill="${C.white}" stroke="${a.c}" stroke-width="1" stroke-opacity="0.35"/>
-          <text x="${x + 24}" y="${y + 34}" font-family="${FONT}" font-size="18" font-weight="800"
-                fill="${a.c}" letter-spacing="1">${a.n}</text>
-          <text x="${x + 24}" y="${y + 60}" font-family="${FONT}" font-size="18" font-weight="800" fill="${C.navy}">${a.t}</text>
-          <text x="${x + 24}" y="${y + 78}" font-family="${FONT}" font-size="12" font-weight="500" fill="${C.g5}">${a.d}</text>
-          <g transform="translate(${x + boxW - 34}, ${y + 22})">
-            ${emo(0, 0, 44, a.sh, a.c, C.cream, { rotate: 12, opacity: 0.6, eyes: false })}
+          <text x="${x + 22}" y="${cy + 6}" font-family="${FONT}" font-size="17" font-weight="800"
+                fill="${a.c}" letter-spacing="0.5">${a.n}</text>
+          <text x="${x + 62}" y="${cy + 6}" font-family="${FONT}" font-size="17" font-weight="800" fill="${C.navy}">${a.t}</text>
+          <text x="${x + 165}" y="${cy + 5}" font-family="${FONT}" font-size="12" font-weight="500" fill="${C.g5}">${a.d}</text>
+          <g transform="translate(${x + boxW - 30}, ${cy})">
+            ${emo(0, 0, 34, a.sh, a.c, C.cream, { rotate: 12, opacity: 0.55, eyes: false })}
           </g>
         </g>
       `;
     }).join("");
   })()}
 
-  <!-- 페이서 후원 CTA -->
-  <g transform="translate(0, 1240)">
-    <rect x="70" y="0" rx="20" ry="20" width="${W - 140}" height="240" fill="${C.navy}"/>
+  <!-- 페이서 후원 CTA — QR 축소 · 텍스트 확대로 균형 재조정 -->
+  <g transform="translate(0, 1220)">
+    <rect x="70" y="0" rx="20" ry="20" width="${W - 140}" height="270" fill="${C.navy}"/>
 
-    <!-- 왼쪽: 문구 -->
-    <text x="110" y="55" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="19"          fill="${C.mango}" letter-spacing="4">PACER · 페이서 되기</text>
-    <text x="110" y="102" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="26" font-weight="800"
-          fill="${C.cream}">부모됨의 여정을</text>
-    <text x="110" y="138" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="26" font-weight="800"
-          fill="${C.cream}">함께 걸어주세요</text>
-    <text x="110" y="172" font-family="Pretendard" font-size="12" font-weight="500"
-          fill="rgba(255,248,236,0.75)">페이서 = 함께 걷는 사람들.</text>
-    <text x="110" y="192" font-family="Pretendard" font-size="12" font-weight="500"
-          fill="rgba(255,248,236,0.75)">더 나은 사회를 위해 힘을 모으는 후원자입니다.</text>
-    <text x="110" y="215" font-family="Pretendard" font-size="11" font-weight="600"
+    ${(() => {
+      const QR_SIZE = 140;
+      const QR_X = W - 100 - QR_SIZE;
+      const QR_Y = 55;
+      return `
+        <!-- 오른쪽: 후원 QR + 하단 라벨 확대 -->
+        ${donationQR
+          ? `<image x="${QR_X}" y="${QR_Y}" width="${QR_SIZE}" height="${QR_SIZE}" href="${donationQR}"/>`
+          : `<rect x="${QR_X}" y="${QR_Y}" width="${QR_SIZE}" height="${QR_SIZE}" fill="#EEE"/>`}
+        <text x="${QR_X + QR_SIZE / 2}" y="${QR_Y + QR_SIZE + 32}" font-family="${FONT}" font-size="20" font-weight="800" fill="${C.mango}" text-anchor="middle" letter-spacing="1">더나일 후원하기</text>
+      `;
+    })()}
+
+    <!-- 왼쪽: 문구 확대 -->
+    <text x="110" y="62" font-family="${FONT}" font-size="15" font-weight="700"
+          fill="${C.mango}" letter-spacing="4">PACER · 페이서 되기</text>
+    <text x="110" y="120" font-family="${FONT}" font-size="36" font-weight="800"
+          fill="${C.cream}" letter-spacing="-1">부모됨의 여정을</text>
+    <text x="110" y="168" font-family="${FONT}" font-size="36" font-weight="800"
+          fill="${C.cream}" letter-spacing="-1">함께 걸어주세요</text>
+    <text x="110" y="210" font-family="${FONT}" font-size="14" font-weight="500"
+          fill="rgba(255,248,236,0.78)">페이서 = 함께 걷는 사람들.</text>
+    <text x="110" y="232" font-family="${FONT}" font-size="14" font-weight="500"
+          fill="rgba(255,248,236,0.78)">더 나은 사회를 위해 힘을 모으는 후원자입니다.</text>
+    <text x="110" y="257" font-family="${FONT}" font-size="12" font-weight="700"
           fill="${C.mango}">→ 지정기부금 영수증 발급 가능</text>
-
-    <!-- 오른쪽: 후원 QR -->
-    ${donationQR
-      ? `<image x="${W - 260}" y="30" width="180" height="180" href="${donationQR}"/>`
-      : `<rect x="${W - 260}" y="30" width="180" height="180" fill="#EEE"/>`}
-    <text x="${W - 170}" y="230" font-family="Pretendard" font-size="12" font-weight="800" fill="${C.mango}" text-anchor="middle" letter-spacing="1">더나일 후원하기</text>
   </g>
 
   <!-- 최하단 브랜드 -->
