@@ -22,6 +22,8 @@ const C = {
   white:"#FFFFFF", navy:"#1B2A4A", gold:"#B8860B",
 };
 
+const FONT = "'Pretendard','Apple SD Gothic Neo',sans-serif";
+
 const SPEAKERS_DIR = path.join(ROOT, "public/images/speakers");
 const PARTNERS_DIR = path.join(ROOT, "public/images/partners");
 const QR_DIR = path.join(ROOT, "public/images/qr");
@@ -191,11 +193,10 @@ const frontSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="$
         fill="${C.coral}" text-anchor="middle" letter-spacing="4">2026 양육불안 컨퍼런스</text>
 
   <!-- 슬로건 -->
-  <text x="${W / 2}" y="308" font-family="'Noto Serif KR', serif" font-size="58" font-weight="800"
+  <text x="${W / 2}" y="308" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="58" font-weight="800"
         fill="${C.ink}" text-anchor="middle" letter-spacing="-2">불안을 불안해하지 마세요</text>
 
-  <text x="${W / 2}" y="345" font-family="'Cormorant Garamond', serif" font-size="20" font-style="italic"
-        fill="${C.gold}" text-anchor="middle" letter-spacing="2">Nurtuning Into the Light Everyday</text>
+  <text x="${W / 2}" y="345" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="20"        fill="${C.gold}" text-anchor="middle" letter-spacing="2">Nurtuning Into the Light Everyday</text>
 
   <!-- 일시·장소 -->
   <g transform="translate(${W / 2}, 405)">
@@ -216,38 +217,42 @@ const frontSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="$
     const SPEAKER_R = 30;
 
     const schedule = [
-      { time: "10:50–11:00", title: "등록 · 체크인 · 입장", kind: "plain" },
+      { time: "10:50 – 11:00", title: "등록 · 체크인 · 입장", kind: "plain" },
       {
-        time: "11:00–12:30",
+        time: "11:00 – 12:30",
         badge: "SESSION 1 · 키노트 (90분)",
         title: "「양육불안은 어디에서 오는가」",
-        desc: "뇌과학과 발달심리학, 두 시선이 한 자리에서 만나 양육불안의 뿌리를 짚어드립니다.",
+        descLines: [
+          "뇌과학과 발달심리학, 두 시선이 한 자리에서 만나",
+          "양육불안의 뿌리를 짚어드립니다.",
+        ],
         accent: C.coral,
         speakers: [
-          { name: "장동선", role: "뇌과학자 · KEYNOTE 01", img: photo.장동선,
-            hook: "양육불안, 우리의 마음은 어떻게 작동될까?" },
-          { name: "이다랑", role: "아동심리전문가 · KEYNOTE 02", img: photo.이다랑,
-            hook: "한국 부모의 양육불안, 어떻게 다를까?" },
-          { name: "김혜민", role: "MC · 사회 (더나일 이사)", img: photo.김혜민 },
+          { name: "장동선", img: photo.장동선 },
+          { name: "이다랑", img: photo.이다랑 },
+          { name: "김혜민", img: photo.김혜민 },
         ],
         kind: "session",
       },
-      { time: "12:30–13:00", title: "밍글링 · 가벼운 식사 · 참가자 네트워킹", kind: "plain" },
+      { time: "12:30 – 13:00", title: "밍글링 · 가벼운 식사 · 네트워킹", kind: "plain" },
       {
-        time: "13:00–14:30",
+        time: "13:00 – 14:30",
         badge: "SESSION 2 · 패널토크 (90분)",
         title: "「양육불안과 함께 살아간다는 것」",
-        desc: "다른 자리에서 양육과 만나온 네 분이 자신의 양육불안을 어떻게 통과해왔는지 나누는 대화.",
+        descLines: [
+          "다른 자리에서 양육과 만나온 네 분이",
+          "자신의 양육불안을 어떻게 통과해왔는지 나누는 대화.",
+        ],
         accent: C.lilac,
         speakers: [
-          { name: "이혜린", role: "모더레이터 · 쉬벤처스 부대표", img: photo.이혜린 },
-          { name: "신두란", role: "패널 · 고마워서그래 대표", img: photo.신두란 },
-          { name: "정지우", role: "패널 · 작가·변호사",       img: photo.정지우 },
-          { name: "후추맘", role: "패널 · 육아 크리에이터",   img: photo.후추맘 },
+          { name: "이혜린", img: photo.이혜린 },
+          { name: "신두란", img: photo.신두란 },
+          { name: "정지우", img: photo.정지우 },
+          { name: "후추맘", img: photo.후추맘 },
         ],
         kind: "session",
       },
-      { time: "14:30–15:00", title: "클로징 · 후원사 소개 · 마무리 인사", kind: "plain" },
+      { time: "14:30 – 15:00", title: "클로징 · 후원사 소개 · 마무리", kind: "plain" },
     ];
 
     let cy = 500;
@@ -265,32 +270,32 @@ const frontSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="$
 
       let content;
       if (isSession) {
-        // 세션 헤더 + 부제 + 설명 + 연사 4명
-        const speakerGap = row.speakers.length === 3 ? 200 : 155;
-        const speakerX0 = CONTENT_X + 20;
+        // 세션 헤더 + 부제 + 설명 2줄 + 연사 얼굴만 (역할·훅 제거로 간결화)
+        const speakerCount = row.speakers.length;
+        const speakerAreaW = 720;                             // CONTENT_X ~ CONTENT_X+720
+        const speakerGap = speakerAreaW / speakerCount;
+        const speakerX0 = CONTENT_X + speakerGap / 2;
         const speakerFaces = row.speakers.map((s, i) => {
-          const sx = speakerX0 + i * speakerGap + SPEAKER_R;
-          const sy = top + 175;
-          const hookText = s.hook ? `<text x="${sx}" y="${sy + SPEAKER_R + 42}" font-family="Pretendard" font-size="10" font-weight="600" fill="${row.accent}" text-anchor="middle" opacity="0.85">${s.hook.length > 22 ? s.hook.slice(0, 21) + "…" : s.hook}</text>` : "";
+          const sx = speakerX0 + i * speakerGap;
+          const sy = top + 155;
           return `
             <g>
               ${circlePhoto(sx, sy, SPEAKER_R, s.img, row.accent, 2)}
-              <text x="${sx}" y="${sy + SPEAKER_R + 20}" font-family="Pretendard" font-size="14" font-weight="800" fill="${C.ink}" text-anchor="middle">${s.name}</text>
-              ${hookText}
+              <text x="${sx}" y="${sy + SPEAKER_R + 22}" font-family="${FONT}" font-size="14" font-weight="700" fill="${C.ink}" text-anchor="middle">${s.name}</text>
             </g>
           `;
         }).join("");
 
         content = `
-          <text x="${CONTENT_X}" y="${top + 32}" font-family="Pretendard" font-size="17" font-weight="800" fill="${row.accent}" letter-spacing="1">${row.badge}</text>
-          <text x="${CONTENT_X}" y="${top + 65}" font-family="'Noto Serif KR', serif" font-size="22" font-weight="800" fill="${C.ink}">${row.title}</text>
-          <text x="${CONTENT_X}" y="${top + 95}" font-family="Pretendard" font-size="13" font-weight="500" fill="${C.g4}">${row.desc.length > 55 ? row.desc.slice(0, 55) + "…" : row.desc}</text>
-          <text x="${CONTENT_X}" y="${top + 115}" font-family="Pretendard" font-size="13" font-weight="500" fill="${C.g4}">${row.desc.length > 55 ? row.desc.slice(55) : ""}</text>
+          <text x="${CONTENT_X}" y="${top + 30}" font-family="${FONT}" font-size="16" font-weight="800" fill="${row.accent}" letter-spacing="1">${row.badge}</text>
+          <text x="${CONTENT_X}" y="${top + 62}" font-family="${FONT}" font-size="22" font-weight="800" fill="${C.ink}">${row.title}</text>
+          <text x="${CONTENT_X}" y="${top + 90}" font-family="${FONT}" font-size="13" font-weight="500" fill="${C.g5}">${row.descLines[0]}</text>
+          <text x="${CONTENT_X}" y="${top + 110}" font-family="${FONT}" font-size="13" font-weight="500" fill="${C.g5}">${row.descLines[1]}</text>
           ${speakerFaces}
         `;
       } else {
         content = `
-          <text x="${CONTENT_X}" y="${top + 34}" font-family="Pretendard" font-size="19" font-weight="700" fill="${C.inkBrown}">${row.title}</text>
+          <text x="${CONTENT_X}" y="${top + 34}" font-family="${FONT}" font-size="19" font-weight="600" fill="${C.inkBrown}">${row.title}</text>
         `;
       }
 
@@ -320,16 +325,15 @@ const frontSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="$
     <!-- 뒷면 안내 카드 (우) -->
     <g transform="translate(${W - 510}, 0)">
       <rect x="0" y="0" rx="18" ry="18" width="440" height="150" fill="${C.ink}"/>
-      <text x="30" y="48" font-family="'Cormorant Garamond', serif" font-size="17" font-style="italic" fill="${C.mango}" letter-spacing="3">The NILE</text>
-      <text x="30" y="82" font-family="'Noto Serif KR', serif" font-size="21" font-weight="800" fill="${C.cream}">사단법인 더나일 이야기</text>
-      <text x="30" y="112" font-family="Pretendard" font-size="14" font-weight="500" fill="${C.peach}">부모됨의 여정을 함께 걷는 사람들</text>
-      <text x="30" y="135" font-family="Pretendard" font-size="12" font-weight="600" fill="${C.mango}">→ 뒷면에서 계속됩니다</text>
+      <text x="30" y="42" font-family="${FONT}" font-size="14" font-weight="800" fill="${C.mango}" letter-spacing="3">THE NILE</text>
+      <text x="30" y="80" font-family="${FONT}" font-size="22" font-weight="800" fill="${C.cream}" letter-spacing="-0.5">사단법인 더나일 이야기</text>
+      <text x="30" y="108" font-family="${FONT}" font-size="13" font-weight="500" fill="${C.peach}">부모됨의 여정을 함께 걷는 사람들</text>
+      <text x="30" y="132" font-family="${FONT}" font-size="12" font-weight="700" fill="${C.mango}" letter-spacing="0.5">→ 뒷면에서 계속됩니다</text>
     </g>
   </g>
 
   <!-- 최하단 브랜드 라인 -->
-  <text x="${W / 2}" y="${H - 30}" font-family="'Cormorant Garamond', serif" font-size="15" font-style="italic"
-        fill="${C.g5}" text-anchor="middle" letter-spacing="3">The NILE · thenile.kr</text>
+  <text x="${W / 2}" y="${H - 30}" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="15"        fill="${C.g5}" text-anchor="middle" letter-spacing="3">The NILE · thenile.kr</text>
 </svg>`;
 
 // ═══════════════════════════════════════════════
@@ -355,8 +359,7 @@ const backSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${
     <image width="${nileLogoMetaL.width}" height="${nileLogoMetaL.height}" href="${nileLogoB64L}"/>
   </g>
 
-  <text x="${W / 2}" y="235" font-family="'Cormorant Garamond', serif" font-size="24" font-style="italic"
-        fill="${C.gold}" text-anchor="middle" letter-spacing="4">Nurtuning Into the Light Everyday</text>
+  <text x="${W / 2}" y="235" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="24"        fill="${C.gold}" text-anchor="middle" letter-spacing="4">Nurtuning Into the Light Everyday</text>
   <text x="${W / 2}" y="270" font-family="Pretendard" font-size="15" font-weight="600"
         fill="${C.g5}" text-anchor="middle" letter-spacing="2">사단법인 더나일 · 지정기부금 단체</text>
 
@@ -365,12 +368,11 @@ const backSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${
   <!-- MISSION -->
   <text x="${W / 2}" y="345" font-family="Pretendard" font-size="14" font-weight="800"
         fill="${C.coral}" text-anchor="middle" letter-spacing="6">MISSION</text>
-  <text x="${W / 2}" y="405" font-family="'Noto Serif KR', serif" font-size="34" font-weight="800"
+  <text x="${W / 2}" y="405" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="34" font-weight="800"
         fill="${C.navy}" text-anchor="middle" letter-spacing="-1">부모됨의 두려움이 기쁨으로 전환되는</text>
-  <text x="${W / 2}" y="450" font-family="'Noto Serif KR', serif" font-size="34" font-weight="800"
+  <text x="${W / 2}" y="450" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="34" font-weight="800"
         fill="${C.navy}" text-anchor="middle" letter-spacing="-1">여정을 함께 합니다</text>
-  <text x="${W / 2}" y="490" font-family="'Cormorant Garamond', serif" font-size="20" font-style="italic"
-        fill="${C.g4}" text-anchor="middle" letter-spacing="1">Parenthood : From dread to delight</text>
+  <text x="${W / 2}" y="490" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="20"        fill="${C.g4}" text-anchor="middle" letter-spacing="1">Parenthood : From dread to delight</text>
 
   <!-- VISION 3개 -->
   <text x="${W / 2}" y="555" font-family="Pretendard" font-size="14" font-weight="800"
@@ -379,14 +381,17 @@ const backSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${
   ${(() => {
     const visions = [
       { n: "01", t: "부모의 일상이 매일의 성장이 됩니다",
-        d: "양육이 의무가 아닌 성장의 과정이라 믿습니다. 부모가 자신의 가능성을 발견하고, 일상 속 성장의 기쁨을 경험하도록 지원합니다.",
-        c: C.coral, c2: C.peach },
+        d1: "양육이 의무가 아닌 성장의 과정이라 믿습니다.",
+        d2: "부모가 자신의 가능성을 발견하고 성장의 기쁨을 경험하도록 돕습니다.",
+        c: C.coral },
       { n: "02", t: "양육에 대한 냉소를 다정함으로 바꿉니다",
-        d: "가족을 향한 냉소적 시선을 신뢰와 환대의 문화로 전환하고, 부모가 서로 연결되고 지지받는 따뜻한 커뮤니티를 만들어갑니다.",
-        c: C.mango, c2: C.rose },
+        d1: "가족을 향한 냉소를 신뢰와 환대의 문화로 전환하고,",
+        d2: "부모가 서로 연결되고 지지받는 따뜻한 커뮤니티를 만듭니다.",
+        c: C.mango },
       { n: "03", t: "양육의 즐거움을 사회와 공유합니다",
-        d: "건강하게 성장한 부모들이 모여 사회적 문화를 함께 바꿉니다. 다음 세대가 더 나은 세상에서 자랄 수 있도록 환경을 만들어갑니다.",
-        c: C.lilac, c2: C.mint },
+        d1: "건강하게 성장한 부모들이 모여 사회의 문화를 바꿉니다.",
+        d2: "다음 세대가 더 나은 세상에서 자라도록 환경을 만들어갑니다.",
+        c: C.lilac },
     ];
 
     return visions.map((v, i) => {
@@ -397,12 +402,12 @@ const backSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${
                 fill="${C.white}" stroke="${v.c}" stroke-width="1.5" stroke-opacity="0.4"/>
           <g transform="translate(120, ${y + 57})">
             <circle cx="0" cy="0" r="34" fill="${v.c}22"/>
-            <text x="0" y="10" font-family="'Cormorant Garamond', serif" font-size="30" font-weight="700"
+            <text x="0" y="10" font-family="${FONT}" font-size="26" font-weight="800"
                   fill="${v.c}" text-anchor="middle">${v.n}</text>
           </g>
-          <text x="180" y="${y + 42}" font-family="Pretendard" font-size="20" font-weight="800" fill="${C.navy}">${v.t}</text>
-          <text x="180" y="${y + 74}" font-family="Pretendard" font-size="13" font-weight="500" fill="${C.g5}">${v.d.slice(0, 68)}</text>
-          <text x="180" y="${y + 96}" font-family="Pretendard" font-size="13" font-weight="500" fill="${C.g5}">${v.d.slice(68, 140)}</text>
+          <text x="180" y="${y + 42}" font-family="${FONT}" font-size="20" font-weight="800" fill="${C.navy}">${v.t}</text>
+          <text x="180" y="${y + 74}" font-family="${FONT}" font-size="13" font-weight="500" fill="${C.g5}">${v.d1}</text>
+          <text x="180" y="${y + 96}" font-family="${FONT}" font-size="13" font-weight="500" fill="${C.g5}">${v.d2}</text>
         </g>
       `;
     }).join("");
@@ -419,21 +424,22 @@ const backSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${
       { n: "03", t: "양육문화 개선", d: "정서적 유대감·사회적 지지망 강화", c: C.mint, sh: "leaf" },
       { n: "04", t: "환경 · 구조", d: "제도적 변화를 이끄는 정책 옹호 활동", c: C.lilac, sh: "arch" },
     ];
+    const gap = 14;
+    const boxW = (W - 140 - gap) / 2;
     return axes.map((a, i) => {
       const col = i % 2;
       const row = Math.floor(i / 2);
-      const x = 70 + col * ((W - 140) / 2 + 10);
+      const x = 70 + col * (boxW + gap);
       const y = 1030 + row * 100;
-      const boxW = (W - 140) / 2 - 5;
       return `
         <g>
           <rect x="${x}" y="${y}" rx="14" ry="14" width="${boxW}" height="85"
                 fill="${C.white}" stroke="${a.c}" stroke-width="1" stroke-opacity="0.35"/>
-          <text x="${x + 22}" y="${y + 32}" font-family="'Cormorant Garamond', serif" font-size="20" font-weight="700"
-                fill="${a.c}" letter-spacing="2">${a.n}</text>
-          <text x="${x + 22}" y="${y + 58}" font-family="Pretendard" font-size="18" font-weight="800" fill="${C.navy}">${a.t}</text>
-          <text x="${x + 22}" y="${y + 76}" font-family="Pretendard" font-size="12" font-weight="500" fill="${C.g5}">${a.d}</text>
-          <g transform="translate(${x + boxW - 32}, ${y + 20})">
+          <text x="${x + 24}" y="${y + 34}" font-family="${FONT}" font-size="18" font-weight="800"
+                fill="${a.c}" letter-spacing="1">${a.n}</text>
+          <text x="${x + 24}" y="${y + 60}" font-family="${FONT}" font-size="18" font-weight="800" fill="${C.navy}">${a.t}</text>
+          <text x="${x + 24}" y="${y + 78}" font-family="${FONT}" font-size="12" font-weight="500" fill="${C.g5}">${a.d}</text>
+          <g transform="translate(${x + boxW - 34}, ${y + 22})">
             ${emo(0, 0, 44, a.sh, a.c, C.cream, { rotate: 12, opacity: 0.6, eyes: false })}
           </g>
         </g>
@@ -446,11 +452,10 @@ const backSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${
     <rect x="70" y="0" rx="20" ry="20" width="${W - 140}" height="240" fill="${C.navy}"/>
 
     <!-- 왼쪽: 문구 -->
-    <text x="110" y="55" font-family="'Cormorant Garamond', serif" font-size="19" font-style="italic"
-          fill="${C.mango}" letter-spacing="4">PACER · 페이서 되기</text>
-    <text x="110" y="102" font-family="'Noto Serif KR', serif" font-size="26" font-weight="800"
+    <text x="110" y="55" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="19"          fill="${C.mango}" letter-spacing="4">PACER · 페이서 되기</text>
+    <text x="110" y="102" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="26" font-weight="800"
           fill="${C.cream}">부모됨의 여정을</text>
-    <text x="110" y="138" font-family="'Noto Serif KR', serif" font-size="26" font-weight="800"
+    <text x="110" y="138" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="26" font-weight="800"
           fill="${C.cream}">함께 걸어주세요</text>
     <text x="110" y="172" font-family="Pretendard" font-size="12" font-weight="500"
           fill="rgba(255,248,236,0.75)">페이서 = 함께 걷는 사람들.</text>
@@ -467,8 +472,7 @@ const backSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${
   </g>
 
   <!-- 최하단 브랜드 -->
-  <text x="${W / 2}" y="${H - 25}" font-family="'Cormorant Garamond', serif" font-size="14" font-style="italic"
-        fill="${C.g5}" text-anchor="middle" letter-spacing="3">The NILE · thenile.kr · Nurtuning Into the Light Everyday</text>
+  <text x="${W / 2}" y="${H - 25}" font-family="'Pretendard','Apple SD Gothic Neo',sans-serif" font-size="14"        fill="${C.g5}" text-anchor="middle" letter-spacing="3">The NILE · thenile.kr · Nurtuning Into the Light Everyday</text>
 </svg>`;
 
 // ─── 두 페이지 PNG 생성 ───
