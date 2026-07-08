@@ -328,17 +328,17 @@ const frontSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="$
   <g transform="translate(0, 1300)">
     <rect x="70" y="0" rx="18" ry="18" width="${W - 140}" height="200"
           fill="${C.white}" stroke="${C.inkBrown}" stroke-opacity="0.15" stroke-width="1.5"/>
-    <text x="${W / 2}" y="38" font-family="${FONT}" font-size="14" font-weight="800"
+    <text x="${W / 2}" y="30" font-family="${FONT}" font-size="13" font-weight="800"
           fill="${C.inkBrown}" text-anchor="middle" opacity="0.6" letter-spacing="4">PARTNERS · 후원 / 협찬</text>
 
     ${(() => {
       const cols = 5;
       const cellW = 180;
-      const cellH = 52;
+      const cellH = 46;
       const gridW = cols * cellW;
       const gridX = (W - gridW) / 2;
-      const gridTopY = 54;
-      const logoW = 150, logoH = 44;   // 로고 셀 크게
+      const gridTopY = 44;
+      const logoW = 132, logoH = 38;
       return partners.map((p, i) => {
         const col = i % cols;
         const row = Math.floor(i / cols);
