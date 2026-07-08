@@ -57,50 +57,30 @@ const emo = (cx, cy, size, shape, c1, c2, opts = {}) => {
     </g></g>`;
 };
 
-// ─── 배경 캐릭터 조밀 배치 (사이트 HERO 톤) ───
-// 캔버스 5031×3543. 캐릭터 22개+ 조밀하게 흩뿌림.
-// 슬로건 중심 (y ~1600-2100) 은 비워두고 주변을 채움.
+// ─── 캐릭터 대형 배치 (텍스트 오릴 때 함께 잘려 붙기 좋게) ───
+// 캔버스 5031×3543. 큰 아이콘 8-10개, 텍스트 주변 엣지있게 배치.
+// 텍스트 존 (y 1200~2400, x 800~4200) 는 비워두되 가장자리를 파고들게.
 function bgCharacters() {
   return [
-    // 상단 왼쪽 존
-    emo(  460,  380, 340, "burst",  C.coral,  C.mango,  { rotate: -8,  opacity: 0.55 }),
-    emo(  980,  580, 240, "cloud",  C.sky,    C.mint,   { rotate:  6,  opacity: 0.5 }),
-    emo( 1600,  360, 200, "star",   C.mango,  C.peach,  { rotate: -12, opacity: 0.55 }),
-    emo(  280,  820, 260, "heart",  C.rose,   C.lilac,  { rotate: 10,  opacity: 0.5 }),
+    // 좌측 대형 클러스터 (텍스트 왼쪽 밀착)
+    emo(  520, 1250, 780, "burst",  C.coral,  C.mango,  { rotate: -12, opacity: 0.85 }),
+    emo(  340, 2100, 600, "heart",  C.rose,   C.lilac,  { rotate: 15,  opacity: 0.75 }),
+    emo(  680, 2820, 520, "flower", C.mint,   C.sky,    { rotate: -8,  opacity: 0.8  }),
 
-    // 상단 오른쪽 존
-    emo( 4650,  400, 320, "blob",   C.peach,  C.rose,   { rotate: -15, opacity: 0.5 }),
-    emo( 4180,  660, 220, "flower", C.mint,   C.sky,    { rotate: 20,  opacity: 0.55 }),
-    emo( 3550,  340, 180, "drop",   C.lilac,  C.rose,   { rotate: -10, opacity: 0.55 }),
-    emo( 4780,  920, 240, "leaf",   C.sage,   C.mint,   { rotate: 22,  opacity: 0.5 }),
+    // 우측 대형 클러스터 (텍스트 오른쪽 밀착)
+    emo( 4520, 1200, 740, "blob",   C.lilac,  C.rose,   { rotate: 18,  opacity: 0.8  }),
+    emo( 4700, 2100, 620, "star",   C.mango,  C.peach,  { rotate: -14, opacity: 0.85 }),
+    emo( 4380, 2860, 560, "cloud",  C.sage,   C.mint,   { rotate: 10,  opacity: 0.75 }),
 
-    // 좌측 세로 존 (슬로건 옆)
-    emo(  340, 1500, 280, "flower", C.coral,  C.mango,  { rotate: 12,  opacity: 0.45 }),
-    emo(  240, 2000, 220, "pebble", C.sage,   C.mint,   { rotate: -6,  opacity: 0.5 }),
-    emo(  420, 2400, 260, "arch",   C.mango,  C.peach,  { rotate:  8,  opacity: 0.45 }),
+    // 상단 중앙 (텍스트 위)
+    emo( 1500,  460, 380, "drop",   C.sky,    C.mint,   { rotate: 20,  opacity: 0.7  }),
+    emo( 2600,  380, 460, "leaf",   C.sage,   C.mint,   { rotate: -10, opacity: 0.72 }),
+    emo( 3600,  460, 380, "pebble", C.peach,  C.rose,   { rotate: 15,  opacity: 0.7  }),
 
-    // 우측 세로 존 (슬로건 옆)
-    emo( 4700, 1500, 260, "star",   C.lilac,  C.rose,   { rotate: -14, opacity: 0.5 }),
-    emo( 4820, 2000, 220, "drop",   C.mint,   C.sky,    { rotate: 18,  opacity: 0.5 }),
-    emo( 4620, 2400, 300, "cloud",  C.peach,  C.rose,   { rotate: -8,  opacity: 0.45 }),
-
-    // 하단 왼쪽 존
-    emo(  580, 3020, 280, "burst",  C.mango,  C.peach,  { rotate: 15,  opacity: 0.5 }),
-    emo( 1200, 3200, 220, "heart",  C.rose,   C.coral,  { rotate: -10, opacity: 0.5 }),
-    emo( 1800, 3060, 200, "leaf",   C.sage,   C.mint,   { rotate:  6,  opacity: 0.55 }),
-
-    // 하단 오른쪽 존
-    emo( 4400, 3060, 260, "flower", C.lilac,  C.mango,  { rotate: -12, opacity: 0.5 }),
-    emo( 3760, 3220, 220, "blob",   C.mint,   C.sky,    { rotate: 10,  opacity: 0.5 }),
-    emo( 3200, 3080, 240, "star",   C.coral,  C.peach,  { rotate: -6,  opacity: 0.5 }),
-
-    // 상단 중앙 (헤더 아래)
-    emo( 2200,  520, 160, "drop",   C.sky,    C.mint,   { rotate: 15,  opacity: 0.4 }),
-    emo( 2900,  520, 160, "heart",  C.rose,   C.lilac,  { rotate: -15, opacity: 0.4 }),
-
-    // 하단 중앙
-    emo( 2400, 3180, 180, "pebble", C.mango,  C.peach,  { rotate:  0,  opacity: 0.4 }),
-    emo( 2700, 3180, 180, "flower", C.lilac,  C.mint,   { rotate: 12,  opacity: 0.4 }),
+    // 하단 중앙 (텍스트 아래)
+    emo( 1600, 3180, 400, "flower", C.coral,  C.mango,  { rotate: 15,  opacity: 0.72 }),
+    emo( 2500, 3230, 440, "arch",   C.mango,  C.peach,  { rotate: -8,  opacity: 0.75 }),
+    emo( 3500, 3180, 400, "heart",  C.rose,   C.coral,  { rotate: 12,  opacity: 0.72 }),
   ].join("\n  ");
 }
 
