@@ -58,33 +58,31 @@ const emo = (cx, cy, size, shape, c1, c2, opts = {}) => {
 };
 
 // ─── 캐릭터 대형 배치 (텍스트 오릴 때 함께 잘려 붙기 좋게) ───
-// 캔버스 5031×3543. 큰 아이콘 8-10개, 텍스트 주변 엣지있게 배치.
-// 텍스트 존 (y 1200~2400, x 800~4200) 는 비워두되 가장자리를 파고들게.
-function bgCharacters() {
-  return [
-    // 좌측 대형 클러스터 (텍스트 왼쪽 밀착)
-    emo(  520, 1250, 780, "burst",  C.coral,  C.mango,  { rotate: -12, opacity: 0.85 }),
-    emo(  340, 2100, 600, "heart",  C.rose,   C.lilac,  { rotate: 15,  opacity: 0.75 }),
-    emo(  680, 2820, 520, "flower", C.mint,   C.sky,    { rotate: -8,  opacity: 0.8  }),
+// 12개 위치 · 각 위치의 shape/rotation은 고정, 색상은 팔레트에서 인덱스로 참조
+const charSlots = [
+  { cx:  520, cy: 1250, size: 780, shape: "burst",  rotate: -12, opacity: 0.85 },
+  { cx:  340, cy: 2100, size: 600, shape: "heart",  rotate: 15,  opacity: 0.75 },
+  { cx:  680, cy: 2820, size: 520, shape: "flower", rotate: -8,  opacity: 0.8  },
+  { cx: 4520, cy: 1200, size: 740, shape: "blob",   rotate: 18,  opacity: 0.8  },
+  { cx: 4700, cy: 2100, size: 620, shape: "star",   rotate: -14, opacity: 0.85 },
+  { cx: 4380, cy: 2860, size: 560, shape: "cloud",  rotate: 10,  opacity: 0.75 },
+  { cx: 1500, cy:  460, size: 380, shape: "drop",   rotate: 20,  opacity: 0.7  },
+  { cx: 2600, cy:  380, size: 460, shape: "leaf",   rotate: -10, opacity: 0.72 },
+  { cx: 3600, cy:  460, size: 380, shape: "pebble", rotate: 15,  opacity: 0.7  },
+  { cx: 1600, cy: 3180, size: 400, shape: "flower", rotate: 15,  opacity: 0.72 },
+  { cx: 2500, cy: 3230, size: 440, shape: "arch",   rotate: -8,  opacity: 0.75 },
+  { cx: 3500, cy: 3180, size: 400, shape: "heart",  rotate: 12,  opacity: 0.72 },
+];
 
-    // 우측 대형 클러스터 (텍스트 오른쪽 밀착)
-    emo( 4520, 1200, 740, "blob",   C.lilac,  C.rose,   { rotate: 18,  opacity: 0.8  }),
-    emo( 4700, 2100, 620, "star",   C.mango,  C.peach,  { rotate: -14, opacity: 0.85 }),
-    emo( 4380, 2860, 560, "cloud",  C.sage,   C.mint,   { rotate: 10,  opacity: 0.75 }),
-
-    // 상단 중앙 (텍스트 위)
-    emo( 1500,  460, 380, "drop",   C.sky,    C.mint,   { rotate: 20,  opacity: 0.7  }),
-    emo( 2600,  380, 460, "leaf",   C.sage,   C.mint,   { rotate: -10, opacity: 0.72 }),
-    emo( 3600,  460, 380, "pebble", C.peach,  C.rose,   { rotate: 15,  opacity: 0.7  }),
-
-    // 하단 중앙 (텍스트 아래)
-    emo( 1600, 3180, 400, "flower", C.coral,  C.mango,  { rotate: 15,  opacity: 0.72 }),
-    emo( 2500, 3230, 440, "arch",   C.mango,  C.peach,  { rotate: -8,  opacity: 0.75 }),
-    emo( 3500, 3180, 400, "heart",  C.rose,   C.coral,  { rotate: 12,  opacity: 0.72 }),
-  ].join("\n  ");
+function bgCharacters(palette) {
+  return charSlots.map((s, i) => {
+    const [c1, c2] = palette[i % palette.length];
+    return emo(s.cx, s.cy, s.size, s.shape, c1, c2, { rotate: s.rotate, opacity: s.opacity });
+  }).join("\n  ");
 }
 
-// ─── 폼보드 정의 ───
+// ─── 폼보드 정의 (배경색 · 텍스트 그라디언트 · 캐릭터 팔레트 각각 다르게) ───
+// bg: 파스텔 배경 · gradStops: 3색 그라디언트 · charPalette: 캐릭터 12개용 6쌍 팔레트
 const boards = [
   {
     name: "01-메인타이틀",
@@ -93,6 +91,12 @@ const boards = [
     fill: [C.coral, "gradient"],
     letterSpacing: [-14, -8],
     lineGap: 40,
+    bg: C.cream,                                          // 크림 (브랜드 기본)
+    gradStops: [C.coral, C.mango, C.lilac],
+    charPalette: [                                         // 코랄·망고·라일락 계열
+      [C.coral, C.mango], [C.rose, C.lilac], [C.mint, C.sky],
+      [C.lilac, C.rose], [C.mango, C.peach], [C.sage, C.mint],
+    ],
   },
   {
     name: "02-불안을-불안해하지-마세요",
@@ -101,6 +105,12 @@ const boards = [
     fill: ["gradient", "gradient"],
     letterSpacing: [-8, -8],
     lineGap: 30,
+    bg: "#DFF3E9",                                         // 소프트 민트
+    gradStops: [C.coral, C.mango, C.lilac],
+    charPalette: [
+      [C.coral, C.rose], [C.mango, C.peach], [C.lilac, C.sky],
+      [C.rose, C.lilac], [C.coral, C.peach], [C.mango, C.rose],
+    ],
   },
   {
     name: "03-불안을-넘어-행복으로",
@@ -109,6 +119,12 @@ const boards = [
     fill: ["gradient", "gradient"],
     letterSpacing: [-8, -8],
     lineGap: 30,
+    bg: "#FFE4CE",                                         // 소프트 피치
+    gradStops: [C.navy, C.coral, C.lilac],                 // 다크 → 코랄 → 라일락
+    charPalette: [
+      [C.lilac, C.sky], [C.sage, C.mint], [C.rose, C.lilac],
+      [C.sky, C.mint], [C.mint, C.sage], [C.lilac, C.rose],
+    ],
   },
   {
     name: "04-걱정-많은-부모-여기-있습니다",
@@ -117,6 +133,12 @@ const boards = [
     fill: ["gradient", "gradient"],
     letterSpacing: [-6, -8],
     lineGap: 30,
+    bg: "#E1EFFA",                                         // 소프트 스카이 블루
+    gradStops: [C.coral, C.mango, C.peach],
+    charPalette: [
+      [C.coral, C.mango], [C.mango, C.peach], [C.rose, C.coral],
+      [C.peach, C.rose], [C.coral, C.peach], [C.mango, C.rose],
+    ],
   },
   {
     name: "05-나만-불안한-게-아니었어",
@@ -125,6 +147,12 @@ const boards = [
     fill: ["gradient", "gradient"],
     letterSpacing: [-6, -8],
     lineGap: 30,
+    bg: "#EEE0F5",                                         // 소프트 라일락
+    gradStops: [C.coral, C.mango, C.mint],
+    charPalette: [
+      [C.mango, C.peach], [C.mint, C.sky], [C.coral, C.mango],
+      [C.sage, C.mint], [C.mango, C.rose], [C.sky, C.mint],
+    ],
   },
   {
     name: "06-불안하지만-잘하고-있습니다",
@@ -133,6 +161,12 @@ const boards = [
     fill: ["gradient", "gradient"],
     letterSpacing: [-8, -6],
     lineGap: 30,
+    bg: "#FCE1E7",                                         // 소프트 로즈
+    gradStops: [C.navy, C.coral, C.mango],
+    charPalette: [
+      [C.sage, C.mint], [C.sky, C.mint], [C.mango, C.peach],
+      [C.mint, C.sage], [C.sky, C.lilac], [C.mango, C.mint],
+    ],
   },
   {
     name: "07-우리의-양육-다시-다정하게",
@@ -141,6 +175,12 @@ const boards = [
     fill: ["gradient", "gradient"],
     letterSpacing: [-6, -8],
     lineGap: 30,
+    bg: "#FFF0C7",                                         // 소프트 버터 옐로우
+    gradStops: [C.coral, C.lilac, C.sage],
+    charPalette: [
+      [C.coral, C.rose], [C.lilac, C.rose], [C.sage, C.mint],
+      [C.rose, C.lilac], [C.mint, C.sky], [C.coral, C.lilac],
+    ],
   },
 ];
 
@@ -161,19 +201,26 @@ function renderBoard(b) {
     return el;
   }).join("\n    ");
 
+  const [g1, g2, g3] = b.gradStops || [C.coral, C.mango, C.lilac];
+  const bg = b.bg || C.cream;
+  const palette = b.charPalette || [
+    [C.coral, C.mango], [C.rose, C.lilac], [C.mint, C.sky],
+    [C.lilac, C.rose], [C.mango, C.peach], [C.sage, C.mint],
+  ];
+
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
-  <rect width="${W}" height="${H}" fill="${C.cream}"/>
+  <rect width="${W}" height="${H}" fill="${bg}"/>
 
   <defs>
     <linearGradient id="titleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="${C.coral}"/>
-      <stop offset="50%" stop-color="${C.mango}"/>
-      <stop offset="100%" stop-color="${C.lilac}"/>
+      <stop offset="0%" stop-color="${g1}"/>
+      <stop offset="50%" stop-color="${g2}"/>
+      <stop offset="100%" stop-color="${g3}"/>
     </linearGradient>
   </defs>
 
-  <!-- 배경 캐릭터 24종 조밀 배치 -->
-  ${bgCharacters()}
+  <!-- 배경 캐릭터 (팔레트 순환) -->
+  ${bgCharacters(palette)}
 
   <!-- 메인 슬로건 텍스트 -->
   ${lineElements}
