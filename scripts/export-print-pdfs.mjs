@@ -41,6 +41,22 @@ const items = [
     fitMode: "contain",
     bgColor: { r: 255, g: 248, b: 236 },  // cream 배경 (포스터와 동일)
   },
+  {
+    // A4 종이 포스터: 작업 사이즈 21.3×30.0cm (재단 21.0×29.7cm, 사방 1.5mm 블리드)
+    name: "더나일-컨퍼런스-포스터-A4",
+    src: path.join(HOME, "Downloads/더나일-컨퍼런스-포스터-인스타.png"),
+    widthCm: 21.3, heightCm: 30.0,
+    fitMode: "contain",
+    bgColor: { r: 255, g: 248, b: 236 },
+  },
+  {
+    // A4 리플렛(양면): 앞면 = 프로그램 타임테이블 + 슬라이도/후원 QR
+    name: "더나일-컨퍼런스-리플렛-A4",
+    src: path.join(HOME, "Downloads/더나일-컨퍼런스-리플렛.png"),
+    widthCm: 21.3, heightCm: 30.0,
+    fitMode: "contain",
+    bgColor: { r: 255, g: 248, b: 236 },
+  },
 ];
 
 const OUT_DIR = path.join(HOME, "Downloads/더나일-인쇄발주");

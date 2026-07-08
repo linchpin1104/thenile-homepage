@@ -1949,6 +1949,7 @@ const ConferencePage=()=>{
             {n:"레피움",img:"/images/partners/lepium.jpg",c:CC.ink},
             {n:"앙호두",img:"/images/partners/anghodu.png",c:CC.mango},
             {n:"다랑클래스",img:"/images/partners/darangclass.jpg",c:CC.ink},
+            {n:"율립",img:"/images/partners/yullip.png",c:CC.peach},
           ].map((p,i)=>(
             <div key={i} style={{height:90,display:"flex",alignItems:"center",justifyContent:"center",padding:"10px 16px",background:C.w,borderRadius:8,overflow:"hidden"}}>
               <img src={p.img} alt={p.n} style={{maxWidth:"100%",maxHeight:"100%",width:"auto",height:"auto",objectFit:"contain"}} onError={e=>{const wrap=e.currentTarget.parentElement;e.currentTarget.style.display="none";if(!wrap.dataset.fb){wrap.dataset.fb="1";wrap.insertAdjacentHTML("beforeend",`<div style="font-size:14px;color:${p.c};font-weight:700;letterSpacing:.02em;text-align:center">${p.n}</div>`)}}}/>

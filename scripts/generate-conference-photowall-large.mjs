@@ -68,6 +68,7 @@ const partners = [
   { name: "레피움",          path: "lepium.jpg" },
   { name: "앙호두",          path: "anghodu.png" },
   { name: "다랑클래스",       path: "darangclass.jpg" },
+  { name: "율립",            path: "yullip.png" },
 ];
 
 // ─── 9×6 체스판 (300:200 = 3:2, 정사각 셀) ───

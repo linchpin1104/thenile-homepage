@@ -77,6 +77,7 @@ const partners = [
   { name: "레피움",          path: "lepium.jpg" },
   { name: "앙호두",          path: "anghodu.png" },
   { name: "다랑클래스",       path: "darangclass.jpg" },
+  { name: "율립",            path: "yullip.png" },
 ];
 
 for (const p of partners) {
